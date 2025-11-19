@@ -102,23 +102,23 @@
         \subsubsection{World phenomena}
         %Eventi che accadono nel mondo reale, che il sistema non può né controllare né osservare. Sono le intenzioni o le azioni fisiche degli utenti.
         \begin{itemize}
-            \item \textbf{WP1:} A registered user decides to start a cycling activity.
-            \item \textbf{WP2:} Any user needs to find a cycling route between two places.
-            \item \textbf{WP3:} A registered user decides to contribute to the BBP inventory.
-            \item \textbf{WP4:} A registered user, while pedaling, physically encounters an obstacle or evaluates the condition of a route.
+            \item \textbf{WP1:} A registered user starts a cycling activity.
+            \item \textbf{WP2:} Any user searches for a cycling route between two places.
+            \item \textbf{WP3:} A registered user contributes contribute to the BBP inventory.
+            \item \textbf{WP4:} While pedaling a registred user ecounters some kind of problem on the route.
         \end{itemize}
 
         \subsubsection{Shared phenomena}
         \paragraph{World controlled}
         %Azioni che l'utente (mondo) compie sull'interfaccia del sistema. Il sistema deve reagirvi, ma non può avviarle. Sono gli input dell'utente.
         \begin{itemize}
-            \item \textbf{SP\_WC1:} The registered user launches the "Register Trip" function on the application.
-            \item \textbf{SP\_WC2:} The registered user stops the "Register Trip" function on the application.
+            \item \textbf{SP\_WC1:} The registered user launches starts to register the trip with the application.
+            \item \textbf{SP\_WC2:} The registered user stops to register the trip with the application.
             \item \textbf{SP\_WC3:} The registered user opens the interface for manually entering route information.
             \item \textbf{SP\_WC4:} The registered user enters the data (e.g. "optimal" status, "hole" presence) and sends the manual entry form.
             \item \textbf{SP\_WC5:} The registered user selects a notification or confirmation request for automatically detected data.
-            \item \textbf{SP\_WC6:} The registered user presses "Confirm" to validate automatically detected data (e.g. a pothole).
-            \item \textbf{SP\_WC7:} The registered user presses "Delete" to invalidate an automatically detected data (false positive).
+            \item \textbf{SP\_WC6:} The registered user confirms to validate automatically the detected data (e.g. a pothole).
+            \item \textbf{SP\_WC7:} The registered user presses deletes to invalidate an automatically detected data (false positive).
             \item \textbf{SP\_WC8:} The registered user modifies an automatically detected piece of data (e.g. corrects the position of the hole on the map) and saves the change.
             \item \textbf{SP\_WC9:} Any user enters a source and destination address.
             \item \textbf{SP\_WC10:} Any user starts the route search.
@@ -127,8 +127,8 @@
         \paragraph{Machine controlled}
         %Azioni che il sistema (macchina) compie sull'interfaccia e che l'utente (mondo) può osservare. Sono gli output del sistema.
         \begin{itemize}
-            \item \textbf{SP\_MC1:} The system shows the registered user the statistics of the completed trip.
-            \item \textbf{SP\_MC2:} The system shows the registered user the weather data associated with the trip.
+            \item \textbf{SP\_MC1:} The system shows the statistics of the completed trip to the registered user.
+            \item \textbf{SP\_MC2:} The system shows the weather data associated with the trip to the registered user.
             \item \textbf{SP\_MC3:} The system presents the Registered User with a confirmation request for automatically detected data.
             \item \textbf{SP\_MC4:} The system shows the user a map with the cycling routes found between the origin and the destination.
             \item \textbf{SP\_MC5:} The system displays the details of a route, including its score and confirmed obstacles.
