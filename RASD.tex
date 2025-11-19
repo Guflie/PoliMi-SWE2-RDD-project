@@ -3,6 +3,7 @@
 \usepackage{parskip}
 \usepackage{enumitem}
 \usepackage{graphicx}
+\usepackage{float}
 \graphicspath{ {img/} }
 
 
@@ -14,12 +15,37 @@
 \frenchspacing
 \begin{document}
     \pagenumbering{arabic}
+    
+    \thispagestyle{empty} 
+    \centering
+    
+    \includegraphics[width=8cm]{politecnico-di-milano-vector-logo.png}
+    \vspace{1.5cm} 
+    
+    {\Large \textbf{COMPUTER SCIENCE AND ENGINEERING} \\}
+    {\Large \textbf{SOFTWARE ENGINEERING II} \\}
+    {\Large \textbf{2025 - 206} \\} 
+    
+    \vspace{1.5cm}
+    
+    {\Huge \textbf{RASD} \\}
+    {\large Requirement Analysis and Specification Document \\}
+    
+    \vspace{0.5cm}
+    {\Large \textit{Best Bike Paths}}
+    
+    \vspace{3cm} 
 
-    \begin{figure}[t]
-        \centering
-        \includegraphics[width=8cm]{politecnico-di-milano-vector-logo.png}
-    \end{figure}
-    \maketitle
+    {\Large \textbf{Authors:}} \\
+    Leonardo Guglielmi, Francesco Lo Conte
+    
+    \vspace{0.5cm}
+    {\Large \textbf{Version:}} \\
+    1.0 \\
+    (\today)
+    
+    \pagebreak
+    \raggedright
     \tableofcontents
     \pagebreak
 
@@ -159,18 +185,253 @@
 
         \subsection{Document structure}
         \begin{enumerate}
-            \item \textbf{Introduction:} this section introduces the project. It contains the main goals and objectives that the final system wants to achieve.
+            \item \textbf{Introduction:} a brief description of the project. It contains the main goals and objectives that the final system wants to achieve.
             \item \textbf{Overall description:} this section is a high-level representation of the system and of the interactions of the system with the other actors.
-            \item \textbf{Specific requirements:} this section focuses on the requirements needed for the system to achieve the goals. It contains valuable information for developers.
-            \item \textbf{Formal analysis using Alloy:} this section has a formal description of the model (or part of) of the system with Alloy.
-            \item \textbf{Effort spent:} this section shows the time spent on each section of the document, for each member of the group.
-            \item \textbf{References:} this section contains all the various references used to write this document.
+            \item \textbf{Specific requirements:} a detailed list of all the requirements needed for the system to achieve the goals. It contains valuable information for developers.
+            \item \textbf{Formal analysis using Alloy:} a formal description of the model of the system with Alloy.
+            \item \textbf{Effort spent:} the time spent on each section of the document, for each member of the group.
+            \item \textbf{References:} reference to documents or tools used for writing this document..
         \end{enumerate}
+        \pagebreak
 
     % -------------------------------------------------------------
     \section{Overall description}
 
         \subsection{Product perspective}
+        %con i seguenti scenari credo di aver coperto tutti gli argomenti richiesti (se te ne vengono in mente di nuovi o vuoi editare questi, dimmi pure):
+        % 1-Registrazione.
+        % 2-Uso perosnale + Meteo.
+        % 3-Inserimento Manuale (Stato).
+        % 4-Inserimento Automatico (Ciclo completo).
+        % 5-Ricerca + Path Score (Utente Generico).
+        % 6-Manutenzione (Aggiornamento dati).
+        % 7-Storico (Analisi lungo termine).
+        \subsubsection{Scenarios}
+
+        \textbf{Registering a new user}
+
+        User "Zoe" has just downloaded the BBP app because she wants to start tracking her trips and contributing to the community.
+        From the welcome screen, she selects "Create Account." She enters her information and accepts the privacy policy.
+        The system verifies the information, creates the new profile in the database, and sends a confirmation. Once the process is complete, Zoe gains "Registered User" status: 
+        the app interface changes, enabling the previously disabled "Start Trip" and "Report Problem" buttons.
+        \vspace{0.5cm}
+
+        \textbf{Activity monitoring and data enrichment}    
+
+        Registered user "Alessandro" is preparing for his weekly training session. He wants to track his performance, including correlation with the weather.
+        He launches the BBP app, logs in, and from the main screen, presses "Start Trip". During the session, Alessandro pedals, focusing solely on the road, while the system 
+        silently tracks his GPS route and biometric data (if connected).
+        At the end, Alessandro presses "End Trip". The system saves the route and immediately queries the external weather service. A few moments later, Alessandro views the 
+        trip summary: he sees his map, the 45 km traveled, his average speed, and, thanks to the weather integration, notes that the strong headwind he detected has negatively 
+        impacted his time. Satisfied with the detailed analysis, he closes the app.
+        \vspace{0.5cm}
+
+        \textbf{Active contribution to the community (manual entry)}
+
+        Registered user "Bianca" is riding a popular bike path when she notices that a stretch, previously marked as "Optimal", is now blocked by unreported construction. 
+        She decides to alert the community.
+        She safely stops and opens BBP. Selects "Report Problem", and the system geolocates her location. Bianca selects the "Obstacle" category and the "Construction in 
+        Progress" subcategory. She adds a text note ("Traffic blocked due to excavation") and submits the report.
+        The system immediately records the information as "Publishable". From that moment, the "Path Score" for that stretch drops dramatically, and future users planning a
+        route in that area will see a warning and will likely be diverted onto alternative routes.
+        \vspace{0.5cm}
+        
+        \textbf{The Auto-Detection cycle}
+
+        This scenario describes the complete flow of passive data acquisition, from invisible collection to explicit validation. 
+        \begin{itemize}
+            \item \textbf{Detection during the journey} 
+            
+            Registered user "Carlo" activates "Automatic Mode" to detect potholes before heading to work. He places his smartphone in the handlebar mount and begins pedaling. 
+            As he rides along Via Verdi, the device's accelerometer registers a strong vertical impact unrelated to braking. The BBP system analyzes the pattern in real time, 
+            classifies it as a "Potential Pothole", and stores the GPS coordinates and timestamp. All this happens in the background, without sending notifications or sounds 
+            so as not to distract Carlo from his riding.
+            
+            \item \textbf{Post-trip confirmation} 
+            
+            Arriving at the office, Carlo finishes his trip. The system displays a notification: "Two potential problems detected. Would you like to check them?" Carlo opens
+            the review screen. The system displays a map with the two points. Carlo selects the first one, Via Verdi, and clearly remembers the pothole. He presses "Confirm".
+            The system promotes that data to "Publishable Information".
+            
+            \item \textbf{Handling a false positive}
+
+            Carlo examines the second point detected on Corso Italia. He realizes that he deliberately stepped onto a curb to park his bike there. It's not a traffic hazard. 
+            He clicks "Ignore". The system discards the raw data and doesn't create any public alerts, preventing the inventory from being contaminated with incorrect data.
+        \end{itemize}
+        \vspace{0.5cm}
+        
+        \textbf{Intelligent route planning (General User)}  
+
+        "Diana", a tourist, wants to explore the city by bike but is worried about traffic and poor roads.
+        She accesses the BBP website without logging in and enters "Hotel Plaza" as the origin and "Museo della Scienza" as the destination.
+        The system calculates three possible routes. Diana notices that the shortest route (3 km) has a low "Path Score" and is colored orange on the map, with several
+        "Pothole" icons along the way. An alternative, slightly longer route (3.5 km) has an excellent "Path Score" and is highlighted in green, indicating a bike path 
+        in excellent condition.
+        Diana chooses the green route. While navigating, she avoids stress and dangers thanks to information aggregated by the community.
+        \vspace{0.5cm}
+        
+        \textbf{Data updating and maintenance}
+        %qui ho pensato che potremmo gestire una risluzione di un problema, ad esempio la buca, in due modi:
+        % 1- l'utente ha un grado di affidabilità compreso tra 95% e 100% e quindi se segnala un problema (buca, lavori in corso, ecc..) come risolto viene subito considerato come vero. 
+        % L'affidabilità si guadagna aggiungendo/confermando dei problemi e, se veri, si acquisisce un punteggio. Altrimenti si perde punteggio, e quindi affidabilità.
+        % 2- un qualsiasi problema deve essere segnalato e/o confermato da almeno x persone. Ma se quella strada viene percorsa solo dall'utente Giovanni come facciamo?
+        % In base a quello che pensi dobbiamo modificare questo scenario
+
+        Registered user "Edoardo" is driving along a road where a large pothole had been reported the previous week (which he also confirmed). He is pleased to note that 
+        the municipality has resurfaced the section and the pothole is no longer there.
+        To keep the inventory updated, Edoardo selects the pothole marker on the map and presses "Mark as Resolved".
+        The system records this new input. If other users confirm the resolution (or if Edoardo has a high confidence level in the system), the obstacle will be removed
+        and the section's "Path Score" will start to increase again.
+        \vspace{0.5cm}
+        
+        \textbf{Historical performance analysis}
+
+        Registered User "Alessandro", after months of using BBP, wants to analyze his progress. He accesses the "My Trip History" section.
+        The system presents a chronological list of all his saved trips. Alessandro filters by "Last Month" and displays an aggregate graph showing the increase in his average 
+        speed and total kilometers traveled.
+        He selects a specific trip from two months ago; the system retrieves all the details from the database, including that day's weather conditions (e.g., "Light rain"),
+        allowing Alessandro to remember why his performance was below average on that date.
+        \pagebreak
+
+        \subsubsection{Domain Class Diagram}
+        %come identifichiamo uno status per un percorso? in base al numero di ostacoli? gli associamo un colore, vero? ad esempio ottimale-verde.
+        %volendo si può "complicare" molto di più il domain class diagram, ad esempio aggiungendo dettagli come profile_picture, età allo user (cosa che personalmente farei).
+        %tuttavia è quello che vogliamo fare? 
+        %inoltre, mancano altre classi? Ti viene in mente qualcosa da aggiungere?
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[width=\textwidth]{Domain_class_diagram.pdf}
+            \caption{Domain Class Diagram of the BBP system}
+            \label{fig:domain_model}
+        \end{figure}
+    
+        Figure \ref{fig:domain_model} shows the domain class diagram. The main architectural choices are explained below:
+    
+        \begin{itemize}
+            \item \textbf{User Generalization:} To avoid duplication and facilitate future scalability, the \texttt{User} superclass has been 
+            introduced. It encapsulates basic functionality accessible to everyone, such as route search and map viewing. The \texttt{RegisteredUser}
+            class extends this foundation, adding authentication data and the main writing functionality: \texttt{recordTrip()}, 
+            \texttt{insertManualReport()}, and \texttt{confirmDetection()}. This structure allows for easy extension to future roles such as 
+            "Administrator" or "Moderator."
+            
+            \item \textbf{Information Abstraction and Scoring:} The abstract \texttt{PublishableInformation} class was created to logically group all 
+            alerts (whether \texttt{RouteStatus} or \texttt{Obstacle}). This polymorphic approach greatly simplifies the calculation of the Path 
+            Score: the system can iterate over a generic list of confirmed information associated with a trip to calculate its score, without 
+            having to use separate logic for each type of alert.
+            
+            \item \textbf{Sensor Scalability:} Although the assignment specifically mentions potholes, the model correctly links the raw 
+            \texttt{SensorData} data to the generic \texttt{Obstacle} class via the "Detects (Candidate)" dependency. This design ensures that the 
+            system can evolve to detect other types of anomalies in the future without changing the core data model.
+            
+            \item \textbf{Trip Composition and Data Lifecycle:} There is a composition relationship between \texttt{Trip} and its internal data: 
+            \texttt{WeatherInfo} and \texttt{SensorData}. This indicates that this data is closely tied to the trip lifecycle: if a user decides to 
+            delete a trip from their history, the associated weather data and raw sensor data will also be automatically removed, preventing data
+            fragmentation and ensuring database cleanliness.
+        \end{itemize}
+        \pagebreak
+
+        \subsubsection{State Diagrams}
+        %vuoi che ci sia un'interruzione di pagina per ogni state diagram? Oppure lasciamo cosi com'è ora?
+        \textbf{User Session Lifecycle} 
+         
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.9\textwidth]{User_profile_lifecycle.pdf}
+            \caption{State diagram of a BBP system user's lifecycle}
+            \label{fig:user_lifecycle}
+        \end{figure}
+
+        The finite state diagram in Figure \ref{fig:user_lifecycle} models the \textbf{user session lifecycle} within the BBP system, defining how 
+        the user transitions from the anonymous browsing state to the fully operational one. The system is designed to ensure that all basic 
+        functionality, such as route search and map viewing, is immediately accessible, with a single initial state that converges 
+        on \texttt{Search\_Routes}, the universal entry point. From this anonymous browsing state, the user can choose to authenticate whether 
+        they are already logged in or not.
+        Once the \texttt{Logged\_In} state is reached, the user unlocks the contribution capabilities, which are critical to the system's value. 
+        This state serves as a hub, allowing the user to initiate trip tracking by moving to the \texttt{Tracking} state (when sensors are active)
+        or to proceed to \texttt{Reviewing\_Data}. Both contribution states are separated to reflect their high impact on resources (tracking) or
+        data consistency (auditing). The session can end by exiting \texttt{Search\_Routes} (for both anonymous and registered users) or by 
+        \texttt{Logout} from the operational state for the registered user.
+
+        \textbf{Trip Lifecycle} 
+ 
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.9\textwidth]{Trip_lifecycle.pdf}
+            \caption{State Diagram of the Lifecycle of a Trip in the BBP System}
+            \label{fig:trip_lifecycle}
+        \end{figure}
+
+        The diagram in Figure \ref{fig:trip_lifecycle} models the complete lifecycle of a \texttt{Trip}, from its inception to its final storage or 
+        discard. The process begins in the initial \texttt{Route\_Definition} state, which represents the hub where a new route can be defined or an 
+        existing one can be used. The fundamental transition to data acquisition occurs only if the \texttt{[if RegisteredUser]} guard condition is 
+        satisfied, ensuring that only authenticated users can initiate tracking, based on the system's contribution requirements. Once in the 
+        \texttt{Data\_Logging} state, the system actively logs raw sensor data (GPS, accelerometer) if in automatic mode. This state offers flexibility,
+        allowing data acquisition to be paused and resumed via transitions. The system manages three distinct transitions when recording is stopped, 
+        resulting in separate processing paths:
+
+        \begin{itemize}
+            \item \textbf{Stop in manual mode}: This transition allows the user to actively add non-sensor data to the route.
+            \item \textbf{Stop in automated mode}: Indicates that the route has ended, starting the automatic processing cycle.
+            \item \textbf{Stop without data}: If the user does not wish to add any data, they go directly to the confirmation to save or delete the 
+            collected data (if collected).
+        \end{itemize}
+
+        The automated processing cycle begins with \texttt{Enrichment\_WeatherInfo}, where the system enriches the trip with weather data retrieved 
+        from external services. Once enrichment is complete, the flow moves to \texttt{Awaiting\_Confirmation}. This state is crucial for data quality:
+        here, the user must decide whether to validate the anomalies detected by the sensors (e.g., potholes) or discard them. The cycle closes 
+        by returning to the \texttt{Route\_Definition} state or definitively exiting the system, demonstrating how data only goes from ephemeral to 
+        persistent information through a rigorous validation process.
+
+        \textbf{Data Lifecycle} 
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.9\textwidth]{Data_lifecycle.pdf}
+            \caption{Data lifecycle state diagram in BBP system}
+            \label{fig:data_lifecycle}
+        \end{figure}
+
+        The diagram in Figure \ref{fig:data_lifecycle} models the complete data lifecycle, from its origin to its final state. The process rigorously 
+        distinguishes data based on its source to direct it to the correct validation path. The flow forks immediately from the initial state:
+
+        \begin{itemize}
+            \item \textbf{Manual Path:} The user generates a \texttt{Manual report} that transitions to the \texttt{Manual\_Submission} state. 
+            The data, being the result of an explicit action, is initially saved and can be published if the user wishes.
+            \item \textbf{Automatic Path:} The data passively detected by the sensors transitions to the \texttt{Dected\_Raw} state. This raw data must
+            pass through the \texttt{Awaiting\_Confirmation} state at the end of its journey.
+        \end{itemize}
+
+        The pending confirmation state is the critical checkpoint: the user is responsible for validating the discovery to allow it to move to 
+        \texttt{Publishable}, or discarding it, moving it to \texttt{Discarded}. Only data in the \texttt{Publishable} state is integrated and can 
+        influence the \texttt{Path Score}. The cycle ends with final publication or discard.
+
+        \textbf{Bike Path Status Lifecycle} 
+ 
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.9\textwidth]{BikePathStatus_lifecycle.pdf}
+            \caption{BBP Path State Lifecycle State Diagram}
+            \label{fig:bikepathstatus_lifecycle}
+        \end{figure}
+
+        The diagram in Figure \ref{fig:bikepathstatus_lifecycle} models the evolution of a Bike Path's Quality Score in response to user contributions. 
+        The entry point is the \texttt{Current\_Score} state, which represents the value of the path at the time of consultation. 
+        This value is dynamic and subject to change based on active reports:
+
+        \begin{itemize}
+            \item A hazard or maintenance report (\texttt{NotRecommended or Requires Maintenance report}) triggers the \texttt{Worsens\_PathScore}   
+            state. This indicates an immediate degradation in quality.
+            \item Conversely, an \texttt{Optimal or Medium report} triggers the \texttt{Improve\_PathScore} state, indicating an improvement in the     
+            path's quality.
+            \item A \texttt{Sufficient report} acts as a validation of the current score, maintaining its status and contributing to the data's     
+            freshness without drastically altering its perceived quality.
+        \end{itemize}
+
+        The diagram emphasizes that the score is a dynamic value, constantly recalculated based on the validity and freshness of the active reports     
+        in the BBP inventory.
+        \pagebreak
+
+
         \subsection{Product functions}
         \subsection{User characteristics}
         \subsection{Assumptions, dependecies and constraints}
