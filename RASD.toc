@@ -19,26 +19,31 @@
 \contentsline {subsubsection}{\numberline {2.1.2}Domain Class Diagram}{12}{}%
 \contentsline {subsubsection}{\numberline {2.1.3}State Diagrams}{14}{}%
 \contentsline {subsection}{\numberline {2.2}Product functions}{18}{}%
-\contentsline {subsection}{\numberline {2.3}User characteristics}{18}{}%
-\contentsline {subsection}{\numberline {2.4}Assumptions, dependecies and constraints}{18}{}%
-\contentsline {section}{\numberline {3}Specific requirements}{18}{}%
-\contentsline {subsection}{\numberline {3.1}External interface requirements}{18}{}%
-\contentsline {subsubsection}{\numberline {3.1.1}User interfaces}{18}{}%
-\contentsline {subsubsection}{\numberline {3.1.2}Hardware interfaces}{18}{}%
-\contentsline {subsubsection}{\numberline {3.1.3}Software interfaces}{18}{}%
-\contentsline {subsubsection}{\numberline {3.1.4}Communication interfaces}{18}{}%
-\contentsline {subsection}{\numberline {3.2}Functional requirements}{18}{}%
-\contentsline {subsection}{\numberline {3.3}Performance requirements}{18}{}%
-\contentsline {subsection}{\numberline {3.4}Design constraints}{18}{}%
-\contentsline {subsubsection}{\numberline {3.4.1}Standard compliance}{18}{}%
-\contentsline {subsubsection}{\numberline {3.4.2}Hardware limitations}{18}{}%
-\contentsline {subsubsection}{\numberline {3.4.3}Any other constraint}{18}{}%
-\contentsline {subsection}{\numberline {3.5}Software system attributes}{18}{}%
-\contentsline {subsubsection}{\numberline {3.5.1}Reliability}{18}{}%
-\contentsline {subsubsection}{\numberline {3.5.2}Availability}{18}{}%
-\contentsline {subsubsection}{\numberline {3.5.3}Security}{18}{}%
-\contentsline {subsubsection}{\numberline {3.5.4}Maintainability}{18}{}%
-\contentsline {subsubsection}{\numberline {3.5.5}Portability}{18}{}%
-\contentsline {section}{\numberline {4}Formal anlaysis using Alloy}{18}{}%
-\contentsline {section}{\numberline {5}Effort spent}{18}{}%
-\contentsline {section}{\numberline {6}References}{19}{}%
+\contentsline {subsection}{\numberline {2.3}User Characteristics}{20}{}%
+\contentsline {subsubsection}{\numberline {2.3.1}Registered Users}{20}{}%
+\contentsline {subsubsection}{\numberline {2.3.2}Generic User}{20}{}%
+\contentsline {subsection}{\numberline {2.4}Assumptions, dependecies and constraints}{22}{}%
+\contentsline {subsubsection}{\numberline {2.4.1}Domain Assumptions}{22}{}%
+\contentsline {subsubsection}{\numberline {2.4.2}System Dependencies}{22}{}%
+\contentsline {subsubsection}{\numberline {2.4.3}System Constraints}{23}{}%
+\contentsline {section}{\numberline {3}Specific requirements}{24}{}%
+\contentsline {subsection}{\numberline {3.1}External interface requirements}{24}{}%
+\contentsline {subsubsection}{\numberline {3.1.1}User interfaces}{24}{}%
+\contentsline {subsubsection}{\numberline {3.1.2}Hardware interfaces}{24}{}%
+\contentsline {subsubsection}{\numberline {3.1.3}Software interfaces}{24}{}%
+\contentsline {subsubsection}{\numberline {3.1.4}Communication interfaces}{24}{}%
+\contentsline {subsection}{\numberline {3.2}Functional requirements}{24}{}%
+\contentsline {subsection}{\numberline {3.3}Performance requirements}{24}{}%
+\contentsline {subsection}{\numberline {3.4}Design constraints}{24}{}%
+\contentsline {subsubsection}{\numberline {3.4.1}Standard compliance}{24}{}%
+\contentsline {subsubsection}{\numberline {3.4.2}Hardware limitations}{24}{}%
+\contentsline {subsubsection}{\numberline {3.4.3}Any other constraint}{24}{}%
+\contentsline {subsection}{\numberline {3.5}Software system attributes}{24}{}%
+\contentsline {subsubsection}{\numberline {3.5.1}Reliability}{24}{}%
+\contentsline {subsubsection}{\numberline {3.5.2}Availability}{24}{}%
+\contentsline {subsubsection}{\numberline {3.5.3}Security}{24}{}%
+\contentsline {subsubsection}{\numberline {3.5.4}Maintainability}{24}{}%
+\contentsline {subsubsection}{\numberline {3.5.5}Portability}{24}{}%
+\contentsline {section}{\numberline {4}Formal anlaysis using Alloy}{24}{}%
+\contentsline {section}{\numberline {5}Effort spent}{24}{}%
+\contentsline {section}{\numberline {6}References}{24}{}%

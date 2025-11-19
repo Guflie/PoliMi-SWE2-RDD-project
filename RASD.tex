@@ -24,7 +24,7 @@
     
     {\Large \textbf{COMPUTER SCIENCE AND ENGINEERING} \\}
     {\Large \textbf{SOFTWARE ENGINEERING II} \\}
-    {\Large \textbf{2025 - 206} \\} 
+    {\Large \textbf{2025 - 2026} \\} 
     
     \vspace{1.5cm}
     
@@ -424,7 +424,7 @@
             \item Conversely, an \texttt{Optimal or Medium report} triggers the \texttt{Improve\_PathScore} state, indicating an improvement in the     
             path's quality.
             \item A \texttt{Sufficient report} acts as a validation of the current score, maintaining its status and contributing to the data's     
-            freshness without drastically altering its perceived quality.
+            freshness without drastically altering its perceived quality.       
         \end{itemize}
 
         The diagram emphasizes that the score is a dynamic value, constantly recalculated based on the validity and freshness of the active reports     
@@ -433,8 +433,164 @@
 
 
         \subsection{Product functions}
-        \subsection{User characteristics}
+
+        \textbf{Sign up \& Login} 
+
+        This feature is the entry point for any user wishing to actively contribute to the inventory. A visitor can register by providing their 
+        information and credentials, and the system creates a \texttt{RegisteredUser} profile, enabling write permissions. Once the account is created
+        the user can log in to access their reserved area, view their travel history, and use the tracking features. Without authentication, the user 
+        remains in "read-only" mode, without access or all the features expected of a registered user.
+
+        \textbf{User Profile Management} %sono sempre più convinto di dover inserire dati personali all'interno di utente come peso, altezza, ecc..
+        
+        Registered users have access to a dedicated section for managing their personal data. Here they can update their contact information and 
+        personal details, change their password, or delete their account. These actions ensure that the user maintains full control over their digital
+        identity within the system.
+
+        \textbf{Trip Recording} 
+        
+        This is a core feature available exclusively to authenticated users. Users can start a recording session at the beginning of their activity. 
+        During the trip, the system tracks their geographic location via GPS in real time. Users have the flexibility to pause and resume recording 
+        (for example, during a rest stop). Upon completion, the trip is stored in the user's personal database.
+
+        \textbf{Statistics Calculation and Data Enrichment} 
+
+        Upon completion of a trip, the system processes the raw data to provide detailed statistics, such as total distance traveled and average speed. 
+        Additionally, BBP automatically queries external services, if available, to retrieve weather information (temperature, wind, and weather 
+        conditions) for the area and time of the trip. This data is integrated into the trip record, providing the user with richer context for 
+        analyzing their performance.
+
+        \textbf{Manual Data Entry} 
+
+        Registered users can actively contribute to the quality of the inventory by entering manual reports. Through a dedicated interface, users can 
+        specify the status of a road segment (e.g., "Optimal," "Requires Maintenance") or report the presence of specific obstacles. The system 
+        associates this information with the current GPS coordinates (or those selected on the map) and makes it immediately available to the community.
+        
+        \textbf{Automatic Detection via Sensors} 
+
+        If the registered user enables "Automatic Mode" while driving, the system uses the mobile device's accelerometer and gyroscope to monitor 
+        vibrations and sudden movements. Internal algorithms analyze this data to identify potential road surface anomalies, such as potholes. This 
+        process occurs in the background so as not to distract the user while driving.
+        
+        \textbf{Review and Confirmation of Detections} 
+
+        To ensure data reliability and filter out false positives, automatic detections are not published immediately. At the end of the journey, 
+        the system presents the user with a list of detected anomalies. The registered user must explicitly confirm the presence of the obstacle 
+        (validation) or discard the detection (if incorrect). Only confirmed data is promoted to publishable information.
+        The published route data is then used to calculate the Path Score.
+
+        \textbf{Route Search} 
+
+        This function is accessible to all users, regardless of registration. The user enters a point of origin and a destination in the search 
+        interface. The system processes the request and calculates one or more possible cycling routes connecting the two points.   
+
+        \textbf{Display and Path Score} 
+
+        The routes found are displayed on an interactive map. For each route, the system calculates and displays a \texttt{Path Score}. This summary 
+        score aggregates information about the route's status and the presence of confirmed obstacles, allowing the user to quickly assess not only 
+        the distance, but also the safety and quality of the proposed route.
+        \pagebreak
+
+        \subsection{User Characteristics}
+        This section describes the general characteristics of users who interact with the BBP system. There are two main categories of users: 
+        Registered Users (the active contributors) and General Users (the passive users).
+
+        \subsubsection{Registered Users}
+        The Registered User represents the core of the BBP ecosystem. This profile typically corresponds to a regular cyclist (commuter or 
+        recreational) who wishes to monitor their performance and actively contribute to community safety.
+
+        \textbf{Profile and Skills} 
+
+        The user must have a personal account with login credentials. It is assumed that they have moderate familiarity with the use of smartphones
+        and GPS technology. Since the app is used in mobile contexts, the user requires a clear interface that minimizes distractions.
+
+        \textbf{Needs and Interactions:}
+        \begin{itemize}
+            \item \textbf{Tracking:} The user wants to track their trips to analyze statistics such as speed and distance, contextualized with weather
+            data if available.
+            \item \textbf{Active Contribution:} The user wants to report obstacles or assess road conditions to help other cyclists. They can do this 
+            manually or by activating automatic mode.
+            \item \textbf{Validation:} The user is responsible for data quality. The system relies on them to confirm or discard automatic sensor 
+            detections (e.g., potholes) at the end of the trip, ensuring that only truthful information influences the Path Score.
+            \item \textbf{Privacy:} The user wants sensitive data (such as personal travel history) to remain private, while agreeing to share 
+            anonymized road condition data publicly.
+        \end{itemize}
+
+        \subsubsection{Generic User}
+        The Generic User includes anyone who accesses the platform without authenticating. This profile includes tourists, occasional cyclists, or 
+        route planners who need quick and reliable information without the commitment of registration.
+
+        \textbf{Profile and Skills}
+
+        They do not have a persistent profile in the system. Minimum proficiency in using digital maps and web/mobile interfaces is required. 
+        Interaction is sporadic and aimed at an immediate goal: reaching a destination.
+
+        \textbf{Needs and Interactions:}
+        \begin{itemize}
+            \item \textbf{Safety and Planning:} The primary need is to find the safest or most efficient route between two points. The user relies on
+            the system to avoid poor or dangerous roads.
+            \item \textbf{Immediacy:} They want to view routes and their Path Score immediately. It's not interested in contributing data or saving 
+            history, but only in consuming aggregated information generated by the community.
+            \item \textbf{Reliability:} It expects the obstacle reports (e.g., potholes) displayed on the map to be up-to-date and verified, so it can 
+            plan its trip with confidence.
+        \end{itemize}
+        \pagebreak
+
         \subsection{Assumptions, dependecies and constraints}
+        \subsubsection{Domain Assumptions}
+        The following assumptions describe real-world conditions that the system considers true and necessary for the correct functioning of the 
+        intended features:
+
+        \begin{itemize} %ci vengono in mente altri domain assumptions??? sei d'accordo con quelli che ho appena elencato?
+            \item \textbf{D1 - Hardware Equipment:} It is assumed that the user's mobile device is equipped with functioning and calibrated hardware, 
+            specifically: GPS receiver, accelerometer, and gyroscope. The system cannot compensate for physical hardware failures of the device.
+            
+            \item \textbf{D2 - Accuracy of User Data:} It is assumed that the information entered by users is correct and truthful. This includes:
+            \begin{itemize}
+                \item Registration data.
+                \item Manual reports.
+                \item Confirmation of automatic detections (the user does not intentionally confirm false positives).
+            \end{itemize}
+            
+            \item \textbf{D3 - Accuracy of Basemaps:} It is assumed that third-party mapping services provide a correct topological representation of 
+            reality. If a road exists on the map, it is assumed that it physically exists and is drivable (unless otherwise reported on BBP).
+            
+            \item \textbf{D4 - GPS Signal Availability:} It is assumed that, for most of the duration of an outdoor trip, satellite coverage is 
+            sufficient to ensure useful location accuracy.
+            
+            \item \textbf{D5 - Distinguishable Movement Patterns:} It is assumed that the physical characteristics of cycling are sufficiently 
+            distinct from those of other modes of transport or walking, allowing classification algorithms to operate with an acceptable level of 
+            accuracy.
+            
+            \item \textbf{D6 - Compliance with Highway Codes:} It is assumed that users use the application in compliance with applicable laws (
+            e.g., not looking at the screen in dangerous situations), absolving the system from liability for accidents caused by distraction.
+            \end{itemize}
+
+        \subsubsection{System Dependencies}
+        The BBP system is not an island; it relies on external services to provide added value. Failure of these services degrades the system's 
+        functionality as follows:
+
+        \begin{itemize}
+            \item \textbf{External Weather Service:} BBP depends on third-party APIs to retrieve weather data (temperature, wind). If this service is 
+            unavailable, the system will continue to record trips, but the "Weather Enrichment" feature will not be performed, and the trips will be 
+            saved without this metadata.
+
+            \item \textbf{Mapping Services:} Route visualization and address geocoding depend on external map providers. If these are unavailable, the 
+            "Route Search" and "Map View" features will be compromised.
+        \end{itemize}
+
+        \subsubsection{System Constraints}      
+        \begin{itemize}
+            \item \textbf{GDPR and Privacy:} Since the system tracks users' physical movements (sensitive data), the management, storage, and sharing 
+            of GPS data must strictly comply with the GDPR regulation. Personal travel data must not be accessible to other users without explicit 
+            consent.
+
+            \item \textbf{Energy Consumption:} The automatic detection algorithm must be optimized to avoid draining the mobile device's battery 
+            quickly, ensuring coverage of medium-duration trips (e.g., 2-3 hours).
+
+            \item \textbf{Intermittent Connectivity:} Since cycling routes can pass through areas with poor network coverage, the mobile application 
+            must be able to store sensor data locally and synchronize it with the server as soon as the connection is re-established.
+        \end{itemize}
 
     % -------------------------------------------------------------
     \section{Specific requirements}
