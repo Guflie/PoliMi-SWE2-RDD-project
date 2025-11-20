@@ -4,6 +4,7 @@
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{verbatim}
 \graphicspath{ {img/} }
 
 
@@ -209,11 +210,19 @@
         \subsubsection{Scenarios}
 
         \textbf{Registering a new user}
-
+        % TODO: here the system is represented as an actor, however it shouldn't
+        \begin{comment}
         User "Zoe" has just downloaded the BBP app because she wants to start tracking her trips and contributing to the community.
         From the welcome screen, she selects "Create Account." She enters her information and accepts the privacy policy.
         The system verifies the information, creates the new profile in the database, and sends a confirmation. Once the process is complete, Zoe gains "Registered User" status: 
         the app interface changes, enabling the previously disabled "Start Trip" and "Report Problem" buttons.
+        \end{comment}
+        
+        % new version
+        User "Zoe" has just downloaded the BPP app.
+        She cretaes an account by entering the information and accepting the privacy policy.
+        Once her information were verified she receives a confirmation message, becoming a "Registred user".
+
         \vspace{0.5cm}
 
         \textbf{Activity monitoring and data enrichment}    
