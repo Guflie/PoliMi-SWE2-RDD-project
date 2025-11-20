@@ -225,26 +225,39 @@
 
         \vspace{0.5cm}
 
-        \textbf{Activity monitoring and data enrichment}    
-
+        \textbf{Activity monitoring and data enrichment (automatic entry)}    
+        \begin{comment}
         Registered user "Alessandro" is preparing for his weekly training session. He wants to track his performance, including correlation with the weather.
         He launches the BBP app, logs in, and from the main screen, presses "Start Trip". During the session, Alessandro pedals, focusing solely on the road, while the system 
         silently tracks his GPS route and biometric data (if connected).
         At the end, Alessandro presses "End Trip". The system saves the route and immediately queries the external weather service. A few moments later, Alessandro views the 
         trip summary: he sees his map, the 45 km traveled, his average speed, and, thanks to the weather integration, notes that the strong headwind he detected has negatively 
         impacted his time. Satisfied with the detailed analysis, he closes the app.
+        \end{comment}
+
+        % maybe we could be more specific on which data the user send, since it's something that he should be aware of (if he reads the privacy agreement...)
+        Registered user "Alessandro" is preparing for his weekly training session. He wants to track his performance, including correlation with the weather.
+        He launches the BBP app, logs in, and starts recording his trip allowing the collection of data about GPS position and biometric data, and to record the weather condition.
+        Once he finished his trip, he stops the recording and after little bit he watches ovwe the app his trip summary: the path map, the total distance rided, the average speed and weather conditions.
         \vspace{0.5cm}
 
         \textbf{Active contribution to the community (manual entry)}
 
+        \begin{comment}
         Registered user "Bianca" is riding a popular bike path when she notices that a stretch, previously marked as "Optimal", is now blocked by unreported construction. 
         She decides to alert the community.
         She safely stops and opens BBP. Selects "Report Problem", and the system geolocates her location. Bianca selects the "Obstacle" category and the "Construction in 
         Progress" subcategory. She adds a text note ("Traffic blocked due to excavation") and submits the report.
         The system immediately records the information as "Publishable". From that moment, the "Path Score" for that stretch drops dramatically, and future users planning a
         route in that area will see a warning and will likely be diverted onto alternative routes.
+        \end{comment}
+        
+        Registered user "Bianca" is riding a popular bike path when she notices that a stretch, previously marked as "Optimal", is now blocked by unreported construction. 
+        She decides to alert the community, so she stop and reports the problem on the BBP app: she specifies the type of problem and adds a text note, then submits.
+        
         \vspace{0.5cm}
         
+        % maybe shorten it? It may be the case to ask to professor how much of system mechanism shou,d be considered or not
         \textbf{The Auto-Detection cycle}
 
         This scenario describes the complete flow of passive data acquisition, from invisible collection to explicit validation. 
@@ -271,12 +284,22 @@
         
         \textbf{Intelligent route planning (General User)}  
 
+        \begin{comment}
         "Diana", a tourist, wants to explore the city by bike but is worried about traffic and poor roads.
         She accesses the BBP website without logging in and enters "Hotel Plaza" as the origin and "Museo della Scienza" as the destination.
         The system calculates three possible routes. Diana notices that the shortest route (3 km) has a low "Path Score" and is colored orange on the map, with several
         "Pothole" icons along the way. An alternative, slightly longer route (3.5 km) has an excellent "Path Score" and is highlighted in green, indicating a bike path 
         in excellent condition.
         Diana chooses the green route. While navigating, she avoids stress and dangers thanks to information aggregated by the community.
+        \end{comment}
+
+        "Diana", a tourist, wants to explore the city by bike but is worried about traffic and poor roads.
+        She accesses the BBP website without logging in and enters "Hotel Plaza" as the origin and "Museo della Scienza" as the destination, receving three possible paths as response.
+        Diana notices that the shortest route (3 km) has a low "Path Score" and is colored orange on the map, with several
+        "Pothole" icons along the way. An alternative, slightly longer route (3.5 km) has an excellent "Path Score" and is highlighted in green, indicating a bike path 
+        in excellent condition.
+        Diana chooses the green route.
+        
         \vspace{0.5cm}
         
         \textbf{Data updating and maintenance}
@@ -286,20 +309,39 @@
         % 2- un qualsiasi problema deve essere segnalato e/o confermato da almeno x persone. Ma se quella strada viene percorsa solo dall'utente Giovanni come facciamo?
         % In base a quello che pensi dobbiamo modificare questo scenario
 
+        % I think we could pospone the decision on how to implement the input reliability to a later moment.
+
+        \begin{comment}
         Registered user "Edoardo" is driving along a road where a large pothole had been reported the previous week (which he also confirmed). He is pleased to note that 
         the municipality has resurfaced the section and the pothole is no longer there.
         To keep the inventory updated, Edoardo selects the pothole marker on the map and presses "Mark as Resolved".
         The system records this new input. If other users confirm the resolution (or if Edoardo has a high confidence level in the system), the obstacle will be removed
         and the section's "Path Score" will start to increase again.
+        \end{comment}
+
+        Registered user "Edoardo" is driving along a road where a large pothole had been reported the previous week (which he also confirmed). He is pleased to note that 
+        the municipality has resurfaced the section and the pothole is no longer there.
+        To keep the inventory updated, Edoardo selects the pothole marker on the map and switches it to resolved.
+        After a few hours, he looks at the path to see if the changes have been applied, and finds out that the pothole marker disapeared.
+
+
         \vspace{0.5cm}
         
         \textbf{Historical performance analysis}
 
+        \begin{comment}
         Registered User "Alessandro", after months of using BBP, wants to analyze his progress. He accesses the "My Trip History" section.
         The system presents a chronological list of all his saved trips. Alessandro filters by "Last Month" and displays an aggregate graph showing the increase in his average 
         speed and total kilometers traveled.
         He selects a specific trip from two months ago; the system retrieves all the details from the database, including that day's weather conditions (e.g., "Light rain"),
         allowing Alessandro to remember why his performance was below average on that date.
+        \end{comment}
+
+        Registered User "Alessandra", after months of using BBP, wants to analyze his progress. 
+        She opens the relative app section and looks at the list of all his saved trips.
+        She filters the list by "Last month" and watches at the aggregated graph showing an increase in her average speed and total kilometers traveled.
+        Then she selects a specific trip from two months ago to compare her average speed from that trip with her recent score.
+
         \pagebreak
 
         \subsubsection{Domain Class Diagram}
