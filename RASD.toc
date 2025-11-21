@@ -33,12 +33,11 @@
 \contentsline {subsubsection}{\numberline {3.1.3}Software interfaces}{23}{}%
 \contentsline {subsubsection}{\numberline {3.1.4}Communication interfaces}{23}{}%
 \contentsline {subsection}{\numberline {3.2}Functional requirements}{23}{}%
-\contentsline {paragraph}{Sign up \& Login}{23}{}%
-\contentsline {paragraph}{Profile management}{23}{}%
-\contentsline {paragraph}{Path planning}{24}{}%
-\contentsline {paragraph}{Trip recording}{24}{}%
-\contentsline {paragraph}{Trip feedback}{24}{}%
-\contentsline {paragraph}{Trip history management}{24}{}%
+\contentsline {paragraph}{Authentication and Account Management}{23}{}%
+\contentsline {paragraph}{Trip Recording and Monitoring}{23}{}%
+\contentsline {paragraph}{Data Contribution and Governance}{24}{}%
+\contentsline {paragraph}{Path Planning and Visualization}{24}{}%
+\contentsline {paragraph}{Trip History}{24}{}%
 \contentsline {subsection}{\numberline {3.3}Performance requirements}{25}{}%
 \contentsline {subsection}{\numberline {3.4}Design constraints}{25}{}%
 \contentsline {subsubsection}{\numberline {3.4.1}Standard compliance}{25}{}%

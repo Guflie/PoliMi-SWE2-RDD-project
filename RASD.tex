@@ -605,55 +605,55 @@
         \subsection{Functional requirements}
 
         % -------------------------------------------------------
-        % Leonardo's proposals
-        % -----
-        % General note: these requirements need an improvement on grammar, structure ecc ecc, they're sole purpouse is to sketch the meaning
+        % Francesco's proposals
+        % -------------
+        % Ho nominato i paragrafi in modo diverso; Ho organizzato in modo diverso i requisiti in relazione agli state diagrams già creati
+        % Ho aggiunto R18 che è chiaramente un requisito importantissimo 
         % -------------------------------------------------------
-        \paragraph{Sign up \& Login}
+        \paragraph{Authentication and Account Management}
         \begin{itemize}
-            \item \textbf{R1}: The system shall allow the user to create a new account
-            \item \textbf{R2}: If the user has already an account, the system should allow the user to log into It
+            \item \textbf{[R1]} The system shall allow any user to create an account.
+            \item \textbf{[R2]} The system shall allow registered users to log in using their credentials.
+            \item \textbf{[R3]} The system shall allow registered users to update their personal profile information.
+            \item \textbf{[R4]} The system shall allow registered users to delete their account.
         \end{itemize}
 
-        \paragraph{Profile management}
+        \paragraph{Trip Recording and Monitoring}
         \begin{itemize}
-            \item \textbf{R3}: The system shall allow the user to add personal information to its account
-            \item \textbf{R4}: The sstem shall allow the user to modidy its personal informations
-            \item \textbf{R5}: The system shall allow the user to remove its personal informations
-            \item \textbf{R6}: The system shall allow the user to delete its account
+            \item \textbf{[R5]} The system shall allow registered users to start the recording of a new trip.
+            \item \textbf{[R6]} The system shall allow registered users to pause and resume the recording of an active trip.
+            \item \textbf{[R7]} The system shall allow registered users to save a trip.
+            \item \textbf{[R8]} During the recording, the system shall track the user's geolocation via GPS to calculate performance statistics.
+            \item \textbf{[R9]} Upon completion of a trip, the system shall automatically retrieve weather data from an external service, 
+            if available, and associate it with the saved trip.
         \end{itemize}
 
-        \paragraph{Path planning}
+        \paragraph{Data Contribution and Governance}
         \begin{itemize}
-            \item \textbf{R7}: The system shall allow to user to search a cycling path given starting point and destination
-            \item \textbf{R8}: The system shall allow the user to filter the search on variuos matrics, as trip difficulty, shortest path ...
-            \item \textbf{R9}: The system shall allow the user to browse throught a set of paths during after a search
-            \item \textbf{R10}: The system shall show to the user the path's properties within search output
+            \item \textbf{[R10]} The system shall allow registered users to insert manual reports regarding the status of a path or specific obstacles.
+            \item \textbf{[R11]} The system shall allow registered users to enable automatic detection for a trip.
+            \item \textbf{[R12]} When automatic detection is active, the system shall analyze data from the device's sensors to detect potential anomalies.
+            \item \textbf{[R13]} The system shall present the list of automatically detected anomalies to the registered user at the end of the trip for review.
+            \item \textbf{[R14]} The system shall allow the registered users to confirm a detected anomaly. Confirmed data becomes publishable 
+            information and is visible to other users.
+            \item \textbf{[R15]} The system shall allow the registered users to discard a detected anomaly. Discarded data must not be published.
         \end{itemize}
 
-        \paragraph{Trip recording}
+        \paragraph{Path Planning and Visualization}
         \begin{itemize}
-            % add more specificity on this one
-            \item \textbf{R11}: The system shall allow registred user to measure automatically its performances during its trip
-            \item \textbf{R12}: The system shall allow registred users to interrupt and resume the recording activity
-            \item \textbf{R13}: If weather info are available, the system should allow registred users to enrich their activities with those infos
-
+            \item \textbf{[R16]} The system shall allow any user to search for cycling paths by specifying a starting point and a destination.
+            \item \textbf{[R17]} The system shall compute and visualize one or more valid routes between the specified points on a map.
+            \item \textbf{[R18]} The system shall calculate a Path Score for each route, based on the aggregated status reports and verified 
+            obstacles present along the path.
+            \item \textbf{[R19]} The system shall display confirmed obstacles on the map with visual markers.
         \end{itemize}
 
-        \paragraph{Trip feedback}
+        \paragraph{Trip History}
         \begin{itemize}
-            \item \textbf{R14}: If the registred user give the permission, the system shall automatically record possible path's problems during the trip
-            \item \textbf{R15}: Once the registred user trip is concluded and the trip was recorded, the system shall ask confirmation to the user about the problem it has detected
-            \item \textbf{R16}: The system shall allow registred users to update the state of a path manually
-            \item \textbf{R17}: The system shall allow the registred users to rate paths
-        \end{itemize}
-
-        \paragraph{Trip history management}
-        \begin{itemize}
-            \item \textbf{R18}: The system shall allow registred users to look @ their trip history
-            \item \textbf{R19}: The system shall allow registred users to delete one trip from their history
-            \item \textbf{R20}: The system shall allow registred users to search for trips among their trip history
-            \item \textbf{R21}: The system shall alloe registred users to apply filters during the search within their trip history
+            \item \textbf{[R20]} The system shall allow registered users to view the list of their past trips.
+            \item \textbf{[R21]} The system shall allow registered users to view the details of a specific past trip, including the route on the map, 
+            statistics, and weather data (if they exist).
+            \item \textbf{[R22]} The system shall allow registered users to delete a specific trip from their history.
         \end{itemize}
 
         \subsection{Performance requirements}
