@@ -712,14 +712,217 @@
             \paragraph{Trip History}
             \begin{itemize}
                 \item \textbf{[R22]} The system shall allow registered user to view the list of its past trips.
-                \item \textbf{[R23]} The system shall allow registered user to view the details of a specific past trip, including the route on the map, 
-                statistics, and weather data (if they exist).
+                \item \textbf{[R23]} The system shall allow registered user to view the details of a specific past trip, including the route on 
+                the map, statistics, and weather data (if they exist).
                 \item \textbf{[R24]} The system shall allow registered users to delete a specific trip from their history.
                 \item \textbf{[R25]} The system shall allow the user to search a specific trip in its history.
                 \item \textbf{[R26]} The system shall allow the user to filter the view of its history.
             \end{itemize}
 
+            \subsubsection{Requirement Mapping}
+            This section maps the Goals identified in Section 1 to the Functional Requirements and Domain Assumptions. This mapping demonstrates that 
+            the set of requirements, supported by the assumptions, is sufficient to satisfy the system goals ($R \land D \models G$).
+
+            \begin{table}[H]
+                \centering
+                \renewcommand{\arraystretch}{1.5} % Spaziatura righe
+                \begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+                    \hline
+                    \multicolumn{2}{|p{0.9\textwidth}|}{\textbf{G1:} A registered user wants to track their personal cycling activities and related 
+                    performance statistics.} \\
+                    \hline
+                    \textbf{Requirements} & \textbf{Domain Assumptions} \\
+                    \hline
+                    \textbf{[R1]} The system shall allow any user to create an account. \newline
+                    \textbf{[R2]} The system shall allow registered user to log in using their credentials. \newline
+                    \textbf{[R5]} The system shall allow registered user to start the recording of a new trip. \newline
+                    \textbf{[R6]} The system shall allow registered user to pause and resume the recording of an active trip. \newline
+                    \textbf{[R7]} The system shall allow registered user to save a trip. \newline
+                    \textbf{[R8]} During the recording, the system shall track the user's position and its performance statistics. \newline
+                    \textbf{[R9]} Upon completion of a trip, the system shall automatically retrieve weather data from an external service, if 
+                    available, and associate it with the saved trip. \newline
+                    \textbf{[R22]} The system shall allow registered user to view the list of its past trips. \newline
+                    \textbf{[R23]} The system shall allow registered user to view the details of a specific past trip, including the route on the map,
+                    statistics, and weather data (if they exist). \newline
+                    \textbf{[R24]} The system shall allow registered users to delete a specific trip from their history. \newline
+                    \textbf{[R25]} The system shall allow the user to search a specific trip in its history. \newline
+                    \textbf{[R26]} The system shall allow the user to filter the view of its history.
+                    & 
+                    \textbf{D1 - Hardware Equipment:} It is assumed that the user's mobile device is equipped with functioning and calibrated hardware,
+                     specifically: GPS receiver, accelerometer, and gyroscope. \newline
+                    \newline
+                    \textbf{D5 - GPS Signal Availability:} It is assumed that, for most of the duration of an outdoor trip, satellite coverage is 
+                    sufficient to ensure useful location accuracy.
+                    \\
+                    \hline
+                \end{tabular}
+                \caption{Requirement Mapping for Goal G1}
+                \label{tab:mapping_g1}
+            \end{table}
+            
+            % --- Tabella per G2 ---
+            \begin{table}[H]
+                \centering
+                \renewcommand{\arraystretch}{1.5}
+                \begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+                    \hline
+                    \multicolumn{2}{|p{0.9\textwidth}|}{\textbf{G2:} A registered user wants to contribute to the community inventory by sharing 
+                    reliable information on the condition of the trails (e.g. quality, obstacles, potholes).} \\
+                    \hline
+                    \textbf{Requirements} & \textbf{Domain Assumptions} \\
+                    \hline
+                    \textbf{[R2]} The system shall allow registered user to log in using their credentials. \newline
+                    \textbf{[R10]} The system shall allow registered user to insert manual reports regarding the status of a path. \newline
+                    \textbf{[R11]} The system shall allow registered user to insert a personal rating of a path. \newline
+                    \textbf{[R12]} The system shall allow registered user to insert manual reports regarding problems on the path. \newline
+                    \textbf{[R13]} The system shall allow registered user to enable automatic detection for a trip. \newline
+                    \textbf{[R14]} When automatic detection is active, the system shall analyze data from the device's sensors to detect potential anomalies. \newline
+                    \textbf{[R15]} The system shall present the list of automatically detected anomalies to the registered user at the end of the recorded trip for review. \newline
+                    \textbf{[R16]} The system shall allow the registered user to confirm or discard a detected anomaly.
+                    & 
+                    \textbf{D1 - Hardware Equipment:} It is assumed that the user's mobile device is equipped with functioning and calibrated hardware, 
+                    specifically: GPS receiver, accelerometer, and gyroscope. \newline
+                    \newline
+                    \textbf{D3 - Accuracy of route feedbacks:} It is assumed that the user's feedbacks about routes problems (either manual or 
+                    automatically detected) are correct and truthful. \newline
+                    \newline
+                    \textbf{D6 - Distinguishable Movement Patterns:} It is assumed that the physical characteristics of cycling are sufficiently 
+                    distinct from those of other modes of transport or walking in order to allow classification algorithms to operate with an 
+                    acceptable level of accuracy.
+                    \\
+                    \hline
+                \end{tabular}
+                \caption{Requirement Mapping for Goal G2}
+                \label{tab:mapping_g2}
+            \end{table}
+            
+            % --- Tabella per G3 ---
+            \begin{table}[H]
+                \centering
+                \renewcommand{\arraystretch}{1.5}
+                \begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+                    \hline
+                    \multicolumn{2}{|p{0.9\textwidth}|}{\textbf{G3:} Any user (registered or not) wants to find and view the best cycling route 
+                    between an origin and a destination, based on up-to-date and relevant data.} \\
+                    \hline
+                    \textbf{Requirements} & \textbf{Domain Assumptions} \\
+                    \hline
+                    \textbf{[R17]} The system shall allow any user to search for cycling paths between starting point and a destination. \newline
+                    \textbf{[R18]} The system shall compute and visualize one or more valid routes between the specified points on a map. \newline
+                    \textbf{[R19]} The system shall calculate a Path Score for each route. \newline
+                    \textbf{[R20]} The system shall display confirmed obstacles on the map with visual markers. \newline
+                    \textbf{[R21]} The system shall allow the user to filter the search on Path properties.
+                    & 
+                    \textbf{D4 - Accuracy of Basemaps:} It is assumed that third-party mapping services provide a correct topological representation of 
+                    reality, that is if a road exists on the map then it's assumed that physically exists and that it'is drivable safely by bycicles 
+                    (unless otherwise reported on BBP). \newline
+                    \newline
+                    \textbf{D1 - Hardware Equipment:} It is assumed that the user's mobile device is equipped with functioning and calibrated hardware.
+                    \\
+                    \hline
+                \end{tabular}
+                \caption{Requirement Mapping for Goal G3}
+                \label{tab:mapping_g3}
+            \end{table}
+            
+            % --- Tabella per G4 ---
+            \begin{table}[H]
+                \centering
+                \renewcommand{\arraystretch}{1.5}
+                \begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+                    \hline
+                    \multicolumn{2}{|p{0.9\textwidth}|}{\textbf{G4:} The cycling association aims to provide the community with a tool to create, 
+                    consult, and maintain a reliable and centralized inventory of cycling routes.} \\
+                    \hline
+                    \textbf{Requirements} & \textbf{Domain Assumptions} \\
+                    \hline
+                    \textbf{[R1]} The system shall allow any user to create an account. \newline
+                    \textbf{[R3]} The system shall allow registered user to update their personal profile information. \newline
+                    \textbf{[R4]} The system shall allow registered user to delete their account. \newline
+                    \textbf{[R16]} The system shall allow the registered user to confirm or discard a detected anomaly. \newline
+                    & 
+                    \textbf{D2 - Accuracy of user registration data:} It is assumed that the information entered by users during registration phase 
+                    is correct and truthful. \newline
+                    \newline
+                    \textbf{D3 - Accuracy of route feedbacks:} It is assumed that the user's feedbacks about routes problems (either manual
+                     or automatically detected) are correct and truthful.
+                    \\
+                    \hline
+                \end{tabular}
+                \caption{Requirement Mapping for Goal G4}
+                \label{tab:mapping_g4}
+            \end{table}
+
         \subsection{Performance requirements}
+        Given the nature of BBP as a mobile application that also operates in active mobility contexts, performance is critical not only for the user
+         experience, but also for the security and reliability of the collected data.
+
+        \begin{itemize}
+            \item \textbf{Interface Responsiveness:} The system must ensure immediate response times for critical interactions during cycling, with a 
+            latency of less than 200 ms, to avoid dangerous distractions for the user.
+
+            \item \textbf{Real-Time Data Processing:} During "Automatic Detection" mode, the local algorithm on the device must process sensor data in 
+            real time without causing interface crashes or delays in recording the GPS track.
+
+            \item \textbf{Routing:} The route search functionality must return results, complete with \textit{Path Score}, within 3 seconds for 
+            requests in a standard urban environment (10 km radius), ensuring smooth planning.
+
+            \item \textbf{Backend Scalability:} The system must be able to handle simultaneous load peaks (e.g., weekends or cycling events), scaling 
+            horizontally to support thousands of simultaneous trip uploads without data loss.
+
+            \item \textbf{Reliability:} The backend service must guarantee 99.9\% uptime on a monthly basis, ensuring that users can 
+            always sync their trips and access maps.
+        \end{itemize}
+        \pagebreak
+
+        \subsection{Design Constraints}
+
+        \subsubsection{Standards Compliance}
+        The BBP system adheres to rigorous international standards to ensure interoperability, security, and regulatory compliance.
+
+        \begin{table}[H]
+            \centering
+            \renewcommand{\arraystretch}{1.3}
+            \begin{tabular}{|l|p{0.7\textwidth}|}
+                \hline
+                \textbf{Standard} & \textbf{Description} \\
+                \hline
+                \textbf{GDPR (EU 2016/679)} & The system manages sensitive geolocation and user profiling data. All processing must comply with the 
+                General Data Protection Regulation, guaranteeing the right to be forgotten and data minimization. \\
+                \hline
+                \textbf{WGS 84} & Geodetic reference standard for the GPS system. All stored and exchanged coordinates must comply with this standard 
+                to ensure compatibility with global maps. \\
+                \hline
+                \textbf{GPX (GPS Exchange)} & The system should support the export of trip data in the standard XML format for GPS data, facilitating 
+                interoperability with other sports platforms. \\
+                \hline
+                \textbf{ISO/IEC 27001} & Standard for information security management, applied to protect the backend infrastructure and user data 
+                from unauthorized access. \\
+                \hline
+            \end{tabular}
+            \caption{Compliance standards adopted by BBP}
+            \label{tab:standards}
+        \end{table}
+
+        \subsubsection{Hardware Limitations}
+        The mobile application must operate in a resource-constrained environment, typical of mobile devices during extended outdoor use.
+
+        \begin{itemize}
+            \item \textbf{Power Consumption:} The automatic detection algorithm (GPS + Sensors) must be optimized to consume no more than 10-15\% 
+            battery power per hour of use on an average device, ensuring the user does not run out of battery power while traveling.
+            \item \textbf{Required Sensors:} Full use of the app is contingent on the physical presence of a calibrated accelerometer and gyroscope. 
+            Older or low-end devices without these sensors will only be able to use the app in limited mode (without automatic detection).
+            \item \textbf{Intermittent Connectivity:} The design must include an "offline-first" mode for data recording. Upload to the server must 
+            occur asynchronously when the connection is stable, handling any timeouts without losing local data.
+        \end{itemize}
+
+        \subsubsection{Any Other Constraint}
+        \begin{itemize}
+            \item \textbf{GPS Accuracy:} The accuracy of obstacle detection is limited by the accuracy of the device's civilian GPS. The system must 
+            include clustering or manual correction mechanisms to handle inherent hardware inaccuracy.
+            \item \textbf{Operating System:} The application must be compatible with Android and iOS versions released in the last 3 years to ensure 
+            access to the latest APIs for efficient background sensor management.
+        \end{itemize}
 
         \subsection{Design constraints}
             \subsubsection{Standard compliance}
@@ -752,6 +955,7 @@
             \item 17/11/2025  4h (Completing Section 1 (Introduction))
             \item 18/11/2025  7h (Section 2 - StateDiagrams, DomainClassDiagram, Scenarios)
             \item 19/11/2025  1h (Completing Section 2)
+            \item 25/11/2025  5h (User Interfaces and some subsections of section 3)
         \end{itemize}
 
 
