@@ -1,0 +1,53 @@
+
+\subsubsection{Scenarios} \label{sssec:scenarios}
+
+\paragraph{[SC1] Registering a new user \\}
+% It may be necessary to modify personal information given by the user
+User "Zoe" has just downloaded the BBP app in order to monitor her activities with the bicycle, and wants to create a profile.
+So she creates an account by entering name, surname, email, birth date, gender, and accepting the privacy policy.
+Once her information is verified, she receives an email to confirm **her** email address. She confirms it, and the account is then created.
+
+% todo: give to these two following scenarios a second look, especially @ the final part (can the trip activity be started also by unregistred users?).
+\paragraph{[SC2] Intelligent route planning (General user) \\}  
+The tourist "Diana" wants to explore the city by bike but is worried about traffic and poor roads.
+She accesses the BBP website without logging in and enters "Hotel Plaza" as the origin and "Museo della Scienza" as the destination, receving two possible paths as response.
+Diana notices that the shortest route (3 km) has a low "Path Score", with several "Pothole" icons along the way. 
+The alternative, slightly longer route (3.5 km) has an excellent "Path Score" and it's marked with excellent conditions.
+Diana chooses the green route, starts the trip activity and follows the instructions.
+
+\paragraph{[SC3] Intelligent route planning (Registred user) \\}
+The athlete "Giorgio" is planning his daily cycling training.
+He opens the BBP app, logs in and searches for bike paths with a starting point near his home and a length of 30 km.
+He receives three paths: the first one, which has a high "Path Score" but that crosses his ex-wife's house, the second 
+which has a decent "Path score" and no problem marked, and the third one with low "Path Score" and several potholes marked on the map.
+Given these options, he choose the second one and starts the activity.
+Once he finishes his training, he stops the activity and checks whether the activity has been registred on his trip history or not.
+
+\paragraph{[SC4] Automatic activity monitoring and trip data enrichment \\}    
+Registered user "Alessandro" is preparing for his weekly training session. He wants to track his performance, including correlation with the weather.
+He launches the BBP app, logs in, and starts recording his trip allowing the automatic collection of data, both to check path and weather conditions.
+Once he has finished his trip, he stops the recording and after little bit he watches the app his trip summary: the path map; the total distance traveled; 
+the average, maximum and minimum speed; maximum, average and minimum altitude excursion; weather conditions.
+
+\paragraph{[SC5] Manual path information update 1 \\}
+Registered user "Bianca" is riding a popular bike path when she notices that a stretch, previously marked as "Optimal", is now blocked by unreported construction. 
+She decides to alert the community: so she stops and reports the problem on the BBP app: she specifies the bike path, the type of problem, the problem position and 
+adds also an optional textual note to be more detailed, then submits the report, receiving an acknowledgement
+
+\paragraph{[SC6] Manual path information update 2 \\}
+Registred user "Edoardo" is riding along a path where a pothole had been reported the previous week. 
+He notices that the pothole has been fixed, so he selects the pothole mark on the map and switches its status as resolved.
+After a few hours, he decides to control if the mark on the map has been removed, and finds out that the pothole mark disappeared.
+
+\paragraph{[SC7] Automatic path information update \\}
+Registered user "Carlo" goes to work by bike, he logs in the app and starts the trip activity, giving permission to the app for automatically record the ride.
+Almost at the end of the ride he goes over a pothole, so when he arrives at work he checks the BBP app to see whether the pothole has been detected or not.
+He notices that there are two potholes detected: one approximately in the middle of the path, and another one near his work building.
+Since he never encountered a pothole in the middle of the path, he selects it and discards it as a false positive.
+Then he selects the pothole near his work building, confirms it and adds an optional note to be more detailed.
+
+\paragraph{[SC8] Historical performance analysis \\}
+Registered User "Alessandra", after months of using BBP, wants to analyze her performance progress. 
+She opens the BBP app, logs in, opens the relative section and looks at the list of all her saved trips.
+She filters the list by "Last month" and looks at the aggregated graph showing her average speed during the whole month and the total distance traveled.
+Then she searches for a specific trip she did two months ago to understand if she improved.
