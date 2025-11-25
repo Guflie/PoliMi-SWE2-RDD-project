@@ -1,0 +1,62 @@
+\documentclass{article}
+
+\begin{document}
+
+% --------------------------------------------------------------------------------------------
+\iffalse 1
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        Name & \\
+        \hline
+        Actors & \\
+        \hline
+        Entry Condition & \\
+        \hline
+        Event Flow & \\
+        \hline
+        Exit Condition & \\
+        \hline
+        Exception & \\
+        \hline       
+    \end{tabular}
+\end{center}
+\fi
+% --------------------------------------------------------------------------------------------
+
+\paragraph{[UC1] Account creation}
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        Name & \textbf{Account creation} \\
+        \hline
+        Actors & Any person \\
+        \hline
+        Entry Condition & \\
+        \hline
+        Event Flow & 
+            \begin{minipage}{0.7\textwidth}
+            \smallskip
+            \begin{enumerate}
+                \item The person opens the account creation pagebreak
+                \item The system asks to fill out a form with the following personal information: name, surname, age, birth date, geneder, email; the form has also a flag for privacy accpetance
+                \item The person fills out the questionare and submits it
+                \item The system verifies that the email exists and sends a verification email containing a link to verify the email address
+                \item The person receives the email and opens the link, which lead to a page in which it can type the password for the account
+                \item The person types the password and submits the form
+            \end{enumerate}
+            \smallskip
+            \end{minipage}
+        \\
+        \hline
+        Exit Condition & The account is successfully created\\
+        \hline
+        Exception & Email inserted during registration has been already used\\
+        \hline       
+    \end{tabular}
+\end{center}
+
+We highlight that the same person can create multiple accounts, but with different emails.
+
+
+\end{document}
