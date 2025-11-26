@@ -1,9 +1,12 @@
 \documentclass{article}
+
 \usepackage[utf8]{inputenc}
 \usepackage{parskip}
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{verbatim}
+\usepackage{tabularx}
 \usepackage{verbatim}
 \graphicspath{ {img/} }
 
@@ -199,108 +202,10 @@
     \section{Overall description}
 
         \subsection{Product perspective}
-        %con i seguenti scenari credo di aver coperto tutti gli argomenti richiesti (se te ne vengono in mente di nuovi o vuoi editare questi, dimmi pure):
-        % 1-Registrazione.
-        % 2-Uso perosnale + Meteo.
-        % 3-Inserimento Manuale (Stato).
-        % 4-Inserimento Automatico (Ciclo completo).
-        % 5-Ricerca + Path Score (Utente Generico).
-        % 6-Manutenzione (Aggiornamento dati).
-        % 7-Storico (Analisi lungo termine).
-        \subsubsection{Scenarios}
-
-        \textbf{Registering a new user}
-        % TODO: here the system is represented as an actor, however it shouldn't
-        \begin{comment}
-        User "Zoe" has just downloaded the BBP app because she wants to start tracking her trips and contributing to the community.
-        From the welcome screen, she selects "Create Account." She enters her information and accepts the privacy policy.
-        The system verifies the information, creates the new profile in the database, and sends a confirmation. Once the process is complete, Zoe gains "Registered User" status: 
-        the app interface changes, enabling the previously disabled "Start Trip" and "Report Problem" buttons.
-        \end{comment}
         
-        % new version
-        User "Zoe" has just downloaded the BPP app.
-        She cretaes an account by entering the information and accepting the privacy policy.
-        Once her information were verified she receives a confirmation message, becoming a "Registred user".
+            \input{RASD/Section2/scenarios.tex}
 
-        \vspace{0.5cm}
-
-        \textbf{Activity monitoring and data enrichment}    
-
-        Registered user "Alessandro" is preparing for his weekly training session. He wants to track his performance, including correlation with the weather.
-        He launches the BBP app, logs in, and from the main screen, presses "Start Trip". During the session, Alessandro pedals, focusing solely on the road, while the system 
-        silently tracks his GPS route and biometric data (if connected).
-        At the end, Alessandro presses "End Trip". The system saves the route and immediately queries the external weather service. A few moments later, Alessandro views the 
-        trip summary: he sees his map, the 45 km traveled, his average speed, and, thanks to the weather integration, notes that the strong headwind he detected has negatively 
-        impacted his time. Satisfied with the detailed analysis, he closes the app.
-        \vspace{0.5cm}
-
-        \textbf{Active contribution to the community (manual entry)}
-
-        Registered user "Bianca" is riding a popular bike path when she notices that a stretch, previously marked as "Optimal", is now blocked by unreported construction. 
-        She decides to alert the community.
-        She safely stops and opens BBP. Selects "Report Problem", and the system geolocates her location. Bianca selects the "Obstacle" category and the "Construction in 
-        Progress" subcategory. She adds a text note ("Traffic blocked due to excavation") and submits the report.
-        The system immediately records the information as "Publishable". From that moment, the "Path Score" for that stretch drops dramatically, and future users planning a
-        route in that area will see a warning and will likely be diverted onto alternative routes.
-        \vspace{0.5cm}
-        
-        \textbf{The Auto-Detection cycle}
-
-        This scenario describes the complete flow of passive data acquisition, from invisible collection to explicit validation. 
-        \begin{itemize}
-            \item \textbf{Detection during the journey} 
-            
-            Registered user "Carlo" activates "Automatic Mode" to detect potholes before heading to work. He places his smartphone in the handlebar mount and begins pedaling. 
-            As he rides along Via Verdi, the device's accelerometer registers a strong vertical impact unrelated to braking. The BBP system analyzes the pattern in real time, 
-            classifies it as a "Potential Pothole", and stores the GPS coordinates and timestamp. All this happens in the background, without sending notifications or sounds 
-            so as not to distract Carlo from his riding.
-            
-            \item \textbf{Post-trip confirmation} 
-            
-            Arriving at the office, Carlo finishes his trip. The system displays a notification: "Two potential problems detected. Would you like to check them?" Carlo opens
-            the review screen. The system displays a map with the two points. Carlo selects the first one, Via Verdi, and clearly remembers the pothole. He presses "Confirm".
-            The system promotes that data to "Publishable Information".
-            
-            \item \textbf{Handling a false positive}
-
-            Carlo examines the second point detected on Corso Italia. He realizes that he deliberately stepped onto a curb to park his bike there. It's not a traffic hazard. 
-            He clicks "Ignore". The system discards the raw data and doesn't create any public alerts, preventing the inventory from being contaminated with incorrect data.
-        \end{itemize}
-        \vspace{0.5cm}
-        
-        \textbf{Intelligent route planning (General User)}  
-
-        "Diana", a tourist, wants to explore the city by bike but is worried about traffic and poor roads.
-        She accesses the BBP website without logging in and enters "Hotel Plaza" as the origin and "Museo della Scienza" as the destination.
-        The system calculates three possible routes. Diana notices that the shortest route (3 km) has a low "Path Score" and is colored orange on the map, with several
-        "Pothole" icons along the way. An alternative, slightly longer route (3.5 km) has an excellent "Path Score" and is highlighted in green, indicating a bike path 
-        in excellent condition.
-        Diana chooses the green route. While navigating, she avoids stress and dangers thanks to information aggregated by the community.
-        \vspace{0.5cm}
-        
-        \textbf{Data updating and maintenance}
-        %qui ho pensato che potremmo gestire una risluzione di un problema, ad esempio la buca, in due modi:
-        % 1- l'utente ha un grado di affidabilità compreso tra 95% e 100% e quindi se segnala un problema (buca, lavori in corso, ecc..) come risolto viene subito considerato come vero. 
-        % L'affidabilità si guadagna aggiungendo/confermando dei problemi e, se veri, si acquisisce un punteggio. Altrimenti si perde punteggio, e quindi affidabilità.
-        % 2- un qualsiasi problema deve essere segnalato e/o confermato da almeno x persone. Ma se quella strada viene percorsa solo dall'utente Giovanni come facciamo?
-        % In base a quello che pensi dobbiamo modificare questo scenario
-
-        Registered user "Edoardo" is driving along a road where a large pothole had been reported the previous week (which he also confirmed). He is pleased to note that 
-        the municipality has resurfaced the section and the pothole is no longer there.
-        To keep the inventory updated, Edoardo selects the pothole marker on the map and presses "Mark as Resolved".
-        The system records this new input. If other users confirm the resolution (or if Edoardo has a high confidence level in the system), the obstacle will be removed
-        and the section's "Path Score" will start to increase again.
-        \vspace{0.5cm}
-        
-        \textbf{Historical performance analysis}
-
-        Registered User "Alessandro", after months of using BBP, wants to analyze his progress. He accesses the "My Trip History" section.
-        The system presents a chronological list of all his saved trips. Alessandro filters by "Last Month" and displays an aggregate graph showing the increase in his average 
-        speed and total kilometers traveled.
-        He selects a specific trip from two months ago; the system retrieves all the details from the database, including that day's weather conditions (e.g., "Light rain"),
-        allowing Alessandro to remember why his performance was below average on that date.
-        \pagebreak
+            \pagebreak
 
         \subsubsection{Domain Class Diagram}
         %come identifichiamo uno status per un percorso? in base al numero di ostacoli? gli associamo un colore, vero? ad esempio ottimale-verde.
@@ -719,6 +624,8 @@
                 \item \textbf{[R26]} The system shall allow the user to filter the view of its history.
             \end{itemize}
 
+            \input{RASD/Section3/Use Case/use_case.tex}
+
             \subsubsection{Requirement Mapping}
             This section maps the Goals identified in Section 1 to the Functional Requirements and Domain Assumptions. This mapping demonstrates that 
             the set of requirements, supported by the assumptions, is sufficient to satisfy the system goals ($R \land D \models G$).
@@ -948,6 +855,9 @@
             \item 11/11/2025  1h (RASD document structure)
             \item 19/11/2025 1h 30m (Section 1 review)
             \item 21/11/2025 1h (class diagram review)
+            \item 20/11/2025 1h (Scenarios review)
+            \item 24/11/2025 2h (Scenario update)
+            \item 26/11/2025 2h (Use Cases)
         \end{itemize}
     
         \textbf{Lo Conte Francesco}

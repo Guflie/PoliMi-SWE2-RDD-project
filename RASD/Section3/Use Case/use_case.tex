@@ -1,0 +1,291 @@
+\begin{comment}
+\paragraph{[UC#] }
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        Name & \textbf{ } \\
+        \hline
+        Actors &  \\
+        \hline
+        Entry Condition & \\
+        \hline
+        Event Flow & 
+            \begin{minipage}{0.7\textwidth}
+            \smallskip
+            \begin{enumerate}
+                \item 
+            \end{enumerate}
+            \smallskip
+            \end{minipage}
+        \\
+        \hline
+        Exit Condition &  \\
+        \hline
+        Exception & 
+        \begin{minipage}{0.7\textwidth}
+        \smallskip
+            \begin{itemize}
+            \item 
+        \end{itemize} 
+        \smallskip
+        \end{minipage}
+        \\
+        \hline       
+    \end{tabular}
+\end{center}
+\end{comment}
+
+\subsubsection{Use cases} \label{sssec:use_cases}
+
+% --------------------------------------------------------------------------------------------------
+\paragraph{[UC1] Account creation} \label{UC1}
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        Name & \textbf{Account creation} \\
+        \hline
+        Actors & Any person \\
+        \hline
+        Entry Condition & True \\
+        \hline
+        Event Flow & 
+            \begin{minipage}{0.7\textwidth}
+            \smallskip
+            \begin{enumerate}
+                \item The person downloads the BBP and opens it
+                \item The system asks to fill out a form with the following personal information: name, surname, age, birth date, geneder, email, password; the form ask also to flag for privacy accpetance
+                \item The person fills out the questionare and submits it
+                \item The system verifies that the email exists and sends a verification email containing a link to verify the email address
+                \item The person receives the email and opens the link
+            \end{enumerate}
+            \smallskip
+            \end{minipage}
+        \\
+        \hline
+        Exit Condition & The account is successfully created \\
+        \hline
+        Exception & 
+        \begin{minipage}{0.7\textwidth}
+        \smallskip
+            \begin{itemize}
+            \item Email address is not valid, therefore a warnigs is displayed in point \textit{2.} and the form can't be submitted
+            \item Email inserted during registration has been already used, therefore the account is not created and in the point \textit{4.} instead of a link an informative message is sent 
+        \end{itemize} 
+        \smallskip
+        \end{minipage}
+        \\
+        \hline       
+    \end{tabular}
+\end{center}
+We highlight that the same person can create multiple accounts, but with different emails.
+\\
+\textit{Refers to \ref{SC1}}.
+
+% --------------------------------------------------------------------------------------------------
+\paragraph{[UC2] Route planning}
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        Name & \textbf{Route planing} \\
+        \hline
+        Actors & Any user \\
+        \hline
+        Entry Condition & BPP app installed on personal device \\ % consider if this is something that can be categorized as an entry condition
+        \hline
+        Event Flow & 
+            \begin{minipage}{0.7\textwidth}
+            \smallskip
+            \begin{enumerate}
+                \item The user opens the search page and inserts the starting point and the destination
+                \item The system retrive from it's archive all paths near the startint point specified by the user, ordered by "Path Score" and send them to the user
+                \item The user explore the choices given by the system and selects one of them 
+            \end{enumerate}
+            \smallskip
+            \end{minipage}
+        \\
+        \hline
+        Exit Condition & A path is displayed to the user \\
+        \hline
+        Exception & 
+        \begin{minipage}{0.7\textwidth}
+        \smallskip
+            \begin{itemize}
+            \item No path between starting point and destination is found, threrefore a message of "No route found" is displayed
+        \end{itemize} 
+        \smallskip
+        \end{minipage}
+        \\
+        \hline       
+    \end{tabular}
+\end{center}
+\textit{Refers to \ref{SC2}, \ref{SC3}}.
+
+% --------------------------------------------------------------------------------------------------
+\paragraph{[UC3] Automatic trip monitoring}
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        Name & \textbf{Automatic trip monitoring} \\
+        \hline
+        Actors & Registred user \\
+        \hline
+        Entry Condition & The BBP app is installed and the user has already an account\\
+        \hline
+        Event Flow & 
+            \begin{minipage}{0.7\textwidth}
+            \smallskip
+            \begin{enumerate}
+                \item The user selects the route he wants to ride on, selects the option to automatically collect data and starts the activity
+                \item The user's personal device collects user position and sends it to the system
+                \item Once finised the user stops the activity
+                \item The system calculates some metrics about the user performances (total sistance traveled, average speed, maximum speed,
+                minumum speed, maximum altitude excursion, average altitude excursion)
+                \item The system retrives the weather conditions during the activty from a third party weather API
+                \item The system send the computed informations mentioned in \textit{4.} and \textit{5.} plus the maps showing the path traveled
+            \end{enumerate}
+            \smallskip
+            \end{minipage}
+        \\
+        \hline
+        Exit Condition & The user sees a resume of the activity just finished \\
+        \hline
+        Exception & 
+        \begin{minipage}{0.7\textwidth}
+        \smallskip
+            \begin{itemize}
+            \item Weather conditions can't be retrived from the third party API, therefore only the metrics about user performances are shown to the user
+            \item User's device loses GPS signal during the activity, therefore the system is not able to compute all the metrics about user performances and shows only the ones that can be computed with the available data
+        \end{itemize} 
+        \smallskip
+        \end{minipage}
+        \\
+        \hline       
+    \end{tabular}
+\end{center}
+\textit{Refers to \ref{SC4}}.
+
+% --------------------------------------------------------------------------------------------------
+\paragraph{[UC4] Report route prolem}
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        Name & \textbf{Manual route status update} \\
+        \hline
+        Actors & Registred user \\
+        \hline
+        Entry Condition & True\\
+        \hline
+        Event Flow & 
+            \begin{minipage}{0.7\textwidth}
+            \smallskip
+            \begin{enumerate}
+                \item The user after noticing a problem along a route open the report issue page
+                \item The user searches for the route, then specifies the issue type, the issue position along the route and adds a description, and submits it
+                \item The system receives the issue report and send an acknowledgement
+                \item The system checks if this issue has been already reported, in that case it increments the number of reports for 
+                that issue, and if the number is greater than a certain treshold the issue is marked as True 
+            \end{enumerate}
+            \smallskip
+            \end{minipage}
+        \\
+        \hline
+        Exit Condition & The system updates the path status \\
+        \hline
+        Exception & \\
+        \hline       
+    \end{tabular}
+\end{center}
+
+% --------------------------------------------------------------------------------------------------
+\paragraph{[UC5] Report route problem fixup}
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        Name & \textbf{Report route problem fixup} \\
+        \hline
+        Actors & Registred user \\
+        \hline
+        Entry Condition & The user has already an account\\
+        \hline
+        Event Flow & 
+            \begin{minipage}{0.7\textwidth}
+            \smallskip
+            \begin{enumerate}
+                \item The user open the app, selects the problem icon on the route and marks it as fixed
+                \item The system receives the fixup report and send an acknowledgement
+                \item The system incrementes the number of reports for that issue, and if the number is greater than a certain treshold the issue is marked as Fixed
+            \end{enumerate}
+            \smallskip
+            \end{minipage}
+        \\
+        \hline
+        Exit Condition & The system updates the path status \\
+        \hline
+        Exception & \\
+        \hline       
+    \end{tabular}
+\end{center}
+\textit{Refers to \ref{SC6}}.
+
+% --------------------------------------------------------------------------------------------------
+\paragraph{[UC6] Automatic route error detection}
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        Name & \textbf{Automatic route error detection} \\
+        \hline
+        Actors & Registred user \\
+        \hline
+        Entry Condition & True\\
+        \hline
+        Event Flow & 
+            \begin{minipage}{0.7\textwidth}
+            \smallskip
+            \begin{enumerate}
+                \item The user starts an activity with automatic issue detection enabled
+                \item The BBP app collects data from the user's device sensors and analyzes them in real time to detect potential issues along the route
+                \item When the user finished the activity, the BBP app shows it a list of all problems detected and their location, asking the user confirmation for each one of them
+                \item The user confirmes wheteher the problems detected are real issues or false positives
+                \item The BPP app sends to the system the confirmed issues
+            \end{enumerate}
+            \smallskip
+            \end{minipage}
+        \\
+        \hline
+        Exit Condition & The system updates the path status \\
+        \hline
+        Exception & \\
+        \hline       
+    \end{tabular}
+\end{center}
+\textit{Refers to \ref{SC7}}.
+
+% --------------------------------------------------------------------------------------------------
+\paragraph{[UC7] User's activity history consultation}
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        Name & \textbf{User's activity history consultation} \\
+        \hline
+        Actors & Registred user \\
+        \hline
+        Entry Condition & True\\
+        \hline
+        Event Flow & 
+            \begin{minipage}{0.7\textwidth}
+            \smallskip
+            \begin{enumerate}
+                \item The user opens the relative page on the app and searches for specific activity over its history, optionally applying filters, and sends the request to the system
+                \item The system run the query and retrives the activities matching the request, then sends the result to the user
+            \end{enumerate}
+            \smallskip
+            \end{minipage}
+        \\
+        \hline
+        Exit Condition & The user consults the result \\
+        \hline
+        Exception & \\
+        \hline       
+    \end{tabular}
+\end{center}
+\textit{Refers to \ref{SC8}}.
