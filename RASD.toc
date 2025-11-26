@@ -46,25 +46,26 @@
 \contentsline {paragraph}{Data Contribution and Governance}{23}{}%
 \contentsline {paragraph}{Path Planning and Visualization}{23}{}%
 \contentsline {paragraph}{Trip History}{24}{}%
-\contentsline {subsubsection}{\numberline {3.2.1}Use cases}{24}{}%
-\contentsline {paragraph}{[UC1] Account creation}{24}{}%
-\contentsline {paragraph}{[UC2] Route planning}{25}{}%
-\contentsline {paragraph}{[UC3] Automatic trip monitoring}{25}{}%
-\contentsline {paragraph}{[UC4] Report route prolem}{26}{}%
-\contentsline {paragraph}{[UC5] Report route problem fixup}{27}{}%
-\contentsline {paragraph}{[UC6] Automatic route error detection}{27}{}%
-\contentsline {paragraph}{[UC7] User's activity history consultation}{28}{}%
-\contentsline {subsection}{\numberline {3.3}Performance requirements}{29}{}%
-\contentsline {subsection}{\numberline {3.4}Design constraints}{29}{}%
-\contentsline {subsubsection}{\numberline {3.4.1}Standard compliance}{29}{}%
-\contentsline {subsubsection}{\numberline {3.4.2}Hardware limitations}{29}{}%
-\contentsline {subsubsection}{\numberline {3.4.3}Any other constraint}{29}{}%
-\contentsline {subsection}{\numberline {3.5}Software system attributes}{29}{}%
-\contentsline {subsubsection}{\numberline {3.5.1}Reliability}{29}{}%
-\contentsline {subsubsection}{\numberline {3.5.2}Availability}{29}{}%
-\contentsline {subsubsection}{\numberline {3.5.3}Security}{29}{}%
-\contentsline {subsubsection}{\numberline {3.5.4}Maintainability}{29}{}%
-\contentsline {subsubsection}{\numberline {3.5.5}Portability}{29}{}%
-\contentsline {section}{\numberline {4}Formal anlaysis using Alloy}{29}{}%
-\contentsline {section}{\numberline {5}Effort spent}{29}{}%
-\contentsline {section}{\numberline {6}References}{29}{}%
+\contentsline {subsubsection}{\numberline {3.2.1}Use Case Diagram}{24}{}%
+\contentsline {subsubsection}{\numberline {3.2.2}Use cases}{24}{}%
+\contentsline {paragraph}{[UC1] Account creation}{25}{}%
+\contentsline {paragraph}{[UC2] Route planning}{26}{}%
+\contentsline {paragraph}{[UC3] Automatic trip monitoring}{27}{}%
+\contentsline {paragraph}{[UC4] Report route prolem}{28}{}%
+\contentsline {paragraph}{[UC5] Report route problem fixup}{29}{}%
+\contentsline {paragraph}{[UC6] Automatic route error detection}{29}{}%
+\contentsline {paragraph}{[UC7] User's activity history consultation}{30}{}%
+\contentsline {subsection}{\numberline {3.3}Performance requirements}{31}{}%
+\contentsline {subsection}{\numberline {3.4}Design constraints}{31}{}%
+\contentsline {subsubsection}{\numberline {3.4.1}Standard compliance}{31}{}%
+\contentsline {subsubsection}{\numberline {3.4.2}Hardware limitations}{31}{}%
+\contentsline {subsubsection}{\numberline {3.4.3}Any other constraint}{31}{}%
+\contentsline {subsection}{\numberline {3.5}Software system attributes}{31}{}%
+\contentsline {subsubsection}{\numberline {3.5.1}Reliability}{31}{}%
+\contentsline {subsubsection}{\numberline {3.5.2}Availability}{31}{}%
+\contentsline {subsubsection}{\numberline {3.5.3}Security}{31}{}%
+\contentsline {subsubsection}{\numberline {3.5.4}Maintainability}{31}{}%
+\contentsline {subsubsection}{\numberline {3.5.5}Portability}{31}{}%
+\contentsline {section}{\numberline {4}Formal anlaysis using Alloy}{31}{}%
+\contentsline {section}{\numberline {5}Effort spent}{31}{}%
+\contentsline {section}{\numberline {6}References}{31}{}%
