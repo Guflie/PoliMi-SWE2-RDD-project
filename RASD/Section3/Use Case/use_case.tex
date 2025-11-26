@@ -38,13 +38,13 @@
 \subsubsection{Use cases} \label{sssec:use_cases}
 
 % --------------------------------------------------------------------------------------------------
-\paragraph{[UC1] Account creation} \label{UC1}
+\paragraph{[UC1] Account creation} \label{UC:UC1}
 \begin{center}
     \begin{tabular}{|c|c|}
         \hline
         Name & \textbf{Account creation} \\
         \hline
-        Actors & Any person \\
+        Actors & Any person \\ % Is this terminology correct?
         \hline
         Entry Condition & True \\
         \hline
@@ -55,8 +55,9 @@
                 \item The person downloads the BBP and opens it
                 \item The system asks to fill out a form with the following personal information: name, surname, age, birth date, geneder, email, password; the form ask also to flag for privacy accpetance
                 \item The person fills out the questionare and submits it
-                \item The system verifies that the email exists and sends a verification email containing a link to verify the email address
-                \item The person receives the email and opens the link
+                \item The system verifies that the email is valid and that it's not already been used, then it sends a verification email containing a link to verify the email address
+                \item The person receives the email and opens the link to confirm the email
+                \item The system send an acknowledgement of successful account creation
             \end{enumerate}
             \smallskip
             \end{minipage}
@@ -79,7 +80,7 @@
 \end{center}
 We highlight that the same person can create multiple accounts, but with different emails.
 \\
-\textit{Refers to \ref{SC1}}.
+\textit{Refers to} [SC1].
 
 % --------------------------------------------------------------------------------------------------
 \paragraph{[UC2] Route planning}
@@ -97,8 +98,9 @@ We highlight that the same person can create multiple accounts, but with differe
             \smallskip
             \begin{enumerate}
                 \item The user opens the search page and inserts the starting point and the destination
-                \item The system retrive from it's archive all paths near the startint point specified by the user, ordered by "Path Score" and send them to the user
-                \item The user explore the choices given by the system and selects one of them 
+                \item The system retrive from it's archive all paths near the startint point specified by the user and that leads toward the destination, ordered by "Path Score" and send them to the user
+                \item The user explore the choices given by the system and selects one of them
+                \item The user starts the trip activity for the selected path
             \end{enumerate}
             \smallskip
             \end{minipage}
@@ -118,7 +120,7 @@ We highlight that the same person can create multiple accounts, but with differe
         \hline       
     \end{tabular}
 \end{center}
-\textit{Refers to \ref{SC2}, \ref{SC3}}.
+\textit{Refers to} [SC2], [SC3].
 
 % --------------------------------------------------------------------------------------------------
 \paragraph{[UC3] Automatic trip monitoring}
@@ -130,18 +132,20 @@ We highlight that the same person can create multiple accounts, but with differe
         Actors & Registred user \\
         \hline
         Entry Condition & The BBP app is installed and the user has already an account\\
+        % are these Entry Conditions necessary?
         \hline
         Event Flow & 
             \begin{minipage}{0.7\textwidth}
             \smallskip
             \begin{enumerate}
                 \item The user selects the route he wants to ride on, selects the option to automatically collect data and starts the activity
-                \item The user's personal device collects user position and sends it to the system
-                \item Once finised the user stops the activity
-                \item The system calculates some metrics about the user performances (total sistance traveled, average speed, maximum speed,
+                \item The user's personal device collects user position and sends it to the system every second
+                \item Once finished the user stops the activity
+                \item The system calculates some metrics about the user performances (total distance traveled, average speed, maximum speed,
                 minumum speed, maximum altitude excursion, average altitude excursion)
-                \item The system retrives the weather conditions during the activty from a third party weather API
-                \item The system send the computed informations mentioned in \textit{4.} and \textit{5.} plus the maps showing the path traveled
+                \item The system retrives the weather conditions during the activty from a third-part weather API
+                \item The system send to the user the computed informations mentioned in \textit{4.} and \textit{5.}, plus the 
+                map showing the path traveled
             \end{enumerate}
             \smallskip
             \end{minipage}
@@ -154,7 +158,8 @@ We highlight that the same person can create multiple accounts, but with differe
         \smallskip
             \begin{itemize}
             \item Weather conditions can't be retrived from the third party API, therefore only the metrics about user performances are shown to the user
-            \item User's device loses GPS signal during the activity, therefore the system is not able to compute all the metrics about user performances and shows only the ones that can be computed with the available data
+            \item User's device loses GPS signal during the activity, therefore the system is not able to compute all the metrics about user performances and shows only the
+            ones that can be computed with the available data, notifying the user about the partial (or total) data loss
         \end{itemize} 
         \smallskip
         \end{minipage}
@@ -162,7 +167,7 @@ We highlight that the same person can create multiple accounts, but with differe
         \hline       
     \end{tabular}
 \end{center}
-\textit{Refers to \ref{SC4}}.
+\textit{Refers to} [SC4].
 
 % --------------------------------------------------------------------------------------------------
 \paragraph{[UC4] Report route prolem}
@@ -179,11 +184,11 @@ We highlight that the same person can create multiple accounts, but with differe
             \begin{minipage}{0.7\textwidth}
             \smallskip
             \begin{enumerate}
-                \item The user after noticing a problem along a route open the report issue page
-                \item The user searches for the route, then specifies the issue type, the issue position along the route and adds a description, and submits it
+                \item The user after noticing a problem along a route opens the report issue page
+                \item The user searches for the route and selects it, then specifies the issue type, the issue position along the route and adds a description, then submits the report
                 \item The system receives the issue report and send an acknowledgement
-                \item The system checks if this issue has been already reported, in that case it increments the number of reports for 
-                that issue, and if the number is greater than a certain treshold the issue is marked as True 
+                \item The system incrementes the number of reports for that issue, and if the number is greater than a certain treshold the issue is marked as True.
+                % this step might be refined later, I don't like to be vague about it but I don't have a better idea right now
             \end{enumerate}
             \smallskip
             \end{minipage}
@@ -195,6 +200,7 @@ We highlight that the same person can create multiple accounts, but with differe
         \hline       
     \end{tabular}
 \end{center}
+\textit{Refers to} [SC5].
 
 % --------------------------------------------------------------------------------------------------
 \paragraph{[UC5] Report route problem fixup}
@@ -211,9 +217,10 @@ We highlight that the same person can create multiple accounts, but with differe
             \begin{minipage}{0.7\textwidth}
             \smallskip
             \begin{enumerate}
-                \item The user open the app, selects the problem icon on the route and marks it as fixed
+                \item The user opens the app, selects the problem icon on the route and marks it as fixed
                 \item The system receives the fixup report and send an acknowledgement
-                \item The system incrementes the number of reports for that issue, and if the number is greater than a certain treshold the issue is marked as Fixed
+                \item The system incrementes the number of fixup reports for that issue, and if the number is greater than a certain treshold the issue is marked as Fixed
+                % same thing as before about vagueness
             \end{enumerate}
             \smallskip
             \end{minipage}
@@ -225,7 +232,7 @@ We highlight that the same person can create multiple accounts, but with differe
         \hline       
     \end{tabular}
 \end{center}
-\textit{Refers to \ref{SC6}}.
+\textit{Refers to} [SC6].
 
 % --------------------------------------------------------------------------------------------------
 \paragraph{[UC6] Automatic route error detection}
@@ -247,6 +254,7 @@ We highlight that the same person can create multiple accounts, but with differe
                 \item When the user finished the activity, the BBP app shows it a list of all problems detected and their location, asking the user confirmation for each one of them
                 \item The user confirmes wheteher the problems detected are real issues or false positives
                 \item The BPP app sends to the system the confirmed issues
+                \item The system sends and acknowledgement, and updates the path status accordingly % this might be refined
             \end{enumerate}
             \smallskip
             \end{minipage}
@@ -258,7 +266,7 @@ We highlight that the same person can create multiple accounts, but with differe
         \hline       
     \end{tabular}
 \end{center}
-\textit{Refers to \ref{SC7}}.
+\textit{Refers to} [SC7].
 
 % --------------------------------------------------------------------------------------------------
 \paragraph{[UC7] User's activity history consultation}
@@ -276,16 +284,16 @@ We highlight that the same person can create multiple accounts, but with differe
             \smallskip
             \begin{enumerate}
                 \item The user opens the relative page on the app and searches for specific activity over its history, optionally applying filters, and sends the request to the system
-                \item The system run the query and retrives the activities matching the request, then sends the result to the user
+                \item The system runs the query and retrives the activities matching the request, then sends the result to the user
             \end{enumerate}
             \smallskip
             \end{minipage}
         \\
         \hline
-        Exit Condition & The user consults the result \\
+        Exit Condition & The user consults its activity history \\
         \hline
         Exception & \\
         \hline       
     \end{tabular}
 \end{center}
-\textit{Refers to \ref{SC8}}.
+\textit{Refers to} [SC8].
