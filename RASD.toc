@@ -16,8 +16,6 @@
 \contentsline {section}{\numberline {2}Overall description}{9}{}%
 \contentsline {subsection}{\numberline {2.1}Product perspective}{9}{}%
 \contentsline {subsubsection}{\numberline {2.1.1}Scenarios}{9}{}%
-<<<<<<< HEAD
-<<<<<<< HEAD
 \contentsline {paragraph}{[SC1] Registering a new user \\}{9}{}%
 \contentsline {paragraph}{[SC2] Intelligent route planning (General user) \\}{9}{}%
 \contentsline {paragraph}{[SC3] Intelligent route planning (Registred user) \\}{9}{}%
@@ -26,8 +24,6 @@
 \contentsline {paragraph}{[SC6] Manual path information update 2 \\}{10}{}%
 \contentsline {paragraph}{[SC7] Automatic path information update \\}{10}{}%
 \contentsline {paragraph}{[SC8] Historical performance analysis \\}{10}{}%
-=======
->>>>>>> 470ac3d4063d59e27eec7a3da23ff6f6e3890f47
 \contentsline {subsubsection}{\numberline {2.1.2}Domain Class Diagram}{11}{}%
 \contentsline {subsubsection}{\numberline {2.1.3}State Diagrams}{13}{}%
 \contentsline {subsection}{\numberline {2.2}Product functions}{17}{}%
@@ -38,86 +34,37 @@
 \contentsline {subsubsection}{\numberline {2.4.1}Domain Assumptions}{21}{}%
 \contentsline {subsubsection}{\numberline {2.4.2}System Dependencies}{21}{}%
 \contentsline {subsubsection}{\numberline {2.4.3}System Constraints}{22}{}%
-\contentsline {section}{\numberline {3}Specific requirements}{23}{}%
-\contentsline {subsection}{\numberline {3.1}External interface requirements}{23}{}%
-\contentsline {subsubsection}{\numberline {3.1.1}User interfaces}{23}{}%
-\contentsline {subsubsection}{\numberline {3.1.2}Hardware interfaces}{23}{}%
-\contentsline {subsubsection}{\numberline {3.1.3}Software interfaces}{23}{}%
-\contentsline {subsubsection}{\numberline {3.1.4}Communication interfaces}{23}{}%
-\contentsline {subsection}{\numberline {3.2}Functional requirements}{23}{}%
-\contentsline {subsection}{\numberline {3.3}Performance requirements}{23}{}%
-\contentsline {subsection}{\numberline {3.4}Design constraints}{23}{}%
-\contentsline {subsubsection}{\numberline {3.4.1}Standard compliance}{23}{}%
-\contentsline {subsubsection}{\numberline {3.4.2}Hardware limitations}{23}{}%
-\contentsline {subsubsection}{\numberline {3.4.3}Any other constraint}{23}{}%
-\contentsline {subsection}{\numberline {3.5}Software system attributes}{23}{}%
-\contentsline {subsubsection}{\numberline {3.5.1}Reliability}{23}{}%
-\contentsline {subsubsection}{\numberline {3.5.2}Availability}{23}{}%
-\contentsline {subsubsection}{\numberline {3.5.3}Security}{23}{}%
-\contentsline {subsubsection}{\numberline {3.5.4}Maintainability}{23}{}%
-\contentsline {subsubsection}{\numberline {3.5.5}Portability}{23}{}%
-\contentsline {section}{\numberline {4}Formal anlaysis using Alloy}{23}{}%
-\contentsline {section}{\numberline {5}Effort spent}{23}{}%
-\contentsline {section}{\numberline {6}References}{24}{}%
-=======
-\contentsline {subsubsection}{\numberline {2.1.2}Domain Class Diagram}{12}{}%
-\contentsline {subsubsection}{\numberline {2.1.3}State Diagrams}{14}{}%
-\contentsline {subsection}{\numberline {2.2}Product functions}{18}{}%
-\contentsline {subsection}{\numberline {2.3}User Characteristics}{20}{}%
-\contentsline {subsubsection}{\numberline {2.3.1}Registered Users}{20}{}%
-\contentsline {subsubsection}{\numberline {2.3.2}Generic User}{20}{}%
-\contentsline {subsection}{\numberline {2.4}Assumptions, dependecies and constraints}{22}{}%
-\contentsline {subsubsection}{\numberline {2.4.1}Domain Assumptions}{22}{}%
-\contentsline {subsubsection}{\numberline {2.4.2}System Dependencies}{22}{}%
-\contentsline {subsubsection}{\numberline {2.4.3}System Constraints}{23}{}%
-<<<<<<< HEAD
-\contentsline {section}{\numberline {3}Specific requirements}{23}{}%
-\contentsline {subsection}{\numberline {3.1}External interface requirements}{23}{}%
-\contentsline {subsubsection}{\numberline {3.1.1}User interfaces}{23}{}%
-\contentsline {subsubsection}{\numberline {3.1.2}Hardware interfaces}{23}{}%
-\contentsline {subsubsection}{\numberline {3.1.3}Software interfaces}{23}{}%
-\contentsline {subsubsection}{\numberline {3.1.4}Communication interfaces}{23}{}%
-\contentsline {subsection}{\numberline {3.2}Functional requirements}{23}{}%
-\contentsline {paragraph}{Authentication and Account Management}{23}{}%
-\contentsline {paragraph}{Trip Recording and Monitoring}{23}{}%
-\contentsline {paragraph}{Data Contribution and Governance}{24}{}%
-\contentsline {paragraph}{Path Planning and Visualization}{24}{}%
-\contentsline {paragraph}{Trip History}{25}{}%
-\contentsline {subsection}{\numberline {3.3}Performance requirements}{25}{}%
-\contentsline {subsection}{\numberline {3.4}Design constraints}{25}{}%
-\contentsline {subsubsection}{\numberline {3.4.1}Standard compliance}{25}{}%
-\contentsline {subsubsection}{\numberline {3.4.2}Hardware limitations}{25}{}%
-\contentsline {subsubsection}{\numberline {3.4.3}Any other constraint}{25}{}%
-\contentsline {subsection}{\numberline {3.5}Software system attributes}{25}{}%
-\contentsline {subsubsection}{\numberline {3.5.1}Reliability}{25}{}%
-\contentsline {subsubsection}{\numberline {3.5.2}Availability}{25}{}%
-\contentsline {subsubsection}{\numberline {3.5.3}Security}{25}{}%
-\contentsline {subsubsection}{\numberline {3.5.4}Maintainability}{25}{}%
-\contentsline {subsubsection}{\numberline {3.5.5}Portability}{25}{}%
-\contentsline {section}{\numberline {4}Formal anlaysis using Alloy}{25}{}%
-\contentsline {section}{\numberline {5}Effort spent}{25}{}%
-\contentsline {section}{\numberline {6}References}{26}{}%
-=======
-\contentsline {section}{\numberline {3}Specific requirements}{24}{}%
-\contentsline {subsection}{\numberline {3.1}External interface requirements}{24}{}%
-\contentsline {subsubsection}{\numberline {3.1.1}User interfaces}{24}{}%
-\contentsline {subsubsection}{\numberline {3.1.2}Hardware interfaces}{24}{}%
-\contentsline {subsubsection}{\numberline {3.1.3}Software interfaces}{24}{}%
-\contentsline {subsubsection}{\numberline {3.1.4}Communication interfaces}{24}{}%
-\contentsline {subsection}{\numberline {3.2}Functional requirements}{24}{}%
-\contentsline {subsection}{\numberline {3.3}Performance requirements}{24}{}%
-\contentsline {subsection}{\numberline {3.4}Design constraints}{24}{}%
-\contentsline {subsubsection}{\numberline {3.4.1}Standard compliance}{24}{}%
-\contentsline {subsubsection}{\numberline {3.4.2}Hardware limitations}{24}{}%
-\contentsline {subsubsection}{\numberline {3.4.3}Any other constraint}{24}{}%
-\contentsline {subsection}{\numberline {3.5}Software system attributes}{24}{}%
-\contentsline {subsubsection}{\numberline {3.5.1}Reliability}{24}{}%
-\contentsline {subsubsection}{\numberline {3.5.2}Availability}{24}{}%
-\contentsline {subsubsection}{\numberline {3.5.3}Security}{24}{}%
-\contentsline {subsubsection}{\numberline {3.5.4}Maintainability}{24}{}%
-\contentsline {subsubsection}{\numberline {3.5.5}Portability}{24}{}%
-\contentsline {section}{\numberline {4}Formal anlaysis using Alloy}{24}{}%
-\contentsline {section}{\numberline {5}Effort spent}{24}{}%
-\contentsline {section}{\numberline {6}References}{25}{}%
->>>>>>> d7f5f7f89359397adf64a1d0ac1cc4a90bf797d1
->>>>>>> Revisions
+\contentsline {section}{\numberline {3}Specific requirements}{22}{}%
+\contentsline {subsection}{\numberline {3.1}External interface requirements}{22}{}%
+\contentsline {subsubsection}{\numberline {3.1.1}User interfaces}{22}{}%
+\contentsline {subsubsection}{\numberline {3.1.2}Hardware interfaces}{22}{}%
+\contentsline {subsubsection}{\numberline {3.1.3}Software interfaces}{22}{}%
+\contentsline {subsubsection}{\numberline {3.1.4}Communication interfaces}{22}{}%
+\contentsline {subsection}{\numberline {3.2}Functional requirements}{22}{}%
+\contentsline {paragraph}{Authentication and Account Management}{22}{}%
+\contentsline {paragraph}{Trip Recording and Monitoring}{22}{}%
+\contentsline {paragraph}{Data Contribution and Governance}{23}{}%
+\contentsline {paragraph}{Path Planning and Visualization}{23}{}%
+\contentsline {paragraph}{Trip History}{24}{}%
+\contentsline {subsubsection}{\numberline {3.2.1}Use cases}{24}{}%
+\contentsline {paragraph}{[UC1] Account creation}{24}{}%
+\contentsline {paragraph}{[UC2] Route planning}{25}{}%
+\contentsline {paragraph}{[UC3] Automatic trip monitoring}{25}{}%
+\contentsline {paragraph}{[UC4] Report route prolem}{26}{}%
+\contentsline {paragraph}{[UC5] Report route problem fixup}{27}{}%
+\contentsline {paragraph}{[UC6] Automatic route error detection}{27}{}%
+\contentsline {paragraph}{[UC7] User's activity history consultation}{28}{}%
+\contentsline {subsection}{\numberline {3.3}Performance requirements}{29}{}%
+\contentsline {subsection}{\numberline {3.4}Design constraints}{29}{}%
+\contentsline {subsubsection}{\numberline {3.4.1}Standard compliance}{29}{}%
+\contentsline {subsubsection}{\numberline {3.4.2}Hardware limitations}{29}{}%
+\contentsline {subsubsection}{\numberline {3.4.3}Any other constraint}{29}{}%
+\contentsline {subsection}{\numberline {3.5}Software system attributes}{29}{}%
+\contentsline {subsubsection}{\numberline {3.5.1}Reliability}{29}{}%
+\contentsline {subsubsection}{\numberline {3.5.2}Availability}{29}{}%
+\contentsline {subsubsection}{\numberline {3.5.3}Security}{29}{}%
+\contentsline {subsubsection}{\numberline {3.5.4}Maintainability}{29}{}%
+\contentsline {subsubsection}{\numberline {3.5.5}Portability}{29}{}%
+\contentsline {section}{\numberline {4}Formal anlaysis using Alloy}{29}{}%
+\contentsline {section}{\numberline {5}Effort spent}{29}{}%
+\contentsline {section}{\numberline {6}References}{29}{}%
