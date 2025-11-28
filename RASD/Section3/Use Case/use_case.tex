@@ -1,7 +1,7 @@
 \begin{comment}
 \paragraph{[UC#] }
 \begin{center}
-    \begin{tabular}{|c|c|}
+    \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{ } \\
         \hline
@@ -50,7 +50,7 @@
 % --------------------------------------------------------------------------------------------------
 \paragraph{[UC1] Account creation} \label{UC:UC1}
 \begin{center}
-    \begin{tabular}{|c|c|}
+    \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{Account creation} \\
         \hline
@@ -93,9 +93,49 @@ We highlight that the same person can create multiple accounts, but with differe
 \textit{Refers to} [SC1].
 
 % --------------------------------------------------------------------------------------------------
-\paragraph{[UC2] Route planning}
+\paragraph{[UC2] User login}
 \begin{center}
-    \begin{tabular}{|c|c|}
+    \begin{tabular}{|l|l|}
+        \hline
+        Name & \textbf{User login} \\
+        \hline
+        Actors & Registred user \\
+        \hline
+        Entry Condition & \\
+        \hline
+        Event Flow & 
+            \begin{minipage}{0.7\textwidth}
+            \smallskip
+            \begin{enumerate}
+                \item The user opens the BBP app and the login form is shown to it
+                \item The user types email and password, then submits the form
+                \item The system receives the user's login info, checks that the information sent corresponds to a certain account
+                \item The system retrive the information to build the homepage for that account and sends it
+            \end{enumerate}
+            \smallskip
+            \end{minipage}
+        \\
+        \hline
+        Exit Condition & The user recevies the homepage for the account \\
+        \hline
+        Exception & 
+        \begin{minipage}{0.7\textwidth}
+        \smallskip
+            \begin{itemize}
+            \item The user sends an email not related to any account, therefore the system sends an error message to it
+            \item The user sends a password that doesn't match with the one on the system for that account, therefore the system sends an errore message to the user
+        \end{itemize} 
+        \smallskip
+        \end{minipage}
+        \\
+        \hline       
+    \end{tabular}
+\end{center}
+
+% --------------------------------------------------------------------------------------------------
+\paragraph{[UC3] Route planning}
+\begin{center}
+    \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{Route planing} \\
         \hline
@@ -133,9 +173,9 @@ We highlight that the same person can create multiple accounts, but with differe
 \textit{Refers to} [SC2], [SC3].
 
 % --------------------------------------------------------------------------------------------------
-\paragraph{[UC3] Automatic trip monitoring}
+\paragraph{[UC4] Automatic trip monitoring}
 \begin{center}
-    \begin{tabular}{|c|c|}
+    \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{Automatic trip monitoring} \\
         \hline
@@ -180,9 +220,9 @@ We highlight that the same person can create multiple accounts, but with differe
 \textit{Refers to} [SC4].
 
 % --------------------------------------------------------------------------------------------------
-\paragraph{[UC4] Report route prolem}
+\paragraph{[UC5] Report route prolem}
 \begin{center}
-    \begin{tabular}{|c|c|}
+    \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{Manual route status update} \\
         \hline
@@ -213,9 +253,9 @@ We highlight that the same person can create multiple accounts, but with differe
 \textit{Refers to} [SC5].
 
 % --------------------------------------------------------------------------------------------------
-\paragraph{[UC5] Report route problem fixup}
+\paragraph{[UC6] Report route problem fixup}
 \begin{center}
-    \begin{tabular}{|c|c|}
+    \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{Report route problem fixup} \\
         \hline
@@ -245,9 +285,9 @@ We highlight that the same person can create multiple accounts, but with differe
 \textit{Refers to} [SC6].
 
 % --------------------------------------------------------------------------------------------------
-\paragraph{[UC6] Automatic route error detection}
+\paragraph{[UC7] Automatic route error detection}
 \begin{center}
-    \begin{tabular}{|c|c|}
+    \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{Automatic route error detection} \\
         \hline
@@ -279,9 +319,9 @@ We highlight that the same person can create multiple accounts, but with differe
 \textit{Refers to} [SC7].
 
 % --------------------------------------------------------------------------------------------------
-\paragraph{[UC7] User's activity history consultation}
+\paragraph{[UC8] User's activity history consultation}
 \begin{center}
-    \begin{tabular}{|c|c|}
+    \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{User's activity history consultation} \\
         \hline
