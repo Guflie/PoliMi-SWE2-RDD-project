@@ -50,7 +50,7 @@
 % --------------------------------------------------------------------------------------------------
 \paragraph{[UC1] Account creation}
 \begin{center}
-    \begin{table}
+    \begin{table}[h!]
         \begin{tabular}{|l|l|}
             \hline
             Name & \textbf{Account creation} \\
@@ -96,7 +96,7 @@
 % --------------------------------------------------------------------------------------------------
 \paragraph{[UC2] User login}
 \begin{center}
-    \begin{table}
+    \begin{table}[h!]
         \begin{tabular}{|l|l|}
             \hline
             Name & \textbf{User login} \\
@@ -139,7 +139,7 @@
 % --------------------------------------------------------------------------------------------------
 \paragraph{[UC3] Route planning}
 \begin{center}
-    \begin{table}
+    \begin{table}[h!]
         \begin{tabular}{|l|l|}
             \hline
             Name & \textbf{Route planing} \\
@@ -182,7 +182,7 @@
 % --------------------------------------------------------------------------------------------------
 \paragraph{[UC4] Automatic trip monitoring}
 \begin{center}
-    \begin{table}
+    \begin{table}[h!]
         \begin{tabular}{|l|l|}
             \hline
             Name & \textbf{Automatic trip monitoring} \\
@@ -232,7 +232,7 @@
 % --------------------------------------------------------------------------------------------------
 \paragraph{[UC5] Report route prolem}
 \begin{center}
-    \begin{table}
+    \begin{table}[h!]
         \begin{tabular}{|l|l|}
             \hline
             Name & \textbf{Manual route status update} \\
@@ -247,9 +247,7 @@
                 \begin{enumerate}
                     \item The user after noticing a problem along a route opens the report issue page
                     \item The user searches for the route and selects it, then specifies the issue type, the issue position along the route and adds a description, then submits the report
-                    \item The system receives the issue report and send an acknowledgement
-                    \item The system incrementes the number of reports for that issue, and if the number is greater than a certain treshold the issue is marked as True.
-                    % this step might be refined later, I don't like to be vague about it but I don't have a better idea right now
+                    \item The system receives the issue report, updates the information about that problem and send an acknowledgement
                 \end{enumerate}
                 \smallskip
                 \end{minipage}
@@ -268,7 +266,7 @@
 % --------------------------------------------------------------------------------------------------
 \paragraph{[UC6] Report route problem fixup}
 \begin{center}
-    \begin{table}
+    \begin{table}[h!]
         \begin{tabular}{|l|l|}
             \hline
             Name & \textbf{Report route problem fixup} \\
@@ -282,9 +280,7 @@
                 \smallskip
                 \begin{enumerate}
                     \item The user opens the app, selects the problem icon on the route and marks it as fixed
-                    \item The system receives the fixup report and send an acknowledgement
-                    \item The system incrementes the number of fixup reports for that issue, and if the number is greater than a certain treshold the issue is marked as Fixed
-                    % same thing as before about vagueness
+                    \item The system receives the fixup report, updates the information about that problem and sends an acknowledgement
                 \end{enumerate}
                 \smallskip
                 \end{minipage}
@@ -303,7 +299,7 @@
 % --------------------------------------------------------------------------------------------------
 \paragraph{[UC7] Automatic route error detection}
 \begin{center}
-    \begin{table}
+    \begin{table}[h!]
         \begin{tabular}{|l|l|}
             \hline
             Name & \textbf{Automatic route error detection} \\
@@ -340,7 +336,7 @@
 % --------------------------------------------------------------------------------------------------
 \paragraph{[UC8] User's activity history consultation}
 \begin{center}
-    \begin{table}
+    \begin{table}[h!]
         \begin{tabular}{|l|l|}
             \hline
             Name & \textbf{User's activity history consultation} \\
