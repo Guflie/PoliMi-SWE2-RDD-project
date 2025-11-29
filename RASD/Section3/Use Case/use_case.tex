@@ -365,5 +365,158 @@
         \label{UC:UC8} 
     \end{table}
 \end{center}
-\textit{Refers to} [SC8].
 
+% --------------------------------------------------------------------------------------------------
+\paragraph{[UC9] User trip deletion}
+\begin{center}
+    \begin{table}[h!]
+        \begin{tabular}{|l|l|}
+            \hline
+            Name & \textbf{User trip deletion} \\
+            \hline
+            Actors & Registered user \\
+            \hline
+            Entry Condition & Registered user has at least one trip recorded \\
+            \hline
+            Event Flow & 
+                \begin{minipage}{0.7\textwidth}
+                \smallskip
+                \begin{enumerate}
+                    \item The user opens the trip history and searches the trip to delete
+                    \item The user selects the trip, selects the option to delete it and confirms the deletion.
+                    \item The system recevies the deletion request, deletes the trip and sends an acknowledgement.
+                \end{enumerate}
+                \smallskip
+                \end{minipage}
+            \\
+            \hline
+            Exit Condition & The user no longer have the trip in its history \\
+            \hline
+            Exception & \\
+            \hline       
+        \end{tabular}
+        \caption{Refers to \hyperref[sc:SC9]{SC9}}
+        \label{UC:UC9} 
+    \end{table}
+\end{center}
+
+% --------------------------------------------------------------------------------------------------
+\paragraph{[UC10] Account information update}
+\begin{center}
+    \begin{table}[h!]
+        \begin{tabular}{|l|l|}
+            \hline
+            Name & \textbf{Account information update} \\
+            \hline
+            Actors & Registered user \\
+            \hline
+            Entry Condition & \\
+            \hline
+            Event Flow & 
+                \begin{minipage}{0.7\textwidth}
+                \smallskip
+                \begin{enumerate}
+                    \item The user opens tha profile page and selects the option to modify the account
+                    \item The user selects the attribute to modify, types the new value and sends it
+                    % review this step
+                    \item The system checks if the attribute is the password or the email, if not modifies the attribute and send an acknowledgment
+                \end{enumerate}
+                \smallskip
+                \end{minipage}
+            \\
+            \hline
+            Exit Condition & The account profile is updated \\
+            \hline
+            Exception & \\
+            \hline       
+        \end{tabular}
+        \caption{Refers to \hyperref[sc:SC10]{SC10}}
+        \label{UC:UC10} 
+    \end{table}
+\end{center}
+
+% --------------------------------------------------------------------------------------------------
+\paragraph{[UC11] Account deletion}
+\begin{center}
+    \begin{table}[h!]
+        \begin{tabular}{|l|l|}
+            \hline
+            Name & \textbf{Account deletion} \\
+            \hline
+            Actors & Registered user \\
+            \hline
+            Entry Condition & \\
+            \hline
+            Event Flow & 
+                \begin{minipage}{0.7\textwidth}
+                \smallskip
+                \begin{enumerate}
+                    \item The user opens the profile page, opens the options and selects to delete the account
+                    \item The system receives the request and sends a confirmation message on the app
+                    \item The user sends the action confirmation
+                    \item The system receives the confirmation and sends an email containing a link to delete the account
+                    \item The user receives the email, opens the link, confirms a second time and sends the second confirm.
+                    \item The system receives the second confirmation and processes the account deletion request
+                    \item Once the system has deleted the account, sends to the ex-account mail an acknowledgement email 
+                \end{enumerate}
+                \smallskip
+                \end{minipage}
+            \\
+            \hline
+            Exit Condition & The account is deleted \\
+            \hline
+            Exception & 
+            \begin{minipage}{0.7\textwidth}
+            \smallskip
+                \begin{itemize}
+                \item The user didn't open the link after one hour, therefore the link expries
+                \item The user didn't confirm the second time, therefore after one hour the request expires
+            \end{itemize} 
+            \smallskip
+            \end{minipage}
+            \\
+            \hline       
+        \end{tabular}
+        \caption{Refers to \hyperref[sc:SC11]{SC11}}
+        \label{UC:UC11} 
+    \end{table}
+\end{center}
+
+% --------------------------------------------------------------------------------------------------
+\paragraph{[UC12] Password account reset}
+\begin{center}
+    \begin{table}[h!]
+        \begin{tabular}{|l|l|}
+            \hline
+            Name & \textbf{Password account reset}\\
+            \hline
+            Actors & Registered user \\
+            \hline
+            Entry Condition & \\
+            \hline
+            Event Flow & 
+                \begin{minipage}{0.7\textwidth}
+                \smallskip
+                \begin{enumerate}
+                    \item The user clicks the "reset password" in the login page and send a reset password request
+                    \item The system receives the request and send a form in which the user must specify the account email
+                    \item The user receives the form, enters the account email and submits it
+                    \item The system receives the account email, checks whether an account with that email exists or not, 
+                    and if it founds it send an email to that address within a link to reset the password
+                    \item The user receives the email, opens the link, types the new password two times and sends the new password
+                    \item The system receives the new password, updates the account password and sends an update confirmation
+                    \item The user receives the update confirmation
+                \end{enumerate}
+                \smallskip
+                \end{minipage}
+            \\
+            \hline
+            Exit Condition & The user can log-in iwth the new password \\
+            \hline
+            Exception & \\
+            \hline       
+        \end{tabular}
+        \caption{Refers to \hyperref[sc:SC12]{SC12}}
+        \label{UC:UC12} 
+    \end{table}
+\end{center}
