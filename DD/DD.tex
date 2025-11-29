@@ -1,0 +1,84 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{verbatim}
+\usepackage{tabularx}
+\usepackage{verbatim}
+\usepackage{sectsty}
+\usepackage{xcolor}
+\graphicspath{ {../img/} }
+
+% sectsty settings
+\definecolor{sec-blue}{RGB}{77, 121, 255}
+\definecolor{subsec-blue}{RGB}{153, 179, 255}
+\sectionfont{\color{sec-blue}}
+\subsectionfont{\color{subsec-blue}}
+
+% header infos
+\title{DD}
+\author{Leonardo Guglielmi, Francesco Lo Conte}
+\date{\today\\Version 1}
+
+\frenchspacing
+\begin{document}
+    \pagenumbering{arabic}
+    
+    \thispagestyle{empty} 
+    \centering
+    
+    \includegraphics[width=8cm]{politecnico-di-milano-vector-logo.png}
+    \vspace{1.5cm} 
+    
+    {\Large \textbf{COMPUTER SCIENCE AND ENGINEERING} \\}
+    {\Large \textbf{SOFTWARE ENGINEERING II} \\}
+    {\Large \textbf{2025 - 2026} \\} 
+    
+    \vspace{1.5cm}
+    
+    {\Huge \textbf{DD} \\}
+    {\large Design Document \\}
+    
+    \vspace{0.5cm}
+    {\Large \textit{Best Bike Paths}}
+    
+    \vspace{3cm} 
+
+    {\Large \textbf{Authors:}} \\
+    Leonardo Guglielmi, Francesco Lo Conte
+    
+    \vspace{0.5cm}
+    {\Large \textbf{Version:}} \\
+    1.0 \\
+    (\today)
+    
+    \pagebreak
+    \raggedright
+    \tableofcontents
+    \pagebreak
+
+    \input{Section1/introduction.tex}
+    \input{Section2/architectural_design.tex}
+    \input{Section3/user_interface_design.tex}
+    \input{Section4/requirements_traceability.tex}
+    \input{Section5/implementation_integration_test_plan.tex}
+
+    \section{Effort spent}
+
+        \textbf{Guglielmi Leonardo}
+        \begin{itemize}
+            \item
+        \end{itemize}
+    
+        \textbf{Lo Conte Francesco}
+        \begin{itemize}
+            \item
+        \end{itemize}
+
+
+    \section{References}
+
+\end{document}
