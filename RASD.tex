@@ -10,8 +10,6 @@
 \usepackage{verbatim}
 \usepackage{sectsty}
 \usepackage{xcolor}
-\usepackage{hyperref}
-
 \graphicspath{ {img/} }
 
 % sectsty settings
@@ -26,8 +24,6 @@
 \date{\today\\Version 1}
 
 \frenchspacing
-
-% --------------------------------------------------------------------------------------
 \begin{document}
     \pagenumbering{arabic}
     
@@ -110,8 +106,10 @@
         For automatically collected data, the system will ask the user to confirm or correct the information before making it available to the community. Once confirmed or 
         manually entered, this information becomes publishable.
 
-        Any user, whether registered or not, can benefit from the collected information. This user can specify a starting point and a destination and ask the system 
-        to display available cycling routes on a map. If multiple routes exist, BBP will present them based on a score, calculated based on the route status derived from the 
+        Any user, whether registered or not, can benefit from the collected information. The user can specify a starting point and a destination. 
+        The system leverages third-party mapping services to identify valid physical routes and overlays them with BBP's inventory data. 
+        If a route is present in the inventory, it is displayed with its quality score; otherwise, it is shown as an unverified path. 
+        If multiple routes exist, BBP will present them based on a score, calculated based on the route status derived from the 
         data confirmed by users.
 
         \subsubsection{World phenomena}
@@ -337,19 +335,10 @@
 
         \textbf{Sign up \& Login} 
 
-        % GENERAL NOTE: fucntions seems ok, maybe we could refine them by giving higher focus on the system.
-
-        \begin{comment}
         This feature is the entry point for any user wishing to actively contribute to the inventory. A visitor can register by providing their 
         information and credentials, and the system creates a \texttt{RegisteredUser} profile, enabling write permissions. Once the account is created
         the user can log in to access their reserved area, view their travel history, and use the tracking features. Without authentication, the user 
         remains in "read-only" mode, without access or all the features expected of a registered user.
-        \end{comment}
-        
-        This feature is the entry point for any user wishing to actively contribute to the inventory. A visitor can register by providing their 
-        information and credentials,and once the account is created the user can log in to access their reserved area, view their travel history, and 
-        use the tracking features. Without authentication, the user remains in "read-only" mode, without access or all the features expected of a 
-        registered user.
 
         \textbf{User Profile Management} %sono sempre più convinto di dover inserire dati personali all'interno di utente come peso, altezza, ecc..
         
@@ -391,8 +380,9 @@
 
         \textbf{Route Search} 
 
-        This function is accessible to all users, regardless of registration. The user enters a point of origin and a destination in the search 
-        interface. The system processes the request and calculates one or more possible cycling routes connecting the two points.   
+        This feature is accessible to all users, regardless of registration. The user enters a starting point and a destination in the search interface.
+        The system processes the request and calculates one or more possible cycling routes connecting the two points, if data for such routes exists 
+        in the inventory.
 
         \textbf{Display and Path Score} 
 
@@ -424,12 +414,6 @@
             detections (e.g., potholes) at the end of the trip, ensuring that only truthful information influences the Path Score.
             \item \textbf{Privacy:} The user wants sensitive data (such as personal travel history) to remain private, while agreeing to share 
             anonymized road condition data publicly.
-
-            % added chracteristics cited only in generyc user section
-            \item \textbf{Trip planning}: The user needs to access to an updated archive of paths in order to plan its cycling activity; so it needs to find the most efficient or
-            the more intriguing path from its starting point up to its destination, but avoiding those paths having some problem; it's also not interested in paths with low score, Since
-            they won't match its expectancies.
-
         \end{itemize}
 
         \subsubsection{Generic User}
@@ -457,26 +441,30 @@
         The following assumptions describe real-world conditions that the system considers true and necessary for the correct functioning of the 
         intended features:
 
-        \begin{itemize} %ci vengono in mente altri domain assumptions??? sei d'accordo con quelli che ho appena elencato?            
-           
+        \begin{itemize} %ci vengono in mente altri domain assumptions??? sei d'accordo con quelli che ho appena elencato?
             \item \textbf{D1 - Hardware Equipment:} It is assumed that the user's mobile device is equipped with functioning and calibrated hardware, 
-            specifically: GPS receiver, accelerometer, and gyroscope.
+            specifically: GPS receiver, accelerometer, and gyroscope. The system cannot compensate for physical hardware failures of the device.
             
-            \item \textbf{D2 - Accuracy of user registration data:} It is assumed that the information entered by users during registration phase is correct and truthful.
+            \item \textbf{D2 - Accuracy of User Data:} It is assumed that the information entered by users is correct and truthful. This includes:
+            \begin{itemize}
+                \item Registration data.
+                \item Manual reports.
+                \item Confirmation of automatic detections (the user does not intentionally confirm false positives).
+            \end{itemize}
             
-            \item \textbf{D3 - Accuracy of route feedbacks:} It is assumed that the user's feedbacks about routes problems (either manual or automatically detected) are correct and truthful.
+            \item \textbf{D3 - Accuracy of Basemaps:} It is assumed that third-party mapping services provide a correct topological representation of 
+            reality. If a road exists on the map, it is assumed that it physically exists and is drivable (unless otherwise reported on BBP).
             
-            \item \textbf{D4 - Accuracy of Basemaps:} It is assumed that third-party mapping services provide a correct topological representation of 
-            reality, that is if a road exists on the map then it's assumed that physically exists and that it'is drivable safely by bycicles (unless otherwise reported on BBP).
-            
-            % Is this assumption included within the first one?
-            \item \textbf{D5 - GPS Signal Availability:} It is assumed that, for most of the duration of an outdoor trip, satellite coverage is 
+            \item \textbf{D4 - GPS Signal Availability:} It is assumed that, for most of the duration of an outdoor trip, satellite coverage is 
             sufficient to ensure useful location accuracy.
             
-            \item \textbf{D6 - Distinguishable Movement Patterns:} It is assumed that the physical characteristics of cycling are sufficiently 
-            distinct from those of other modes of transport or walking in order to allow classification algorithms to operate with an acceptable level of 
+            \item \textbf{D5 - Distinguishable Movement Patterns:} It is assumed that the physical characteristics of cycling are sufficiently 
+            distinct from those of other modes of transport or walking, allowing classification algorithms to operate with an acceptable level of 
             accuracy.
-        \end{itemize}
+            
+            \item \textbf{D6 - Compliance with Highway Codes:} It is assumed that users use the application in compliance with applicable laws (
+            e.g., not looking at the screen in dangerous situations), absolving the system from liability for accidents caused by distraction.
+            \end{itemize}
 
         \subsubsection{System Dependencies}
         The BBP system is not an island; it relies on external services to provide added value. Failure of these services degrades the system's 
@@ -602,9 +590,10 @@
 
             \paragraph{Path Planning and Visualization}
             \begin{itemize}
-                \item \textbf{[R17]} The system shall allow any user to search for cycling paths between starting point and a destination.
+                \item \textbf{[R17]} The system shall compute valid cycling routes between a specified starting point and a destination based on the 
+                available physical road network. 
                 \item \textbf{[R18]} The system shall compute and visualize one or more valid routes between the specified points on a map.
-                \item \textbf{[R19]} The system shall calculate a Path Score for each route.
+                \item \textbf{[R19]} The system shall compute a Path Score for each route derived from available inventory data
                 \item \textbf{[R20]} The system shall display confirmed obstacles on the map with visual markers.
                 \item \textbf{[R21]} The system shall allow the user to filter the search on Path properties. 
             \end{itemize}
@@ -839,24 +828,21 @@
         \begin{itemize}
             \item 11/11/2025  1h (RASD document structure)
             \item 19/11/2025 1h 30m (Section 1 review)
-            \item 20/11/2025 1h (Scenarios review)
             \item 21/11/2025 1h (class diagram review)
-            \item 21/11//2025 1h (Section )
+            \item 20/11/2025 1h (Scenarios review)
             \item 24/11/2025 2h (Scenario update)
             \item 26/11/2025 2h (Use Cases)
             \item 27/112025 1h (System Attributes)
-            \item 29/11/2025 1h (Use Cases improvement)
-
         \end{itemize}
     
         \textbf{Lo Conte Francesco}
         \begin{itemize}
             \item 17/11/2025 4h (Completing Section 1 (Introduction))
             \item 18/11/2025 7h (Section 2 - StateDiagrams, DomainClassDiagram, Scenarios)
-            \item 19/11/2025  1h (Completing Section 2.2, 2.3, 2.4)
+            \item 19/11/2025 1h (Completing Section 2)
             \item 25/11/2025 5h (User Interfaces and some subsections of section 3)
             \item 26/11/2025 30 min (Revision)
-            \item 30/11/2025 2h (Various Adjustements) 
+            \item 30/11/2025 3h (Various Adjustements) 
         \end{itemize}
 
 
