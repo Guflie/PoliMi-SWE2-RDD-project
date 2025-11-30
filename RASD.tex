@@ -327,33 +327,7 @@
         The pending confirmation state is the critical checkpoint: the user is responsible for validating the discovery to allow it to move to 
         \texttt{Publishable}, or discarding it, moving it to \texttt{Discarded}. Only data in the \texttt{Publishable} state is integrated and can 
         influence the \texttt{Path Score}. The cycle ends with final publication or discard.
-
-        \textbf{Bike Path Status Lifecycle} 
- 
-        \begin{figure}[H]
-            \centering
-            \includegraphics[width=0.9\textwidth]{BikePathStatus_lifecycle.pdf}
-            \caption{BBP Path State Lifecycle State Diagram}
-            \label{fig:bikepathstatus_lifecycle}
-        \end{figure}
-
-        The diagram in Figure \ref{fig:bikepathstatus_lifecycle} models the evolution of a Bike Path's Quality Score in response to user contributions. 
-        The entry point is the \texttt{Current\_Score} state, which represents the value of the path at the time of consultation. 
-        This value is dynamic and subject to change based on active reports:
-
-        \begin{itemize}
-            \item A hazard or maintenance report (\texttt{NotRecommended or Requires Maintenance report}) triggers the \texttt{Worsens\_PathScore}   
-            state. This indicates an immediate degradation in quality.
-            \item Conversely, an \texttt{Optimal or Medium report} triggers the \texttt{Improve\_PathScore} state, indicating an improvement in the     
-            path's quality.
-            \item A \texttt{Sufficient report} acts as a validation of the current score, maintaining its status and contributing to the data's     
-            freshness without drastically altering its perceived quality.       
-        \end{itemize}
-
-        The diagram emphasizes that the score is a dynamic value, constantly recalculated based on the validity and freshness of the active reports     
-        in the BBP inventory.
         \pagebreak
-
 
         \subsection{Product functions}
 
@@ -560,7 +534,6 @@
                 travel and to geolocate alerts.
                 \item \textbf{Inertial Sensors:} For the "Automatic Mode" feature, the application needs to interface directly with the device's 
                 motion sensors to detect vibrations and road surface anomalies.
-                \item \textbf{Network Connectivity:} The device must have a network interface (4G/5G/Wi-Fi) to send data to the server and download maps.
             \end{itemize}
 
             \subsubsection{Software interfaces}
@@ -577,7 +550,7 @@
             \begin{itemize}
                 \item \textbf{Network Protocols:} All communications between the mobile application and the backend server are via the \textbf{HTTPS} 
                 protocol to ensure the security and encryption of data in transit, especially for authentication information and sensitive location data.
-                \item \textbf{Data Format:} Structured data exchange typically occurs in \textbf{JSON} format via RESTful APIs.
+                \item \textbf{Network Connectivity:} The device must have a network interface (4G/5G/Wi-Fi) to send data to the server and download maps.
                 %condividi il concetto di Data Format? Per me ha molto senso, l'ho usato anche in ingegneria del software 1
             \end{itemize}
         
@@ -603,7 +576,7 @@
             \paragraph{Data Contribution and Governance}
             \begin{itemize}
                 \item \textbf{[R10]} The system shall allow registered user to insert manual reports regarding the status of a path.
-                \item \textbf{[R11]} The system shall allow registered user to insert a personal rating of a path.
+                \item \textbf{[R11]} The system shall allow registered user to submit feedback regarding the Path Status.
                 \item \textbf{[R12]} The system shall allow registered user to insert manual reports regarding problems on the path.
                 \item \textbf{[R13]} The system shall allow registered user to enable automatic detection for a trip.
                 \item \textbf{[R14]} When automatic detection is active, the system shall analyze data from the device's sensors to detect potential anomalies.
@@ -639,7 +612,7 @@
 
             \begin{table}[H]
                 \centering
-                \renewcommand{\arraystretch}{1.5} % Spaziatura righe
+                \renewcommand{\arraystretch}{1.5} 
                 \begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
                     \hline
                     \multicolumn{2}{|p{0.9\textwidth}|}{\textbf{G1:} A registered user wants to track their personal cycling activities and related 
@@ -674,7 +647,6 @@
                 \label{tab:mapping_g1}
             \end{table}
             
-            % --- Tabella per G2 ---
             \begin{table}[H]
                 \centering
                 \renewcommand{\arraystretch}{1.5}
@@ -710,7 +682,6 @@
                 \label{tab:mapping_g2}
             \end{table}
             
-            % --- Tabella per G3 ---
             \begin{table}[H]
                 \centering
                 \renewcommand{\arraystretch}{1.5}
@@ -739,7 +710,6 @@
                 \label{tab:mapping_g3}
             \end{table}
             
-            % --- Tabella per G4 ---
             \begin{table}[H]
                 \centering
                 \renewcommand{\arraystretch}{1.5}
@@ -836,6 +806,9 @@
             include clustering or manual correction mechanisms to handle inherent hardware inaccuracy.
             \item \textbf{Operating System:} The application must be compatible with Android and iOS versions released in the last 3 years to ensure 
             access to the latest APIs for efficient background sensor management.
+            \item \textbf{Local Data Processing:} To ensure responsiveness and minimize mobile data usage, the raw processing of high-frequency sensor 
+            data must be performed locally on the user's device. The system is constrained to transmit only the identified "candidate anomalies" to 
+            the server, rather than the continuous raw data stream.
         \end{itemize}
 
         \input{RASD/Section3/system_attributes.tex}
@@ -860,10 +833,12 @@
     
         \textbf{Lo Conte Francesco}
         \begin{itemize}
-            \item 17/11/2025  4h (Completing Section 1 (Introduction))
-            \item 18/11/2025  7h (Section 2 - StateDiagrams, DomainClassDiagram, Scenarios)
-            \item 19/11/2025  1h (Completing Section 2)
-            \item 25/11/2025  5h (User Interfaces and some subsections of section 3)
+            \item 17/11/2025 4h (Completing Section 1 (Introduction))
+            \item 18/11/2025 7h (Section 2 - StateDiagrams, DomainClassDiagram, Scenarios)
+            \item 19/11/2025 1h (Completing Section 2)
+            \item 25/11/2025 5h (User Interfaces and some subsections of section 3)
+            \item 26/11/2025 30 min (Revision)
+            \item 30/11/2025 2h (Various Adjustements) 
         \end{itemize}
 
 
