@@ -1,0 +1,64 @@
+\subsection{Scope}
+
+% TODO: expand this part, give a more detailed scope of the project (more organic)
+The project scope covers users interacting with the system, user-generated actions that influence the system, and system-generated actions that impact the outside world.
+
+% 
+% maybe here we could define the distinction between the two types of data insertion and user, but give the detailed definition later? mh something to reason about it a little bit more
+For this project, the following users interacting with the system have been identified:
+\begin{itemize}
+    \item \textbf{Registered User}
+    \item \textbf{Any User} 
+\end{itemize}
+
+A Registered User will be able to use the application to log and store their trips, tracking their cycling activities and related 
+statistics. When available, this data can be enriched with weather information retrieved from external services. Furthermore, this user is the primary contributor to 
+the inventory. They can enter route information in two ways:
+\begin{enumerate}
+    \item In \textbf{manual mode}, by actively specifying the route status (e.g., optimal, requires maintenance) and the presence of obstacles (e.g., potholes).
+    \item In \textbf{automatic mode}, by allowing the app to acquire data from GPS and mobile device sensors while cycling, in order to automatically detect potential 
+    problems such as potholes.
+\end{enumerate}
+
+For automatically collected data, the system will ask the user to confirm or correct the information before making it available to the community. Once confirmed or 
+manually entered, this information becomes publishable.
+
+Any user, whether registered or not, can benefit from the collected information. This user can specify a starting point and a destination and ask the system 
+to display available cycling routes on a map. If multiple routes exist, BBP will present them based on a score, calculated based on the route status derived from the 
+data confirmed by users.
+
+\subsubsection{World phenomena}
+%Eventi che accadono nel mondo reale, che il sistema non può né controllare né osservare. Sono le intenzioni o le azioni fisiche degli utenti.
+\begin{itemize}
+    \item \textbf{WP1:} A registered user starts a cycling activity.
+    \item \textbf{WP2:} Any user searches for a cycling route between two places.
+    \item \textbf{WP3:} A registered user contributes contribute to the BBP inventory.
+    \item \textbf{WP4:} While pedaling a registred user ecounters some kind of problem on the route.
+\end{itemize}
+
+\subsubsection{Shared phenomena}
+\paragraph{World controlled}
+%Azioni che l'utente (mondo) compie sull'interfaccia del sistema. Il sistema deve reagirvi, ma non può avviarle. Sono gli input dell'utente.
+\begin{itemize}
+    \item \textbf{SP\_WC1:} The registered user launches starts to register the trip with the application.
+    \item \textbf{SP\_WC2:} The registered user stops to register the trip with the application.
+    \item \textbf{SP\_WC3:} The registered user opens the interface for manually entering route information.
+    \item \textbf{SP\_WC4:} The registered user enters the data (e.g. "optimal" status, "hole" presence) and sends the manual entry form.
+    \item \textbf{SP\_WC5:} The registered user selects a notification or confirmation request for automatically detected data.
+    \item \textbf{SP\_WC6:} The registered user confirms to validate automatically the detected data (e.g. a pothole).
+    \item \textbf{SP\_WC7:} The registered user deletes to invalidate an automatically detected data (false positive).
+    \item \textbf{SP\_WC8:} The registered user modifies an automatically detected piece of data (e.g. corrects the position of the hole on the map) and saves the change.
+    \item \textbf{SP\_WC9:} Any user enters a source and destination address.
+    \item \textbf{SP\_WC10:} Any user starts the route search.
+\end{itemize}
+
+\paragraph{Machine controlled}
+%Azioni che il sistema (macchina) compie sull'interfaccia e che l'utente (mondo) può osservare. Sono gli output del sistema.
+\begin{itemize}
+    \item \textbf{SP\_MC1:} The system shows the statistics of the completed trip to the registered user.
+    \item \textbf{SP\_MC2:} The system shows the weather data associated with the trip to the registered user.
+    \item \textbf{SP\_MC3:} The system presents the Registered User with a confirmation request for automatically detected data.
+    \item \textbf{SP\_MC4:} The system shows the user a map with the cycling routes found between the origin and the destination.
+    \item \textbf{SP\_MC5:} The system displays the details of a route, including its score and confirmed obstacles.
+    \item \textbf{SP\_MC6:} The system displays an error message (e.g., "Weather service unavailable").
+\end{itemize}
