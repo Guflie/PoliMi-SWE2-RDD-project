@@ -1,0 +1,119 @@
+\subsection{Product perspective}
+
+\input{RASD/Section2/scenarios.tex}
+\pagebreak
+
+\subsubsection{Domain Class Diagram}
+    %come identifichiamo uno status per un percorso? in base al numero di ostacoli? gli associamo un colore, vero? ad esempio ottimale-verde.
+    %volendo si può "complicare" molto di più il domain class diagram, ad esempio aggiungendo dettagli come profile_picture, età allo user (cosa che personalmente farei).
+    %tuttavia è quello che vogliamo fare? 
+    %inoltre, mancano altre classi? Ti viene in mente qualcosa da aggiungere?
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=\textwidth]{domain class diagram/Domain_class_diagram_v1.pdf}
+        \caption{Domain Class Diagram of the BBP system}
+        \label{fig:domain_model}
+    \end{figure}
+
+
+    Figure \ref{fig:domain_model} shows the domain class diagram. The main architectural choices are explained below:
+
+    \begin{itemize}
+        \item \textbf{User Generalization:} To avoid duplication and facilitate future scalability, the \texttt{User} superclass has been 
+        introduced. It encapsulates basic functionality accessible to everyone, such as route search and map viewing. The \texttt{RegisteredUser}
+        class extends this foundation, adding authentication data and the main writing functionality: \texttt{recordTrip()}, 
+        \texttt{insertManualReport()}, and \texttt{confirmDetection()}. This structure allows for easy extension to future roles such as 
+        "Administrator" or "Moderator."
+        
+        \item \textbf{Information Abstraction and Scoring:} The abstract \texttt{PublishableInformation} class was created to logically group all 
+        alerts (whether \texttt{RouteStatus} or \texttt{Obstacle}). This polymorphic approach greatly simplifies the calculation of the Path 
+        Score: the system can iterate over a generic list of confirmed information associated with a trip to calculate its score, without 
+        having to use separate logic for each type of alert.
+        
+        \item \textbf{Sensor Scalability:} Although the assignment specifically mentions potholes, the model correctly links the raw 
+        \texttt{SensorData} data to the generic \texttt{Obstacle} class via the "Detects (Candidate)" dependency. This design ensures that the 
+        system can evolve to detect other types of anomalies in the future without changing the core data model.
+        
+        \item \textbf{Trip Composition and Data Lifecycle:} There is a composition relationship between \texttt{Trip} and its internal data: 
+        \texttt{WeatherInfo} and \texttt{SensorData}. This indicates that this data is closely tied to the trip lifecycle: if a user decides to 
+        delete a trip from their history, the associated weather data and raw sensor data will also be automatically removed, preventing data
+        fragmentation and ensuring database cleanliness.
+    \end{itemize}
+\pagebreak
+
+\subsubsection{State Diagrams}
+    %vuoi che ci sia un'interruzione di pagina per ogni state diagram? Oppure lasciamo cosi com'è ora?
+    \textbf{User Session Lifecycle} 
+        
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\textwidth]{User_profile_lifecycle.pdf}
+        \caption{State diagram of a BBP system user's lifecycle}
+        \label{fig:user_lifecycle}
+    \end{figure}
+
+    The finite state diagram in Figure \ref{fig:user_lifecycle} models the \textbf{user session lifecycle} within the BBP system, defining how 
+    the user transitions from the anonymous browsing state to the fully operational one. The system is designed to ensure that all basic 
+    functionality, such as route search and map viewing, is immediately accessible, with a single initial state that converges 
+    on \texttt{Search\_Routes}, the universal entry point. From this anonymous browsing state, the user can choose to authenticate whether 
+    they are already logged in or not.
+    Once the \texttt{Logged\_In} state is reached, the user unlocks the contribution capabilities, which are critical to the system's value. 
+    This state serves as a hub, allowing the user to initiate trip tracking by moving to the \texttt{Tracking} state (when sensors are active)
+    or to proceed to \texttt{Reviewing\_Data}. Both contribution states are separated to reflect their high impact on resources (tracking) or
+    data consistency (auditing). The session can end by exiting \texttt{Search\_Routes} (for both anonymous and registered users) or by 
+    \texttt{Logout} from the operational state for the registered user.
+
+    \textbf{Trip Lifecycle} 
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\textwidth]{Trip_lifecycle.pdf}
+        \caption{State Diagram of the Lifecycle of a Trip in the BBP System}
+        \label{fig:trip_lifecycle}
+    \end{figure}
+
+    The diagram in Figure \ref{fig:trip_lifecycle} models the complete lifecycle of a \texttt{Trip}, from its inception to its final storage or 
+    discard. The process begins in the initial \texttt{Route\_Definition} state, which represents the hub where a new route can be defined or an 
+    existing one can be used. The fundamental transition to data acquisition occurs only if the \texttt{[if RegisteredUser]} guard condition is 
+    satisfied, ensuring that only authenticated users can initiate tracking, based on the system's contribution requirements. Once in the 
+    \texttt{Data\_Logging} state, the system actively logs raw sensor data (GPS, accelerometer) if in automatic mode. This state offers flexibility,
+    allowing data acquisition to be paused and resumed via transitions. The system manages three distinct transitions when recording is stopped, 
+    resulting in separate processing paths:
+
+    \begin{itemize}
+        \item \textbf{Stop in manual mode}: This transition allows the user to actively add non-sensor data to the route.
+        \item \textbf{Stop in automated mode}: Indicates that the route has ended, starting the automatic processing cycle.
+        \item \textbf{Stop without data}: If the user does not wish to add any data, they go directly to the confirmation to save or delete the 
+        collected data (if collected).
+    \end{itemize}
+
+    The automated processing cycle begins with \texttt{Enrichment\_WeatherInfo}, where the system enriches the trip with weather data retrieved 
+    from external services. Once enrichment is complete, the flow moves to \texttt{Awaiting\_Confirmation}. This state is crucial for data quality:
+    here, the user must decide whether to validate the anomalies detected by the sensors (e.g., potholes) or discard them. The cycle closes 
+    by returning to the \texttt{Route\_Definition} state or definitively exiting the system, demonstrating how data only goes from ephemeral to 
+    persistent information through a rigorous validation process.
+
+    \textbf{Data Lifecycle} 
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\textwidth]{Data_lifecycle.pdf}
+        \caption{Data lifecycle state diagram in BBP system}
+        \label{fig:data_lifecycle}
+    \end{figure}
+
+    The diagram in Figure \ref{fig:data_lifecycle} models the complete data lifecycle, from its origin to its final state. The process rigorously 
+    distinguishes data based on its source to direct it to the correct validation path. The flow forks immediately from the initial state:
+
+    \begin{itemize}
+        \item \textbf{Manual Path:} The user generates a \texttt{Manual report} that transitions to the \texttt{Manual\_Submission} state. 
+        The data, being the result of an explicit action, is initially saved and can be published if the user wishes.
+        \item \textbf{Automatic Path:} The data passively detected by the sensors transitions to the \texttt{Dected\_Raw} state. This raw data must
+        pass through the \texttt{Awaiting\_Confirmation} state at the end of its journey.
+    \end{itemize}
+
+    The pending confirmation state is the critical checkpoint: the user is responsible for validating the discovery to allow it to move to 
+    \texttt{Publishable}, or discarding it, moving it to \texttt{Discarded}. Only data in the \texttt{Publishable} state is integrated and can 
+    influence the \texttt{Path Score}. The cycle ends with final publication or discard.
+\pagebreak

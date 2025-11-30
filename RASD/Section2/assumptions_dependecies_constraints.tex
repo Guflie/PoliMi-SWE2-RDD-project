@@ -1,0 +1,51 @@
+\subsection{Assumptions, dependecies and constraints}
+    \subsubsection{Domain Assumptions}
+    The following assumptions describe real-world conditions that the system considers true and necessary for the correct functioning of the 
+    intended features:
+
+    \begin{itemize} %ci vengono in mente altri domain assumptions??? sei d'accordo con quelli che ho appena elencato?            
+        
+        \item \textbf{D1 - Hardware Equipment:} It is assumed that the user's mobile device is equipped with functioning and calibrated hardware, 
+        specifically: GPS receiver, accelerometer, and gyroscope.
+        
+        \item \textbf{D2 - Accuracy of user registration data:} It is assumed that the information entered by users during registration phase is correct and truthful.
+        
+        \item \textbf{D3 - Accuracy of route feedbacks:} It is assumed that the user's feedbacks about routes problems (either manual or automatically detected) are correct and truthful.
+        
+        \item \textbf{D4 - Accuracy of Basemaps:} It is assumed that third-party mapping services provide a correct topological representation of 
+        reality, that is if a road exists on the map then it's assumed that physically exists and that it'is drivable safely by bycicles (unless otherwise reported on BBP).
+        
+        % Is this assumption included within the first one?
+        \item \textbf{D5 - GPS Signal Availability:} It is assumed that, for most of the duration of an outdoor trip, satellite coverage is 
+        sufficient to ensure useful location accuracy.
+        
+        \item \textbf{D6 - Distinguishable Movement Patterns:} It is assumed that the physical characteristics of cycling are sufficiently 
+        distinct from those of other modes of transport or walking in order to allow classification algorithms to operate with an acceptable level of 
+        accuracy.
+    \end{itemize}
+
+    \subsubsection{System Dependencies}
+    The BBP system is not an island; it relies on external services to provide added value. Failure of these services degrades the system's 
+    functionality as follows:
+
+    \begin{itemize}
+        \item \textbf{External Weather Service:} BBP depends on third-party APIs to retrieve weather data (temperature, wind). If this service is 
+        unavailable, the system will continue to record trips, but the "Weather Enrichment" feature will not be performed, and the trips will be 
+        saved without this metadata.
+
+        \item \textbf{Mapping Services:} Route visualization and address geocoding depend on external map providers. If these are unavailable, the 
+        "Route Search" and "Map View" features will be compromised.
+    \end{itemize}
+
+    \subsubsection{System Constraints}      
+    \begin{itemize}
+        \item \textbf{GDPR and Privacy:} Since the system tracks users' physical movements (sensitive data), the management, storage, and sharing 
+        of GPS data must strictly comply with the GDPR regulation. Personal travel data must not be accessible to other users without explicit 
+        consent.
+
+        \item \textbf{Energy Consumption:} The automatic detection algorithm must be optimized to avoid draining the mobile device's battery 
+        quickly, ensuring coverage of medium-duration trips (e.g., 2-3 hours).
+
+        \item \textbf{Intermittent Connectivity:} Since cycling routes can pass through areas with poor network coverage, the mobile application 
+        must be able to store sensor data locally and synchronize it with the server as soon as the connection is re-established.
+    \end{itemize}

@@ -1,0 +1,61 @@
+\subsection{External interface requirements}
+
+    \subsubsection{User interfaces}
+    This section presents mockups of the BBP mobile application's user interface. The images illustrate the main interaction flows defined in 
+    the scenarios, demonstrating how the system meets usability and functionality requirements.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\textwidth]{login_mockup.pdf} 
+        \caption{Login and Registration Screen}
+        \label{fig:mockup_login}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\textwidth]{mockup_search.pdf}
+        \caption{Route Selection Screen}
+        \label{fig:mockup_search}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\textwidth]{mockup_confirmation.pdf}
+        \caption{Post-Trip Confirmation Screen}
+        \label{fig:mockup_confirmation}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\textwidth]{mockup_history.pdf}
+        \caption{Trip History Screen}
+        \label{fig:mockup_history}
+    \end{figure}
+
+    \subsubsection{Hardware interfaces}
+    Since BBP is a mobile application focused on automatic tracking and detection, hardware interfaces are critical to the system's operation.
+
+    \begin{itemize}
+        \item \textbf{GPS:} The system requires access to the mobile device's GPS receiver to track the user's location in real time during 
+        travel and to geolocate alerts.
+        \item \textbf{Inertial Sensors:} For the "Automatic Mode" feature, the application needs to interface directly with the device's 
+        motion sensors to detect vibrations and road surface anomalies.
+    \end{itemize}
+
+    \subsubsection{Software interfaces}
+    The system interacts with external software components to enhance its functionality.
+
+    \begin{itemize}
+        \item \textbf{External Weather Service API:} The system interfaces with a weather data provider to retrieve historical weather 
+        conditions for the time and location of the completed trip.
+        \item \textbf{Mapping Service API:} The application uses mapping services for map rendering, route calculation, and address geocoding.
+        \item \textbf{Mobile OS APIs:} The app interacts with native Android and iOS APIs for managing permissions and push notifications.
+    \end{itemize}
+
+    \subsubsection{Communication interfaces}
+    \begin{itemize}
+        \item \textbf{Network Protocols:} All communications between the mobile application and the backend server are via the \textbf{HTTPS} 
+        protocol to ensure the security and encryption of data in transit, especially for authentication information and sensitive location data.
+        \item \textbf{Network Connectivity:} The device must have a network interface (4G/5G/Wi-Fi) to send data to the server and download maps.
+        %condividi il concetto di Data Format? Per me ha molto senso, l'ho usato anche in ingegneria del software 1
+    \end{itemize}

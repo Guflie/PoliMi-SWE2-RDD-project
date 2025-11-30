@@ -1,0 +1,84 @@
+\section{Specific requirements}
+\input{RASD/Section3/external_interface_requirements.tex}    
+\input{RASD/Section3/functional_requirements.tex}
+\input{RASD/Section3/use_case.tex}
+\input{RASD/Section3/requirement_mapping.tex}
+
+% ------------------------------------------------------------------------------------------------------------------
+\subsection{Performance requirements}
+    Given the nature of BBP as a mobile application that also operates in active mobility contexts, performance is critical not only for the user
+        experience, but also for the security and reliability of the collected data.
+
+    \begin{itemize}
+        \item \textbf{Interface Responsiveness:} The system must ensure immediate response times for critical interactions during cycling, with a 
+        latency of less than 200 ms, to avoid dangerous distractions for the user.
+
+        \item \textbf{Real-Time Data Processing:} During "Automatic Detection" mode, the local algorithm on the device must process sensor data in 
+        real time without causing interface crashes or delays in recording the GPS track.
+
+        \item \textbf{Routing:} The route search functionality must return results, complete with \textit{Path Score}, within 3 seconds for 
+        requests in a standard urban environment (10 km radius), ensuring smooth planning.
+
+        \item \textbf{Backend Scalability:} The system must be able to handle simultaneous load peaks (e.g., weekends or cycling events), scaling 
+        horizontally to support thousands of simultaneous trip uploads without data loss.
+
+        \item \textbf{Reliability:} The backend service must guarantee 99.9\% uptime on a monthly basis, ensuring that users can 
+        always sync their trips and access maps.
+    \end{itemize}
+    \pagebreak
+
+% ------------------------------------------------------------------------------------------------------------------
+\subsection{Design Constraints}
+
+    \subsubsection{Standards Compliance}
+    The BBP system adheres to rigorous international standards to ensure interoperability, security, and regulatory compliance.
+
+    \begin{table}[H]
+        \centering
+        \renewcommand{\arraystretch}{1.3}
+        \begin{tabular}{|l|p{0.7\textwidth}|}
+            \hline
+            \textbf{Standard} & \textbf{Description} \\
+            \hline
+            \textbf{GDPR (EU 2016/679)} & The system manages sensitive geolocation and user profiling data. All processing must comply with the 
+            General Data Protection Regulation, guaranteeing the right to be forgotten and data minimization. \\
+            \hline
+            \textbf{WGS 84} & Geodetic reference standard for the GPS system. All stored and exchanged coordinates must comply with this standard 
+            to ensure compatibility with global maps. \\
+            \hline
+            \textbf{GPX (GPS Exchange)} & The system should support the export of trip data in the standard XML format for GPS data, facilitating 
+            interoperability with other sports platforms. \\
+            \hline
+            \textbf{ISO/IEC 27001} & Standard for information security management, applied to protect the backend infrastructure and user data 
+            from unauthorized access. \\
+            \hline
+        \end{tabular}
+        \caption{Compliance standards adopted by BBP}
+        \label{tab:standards}
+    \end{table}
+
+    \subsubsection{Hardware Limitations}
+    The mobile application must operate in a resource-constrained environment, typical of mobile devices during extended outdoor use.
+
+    \begin{itemize}
+        \item \textbf{Power Consumption:} The automatic detection algorithm (GPS + Sensors) must be optimized to consume no more than 10-15\% 
+        battery power per hour of use on an average device, ensuring the user does not run out of battery power while traveling.
+        \item \textbf{Required Sensors:} Full use of the app is contingent on the physical presence of a calibrated accelerometer and gyroscope. 
+        Older or low-end devices without these sensors will only be able to use the app in limited mode (without automatic detection).
+        \item \textbf{Intermittent Connectivity:} The design must include an "offline-first" mode for data recording. Upload to the server must 
+        occur asynchronously when the connection is stable, handling any timeouts without losing local data.
+    \end{itemize}
+
+    \subsubsection{Any Other Constraint}
+    \begin{itemize}
+        \item \textbf{GPS Accuracy:} The accuracy of obstacle detection is limited by the accuracy of the device's civilian GPS. The system must 
+        include clustering or manual correction mechanisms to handle inherent hardware inaccuracy.
+        \item \textbf{Operating System:} The application must be compatible with Android and iOS versions released in the last 3 years to ensure 
+        access to the latest APIs for efficient background sensor management.
+        \item \textbf{Local Data Processing:} To ensure responsiveness and minimize mobile data usage, the raw processing of high-frequency sensor 
+        data must be performed locally on the user's device. The system is constrained to transmit only the identified "candidate anomalies" to 
+        the server, rather than the continuous raw data stream.
+    \end{itemize}
+
+\input{RASD/Section3/system_attributes.tex}
+

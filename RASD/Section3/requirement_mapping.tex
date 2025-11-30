@@ -1,0 +1,130 @@
+\subsubsection{Requirement Mapping}
+    This section maps the Goals identified in Section 1 to the Functional Requirements and Domain Assumptions. This mapping demonstrates that 
+    the set of requirements, supported by the assumptions, is sufficient to satisfy the system goals ($R \land D \models G$).
+
+    \begin{table}[H]
+        \centering
+        \renewcommand{\arraystretch}{1.5} 
+        \begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+            \hline
+            \multicolumn{2}{|p{0.9\textwidth}|}{\textbf{G1:} A registered user wants to track their personal cycling activities and related 
+            performance statistics.} \\
+            \hline
+            \textbf{Requirements} & \textbf{Domain Assumptions} \\
+            \hline
+            \textbf{[R1]} The system shall allow any user to create an account. \newline
+            \textbf{[R2]} The system shall allow registered user to log in using their credentials. \newline
+            \textbf{[R5]} The system shall allow registered user to start the recording of a new trip. \newline
+            \textbf{[R6]} The system shall allow registered user to pause and resume the recording of an active trip. \newline
+            \textbf{[R7]} The system shall allow registered user to save a trip. \newline
+            \textbf{[R8]} During the recording, the system shall track the user's position and its performance statistics. \newline
+            \textbf{[R9]} Upon completion of a trip, the system shall automatically retrieve weather data from an external service, if 
+            available, and associate it with the saved trip. \newline
+            \textbf{[R22]} The system shall allow registered user to view the list of its past trips. \newline
+            \textbf{[R23]} The system shall allow registered user to view the details of a specific past trip, including the route on the map,
+            statistics, and weather data (if they exist). \newline
+            \textbf{[R24]} The system shall allow registered users to delete a specific trip from their history. \newline
+            \textbf{[R25]} The system shall allow the user to search a specific trip in its history. \newline
+            \textbf{[R26]} The system shall allow the user to filter the view of its history.
+            & 
+            \textbf{D1 - Hardware Equipment:} It is assumed that the user's mobile device is equipped with functioning and calibrated hardware,
+                specifically: GPS receiver, accelerometer, and gyroscope. \newline
+            \newline
+            \textbf{D5 - GPS Signal Availability:} It is assumed that, for most of the duration of an outdoor trip, satellite coverage is 
+            sufficient to ensure useful location accuracy.
+            \\
+            \hline
+        \end{tabular}
+        \caption{Requirement Mapping for Goal G1}
+        \label{tab:mapping_g1}
+    \end{table}
+    
+    \begin{table}[H]
+        \centering
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+            \hline
+            \multicolumn{2}{|p{0.9\textwidth}|}{\textbf{G2:} A registered user wants to contribute to the community inventory by sharing 
+            reliable information on the condition of the trails (e.g. quality, obstacles, potholes).} \\
+            \hline
+            \textbf{Requirements} & \textbf{Domain Assumptions} \\
+            \hline
+            \textbf{[R2]} The system shall allow registered user to log in using their credentials. \newline
+            \textbf{[R10]} The system shall allow registered user to insert manual reports regarding the status of a path. \newline
+            \textbf{[R11]} The system shall allow registered user to insert a personal rating of a path. \newline
+            \textbf{[R12]} The system shall allow registered user to insert manual reports regarding problems on the path. \newline
+            \textbf{[R13]} The system shall allow registered user to enable automatic detection for a trip. \newline
+            \textbf{[R14]} When automatic detection is active, the system shall analyze data from the device's sensors to detect potential anomalies. \newline
+            \textbf{[R15]} The system shall present the list of automatically detected anomalies to the registered user at the end of the recorded trip for review. \newline
+            \textbf{[R16]} The system shall allow the registered user to confirm or discard a detected anomaly.
+            & 
+            \textbf{D1 - Hardware Equipment:} It is assumed that the user's mobile device is equipped with functioning and calibrated hardware, 
+            specifically: GPS receiver, accelerometer, and gyroscope. \newline
+            \newline
+            \textbf{D3 - Accuracy of route feedbacks:} It is assumed that the user's feedbacks about routes problems (either manual or 
+            automatically detected) are correct and truthful. \newline
+            \newline
+            \textbf{D6 - Distinguishable Movement Patterns:} It is assumed that the physical characteristics of cycling are sufficiently 
+            distinct from those of other modes of transport or walking in order to allow classification algorithms to operate with an 
+            acceptable level of accuracy.
+            \\
+            \hline
+        \end{tabular}
+        \caption{Requirement Mapping for Goal G2}
+        \label{tab:mapping_g2}
+    \end{table}
+    
+    \begin{table}[H]
+        \centering
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+            \hline
+            \multicolumn{2}{|p{0.9\textwidth}|}{\textbf{G3:} Any user (registered or not) wants to find and view the best cycling route 
+            between an origin and a destination, based on up-to-date and relevant data.} \\
+            \hline
+            \textbf{Requirements} & \textbf{Domain Assumptions} \\
+            \hline
+            \textbf{[R17]} The system shall allow any user to search for cycling paths between starting point and a destination. \newline
+            \textbf{[R18]} The system shall compute and visualize one or more valid routes between the specified points on a map. \newline
+            \textbf{[R19]} The system shall calculate a Path Score for each route. \newline
+            \textbf{[R20]} The system shall display confirmed obstacles on the map with visual markers. \newline
+            \textbf{[R21]} The system shall allow the user to filter the search on Path properties.
+            & 
+            \textbf{D4 - Accuracy of Basemaps:} It is assumed that third-party mapping services provide a correct topological representation of 
+            reality, that is if a road exists on the map then it's assumed that physically exists and that it'is drivable safely by bycicles 
+            (unless otherwise reported on BBP). \newline
+            \newline
+            \textbf{D1 - Hardware Equipment:} It is assumed that the user's mobile device is equipped with functioning and calibrated hardware.
+            \\
+            \hline
+        \end{tabular}
+        \caption{Requirement Mapping for Goal G3}
+        \label{tab:mapping_g3}
+    \end{table}
+    
+    \begin{table}[H]
+        \centering
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+            \hline
+            \multicolumn{2}{|p{0.9\textwidth}|}{\textbf{G4:} The cycling association aims to provide the community with a tool to create, 
+            consult, and maintain a reliable and centralized inventory of cycling routes.} \\
+            \hline
+            \textbf{Requirements} & \textbf{Domain Assumptions} \\
+            \hline
+            \textbf{[R1]} The system shall allow any user to create an account. \newline
+            \textbf{[R3]} The system shall allow registered user to update their personal profile information. \newline
+            \textbf{[R4]} The system shall allow registered user to delete their account. \newline
+            \textbf{[R16]} The system shall allow the registered user to confirm or discard a detected anomaly. \newline
+            & 
+            \textbf{D2 - Accuracy of user registration data:} It is assumed that the information entered by users during registration phase 
+            is correct and truthful. \newline
+            \newline
+            \textbf{D3 - Accuracy of route feedbacks:} It is assumed that the user's feedbacks about routes problems (either manual
+                or automatically detected) are correct and truthful.
+            \\
+            \hline
+        \end{tabular}
+        \caption{Requirement Mapping for Goal G4}
+        \label{tab:mapping_g4}
+    \end{table}
