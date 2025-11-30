@@ -92,6 +92,9 @@
 \contentsline {section}{\numberline {5}Effort spent}{24}{}%
 \contentsline {section}{\numberline {6}References}{25}{}%
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> d7f5f7f89359397adf64a1d0ac1cc4a90bf797d1
 =======
 >>>>>>> Revision-domain-class-diragram
+=======
+>>>>>>> Revision-sections-2.2-2.3-2.4
