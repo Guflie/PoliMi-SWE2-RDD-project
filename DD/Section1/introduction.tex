@@ -1,1 +1,90 @@
 \section{Introduction}
+
+    \subsection{Scope}
+
+    \subsubsection{Product domain}
+    The scope of the project covers the users interacting with the Best Bike Paths (BBP) system, the data collection processes regarding cycling routes,
+    and the navigation services provided to the community.
+
+    For the project, the following users interacting with the system have been identified:
+    \begin{itemize}
+        \item \textbf{Registered Users.}
+        \item \textbf{Generic Users.}
+    \end{itemize}
+
+    \textbf{Registered Users} will be able to record their trips using the mobile application, tracking their performance statistics and path data. 
+    During the recording, they contribute to the system by collecting data either automatically (via device sensors) or manually (by reporting 
+    obstacles or status). Upon completion of a trip, they can review and confirm the detected anomalies, making them available to the community.
+
+    \textbf{Generic Users} (along with Registered Users) can access the platform to search for the best cycling routes between two locations. 
+    The system provides them with routes ranked by a "Path Score", calculated based on the aggregated data provided by the community, allowing them to 
+    visualize safety information and obstacles on the map.
+    % il termine "based on" fa capire che se non ci sono dati allora non offre un path score, gestione corretta!
+
+    The system acts as a mediator between the raw data collected from the real world (road conditions) and the end-users, processing this information 
+    to ensure safety and reliability.
+
+    \subsubsection{Main architectural choices}
+    The system is to be implemented using a \textbf{microservices-oriented architecture}. This choice is driven by the need for a scalable and maintainable system, capable of handling different loads on different components (e.g., the data ingestion service may face high traffic during weekends, while the reporting service might be less stressed).
+
+    This architecture allows for:
+    \begin{itemize}
+        \item \textbf{Independent Scaling:} Individual components can be scaled based on their specific resource requirements.
+        \item \textbf{Resilience:} If a specific microservice fails (e.g., the weather enrichment service), the core functionality remains available.
+        \item \textbf{Technology Agnosticism:} Different teams can develop different services using the most appropriate technologies for each task.
+    \end{itemize}
+
+    Furthermore, the system adopts a **Client-Server** model where the mobile application performs significant local processing (Edge Computing) to 
+    analyze sensor data before sending it to the backend, optimizing bandwidth and responsiveness.
+
+    \subsection{Definitions, acronyms, abbreviations}
+    This section contains the definitions for terms that may be technical or specific to the architecture, as well as acronyms and abbreviations used 
+    throughout the document.
+
+    \subsubsection{Definitions}
+    \begin{itemize}
+        \item \textbf{Microservice:} A software development technique that arranges an application as a collection of loosely coupled services.
+        \item \textbf{API Gateway:} A server that acts as an API front-end, receiving API requests, enforcing throttling and security policies, 
+        passing requests to the back-end service and then passing the response back to the requester.
+        \item \textbf{Edge Computing:} A distributed computing paradigm that brings computation and data storage closer to the sources of data 
+        (in this case, the user's smartphone).
+    \end{itemize}
+
+    \subsubsection{Acronyms}
+    \begin{itemize}
+        \item \textbf{BBP:} Best Bike Paths
+        \item \textbf{RASD:} Requirement Analysis and Specification Document
+        \item \textbf{DD:} Design Document
+        \item \textbf{API:} Application Programming Interface
+        \item \textbf{REST:} Representational State Transfer
+        \item \textbf{DBMS:} DataBase Management System
+    \end{itemize}
+
+    \subsubsection{Abbreviations}
+    \begin{itemize}
+        \item \textbf{R*:} Requirement 
+    \end{itemize}
+
+    \subsection{Reference documents}
+    This document is based on the following materials:
+    \begin{itemize}
+        \item The specification of the RASD and DD assignment of the Software Engineering II course a.y. 2025/26.
+        \item Course slides shared on WeBeep.
+        \item The Requirement Analysis and Specification Document (RASD) v1.0 of Best Bike Paths.
+        \item Past Design Documents.
+    \end{itemize}
+
+    \subsection{Overview}
+    \begin{enumerate}
+        \item \textbf{Introduction:} this section introduces the project. It contains a high level description of the system, including its 
+        architectural style and architectural choices.
+        \item \textbf{Architectural design:} this section is very broad and contains the description of the various interfaces of the system, 
+        its deployment and an in-depth description of the components and their interactions (Runtime view).
+        \item \textbf{User interface design:} this section focuses on the user interface design, expanding on what was shown in the RASD.
+        \item \textbf{Requirements traceability:} this section contains a mapping between the requirements defined in the RASD and the design elements 
+        defined in the DD.
+        \item \textbf{Implementation, integration and test plan:} this section describes the order in which the various components and subsystems must 
+        be developed and tested.
+        \item \textbf{Effort spent:} this section shows the time spent on each section of the document, for each member of the group.
+        \item \textbf{References:} this section contains all the various references used to write this document.
+    \end{enumerate}
