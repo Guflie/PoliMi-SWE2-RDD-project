@@ -1,40 +1,3 @@
-\begin{comment}
-\paragraph{[UC#] }
-\begin{center}
-    \begin{tabular}{|l|l|}
-        \hline
-        Name & \textbf{ } \\
-        \hline
-        Actors &  \\
-        \hline
-        Entry Condition & \\
-        \hline
-        Event Flow & 
-            \begin{minipage}{0.7\textwidth}
-            \smallskip
-            \begin{enumerate}
-                \item 
-            \end{enumerate}
-            \smallskip
-            \end{minipage}
-        \\
-        \hline
-        Exit Condition &  \\
-        \hline
-        Exception & 
-        \begin{minipage}{0.7\textwidth}
-        \smallskip
-            \begin{itemize}
-            \item 
-        \end{itemize} 
-        \smallskip
-        \end{minipage}
-        \\
-        \hline       
-    \end{tabular}
-\end{center}
-\end{comment}
-
 \subsubsection{Use Case Diagram} \label{sssec:use_case_diagram}
 
 \begin{figure}[h!]
@@ -55,7 +18,7 @@
             \hline
             Name & \textbf{Account creation} \\
             \hline
-            Actors & Any person \\ % Is this terminology correct?
+            Actors & General user \\ % Is this terminology correct?
             \hline
             Entry Condition & True \\
             \hline
@@ -64,7 +27,7 @@
                 \smallskip
                 \begin{enumerate}
                     \item The person downloads the BBP and opens it
-                    \item The system asks to fill out a form with the following personal information: name, surname, birth date, geneder, email, password; the form ask also to flag for privacy accpetance
+                    \item The system asks to the user to fill out a form with the following personal information: name, surname, birth date, geneder, email, password; the systems laso asks to accept the privacy terms
                     \item The person fills out the questionare and submits it
                     \item The system verifies that the email is valid and that it's not already been used, then it sends a verification email containing a link to verify the email address
                     \item The person receives the email and opens the link to confirm the email
@@ -101,7 +64,7 @@
             \hline
             Name & \textbf{User login} \\
             \hline
-            Actors & Registred user \\
+            Actors & Registered user \\
             \hline
             Entry Condition & \\
             \hline
@@ -111,7 +74,7 @@
                 \begin{enumerate}
                     \item The user opens the BBP app and the login form is shown to it
                     \item The user types email and password, then submits the form
-                    \item The system receives the user's login info, checks that the information sent corresponds to a certain account
+                    \item The system receives the user's login info, checks that the information sent corresponds to an existing account
                     \item The system retrive the information to build the homepage for that account and sends it
                 \end{enumerate}
                 \smallskip
@@ -124,7 +87,7 @@
             \begin{minipage}{0.7\textwidth}
             \smallskip
                 \begin{itemize}
-                \item The user sends an email not related to any account, therefore the system sends an error message to it
+                \item The user sends an email not related to any account, therefore the system sends an error message to the user
                 \item The user sends a password that doesn't match with the one on the system for that account, therefore the system sends an errore message to the user
             \end{itemize} 
             \smallskip
@@ -132,19 +95,150 @@
             \\
             \hline       
         \end{tabular}
+        \caption{Refers to \hyperref[sc:SC2]{SC2}.}
         \label{UC:UC2} 
     \end{table}
 \end{center}
 
 % --------------------------------------------------------------------------------------------------
-\paragraph{[UC3] Route planning}
+\paragraph{[UC3] Account information update}
+\begin{center}
+    \begin{table}[h!]
+        \begin{tabular}{|l|l|}
+            \hline
+            Name & \textbf{Account information update} \\
+            \hline
+            Actors & Registered user \\
+            \hline
+            Entry Condition & \\
+            \hline
+            Event Flow & 
+                \begin{minipage}{0.7\textwidth}
+                \smallskip
+                \begin{enumerate}
+                    \item The user opens his profile page and selects the option to modify the account
+                    \item The user selects the attribute to modify (email address and password are excluded), types the new value and sends it
+                    % review this step
+                    \item The system modifies the attributes and sends an acknowledgment
+                \end{enumerate}
+                \smallskip
+                \end{minipage}
+            \\
+            \hline
+            Exit Condition & The account profile is updated \\
+            \hline
+            Exception & \\
+            \hline       
+        \end{tabular}
+        \caption{Refers to \hyperref[sc:SC3]{SC3}}
+        \label{UC:UC3} 
+    \end{table}
+\end{center}
+
+
+% --------------------------------------------------------------------------------------------------
+\paragraph{[UC4] Password account reset}
+\begin{center}
+    \begin{table}[h!]
+        \begin{tabular}{|l|l|}
+            \hline
+            Name & \textbf{Password account reset}\\
+            \hline
+            Actors & Registered user \\
+            \hline
+            Entry Condition & \\
+            \hline
+            Event Flow & 
+                \begin{minipage}{0.7\textwidth}
+                \smallskip
+                \begin{enumerate}
+                    \item The user clicks the "Reset Password" option in the login page and sends a reset password request
+                    \item The system receives the request and sends a form in which the user must specify the account email
+                    \item The user receives the form, enters the account email and submits it
+                    \item The system receives the account email, checks whether an account with that email exists or not, 
+                    and if it finds it sends an email to that address with a link to reset the password that expires in 1 hour
+                    \item The user receives the email, opens the link, types the new password two times and sends the new password
+                    \item The system receives the new password, updates the account password and sends an update confirmation
+                    \item The user receives the update confirmation
+                \end{enumerate}
+                \smallskip
+                \end{minipage}
+            \\
+            \hline
+            Exit Condition & The user can log-in with the new password \\
+            \hline
+            Exception &
+                \begin{minipage}{0.7\textwidth}
+                \smallskip
+                \begin{itemize}
+                    \item The user doesn't open the link within one hour, therefore the password wouldn't be changed 
+                    \item The user doesn't submits the new password after opening the link within one hour, therefore the password wouldn't be changed
+                \end{itemize}
+                \end{minipage}
+            \\
+            \hline       
+        \end{tabular}
+        \caption{Refers to \hyperref[sc:SC4]{SC4}.}
+        \label{UC:UC4} 
+    \end{table}
+\end{center}
+
+% --------------------------------------------------------------------------------------------------
+\paragraph{[UC5] Account deletion}
+\begin{center}
+    \begin{table}[h!]
+        \begin{tabular}{|l|l|}
+            \hline
+            Name & \textbf{Account deletion} \\
+            \hline
+            Actors & Registered user \\
+            \hline
+            Entry Condition & \\
+            \hline
+            Event Flow & 
+                \begin{minipage}{0.7\textwidth}
+                \smallskip
+                \begin{enumerate}
+                    \item The user opens the Profile page, opens the options and selects to delete the account
+                    \item The system receives the request and sends a confirmation message on the app
+                    \item The user sends the confirmation
+                    \item The system receives the confirmation and sends an email containing a link to delete the account, which expires in 1 hour
+                    \item The user receives the email, opens the link and sends the second confirm.
+                    \item The system receives the second confirmation and processes the account deletion request
+                    \item Once the system has deleted the account, sends to the ex-account mail address a deletion message confirmation
+                \end{enumerate}
+                \smallskip
+                \end{minipage}
+            \\
+            \hline
+            Exit Condition & The account is deleted \\
+            \hline
+            Exception & 
+            \begin{minipage}{0.7\textwidth}
+            \smallskip
+                \begin{itemize}
+                \item The user didn't open the link after one hour, therefore the link expries
+                \item The user didn't confirm the second time, therefore after one hour the request expires
+            \end{itemize} 
+            \smallskip
+            \end{minipage}
+            \\
+            \hline       
+        \end{tabular}
+        \caption{Refers to \hyperref[sc:SC5]{SC5}}
+        \label{UC:UC5} 
+    \end{table}
+\end{center}
+
+% --------------------------------------------------------------------------------------------------
+\paragraph{[UC6] Route planning with route match}
 \begin{center}
     \begin{table}[h!]
         \begin{tabular}{|l|l|}
             \hline
             Name & \textbf{Route planing} \\
             \hline
-            Actors & Any user \\
+            Actors & General user \\
             \hline
             Entry Condition & BPP app installed on personal device \\ % consider if this is something that can be categorized as an entry condition
             \hline
@@ -152,9 +246,10 @@
                 \begin{minipage}{0.7\textwidth}
                 \smallskip
                 \begin{enumerate}
-                    \item The user opens the search page and inserts the starting point and the destination
-                    \item The system retrive from it's archive all paths near the startint point specified by the user and that leads toward the destination, ordered by "Path Score" and send them to the user
-                    \item The user explore the choices given by the system and selects one of them
+                    \item The user opens the Search page and inserts the starting point and the destination
+                    \item The system retrieves from its archive all paths near the starting point specified by the user and that lead toward the destination, ordered by "Path Score" and sends them to the user
+                    % TODO: we allow the same path to be traveld partially? Is this reasonable since we don't have to bother about how much would the score be adjusted in this case?
+                    \item The user explores the choices given by the system and selects one of them
                     \item The user starts the trip activity for the selected path
                 \end{enumerate}
                 \smallskip
@@ -167,20 +262,134 @@
             \begin{minipage}{0.7\textwidth}
             \smallskip
                 \begin{itemize}
-                \item No path between starting point and destination is found, threrefore a message of "No route found" is displayed
+                \item No path between starting point and destination is found, see \ref{UC:UC7}
             \end{itemize} 
             \smallskip
             \end{minipage}
             \\
             \hline       
         \end{tabular}
-        \caption{Refers to \hyperref[sc:SC2]{SC2}, \hyperref[sc:SC3]{SC3}}
-        \label{UC:UC3} 
+        \caption{Refers to \hyperref[sc:SC6]{SC6}, \hyperref[sc:SC8]{SC8}}
+        \label{UC:UC6} 
+    \end{table}
+\end{center}
+
+% --------------------------------------------------------------------------------------------------.
+% TODO: finish this
+\paragraph{[UC7] Route planning without route match}
+\begin{center}
+    \begin{table}[h!]
+        \begin{tabular}{|l|l|}
+            \hline
+            Name & \textbf{Route planing} \\
+            \hline
+            Actors & General user \\
+            \hline
+            Entry Condition & BPP app installed on personal device \\ % consider if this is something that can be categorized as an entry condition
+            \hline
+            Event Flow & 
+                \begin{minipage}{0.7\textwidth}
+                \smallskip
+                \begin{enumerate}
+                    \item The user opens the Search page and inserts the starting point and the destination
+                    \item The system fails to retrieve from its archive any path near the starting point specified by the user and that lead toward the destination
+                    % TODO: give a second look to these last two points (external mapping service seems to be an user?)
+                    \item The system sends to the external mapping service a request to compute a path between the starting point and the ending point.
+                    \item The external mapping service computes the path and returns it to the system
+                    \item The system forwards the computed paths to the user
+                    \item The user searches among returned paths, selects one of them and starts the trip activity for the selected path
+                \end{enumerate}
+                \smallskip
+                \end{minipage}
+            \\
+            \hline
+            Exit Condition & A path is displayed to the user \\
+            \hline
+            Exception & \\
+        \caption{Refers to \hyperref[sc:SC7]{SC7}, \hyperref[sc:SC9]{SC9}}
+        \label{UC:UC7} 
     \end{table}
 \end{center}
 
 % --------------------------------------------------------------------------------------------------
-\paragraph{[UC4] Automatic trip monitoring}
+\paragraph{[UC8] Trip activity for unregistered user}
+\begin{center}
+    \begin{table}[h!]
+        \begin{tabular}{|l|l|}
+            \hline
+            Name & \textbf{Trip activity} \\
+            \hline
+            Actors & Not registered user \\
+            \hline
+            Entry Condition & \\
+            \hline
+            Event Flow & 
+                \begin{minipage}{0.7\textwidth}
+                \smallskip
+                \begin{enumerate}
+                    \item The user selects the path and starts the trip, sending an information retrieval request to the system
+                    \item The system receives the request, retrieves the path map and sends it to the user
+                    \item The user receives the path map
+                        \subitem The user might stop and resume the trip whenever he likes
+                    \item The user completes the trip, and sends an "Trip Completion message" to the system
+                    \item The system receives the message and sends an acknowledgement
+                \end{enumerate}
+                \smallskip
+                \end{minipage}
+            \\
+            \hline
+            Exit Condition & The user did its trip \\
+            \hline
+            Exception & \\
+            \hline       
+        \end{tabular}
+        \caption{Refers to \hyperref[sc:SC10]{SC10}, \hyperref[sc:SC11]{SC11}}
+        \label{UC:UC8} 
+    \end{table}
+\end{center}
+
+% --------------------------------------------------------------------------------------------------
+% TODO: give a deep tought about this Use Case, maybe it isn't such relevant to be listed explicitly?
+\paragraph{[UC9] Trip activity for registered user}
+\begin{center}
+    \begin{table}[h!]
+        \begin{tabular}{|l|l|}
+            \hline
+            Name & \textbf{Trip activity} \\
+            \hline
+            Actors & Registered user \\
+            \hline
+            Entry Condition & \\
+            \hline
+            Event Flow & 
+                \begin{minipage}{0.7\textwidth}
+                \smallskip
+                \begin{enumerate}
+                    \item The user selects the path and starts the activity, sending an information retrieval request to the system
+                    \item The system receives the request, retrieves the path map and sends it to the user
+                    \item The user receives the path map
+                        \subitem The user might stop and resume the activity whenever he likes
+                    \item The user completes the activity, and sends an "Activity Completion message" to the system
+                    \item The system receives the notification about the activity completion and sends a form to rate the path
+                    \item The user receives the rating form, fills it out and sends it
+                    \item The system receives the rating form and sends an acknowledgement 
+                \end{enumerate}
+                \smallskip
+                \end{minipage}
+            \\
+            \hline
+            Exit Condition & The user did its trip activity and gave a score to the path\\
+            \hline
+            Exception & \\
+            \hline       
+        \end{tabular}
+        \caption{Refers to \hyperref[sc:SC10]{SC10}, \hyperref[sc:SC11]{SC11}, \hyperref[sc:SC13]{SC13}}
+        \label{UC:UC9} 
+    \end{table}
+\end{center}
+
+% --------------------------------------------------------------------------------------------------
+\paragraph{[UC10] Automatic trip monitoring}
 \begin{center}
     \begin{table}[h!]
         \begin{tabular}{|l|l|}
@@ -189,7 +398,7 @@
             \hline
             Actors & Registered user \\
             \hline
-            Entry Condition & The BBP app is installed and the user has already an account\\
+            Entry Condition & \\
             % are these Entry Conditions necessary?
             \hline
             Event Flow & 
@@ -197,11 +406,11 @@
                 \smallskip
                 \begin{enumerate}
                     \item The user selects the route he wants to ride on, selects the option to automatically collect data and starts the activity
-                    \item The user's personal device collects user position and sends it to the system every second
-                    \item Once finished the user stops the activity
+                    \item The user's personal device samples user position every second and stores it
+                    \item Once finished the user stops the activity and the data collected are sent to the system
                     \item The system calculates some metrics about the user performances (total distance traveled, average speed, maximum speed,
                     minumum speed, maximum altitude excursion, average altitude excursion)
-                    \item The system retrives the weather conditions during the activty from a third-part weather API
+                    \item The system retrives the weather conditions during the activty from a third-part weather service
                     \item The system send to the user the computed informations mentioned in \textit{4.} and \textit{5.}, plus the 
                     map showing the path traveled
                 \end{enumerate}
@@ -215,7 +424,7 @@
             \begin{minipage}{0.7\textwidth}
             \smallskip
                 \begin{itemize}
-                \item Weather conditions can't be retrived from the third party API, therefore only the metrics about user performances are shown to the user
+                \item Weather conditions can't be retrived from the third party service, therefore only the metrics about user performances are shown to the user
                 \item User's device loses GPS signal during the activity, therefore the system is not able to compute all the metrics about user performances and shows only the
                 ones that can be computed with the available data, notifying the user about the partial (or total) data loss
             \end{itemize} 
@@ -224,18 +433,18 @@
             \\
             \hline       
         \end{tabular}
-        \caption{Refers to \hyperref[sc:SC4]{SC4}}
-        \label{UC:UC4} 
+        \caption{Refers to \hyperref[sc:SC12]{SC12}}
+        \label{UC:UC10} 
     \end{table}
 \end{center}
 
 % --------------------------------------------------------------------------------------------------
-\paragraph{[UC5] Report route prolem}
+\paragraph{[UC11] Manual route problem report}
 \begin{center}
     \begin{table}[h!]
         \begin{tabular}{|l|l|}
             \hline
-            Name & \textbf{Manual route status update} \\
+            Name & \textbf{Manual route problem report} \\
             \hline
             Actors & Registered user \\
             \hline
@@ -245,7 +454,7 @@
                 \begin{minipage}{0.7\textwidth}
                 \smallskip
                 \begin{enumerate}
-                    \item The user after noticing a problem along a route opens the report issue page
+                    \item The user after noticing a problem along a route opens the Report Issue page
                     \item The user searches for the route and selects it, then specifies the issue type, the issue position along the route and adds a description, then submits the report
                     \item The system receives the issue report, updates the information about that problem and send an acknowledgement
                 \end{enumerate}
@@ -258,18 +467,18 @@
             Exception & \\
             \hline       
         \end{tabular}
-        \caption{Refers to \hyperref[sc:SC5]{SC5}}
-        \label{UC:UC5} 
+        \caption{Refers to \hyperref[sc:SC15]{SC15}}
+        \label{UC:UC11} 
     \end{table}
 \end{center}
 
 % --------------------------------------------------------------------------------------------------
-\paragraph{[UC6] Report route problem fixup}
+\paragraph{[UC12] Route problem fixup report}
 \begin{center}
     \begin{table}[h!]
         \begin{tabular}{|l|l|}
             \hline
-            Name & \textbf{Report route problem fixup} \\
+            Name & \textbf{Route problem fixup report} \\
             \hline
             Actors & Registered user \\
             \hline
@@ -291,18 +500,18 @@
             Exception & \\
             \hline       
         \end{tabular}
-        \caption{Refers to \hyperref[sc:SC6]{SC6}}
-        \label{UC:UC6} 
+        \caption{Refers to \hyperref[sc:SC16]{SC16}}
+        \label{UC:UC12} 
     \end{table}
 \end{center}
 
 % --------------------------------------------------------------------------------------------------
-\paragraph{[UC7] Automatic route error detection}
+\paragraph{[UC13] Automatic route problem detection and report}
 \begin{center}
     \begin{table}[h!]
         \begin{tabular}{|l|l|}
             \hline
-            Name & \textbf{Automatic route error detection} \\
+            Name & \textbf{Automatic route problem detection and report} \\
             \hline
             Actors & Registered user \\
             \hline
@@ -313,11 +522,11 @@
                 \smallskip
                 \begin{enumerate}
                     \item The user starts an activity with automatic issue detection enabled
-                    \item The BBP app collects data from the user's device sensors and analyzes them in real time to detect potential issues along the route
-                    \item When the user finished the activity, the BBP app shows it a list of all problems detected and their location, asking the user confirmation for each one of them
-                    \item The user confirmes wheteher the problems detected are real issues or false positives
+                    \item The BBP app collects data from the user's device sensors and analyzes them in real-time to detect potential issues along the route
+                    \item When the user finishes the activity, the BBP app shows to the user a list of all problems detected and their location, asking the user confirmation for each one of them
+                    \item The user confirmes whether the problems detected are real issues or false positives
                     \item The BPP app sends to the system the confirmed issues
-                    \item The system sends and acknowledgement, and updates the path status accordingly % this might be refined
+                    \item The system sends and acknowledgement, and updates the path status
                 \end{enumerate}
                 \smallskip
                 \end{minipage}
@@ -328,13 +537,13 @@
             Exception & \\
             \hline       
         \end{tabular}
-        \caption{Refers to \hyperref[sc:SC7]{SC7}}
-        \label{UC:UC7} 
+        \caption{Refers to \hyperref[sc:SC14]{SC14}}
+        \label{UC:UC13} 
     \end{table}
 \end{center}
 
 % --------------------------------------------------------------------------------------------------
-\paragraph{[UC8] User's activity history consultation}
+\paragraph{[UC14] User's activity history consultation}
 \begin{center}
     \begin{table}[h!]
         \begin{tabular}{|l|l|}
@@ -349,8 +558,8 @@
                 \begin{minipage}{0.7\textwidth}
                 \smallskip
                 \begin{enumerate}
-                    \item The user opens the relative page on the app and searches for specific activity over its history, optionally applying filters, and sends the request to the system
-                    \item The system runs the query and retrives the activities matching the request, then sends the result to the user
+                    \item The user opens the relative page on the app, optionally applies filters, and sends the request to the system
+                    \item The system runs the query and retrieves the activities matching the request, then sends the result to the user
                 \end{enumerate}
                 \smallskip
                 \end{minipage}
@@ -361,18 +570,18 @@
             Exception & \\
             \hline       
         \end{tabular}
-        \caption{Refers to \hyperref[sc:SC8]{SC8}}
-        \label{UC:UC8} 
+        \caption{Refers to \hyperref[sc:SC17]{SC17}}
+        \label{UC:UC14} 
     \end{table}
 \end{center}
 
 % --------------------------------------------------------------------------------------------------
-\paragraph{[UC9] User trip deletion}
+\paragraph{[UC15] User activity deletion}
 \begin{center}
     \begin{table}[h!]
         \begin{tabular}{|l|l|}
             \hline
-            Name & \textbf{User trip deletion} \\
+            Name & \textbf{User activity deletion} \\
             \hline
             Actors & Registered user \\
             \hline
@@ -382,9 +591,9 @@
                 \begin{minipage}{0.7\textwidth}
                 \smallskip
                 \begin{enumerate}
-                    \item The user opens the trip history and searches the trip to delete
+                    \item The user opens the Acivity History and searches for the trip to delete
                     \item The user selects the trip, selects the option to delete it and confirms the deletion.
-                    \item The system recevies the deletion request, deletes the trip and sends an acknowledgement.
+                    \item The system recevies the deletion request, deletes the activity and sends an acknowledgement to the user.
                 \end{enumerate}
                 \smallskip
                 \end{minipage}
@@ -395,128 +604,7 @@
             Exception & \\
             \hline       
         \end{tabular}
-        \caption{Refers to \hyperref[sc:SC9]{SC9}}
-        \label{UC:UC9} 
-    \end{table}
-\end{center}
-
-% --------------------------------------------------------------------------------------------------
-\paragraph{[UC10] Account information update}
-\begin{center}
-    \begin{table}[h!]
-        \begin{tabular}{|l|l|}
-            \hline
-            Name & \textbf{Account information update} \\
-            \hline
-            Actors & Registered user \\
-            \hline
-            Entry Condition & \\
-            \hline
-            Event Flow & 
-                \begin{minipage}{0.7\textwidth}
-                \smallskip
-                \begin{enumerate}
-                    \item The user opens tha profile page and selects the option to modify the account
-                    \item The user selects the attribute to modify, types the new value and sends it
-                    % review this step
-                    \item The system checks if the attribute is the password or the email, if not modifies the attribute and send an acknowledgment
-                \end{enumerate}
-                \smallskip
-                \end{minipage}
-            \\
-            \hline
-            Exit Condition & The account profile is updated \\
-            \hline
-            Exception & \\
-            \hline       
-        \end{tabular}
-        \caption{Refers to \hyperref[sc:SC10]{SC10}}
-        \label{UC:UC10} 
-    \end{table}
-\end{center}
-
-% --------------------------------------------------------------------------------------------------
-\paragraph{[UC11] Account deletion}
-\begin{center}
-    \begin{table}[h!]
-        \begin{tabular}{|l|l|}
-            \hline
-            Name & \textbf{Account deletion} \\
-            \hline
-            Actors & Registered user \\
-            \hline
-            Entry Condition & \\
-            \hline
-            Event Flow & 
-                \begin{minipage}{0.7\textwidth}
-                \smallskip
-                \begin{enumerate}
-                    \item The user opens the profile page, opens the options and selects to delete the account
-                    \item The system receives the request and sends a confirmation message on the app
-                    \item The user sends the action confirmation
-                    \item The system receives the confirmation and sends an email containing a link to delete the account
-                    \item The user receives the email, opens the link, confirms a second time and sends the second confirm.
-                    \item The system receives the second confirmation and processes the account deletion request
-                    \item Once the system has deleted the account, sends to the ex-account mail an acknowledgement email 
-                \end{enumerate}
-                \smallskip
-                \end{minipage}
-            \\
-            \hline
-            Exit Condition & The account is deleted \\
-            \hline
-            Exception & 
-            \begin{minipage}{0.7\textwidth}
-            \smallskip
-                \begin{itemize}
-                \item The user didn't open the link after one hour, therefore the link expries
-                \item The user didn't confirm the second time, therefore after one hour the request expires
-            \end{itemize} 
-            \smallskip
-            \end{minipage}
-            \\
-            \hline       
-        \end{tabular}
-        \caption{Refers to \hyperref[sc:SC11]{SC11}}
-        \label{UC:UC11} 
-    \end{table}
-\end{center}
-
-% --------------------------------------------------------------------------------------------------
-\paragraph{[UC12] Password account reset}
-\begin{center}
-    \begin{table}[h!]
-        \begin{tabular}{|l|l|}
-            \hline
-            Name & \textbf{Password account reset}\\
-            \hline
-            Actors & Registered user \\
-            \hline
-            Entry Condition & \\
-            \hline
-            Event Flow & 
-                \begin{minipage}{0.7\textwidth}
-                \smallskip
-                \begin{enumerate}
-                    \item The user clicks the "reset password" in the login page and send a reset password request
-                    \item The system receives the request and send a form in which the user must specify the account email
-                    \item The user receives the form, enters the account email and submits it
-                    \item The system receives the account email, checks whether an account with that email exists or not, 
-                    and if it founds it send an email to that address within a link to reset the password
-                    \item The user receives the email, opens the link, types the new password two times and sends the new password
-                    \item The system receives the new password, updates the account password and sends an update confirmation
-                    \item The user receives the update confirmation
-                \end{enumerate}
-                \smallskip
-                \end{minipage}
-            \\
-            \hline
-            Exit Condition & The user can log-in iwth the new password \\
-            \hline
-            Exception & \\
-            \hline       
-        \end{tabular}
-        \caption{Refers to \hyperref[sc:SC12]{SC12}}
-        \label{UC:UC12} 
+        \caption{Refers to \hyperref[sc:SC18]{SC18}}
+        \label{UC:UC15} 
     \end{table}
 \end{center}
