@@ -1,124 +1,143 @@
-
 \subsubsection{Scenarios} \label{sssec:scenarios}
 \paragraph{[SC1] Registering a new account} \phantomsection\label{sc:SC1}
 \begin{flushleft}
 % It may be necessary to modify personal information given by the user
-User "Zoe" has just downloaded the BBP app in order to monitor her activities with the bicycle, and wants to create a profile.
-So she creates an account by entering name, surname, email, birth date, gender, and accepting the privacy policy.
-Once her information is verified, she receives an email to confirm her email address. She confirms it, and the account is then created.
+User "Zoe" has just downloaded the BBP app in order to monitor her activities on the bicycle, and wants to create a profile.
+So she creates an account by entering her name, surname, email, birth date, gender, and accepting the privacy policy.
+Once her information is verified, she receives an email to confirm her mail address. She confirms it, and the account is succesfully created.
 \end{flushleft}
 
 \paragraph{[SC2] Logging into account} \phantomsection\label{sc:SC2}
 \begin{flushleft}
-
+Registered user "Monica" wants to enter in the BBP app with her account.
+She opens the BBP app, enters her email and password on the login screen, and submits that information.
+Then the account information is displayed to her, and she can use all app functionalities.
 \end{flushleft}
 
 \paragraph{[SC3] Updating account information} \phantomsection\label{sc:SC3}
 \begin{flushleft}
-Registered user "Giulio" noticed that during the creation of his account selected the wrong birth date.
-He decides to fix it: he opens the BBP app, goes in the profile section and opens the modify view.
-Here he changes the birth date with the correct one, he confirms the update and the app now displays the correct date.
+Registered user "Giulio" noticed that he had selected the wrong birth date during account creation.
+He decides to fix it: he opens the BBP app, goes to the Profile section, and opens the edit screen.
+On this screen he changes the birth date with the correct one, he confirms the update and the app now displays the correct date.
 \end{flushleft}
 
 \paragraph{[SC4] Resetting account password} \phantomsection\label{sc:SC4}
 \begin{flushleft}
-Registered user "Vittorio" changed mobile device, installed the BBP app but when he tries to log in, he realize that he forgot the password.
-Then from the login page he clicks on the link to reset the password, he receives a form in which he enters the account email.
-After few seconds he receives an email which contains a link to reset the password, he opens it, fill the form with the new password and submits it.
-Then he tries to log-in again in the app with the new password, successfully logging in 
+Registered user "Vittorio" changed mobile device and installed the BBP app, but when he tried to log in, he realized he had forgotten his password.
+Then from the login page he clicks on the link to reset the password, which takes him to a form in which he enters the account email.
+After a few seconds, he receives an email which contains a link to reset the password. 
+He opens it, fills out the form with the new password and submits it.
+Then he tries to log-in again in the app with the new password, successfully logging in. 
 \end{flushleft}
 
 \paragraph{[SC5] Account deletion} \phantomsection\label{sc:SC5}
 \begin{flushleft}
-After months of stops, registered user "Mirko" doesn't want to cycle anymore and decides to delete his BBP account.
-He opens the BBP app, opens the account sections and from the options he selects that one to delete the account.
-He confirms to the app that he wants to delete his account, then he receives an email in which there is a link to confirm
-a second time his choice, he opens it, reads the disclaimer and confirms that he wants to delete the account.
-After a few hours, he receives another email which confirms account deletion.    
+After months of inactivity, registered user "Mirko" decides he no longer wants to cycle and deletes his BBP account.
+He opens the BBP app, opens the Account section and from the options he selects that one to delete the account.
+He confirms to the app that he wants to delete his account, he receives an email containing a link to confirm his choice a second time.
+He opens it, reads the disclaimer and confirms that he wants to delete the account.
+After a few hours, he receives another email confirming account deletion.    
 \end{flushleft}
 
-% todo: give to these two following scenarios a second look, especially @ the final part (can the trip activity be started also by unregistred users?).
-\paragraph{[SC6] Intelligent route planning with successful match (General user) } \phantomsection\label{sc:SC6}
+\paragraph{[SC6] Intelligent route planning with successful match (Causal user) } \phantomsection\label{sc:SC6}
 \begin{flushleft}
-The tourist "Diana" wants to explore the city by bike but is worried about traffic and poor roads.
-She accesses the BBP website without logging in and enters "Hotel Plaza" as the origin and "Museo della Scienza" as the destination, receving two possible paths as response.
+Tourist "Diana" wants to explore the city by bike but is concerned about traffic and poor roads.
+She accesses the BBP website without logging in and enters "Hotel Plaza" as the origin and "Museo della Scienza" as the destination, receiving two possible paths in response.
 Diana notices that the shortest route (3 km) has a low "Path Score", with several "Pothole" icons along the way. 
-The alternative, slightly longer route (3.5 km) has an excellent "Path Score" and it's marked with excellent conditions.
-Diana chooses the green route, starts the trip activity and follows the instructions.
+The alternative, slightly longer route (3.5 km) has an excellent "Path Score" and it's marked as having excellent conditions.
+Diana chooses the green route, starts the trip and follows the instructions.
 \end{flushleft}
 
-\paragraph{[SC7]  Intelligent route planning with unsuccessful match (General user) } \phantomsection\label{sc:SC7}
+\paragraph{[SC7]  Intelligent route planning with unsuccessful match (Casual user) } \phantomsection\label{sc:SC7}
 \begin{flushleft}
-
+Casual user "Mirko" wants to find a route to reach out his friends by bicycle.
+He opens the BBP app and proceedes as a guest, then searches for a path but the app doesn't find a match.
+He selects the option to create a new path, selects one of the proposed alternatives and starts the trip.  
 \end{flushleft}
 
 \paragraph{[SC8] Intelligent route planning with successful match (Registred user)} \phantomsection\label{sc:SC8}
 \begin{flushleft}
-The athlete "Giorgio" is planning his daily cycling training.
+Registered user "Giorgio" is planning his daily cycling training ride.
 He opens the BBP app, logs in and searches for bike paths with a starting point near his home and a length of 30 km.
-He receives three paths: the first one, which has a high "Path Score" but that crosses his ex-wife's house, the second 
-which has a decent "Path score" and no problem marked, and the third one with low "Path Score" and several potholes marked on the map.
-Given these options, he choose the second one and starts the activity.
-Once he finishes his training, he stops the activity and checks whether the activity has been registred on his trip history or not.
+He receives three paths: the first path has a high "Path Score" but that passes by his ex-wife's house; the second 
+path has a decent "Path score" with no problem marked; the third one has low "Path Score" with several potholes marked on the map.
+Given these options, he chooses the second one and starts the activity.
 \end{flushleft}
 
 \paragraph{[SC9]  Intelligent route planning with unsuccessful match (Registered user) } \phantomsection\label{sc:SC9}
 \begin{flushleft}
-
+Registered user "Sara" wants to reach her hometown pharmacy by bike.
+She opens the BBP app, searches for a path from her home to the pharmacy but no match is found.
+She then selects the option to create a new path, and starts the activity following one of the suggested paths.
 \end{flushleft}
 
+% TODO: discuss this with Francesco if this might be relevant to extends the mockup
+% TODO: review this
 \paragraph{[SC10] Starting trip activity} \phantomsection\label{sc:SC10}
 \begin{flushleft}
-
+User "Marco" has selected the path he wants to do by bike, starts the trip by selecting the relative option.
+By doing so, he's able to see the path he should follow and his position in real-time.
 \end{flushleft}
 
+% TODO: review this
 \paragraph{[SC11] Stopping and resuming trip activity} \phantomsection\label{sc:SC11}
 \begin{flushleft}
-
+User "Tony" started an activity, but in the middle of it, he encounters his old friend "Lorenzo" and stops for a chat.
+He opens the activity screen and pauses it. 
+Later, when he finished with his friends, he resumes the activity.
 \end{flushleft}
 
 \paragraph{[SC12] Automatic activity monitoring and trip data enrichment } \phantomsection\label{sc:SC12}
 \begin{flushleft}    
-Registered user "Alessandro" is preparing for his weekly training session. He wants to track his performance, including correlation with the weather.
-He launches the BBP app, logs in, and starts recording his trip allowing the automatic collection of data, both to check path and weather conditions.
-Once he has finished his trip, he stops the recording and after little bit he watches the app his trip summary: the path map; the total distance traveled; 
-the average, maximum and minimum speed; maximum, average and minimum altitude excursion; weather conditions.
+Registered user "Alessandro" is preparing for his weekly training session. He wants to track his performance, including its correlation with weather conditions.
+He starts recording his activity allowing automatic collection of data for both check path and weather conditions tracking.
+Once he has finished his trip, he stops the recording and after a little bit he views the trip summary on the app: the path map; the total distance traveled; 
+the average, maximum and minimum speed; maximum, average and minimum altitude; and the weather conditions.
 \end{flushleft}
 
-\paragraph{[SC13] Automatic path information update } \phantomsection\label{sc:SC13}
+% TODO: review this
+\paragraph{[SC13] Route score assignment } \phantomsection\label{sc:SC13}
 \begin{flushleft}
-Registered user "Carlo" goes to work by bike, he logs in the app and starts the trip activity, giving permission to the app for automatically record the ride.
-Almost at the end of the ride he goes over a pothole, so when he arrives at work he checks the BBP app to see whether the pothole has been detected or not.
-He notices that there are two potholes detected: one approximately in the middle of the path, and another one near his work building.
-Since he never encountered a pothole in the middle of the path, he selects it and discards it as a false positive.
-Then he selects the pothole near his work building, confirms it and adds an optional note to be more detailed.
+Registered user "Anna" started and completed her activity with the bicycle.
+Upon completion, she receives from the app the summary of the activity and a small form to sore the route.
+She selects the score she wants to give and submits it.
 \end{flushleft}
 
-\paragraph{[SC14] Manual path information update 1 } \phantomsection\label{sc:SC14}
+\paragraph{[SC14] Automatic path information update } \phantomsection\label{sc:SC14}
+\begin{flushleft}
+Registered user "Carlo" started an activity with automatic monitoring.
+Almost at the end of the ride, he rode over a pothole.
+When he arrives at work he checks the BBP app to see whether the pothole has been detected or not.
+He notices that there two potholes were detected: one approximately in the middle of the path, and another one near his work building.
+Since he didn't encountered a pothole in the middle of the path, he selects it and discards it.
+He then selects the pothole near his work building, confirms it and adds an optional note to be more detailed.
+\end{flushleft}
+
+\paragraph{[SC15] Manual path information update 1 } \phantomsection\label{sc:SC15}
 \begin{flushleft}
 Registered user "Bianca" is riding a popular bike path when she notices that a stretch, previously marked as "Optimal", is now blocked by unreported construction. 
-She decides to alert the community: so she stops and reports the problem on the BBP app: she specifies the bike path, the type of problem, the problem position and 
-adds also an optional textual note to be more detailed, then submits the report, receiving an acknowledgement
+She decides to alert the community: she stops and reports the problem on the BBP app by specifying the bike path, the type of problem, the problem position.
+She also adds an optional textual note for more detailed, then submits the report, receiving an acknowledgement few seconds before. 
 \end{flushleft}
 
-\paragraph{[SC15] Manual path information update 2 } \phantomsection\label{sc:SC15}
+\paragraph{[SC16] Manual path information update 2 } \phantomsection\label{sc:SC16}
 \begin{flushleft}
-Registred user "Edoardo" is riding along a path where a pothole had been reported the previous week. 
-He notices that the pothole has been fixed, so he selects the pothole mark on the map and switches its status as resolved.
-After a few hours, he decides to control if the mark on the map has been removed, and finds out that the pothole mark disappeared.
+Registered user "Edoardo" is riding along a path where a pothole had been reported the previous week. 
+He notices that the pothole has been fixed, so he selects the pothole icon on the map and switches its status to Resolved.
+After a few hours, he decides to check if the icon on the map has been removed, and finds out that the pothole mark disappeared.
 \end{flushleft}
 
-\paragraph{[SC16] Historical performance analysis } \phantomsection\label{sc:SC16}
+\paragraph{[SC17] Historical performance analysis } \phantomsection\label{sc:SC17}
 \begin{flushleft}
 Registered User "Alessandra", after months of using BBP, wants to analyze her performance progress. 
-She opens the BBP app, logs in, opens the relative section and looks at the list of all her saved trips.
-She filters the list by "Last month" and looks at the aggregated graph showing her average speed during the whole month and the total distance traveled.
-Then she searches for a specific trip she did two months ago to understand if she improved.
+She opens the Trip History app section and looks at the list of all her saved trips.
+She filters the list by "Last month" and looks at the aggregated graph showing her average speed and the total distance traveled for that period.
+Then she searches for a specific activity she completed two months ago to check for improvements.
 \end{flushleft}
 
-\paragraph{[SC17] Trip deletion} \phantomsection\label{sc:SC17}
+\paragraph{[SC18] Trip deletion} \phantomsection\label{sc:SC18}
 \begin{flushleft}
-Registred user "Caterina" has an accident during last recorded trip, and therefore the performances recorded are not truthful.
-So she opens the BBP app, goes in the trip history section and searches for the trip she wants to delete, once she founds it
-she select the option to delete it, she confirms that she wants to do that and then the trip is deleted.  
+Registered user "Caterina" has an accident during her last recorded trip, and therefore the recorded performances are inaccurate.
+She opens the BBP app, goes to the Activity History section and searches for the trip she wants to delete.
+Once she finds it, she selects the option to delete it, she confirms that she wants to do that and then the trip is deleted.  
 \end{flushleft}
