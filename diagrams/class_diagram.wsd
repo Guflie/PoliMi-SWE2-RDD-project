@@ -1,0 +1,130 @@
+@startuml Domain Class Diagram
+
+' switch to std UML notation for visibility
+skinparam classAttributeIconSize 0
+
+hide circle
+
+' --- Abstract Class ---
+abstract class "PublishableInformation" as pi {
+  - user : User
+  + timestamp : datetime 
+}
+
+' --- Enumerations ---
+' I dont' know if giving this effort on classifyng the cases is woth or not
+enum "ObstacleType" as ot << enumeration >> { }
+
+' Same thing as before
+enum "StatusLevel" as sl << enumeration >> { }
+
+' --- Classes ---
+class "GeoPoint" as gp {
++ latitude : double
++ longitude : double
++ address : string
+}
+
+
+class "User" as u {
+'  searchRoute(origin: String, dest: String)
+'  viewMap()
+}
+
+class "RegisteredUser" as ru {
+- email : string
+- passwordHash : string
+- name : string
+- surname : string
+- birthDate : date
+'+ modifyProfile()
+'+ insertManualReport()
+'+ confirmDetection()
+'+ automaticMonitor
+}
+
+class "RUTrip" as rut {
+'  startTime: DateTime
+'  endTime: DateTime
+- avgSpeed : float
+- maxSpeed : float
+- minSpeed : float
+}
+
+class "UUTrip" as ut {
+- startingDatetime : datetime
+- endingDatetime : datetime
+}
+
+class "MeteorologicalInfo" as mi {
++ temperature: float 
++ windSpeed: float
++ condition: string
++ humidityPerc: int
+}
+
+class "SensorData" as sd {
++ timestamp: DateTime
++ accelerometerX: Float
++ accelerometerY: Float
++ accelerometerZ: Float
++ gpsLocation: GeoPoint
+}
+
+class "BikePath" as bp {
+'  currentScore: Float
+'  calculateScore()
+- startPoint: GeoPoint
+- endPoint: GeoPoint
+- totalLenght : float
+- pathCoordinates: List<GeoPoint>
+}
+
+class "Obstacle" as o {
++ type: ObstacleType
++ description: String
+}
+
+class "RouteStatus" as rs {
++ status: StatusLevel
+}
+
+entity "MappingExtrenalSystem" as ms << Entity >>{
+'  represent this as an actor?
+}
+
+entity "WeatherExternalSystem" as ws << Entity >> {
+
+}
+
+' --- Relationships ---
+
+' Inheritance
+u <|-- ru
+ut <|-- rut
+pi <|- o
+pi <|-- rs
+
+u "0...*" -> "1" ut : do
+ru "0...*" -> "1" rut : record
+
+rut "0...*  " -- "1" mi
+rut "0...*" -- "1  " sd
+
+ut "1" - "0...*" bp
+
+bp "0...*" o-> "1 " pi : contain
+
+rut "0...1" -> "1" pi : create
+
+bp "1" <- "0...*" ms : create
+
+bp  o--> gp
+o o-> gp
+
+mi <-- ws : create
+
+o ..> ot : <<uses>>
+rs ..> sl : <<uses>>
+
+@enduml
