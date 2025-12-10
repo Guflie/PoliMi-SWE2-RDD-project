@@ -29,7 +29,7 @@
                 \item The person downloads the BBP, opens it and starts the creation of an account
                 \item The system asks to the user to fill out a form with the following personal information: name, surname, birth date, geneder, email, password; the systems also asks to accept the privacy terms
                 \item The person fills out the questionare and submits it
-                \item The system verifies that the email address is valid and that it's not already been used, then it sends a verification email containing a link to verify the email address, which expires in 1 hour
+                \item The system checks the information submitted and sends a verification email containing a link to verify the email address, which expires in 1 hour
                 \item The person receives the email and opens the link to confirm the email
                 \item The system sends an acknowledgement of successful account creation
             \end{enumerate}
@@ -37,7 +37,7 @@
             \end{minipage}
         \\
         \hline
-        Exit Condition & The account is successfully created \\
+        Exit Condition & The account is successfully created if the information are correct. If not, an error message is sent and the account isn't created. \\
         \hline
         Exception & 
         \begin{minipage}{0.7\textwidth}
@@ -75,14 +75,14 @@
             \begin{enumerate}
                 \item The user opens the BBP app and the login form is shown to it
                 \item The user types email and password, then submits the form
-                \item The system receives the user's login info, checks that the information sent corresponds to an existing account
+                \item The system receives the user's login info and checks the information
                 \item The system retrives the information to build the homepage for that account and sends it
             \end{enumerate}
             \smallskip
             \end{minipage}
         \\
         \hline
-        Exit Condition & The user logs into its account \\
+        Exit Condition & The user logs into its account if submits the correct information. If not, the user can-t login and an error message is displayed. \\
         \hline
         Exception & 
         \begin{minipage}{0.7\textwidth}
@@ -120,13 +120,13 @@
             \begin{enumerate}
                 \item The user opens his profile page and selects the option to modify the account
                 \item The user selects the attribute to modify, types the new value and sends it
-                \item The system modifies the attributes and sends an acknowledgment
+                \item The system checks the new values and sends an acknowledgement
             \end{enumerate}
             \smallskip
             \end{minipage}
         \\
         \hline
-        Exit Condition & The account profile is updated \\
+        Exit Condition & The account profile is updated. If not, an error meassge is diplayed and the account isn't updated. \\
         \hline
         Exception &
         \begin{minipage}{0.7\textwidth}
@@ -163,8 +163,7 @@
                 \item The user clicks the "Reset Password" option in the login page and sends a reset password request
                 \item The system receives the request and sends a form in which the user must specify the account email
                 \item The user receives the form, enters the account email and submits it
-                \item The system receives the account email, checks whether an account with that email exists or not, 
-                and if it finds it sends an email to that address with a link to reset the password that expires in 1 hour
+                \item The system receives the account email, checks the email address and sends an email to that address with a link to reset the password that expires in 1 hour
                 \item The user receives the email, opens the link, types the new password two times and sends the new password
                 \item The system receives the new password, updates the account password and sends an update confirmation
                 \item The user receives the update confirmation
@@ -173,7 +172,8 @@
             \end{minipage}
         \\
         \hline
-        Exit Condition & The user can log-in with the new password \\
+        Exit Condition & The user can log-in with the new password if the information submitted are truthfull and are sent within expiration time. 
+        If the informations are not correct, the systems send an error messagge and the password isn't updated.\\
         \hline
         Exception &
             \begin{minipage}{0.7\textwidth}
@@ -221,7 +221,7 @@
             \end{minipage}
         \\
         \hline
-        Exit Condition & The account is deleted \\
+        Exit Condition & The account is deleted. If the confirmation isn't given within the expiration times, the account isn't deleted. \\
         \hline
         Exception & 
         \begin{minipage}{0.7\textwidth}
@@ -265,7 +265,7 @@
             \end{minipage}
         \\
         \hline
-        Exit Condition & A path is displayed to the user \\
+        Exit Condition & A path, if existing, is displayed to the user. Otherwise see UC\ref{UC:UC7}. \\
         \hline
         Exception & 
         \begin{minipage}{0.7\textwidth}
@@ -293,7 +293,7 @@
         \hline
         Actors & User, External Mapping Service \\
         \hline
-        Entry Condition & True \\ % consider if this is something that can be categorized as an entry condition
+        Entry Condition & True \\
         \hline
         Event Flow & 
             \begin{minipage}{0.7\textwidth}
@@ -415,18 +415,15 @@
                 \item The user selects the route he wants to ride on, selects the option to automatically collect data and starts the activity
                 \item The user's personal device samples user position every second and stores it
                 \item Once finished the user stops the activity and the data collected are sent to the system
-                \item The system calculates some metrics about the user performances (total distance traveled, average speed, maximum speed,
-                minumum speed, maximum altitude excursion, average altitude excursion)
                 \item The system sends a request to retirve weather conditions during the activty to a third-part Weather Service
                 \item The Weather Service responds to the system with the requested data
-                \item The system send to the user the computed informations mentioned in \textit{4.} and \textit{5.}, plus the 
-                map showing the path traveled
+                \item The system sends to the user the activity summary, waether conditions plus the map showing the path traveled
             \end{enumerate}
             \smallskip
             \end{minipage}
         \\
         \hline
-        Exit Condition & The user completed the activity with related metrics \\
+        Exit Condition & The user completed the activity and activity summary is shown \\
         \hline
         Exception & 
         \begin{minipage}{0.7\textwidth}
@@ -530,7 +527,7 @@
             \smallskip
             \begin{enumerate}
                 \item The user starts an activity with automatic issue detection enabled
-                \item The BBP app collects data from the user's device sensors and analyzes them in real-time to detect potential issues along the route
+                \item The BBP app collects data from the user's device sensors and analyzes them
                 \item When the user finishes the activity, the BBP app shows to the user a list of all problems detected and their location, asking the user confirmation for each one of them
                 \item The user confirmes whether the problems detected are real issues or false positives
                 \item The BPP app sends to the system the confirmed issues
@@ -601,7 +598,7 @@
             \begin{enumerate}
                 \item The user opens the Acivity History and searches for the trip to delete
                 \item The user selects the trip, selects the option to delete it and confirms the deletion.
-                \item The system recevies the deletion request, deletes the activity and sends an acknowledgement to the user.
+                \item The system recevies the deletion request and sends an acknowledgement to the user.
             \end{enumerate}
             \smallskip
             \end{minipage}
