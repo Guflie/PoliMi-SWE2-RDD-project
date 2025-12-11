@@ -105,7 +105,7 @@ ut <|-- rut
 pi <|- o
 pi <|-- rs
 
-u "0...*" -> "1" ut : do
+u "0...*    " -> "1  " ut :   do
 ru "0...*" -> "1" rut : record
 
 rut "0...*  " -- "1" mi
@@ -113,14 +113,16 @@ rut "0...*" -- "1  " sd
 
 ut "1" - "0...*" bp
 
-bp "0...*" o-> "1 " pi : contain
+bp "0...* " o-> "1  " pi : contain
 
-rut "0...1" -> "1" pi : create
+rut "0...*" -> "1" pi : generate
+
+ru --> pi 
 
 bp "1" <- "0...*" ms : create
 
 bp  o--> gp
-o o-> gp
+o o-> gp : testtestesttest
 
 mi <-- ws : create
 
