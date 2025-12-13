@@ -14,6 +14,7 @@
 \subsubsection*{[UC1] Account creation}
 \FloatBarrier
 \begin{table}[ht!]
+    \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{Account creation} \\
@@ -37,7 +38,14 @@
             \end{minipage}
         \\
         \hline
-        Exit Condition & The account is successfully created if the information are correct. If not, an error message is sent and the account isn't created. \\
+        Exit Condition & 
+            \begin{minipage}{0.7\textwidth}
+            \smallskip
+            The account is successfully created if the information are correct. 
+            If not, an error message is sent and the account isn't created. 
+            \smallskip
+            \end{minipage}
+        \\
         \hline
         Exception & 
         \begin{minipage}{0.7\textwidth}
@@ -61,6 +69,7 @@
 \subsubsection*{[UC2] User login}
 \FloatBarrier
 \begin{table}[ht!]
+    \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{User login} \\
@@ -82,7 +91,15 @@
             \end{minipage}
         \\
         \hline
-        Exit Condition & The user logs into its account if submits the correct information. If not, the user can-t login and an error message is displayed. \\
+        Exit Condition &
+            \begin{minipage}{0.7\textwidth}
+            \smallskip
+            The user logs into its account if submits the correct information. 
+            If not, the user can-t login and an error message is displayed.
+            \smallskip
+            \end{minipage}
+         
+        \\
         \hline
         Exception & 
         \begin{minipage}{0.7\textwidth}
@@ -106,6 +123,7 @@
 \subsubsection*{[UC3] Account information update}
 \FloatBarrier
 \begin{table}[ht!]
+    \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{Account information update} \\
@@ -126,7 +144,13 @@
             \end{minipage}
         \\
         \hline
-        Exit Condition & The account profile is updated. If not, an error meassge is diplayed and the account isn't updated. \\
+        Exit Condition & 
+            \begin{minipage}{0.7\textwidth}
+            \smallskip
+            The account profile is updated. If not, an error meassge is diplayed and the account isn't updated. 
+            \smallskip
+            \end{minipage}
+        \\
         \hline
         Exception &
         \begin{minipage}{0.7\textwidth}
@@ -148,6 +172,7 @@
 \subsubsection*{[UC4] Password account reset}
 \FloatBarrier
 \begin{table}[ht!]
+    \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{Password account reset}\\
@@ -172,8 +197,15 @@
             \end{minipage}
         \\
         \hline
-        Exit Condition & The user can log-in with the new password if the information submitted are truthfull and are sent within expiration time. 
-        If the informations are not correct, the systems send an error messagge and the password isn't updated.\\
+        Exit Condition &
+            \begin{minipage}{0.7\textwidth}
+            \smallskip
+            The user can log-in with the new password if the information submitted are truthfull 
+            and are sent within expiration time. If the informations are not correct, the systems send an error 
+            messagge and the password isn't updated.    
+            \smallskip           
+            \end{minipage}
+        \\
         \hline
         Exception &
             \begin{minipage}{0.7\textwidth}
@@ -197,6 +229,7 @@
 \subsubsection*{[UC5] Account deletion}
 \FloatBarrier
 \begin{table}[ht!]
+    \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{Account deletion} \\
@@ -221,7 +254,13 @@
             \end{minipage}
         \\
         \hline
-        Exit Condition & The account is deleted. If the confirmation isn't given within the expiration times, the account isn't deleted. \\
+        Exit Condition &
+            \begin{minipage}{0.7\textwidth}
+            \smallskip
+            The account is deleted. If the confirmation isn't given within the expiration times, the account isn't deleted. 
+            \smallskip
+            \end{minipage}
+        \\
         \hline
         Exception & 
         \begin{minipage}{0.7\textwidth}
@@ -244,6 +283,7 @@
 \subsubsection*{[UC6] Route planning with route match}
 \FloatBarrier
 \begin{table}[ht!]
+    \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{Route planning with route match} \\
@@ -287,6 +327,7 @@
 \subsubsection*{[UC7] Route planning without route match}
 \FloatBarrier
 \begin{table}[ht!]
+    \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{Route planning without route match} \\
@@ -324,6 +365,7 @@
 \subsubsection*{[UC8] Trip activity for unregistered user}
 \FloatBarrier
 \begin{table}[ht!]
+    \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{Trip activity} \\
@@ -361,6 +403,7 @@
 \subsubsection*{[UC9] Trip activity for registered user}
 \FloatBarrier
 \begin{table}[ht!]
+    \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{Trip activity} \\
@@ -400,6 +443,7 @@
 \subsubsection*{[UC10] Automatic trip monitoring}
 \FloatBarrier
 \begin{table}[ht!]
+    \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{Automatic trip monitoring} \\
@@ -447,6 +491,7 @@
 \subsubsection*{[UC11] Manual route problem report}
 \FloatBarrier
 \begin{table}[ht!]
+    \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{Manual route problem report} \\
@@ -481,6 +526,7 @@
 \subsubsection*{[UC12] Route problem fixup report}
 \FloatBarrier
 \begin{table}[ht!]
+    \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{Route problem fixup report} \\
@@ -514,6 +560,7 @@
 \subsubsection*{[UC13] Automatic route problem detection and report}
 \FloatBarrier
 \begin{table}[ht!]
+    \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{Automatic route problem detection and report} \\
@@ -551,6 +598,7 @@
 \subsubsection*{[UC14] User's activity history consultation}
 \FloatBarrier
 \begin{table}[ht!]
+    \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{|l|l|}
         \hline
         Name & \textbf{User's activity history consultation} \\
