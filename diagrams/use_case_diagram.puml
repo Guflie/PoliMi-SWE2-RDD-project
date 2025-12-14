@@ -1,0 +1,67 @@
+@startuml Use Case Diagram
+left to right direction
+
+' --- Actors ---
+:User: as u
+:Registred user: as ru
+
+:Mapping system: as ms
+:Weather system: as ws
+
+u <|--- ru
+
+' --- Use Cases for User ---
+(Account registration [UC1]) as uc1
+u --- uc1
+
+(Trip planning [UC6]) as uc6
+u --- uc6
+
+(Trip unregistered user [UC8]) as uc8
+u --- uc8
+uc8 ...> uc6 :  <<include>>
+
+(Route creation [UC7]) as uc7
+uc7 ...> uc6 : <<extends>>
+uc7 --- ms
+
+
+' --- Use Cases for Registered User ---
+(Login [UC2]) as uc2
+ru --- uc2
+
+(Account modification [UC3]) as uc3
+ru --- uc3
+
+(Password reset [UC4]) as uc4
+ru --- uc4
+
+(Account deletion [UC5]) as uc5
+ru --- uc5
+
+(Trip registered user [UC9]) as uc9
+ru --- uc9
+uc8 <|- uc9
+
+(Automatic trip monitoring [UC10]) as uc10
+ru --- uc10
+uc9 <. uc10 : <<extends>>
+uc10 - ws
+
+(Manual route problem report [UC11]) as uc11
+ru --- uc11
+
+(Route fixup report [UC12]) as uc12
+ru --- uc12
+
+(Automatic route problem report [UC13]) as uc13
+ru --- uc13
+uc13 ...> uc10 : <<include>>  
+
+(Activity history consulatation [UC14]) as uc14
+ru --- uc14
+
+(Activity deletion from history [UC15]) as uc15
+ru --- uc15
+
+@enduml

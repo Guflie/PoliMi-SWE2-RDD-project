@@ -1,0 +1,87 @@
+@startuml [UC1] Account creation
+title [UC1] Account Creation
+
+actor User as U
+participant "BBP System" as S
+
+autonumber
+'----------------------------------------
+activate U
+
+U -> S: Starts account creation
+
+activate S
+
+S --> U: Sends account registration form
+
+U -> S: Submits registration form (name, surname, birth date, geneder, email address, password)
+
+S -> S: Verifies submited email address
+
+opt Invalid email address
+    S --> U : Invalid email address warning
+end
+
+opt Email address submitted already used
+    S --> U : Email address already used warning
+end
+
+S --> U: Sends email with confirmation link
+
+alt normal procedure
+
+U -> S : Confirms account creation
+
+S --> U : Acknowledge account creation
+
+else
+end
+
+alt **Invalid Email / Data Exception**
+
+    S --> App: Return validation error
+    App --> U: Display "Invalid email address" warning
+    note right of U: Form cannot be submitted
+
+else **Email Already Used Exception**
+
+    S -> S: Check if email is already in use
+    S --> App: Return "Email already used" status
+    App --> U: Display "Account already exists" message
+
+else **Successful Submission**
+
+    S -> S: Generate verification link
+    S -> Email: Send verification email (Link)
+
+    deactivate S
+
+    Email --> U: Delivers email with verification link
+
+    activate S #pink
+    group **Email Confirmation Window** (Expires in 1 hour)
+
+        U -> S: Clicks verification link (Link)
+
+        activate S
+        S -> S: Validate link and expiration
+
+        alt **Link Valid**
+
+            S -> S: Mark account as verified and active
+            S --> U: Acknowledgment of successful creation
+            note right of U: **Exit Condition Met**
+
+        else **Link Expired Exception**
+
+            S -> S: Abort creation, cancel submitted data
+            S --> U: Display "Verification link expired" message
+
+        end
+
+        deactivate S
+    end
+    deactivate S
+end
+
+@enduml
