@@ -1,14 +1,17 @@
-@startuml Domain Class Diagram
+@startuml domain_class_diagram
+!theme plain
 
 ' switch to std UML notation for visibility
 skinparam classAttributeIconSize 0
+
 
 hide circle
 
 ' --- Abstract Class ---
 abstract class "PublishableInformation" as pi {
-  - user : User
-  + timestamp : datetime 
++ user : User
++ path : BikePath
++ timestamp : datetime 
 }
 
 ' --- Enumerations ---
@@ -25,35 +28,27 @@ class "GeoPoint" as gp {
 + address : string
 }
 
-
-class "User" as u {
-'  searchRoute(origin: String, dest: String)
-'  viewMap()
-}
+class "User" as u { }
 
 class "RegisteredUser" as ru {
-- email : string
-- passwordHash : string
-- name : string
-- surname : string
-- birthDate : date
-'+ modifyProfile()
-'+ insertManualReport()
-'+ confirmDetection()
-'+ automaticMonitor
++ email : string
++ passwordHash : string
++ name : string
++ surname : string
++ birthDate : date
 }
 
 class "RUTrip" as rut {
-'  startTime: DateTime
-'  endTime: DateTime
-- avgSpeed : float
-- maxSpeed : float
-- minSpeed : float
++ avgSpeed : float
++ maxSpeed : float
++ minSpeed : float
++ altitudeDiff : float
++ isAutomaticallyMonitored : bool
 }
 
 class "UUTrip" as ut {
-- startingDatetime : datetime
-- endingDatetime : datetime
++ startingDatetime : datetime
++ endingDatetime : datetime
 }
 
 class "MeteorologicalInfo" as mi {
@@ -72,12 +67,11 @@ class "SensorData" as sd {
 }
 
 class "BikePath" as bp {
-'  currentScore: Float
-'  calculateScore()
-- startPoint: GeoPoint
-- endPoint: GeoPoint
-- totalLenght : float
-- pathCoordinates: List<GeoPoint>
++ score : float
++ startPoint: GeoPoint
++ endPoint: GeoPoint
++ totalLenght : float
++ pathCoordinates: List<GeoPoint>
 }
 
 class "Obstacle" as o {
@@ -98,35 +92,39 @@ entity "WeatherExternalSystem" as ws << Entity >> {
 }
 
 ' --- Relationships ---
+' Following relationships are listed in this way in order to make the diagram clearer
 
-' Inheritance
-u <|-- ru
-ut <|-- rut
-pi <|- o
-pi <|-- rs
+ms "*" ->  bp : "+creates "
 
-u "0...*    " -> "1  " ut :   do
-ru "0...*" -> "1" rut : record
 
-rut "0...*  " -- "1" mi
-rut "0...*" -- "1  " sd
+bp "*" --> " 1" ut : "+involves "
 
-ut "1" - "0...*" bp
+rut --|> ut
 
-bp "0...* " o-> "1  " pi : contain
+u "*" --> "1 " ut : "+does"
 
-rut "0...*" -> "1" pi : generate
+ru "*" -> "1 " rut : "+records  "
 
-ru --> pi 
+u <|- ru
 
-bp "1" <- "0...*" ms : create
+pi "1    " -- "*" bp : "+related"
 
-bp  o--> gp
-o o-> gp : testtestesttest
+pi "1" -- "0...*      " rut : "+generates"
 
-mi <-- ws : create
+gp <--o "*" bp : "+contains"
 
-o ..> ot : <<uses>>
-rs ..> sl : <<uses>>
+rs --|> pi
+o --|> pi
+
+sl ..> rs : <<uses>>
+ot ..> o : <<uses>>
+
+o "1 " --> gp : "+located"
+
+pi "1 " <-- " *  " ru : "+publishes"
+
+mi "1 " <-- "0...* " rut : " +contains"
+ws " * " --> mi : "+creates"
+rut "0...*" *- "  1" sd : "+generates"
 
 @enduml
