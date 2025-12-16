@@ -84,11 +84,11 @@ class "RouteStatus" as rs {
 }
 
 entity "MappingExtrenalSystem" as ms << Entity >>{
-'  represent this as an actor?
++ getPath(startingPoint: GeoPoint, endingPoint: GeoPoint): List<GeoPoint>
 }
 
 entity "WeatherExternalSystem" as ws << Entity >> {
-
++ getWeatherInfo(location: GeoPoint): List<string>
 }
 
 ' --- Relationships ---
