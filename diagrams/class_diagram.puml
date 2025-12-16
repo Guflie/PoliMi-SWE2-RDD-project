@@ -68,10 +68,8 @@ class "SensorData" as sd {
 
 class "BikePath" as bp {
 + score : float
-+ startPoint: GeoPoint
-+ endPoint: GeoPoint
-+ totalLenght : float
 + pathCoordinates: List<GeoPoint>
++ totalLenght : float
 }
 
 class "Obstacle" as o {
