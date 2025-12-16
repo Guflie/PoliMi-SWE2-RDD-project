@@ -4,10 +4,6 @@
 \pagebreak
 
 \subsubsection{Domain Class Diagram}
-    %come identifichiamo uno status per un percorso? in base al numero di ostacoli? gli associamo un colore, vero? ad esempio ottimale-verde.
-    %volendo si può "complicare" molto di più il domain class diagram, ad esempio aggiungendo dettagli come profile_picture, età allo user (cosa che personalmente farei).
-    %tuttavia è quello che vogliamo fare? 
-    %inoltre, mancano altre classi? Ti viene in mente qualcosa da aggiungere?
 
     \begin{figure}[h!]
         \centering
@@ -17,29 +13,18 @@
     \end{figure}
 
 
-    Figure \ref{fig:domain_model} shows the domain class diagram. The main architectural choices are explained below:
-
+    Figure \ref{fig:domain_model} shows the domain class diagram. The following points outline some choices made while modeling the domain:
+   
     \begin{itemize}
-        \item \textbf{User Generalization:} To avoid duplication and facilitate future scalability, the \texttt{User} superclass has been 
-        introduced. It encapsulates basic functionality accessible to everyone, such as route search and map viewing. The \texttt{RegisteredUser}
-        class extends this foundation, adding authentication data and the main writing functionality: \texttt{recordTrip()}, 
-        \texttt{insertManualReport()}, and \texttt{confirmDetection()}. This structure allows for easy extension to future roles such as 
-        "Administrator" or "Moderator."
-        
-        \item \textbf{Information Abstraction and Scoring:} The abstract \texttt{PublishableInformation} class was created to logically group all 
-        alerts (whether \texttt{RouteStatus} or \texttt{Obstacle}). This polymorphic approach greatly simplifies the calculation of the Path 
-        Score: the system can iterate over a generic list of confirmed information associated with a trip to calculate its score, without 
-        having to use separate logic for each type of alert.
-        
-        \item \textbf{Sensor Scalability:} Although the assignment specifically mentions potholes, the model correctly links the raw 
-        \texttt{SensorData} data to the generic \texttt{Obstacle} class via the "Detects (Candidate)" dependency. This design ensures that the 
-        system can evolve to detect other types of anomalies in the future without changing the core data model.
-        
-        \item \textbf{Trip Composition and Data Lifecycle:} There is a composition relationship between \texttt{Trip} and its internal data: 
-        \texttt{WeatherInfo} and \texttt{SensorData}. This indicates that this data is closely tied to the trip lifecycle: if a user decides to 
-        delete a trip from their history, the associated weather data and raw sensor data will also be automatically removed, preventing data
-        fragmentation and ensuring database cleanliness.
+        \item \textbf{User \& Trip generalizations:} two superclasses were introduced to standardize and encapsulate the core functionalities shared by a
+        ll elements. By contrast, their specialization classes are responsible for capturing and managing the specific, differentiated relationships that 
+        these elements maintain with the rest of the domain components.
+
+        \item \textbf{Publishable Info abstraction:} the introduction of this abstraction was motivated by the intent to make the defined set of publishable 
+        information highly adaptable, in order to maximize flexibility for future extensions about publishable informations.
+ 
     \end{itemize}
+
 \pagebreak
 
 \subsubsection{State Diagrams}
