@@ -123,7 +123,7 @@ o "1 " --> gp : "+located"
 
 pi "1 " <-- " *  " ru : "+publishes"
 
-mi "1 " <-- "0...* " rut : " +contains"
+mi "1 " <--* "0...* " rut : " +contains"
 ws " * " --> mi : "+creates"
 rut "0...*" *- "  1" sd : "+generates"
 
