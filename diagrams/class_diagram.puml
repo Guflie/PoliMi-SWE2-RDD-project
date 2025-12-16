@@ -63,6 +63,10 @@ class "SensorData" as sd {
 + accelerometerX: Float
 + accelerometerY: Float
 + accelerometerZ: Float
+}
+
+class "PositionData" as pd {
++timestamp : DateTime
 + gpsLocation: GeoPoint
 }
 
@@ -123,6 +127,7 @@ pi "1 " <-- " *  " ru : "+publishes"
 
 mi "1 " <--* "0...* " rut : " +contains"
 ws " * " --> mi : "+creates"
-rut "0...*" *- "  1" sd : "+generates"
+rut "0...*" *-> "  1" sd : "+generates"
+rut "0...*" *--> "  1" pd : "+generates"
 
 @enduml
