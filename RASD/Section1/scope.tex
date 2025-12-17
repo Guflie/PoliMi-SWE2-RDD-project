@@ -32,21 +32,27 @@ user-confirmed data.
 \subsubsection{World phenomena}
 %Eventi che accadono nel mondo reale, che il sistema non può né controllare né osservare. Sono le intenzioni o le azioni fisiche degli utenti.
 \begin{itemize}
-    \item \textbf{WP1:} The registered user modifies an attribute.
-    \item \textbf{WP2:} The registered user forgots the password.
-    \item \textbf{WP3:} The user inserts the new password.
-    \item \textbf{WP4:} The user searches for a path.
-    \item \textbf{WP5:} The user inserts starting and destination points.
-    \item \textbf{WP6:} The user stops to cycling.
-    \item \textbf{WP7:} The registered user evaluates a path.
-    \item \textbf{WP8:} The registered user's personal device samples sensors data.
-    \item \textbf{WP9:} The external weather service is unavailable.
-    \item \textbf{WP10:} The registered user encounters a problem along a path.
-    \item \textbf{WP11:} The registered user inserts a route problem information
-    \item \textbf{WP12:} The registered user encounters a fixup problem.
-    \item \textbf{WP13:} The registered user changes the problem status to "Resolved".
-    \item \textbf{WP14:} The registered user confirms detected problems.
-    \item \textbf{WP15:} The registered user denies detected problems
+    \item \textbf{WP1:} The user fills up the registration form with its personal information.
+    \item \textbf{WP2:} The user inserts an invalid email address in the registration form.
+    \item \textbf{WP3:} The user inserts an email address in the registration form already used for another account.
+    \item \textbf{WP4:} The registered user inserts the account credentials into the login form.
+    \item \textbf{WP5:} The registered user inserts the wrong credentials into the login form.
+    \item \textbf{WP6:} The registered user modifies an attribute.
+    \item \textbf{WP7:} The registered user forgots the password.
+    \item \textbf{WP8:} The registered user inserts the new password.
+    \item \textbf{WP9:} The user searches for a path.
+    \item \textbf{WP10:} The user inserts starting and destination points.
+    \item \textbf{WP11:} The user stops to cycling.
+    \item \textbf{WP12:} The registered user evaluates a path.
+    \item \textbf{WP13:} The registered user's personal device samples sensors data.
+    \item \textbf{WP14:} The external weather service is unavailable.
+    \item \textbf{WP15:} The external mapping system is unavailable.
+    \item \textbf{WP16:} The registered user encounters a problem along a path.
+    \item \textbf{WP17:} The registered user inserts a route problem information
+    \item \textbf{WP18:} The registered user encounters a fixup problem.
+    \item \textbf{WP19:} The registered user changes the problem status to "Resolved".
+    \item \textbf{WP21:} The registered user confirms automatically detected problems.
+    \item \textbf{WP22:} The registered user denies automatically detected problems
 \end{itemize}
 
 \subsubsection{Shared phenomena}
@@ -54,58 +60,43 @@ user-confirmed data.
 %Azioni che l'utente (mondo) compie sull'interfaccia del sistema. Il sistema deve reagirvi, ma non può avviarle. Sono gli input dell'utente.
 \begin{itemize}
     \item \textbf{SP\_WC1:} The user registers itself.
-    \item \textbf{SP\_WC2:} The user inserts an invalid email address in the registration form.
-    \item \textbf{SP\_WC3:} The user inserts an email address in the registration form already used for another account.
-    \item \textbf{SP\_WC4:} The user fills up the registration form with its personal information.
-    \item \textbf{SP\_WC5:} The user accepts the privacy terms.
-    \item \textbf{SP\_WC6:} The user submits to the system the registration form.
-    \item \textbf{SP\_WC7:} The user confirms the email address through the given link.
-    \item \textbf{SP\_WC8:} The registered user inserts the account credentials into the login form.
-    \item \textbf{SP\_WC9:} The registered user inserts the wrong credentials into the login form.
-    \item \textbf{SP\_WC10:} The registered user send the login form to the system.
-    \item \textbf{SP\_WC11:} The registered user sends the attribute modification.
-    \item \textbf{SP\_WC12:} The registered user starts the procedure to reset the password.
-    \item \textbf{SP\_WC13:} The registered user submits the account email address during password recovery.
-    \item \textbf{SP\_WC14:} The registered user submits the wrong email address during password recovery.
-    \item \textbf{SP\_WC15:} The user opens the link to reset the password.
-    \item \textbf{SP\_WC16:} The registered user submits the new password.
-    \item \textbf{SP\_WC17:} The registered user starts the account deletion procedure.
-    \item \textbf{SP\_WC18:} The registered user confirms to the system the account deletion.
-    \item \textbf{SP\_WC19:} The user starts the search for a path in the app.
-    \item \textbf{SP\_WC20:} The user submits to the system the starting and destination points.
-    \item \textbf{SP\_WC21:} The user starts an activity.
-    \item \textbf{SP\_WC22:} The external mapping service sends to the system a list of paths
-    \item \textbf{SP\_WC23:} The user stops the ongoing activity.
-    \item \textbf{SP\_WC24:} The user resumes the stopped activity.
-    \item \textbf{SP\_WC25:} The user terminates the activity.
-    \item \textbf{SP\_WC26:} The registered user submits the path evaluation.
-    \item \textbf{SP\_WC27:} The registered user enables to automatically collect data during an activity.
-    \item \textbf{SP\_WC28:} The registered user's personal device sends to the system sampled data upon activity completition.
-    \item \textbf{SP\_WC29:} The external weather service sends to the system weather conditions for a given path.
-    \item \textbf{SP\_WC30:} The registered user submits a route problem information.
-    \item \textbf{SP\_WC31:} The registered user reports the path fixup.
-    \item \textbf{SP\_WC32:} The registered user submits detected problem confirmations.
-    \item \textbf{SP\_WC33:} The registered user submits detected problems denials.
-    \item \textbf{SP\_WC34:} The registered user sends to the user a request for its activity history.
-    \item \textbf{SP\_WC35:} The registered user asks to the system to delete an activity.
+    \item \textbf{SP\_WC2:} The user submits to the system the registration form.
+    \item \textbf{SP\_WC3:} The registered user sends the login form to the system.
+    \item \textbf{SP\_WC4:} The registered user sends the attribute modification to the system.
+    \item \textbf{SP\_WC5:} The registered user submits the new password.
+    \item \textbf{SP\_WC6:} The registered user confirms to the system the account deletion.
+    \item \textbf{SP\_WC7:} The user starts the search for a path in the app.
+    \item \textbf{SP\_WC8:} The user submits to the system the starting and destination points.
+    \item \textbf{SP\_WC9:} The user starts an activity.
+    \item \textbf{SP\_WC10:} The external mapping service sends to the system a list of paths
+    \item \textbf{SP\_WC11:} The user stops the ongoing activity.
+    \item \textbf{SP\_WC12:} The user resumes the stopped activity.
+    \item \textbf{SP\_WC13:} The user terminates the activity.
+    \item \textbf{SP\_WC14:} The registered user submits the path evaluation.
+    \item \textbf{SP\_WC15:} The registered user enables to automatically collect data during an activity.
+    \item \textbf{SP\_WC16:} The registered user's personal device sends to the system sampled data upon activity completition.
+    \item \textbf{SP\_WC17:} The external weather service sends to the system weather conditions for a given path.
+    \item \textbf{SP\_WC18:} The registered user submits a route problem information.
+    \item \textbf{SP\_WC19:} The registered user reports the path fixup.
+    \item \textbf{SP\_WC20:} The registered user submits detected problem confirmations.
+    \item \textbf{SP\_WC21:} The registered user submits detected problems denials.
+    \item \textbf{SP\_WC22:} The registered user sends to the user a request for its activity history.
+    \item \textbf{SP\_WC23:} The registered user asks to the system to delete an activity.
 \end{itemize}
 
 \paragraph{Machine controlled}
 %Azioni che il sistema (macchina) compie sull'interfaccia e che l'utente (mondo) può osservare. Sono gli output del sistema.
 \begin{itemize}
     \item \textbf{SP\_MC1:} The system sends to the user the registration form.
-    \item \textbf{SP\_MC2:} The system sends to the user the email containing the email address confirmation link.
-    \item \textbf{SP\_MC3:} The system sends to the registered user the login form.
-    \item \textbf{SP\_MC4:} The system sends the account's homepage to the registered user
-    \item \textbf{SP\_MC5:} The system asks to the registered user for which account it must reset the password
-    \item \textbf{SP\_MC6:} The system sends to the registered user an email containing the link for password recovery.
-    \item \textbf{SP\_MC7:} The system asks to the user confirmation about account deletion.
-    \item \textbf{SP\_MC8:} The system shows to the user a list of paths.
-    \item \textbf{SP\_MC9:} The system asks to an external mapping service for a list of paths
-    \item \textbf{SP\_MC10:} The system asks to the registered user to evaluate a path travelled during a completed activity.
-    \item \textbf{SP\_MC11:} The system asks for weather conditions to an external weather service.
-    \item \textbf{SP\_MC12:} The system shows to the registered user the activity summary with performances.
-    \item \textbf{SP\_MC13:} The system shows to the registered user the activity summary with performances and weather conditions.
-    \item \textbf{SP\_MC14:} The system asks confirmation to the registered user about detected problem during an activity
-    \item \textbf{SP\_MC15:} The system shows to the registered user the activity history of the user
+    \item \textbf{SP\_MC2:} The system sends to the registered user the login form.
+    \item \textbf{SP\_MC3:} The system asks to the registered user for which account it must reset the password
+    \item \textbf{SP\_MC4:} The system asks to the user confirmation about account deletion.
+    \item \textbf{SP\_MC5:} The system shows to the user a list of paths.
+    \item \textbf{SP\_MC6:} The system asks to an external mapping service for a list of paths
+    \item \textbf{SP\_MC7:} The system asks to the registered user to evaluate a path travelled during a completed activity.
+    \item \textbf{SP\_MC8:} The system asks for weather conditions to an external weather service.
+    \item \textbf{SP\_MC9:} The system shows to the registered user the activity summary with performances.
+    \item \textbf{SP\_MC10:} The system shows to the registered user the activity summary with performances and weather conditions.
+    \item \textbf{SP\_MC11:} The system asks confirmation to the registered user about detected problem during an activity.
+    \item \textbf{SP\_MC12:} The system shows to the registered user its activity history.
 \end{itemize}
