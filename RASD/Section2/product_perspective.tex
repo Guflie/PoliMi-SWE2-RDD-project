@@ -29,29 +29,6 @@
 
 \subsubsection{State Diagrams}
 
-% I think we should trim out this State Diagram, it's about an  entity which is not represented
-\begin{comment}
-    \textbf{User Session Lifecycle} 
-        
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{User_profile_lifecycle.pdf}
-        \caption{State diagram of a BBP system user's lifecycle}
-        \label{fig:user_lifecycle}
-    \end{figure}
-
-    The finite state diagram in Figure \ref{fig:user_lifecycle} models the \textbf{user session lifecycle} within the BBP system, defining how 
-    the user transitions from the anonymous browsing state to the fully operational one. The system is designed to ensure that all basic 
-    functionality, such as route search and map viewing, is immediately accessible, with a single initial state that converges 
-    on \texttt{Search\_Routes}, the universal entry point. From this anonymous browsing state, the user can choose to authenticate whether 
-    they are already logged in or not.
-    Once the \texttt{Logged\_In} state is reached, the user unlocks the contribution capabilities, which are critical to the system's value. 
-    This state serves as a hub, allowing the user to initiate trip tracking by moving to the \texttt{Tracking} state (when sensors are active)
-    or to proceed to \texttt{Reviewing\_Data}. Both contribution states are separated to reflect their high impact on resources (tracking) or
-    data consistency (auditing). The session can end by exiting \texttt{Search\_Routes} (for both anonymous and registered users) or by 
-    \texttt{Logout} from the operational state for the registered user.
-\end{comment}
-
     \textbf{Trip Lifecycle} 
 
     \begin{figure}[H]
