@@ -1,4 +1,4 @@
-@startuml domain_class_diagram
+@startuml domain_class_diagram_v2
 !theme plain
 
 ' switch to std UML notation for visibility
@@ -85,11 +85,11 @@ class "RouteStatus" as rs {
 + status: StatusLevel
 }
 
-entity "MappingExtrenalSystem" as ms << Entity >>{
+entity "MappingExtrenalService" as ms {
 + getPath(startingPoint: GeoPoint, endingPoint: GeoPoint): List<GeoPoint>
 }
 
-entity "WeatherExternalSystem" as ws << Entity >> {
+entity "WeatherExternalService" as ws {
 + getWeatherInfo(location: GeoPoint): List<string>
 }
 
