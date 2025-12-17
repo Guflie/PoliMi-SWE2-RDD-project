@@ -96,14 +96,14 @@ entity "WeatherExternalService" as ws {
 ' --- Relationships ---
 ' Following relationships are listed in this way in order to make the diagram clearer
 
-ms "*" ->  bp : "+creates "
+'ms "*" ->  bp : "+creates "
+bp <-- "*" ms : "+creates"
 
-
-bp "*" --> " 1" ut : "+involves "
+bp "*" --> "  1" ut : "+involves "
 
 rut --|> ut
 
-u "*" --> "1 " ut : "+does"
+u "*" --> "1   " ut : "+does"
 
 ru "*" -> "1 " rut : "+records  "
 
@@ -127,7 +127,7 @@ pi "1 " <-- " *  " ru : "+publishes"
 
 mi "1 " <--* "0...* " rut : " +contains"
 ws " * " --> mi : "+creates"
-rut "0...*" *-> "  1" sd : "+generates"
+rut "0...*" *-> "1" sd : "+generates   "
 rut "0...*" *--> "  1" pd : "+generates"
 
 @enduml
