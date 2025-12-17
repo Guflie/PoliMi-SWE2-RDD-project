@@ -28,7 +28,9 @@
 \pagebreak
 
 \subsubsection{State Diagrams}
-    %vuoi che ci sia un'interruzione di pagina per ogni state diagram? Oppure lasciamo cosi com'è ora?
+
+% I think we should trim out this State Diagram, it's about an  entity which is not represented
+\begin{comment}
     \textbf{User Session Lifecycle} 
         
     \begin{figure}[H]
@@ -48,6 +50,7 @@
     or to proceed to \texttt{Reviewing\_Data}. Both contribution states are separated to reflect their high impact on resources (tracking) or
     data consistency (auditing). The session can end by exiting \texttt{Search\_Routes} (for both anonymous and registered users) or by 
     \texttt{Logout} from the operational state for the registered user.
+\end{comment}
 
     \textbf{Trip Lifecycle} 
 
@@ -79,6 +82,7 @@
     by returning to the \texttt{Route\_Definition} state or definitively exiting the system, demonstrating how data only goes from ephemeral to 
     persistent information through a rigorous validation process.
 
+    % I catch che concept, but I don't know if the State Diagram is the right choice
     \textbf{Data Lifecycle} 
 
     \begin{figure}[H]
