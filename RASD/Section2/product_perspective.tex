@@ -7,7 +7,7 @@
 
     \begin{figure}[h!]
         \centering
-        \includegraphics[width=1.2\textwidth]{domain class diagram/Domain_class_diagram_v2.pdf}
+        \includegraphics[width=1\textwidth]{RASD/domain class diagram/Domain_class_diagram_v2.pdf}
         \caption{Domain Class Diagram of the BBP system}
         \label{fig:domain_model}
     \end{figure}
@@ -28,26 +28,6 @@
 \pagebreak
 
 \subsubsection{State Diagrams}
-    %vuoi che ci sia un'interruzione di pagina per ogni state diagram? Oppure lasciamo cosi com'è ora?
-    \textbf{User Session Lifecycle} 
-        
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\textwidth]{User_profile_lifecycle.pdf}
-        \caption{State diagram of a BBP system user's lifecycle}
-        \label{fig:user_lifecycle}
-    \end{figure}
-
-    The finite state diagram in Figure \ref{fig:user_lifecycle} models the \textbf{user session lifecycle} within the BBP system, defining how 
-    the user transitions from the anonymous browsing state to the fully operational one. The system is designed to ensure that all basic 
-    functionality, such as route search and map viewing, is immediately accessible, with a single initial state that converges 
-    on \texttt{Search\_Routes}, the universal entry point. From this anonymous browsing state, the user can choose to authenticate whether 
-    they are already logged in or not.
-    Once the \texttt{Logged\_In} state is reached, the user unlocks the contribution capabilities, which are critical to the system's value. 
-    This state serves as a hub, allowing the user to initiate trip tracking by moving to the \texttt{Tracking} state (when sensors are active)
-    or to proceed to \texttt{Reviewing\_Data}. Both contribution states are separated to reflect their high impact on resources (tracking) or
-    data consistency (auditing). The session can end by exiting \texttt{Search\_Routes} (for both anonymous and registered users) or by 
-    \texttt{Logout} from the operational state for the registered user.
 
     \textbf{Trip Lifecycle} 
 
@@ -79,6 +59,7 @@
     by returning to the \texttt{Route\_Definition} state or definitively exiting the system, demonstrating how data only goes from ephemeral to 
     persistent information through a rigorous validation process.
 
+    % I catch che concept, but I don't know if the State Diagram is the right choice
     \textbf{Data Lifecycle} 
 
     \begin{figure}[H]
