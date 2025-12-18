@@ -15,18 +15,12 @@
 
         \item \textbf{Real-Time Data Processing:} During "Automatic Detection" mode, the local algorithm on the device must process sensor data in 
         real time.
-    
-        % "I would ommit this part, it looks to me not such relevant.
-        % without causing interface crashes or delays in recording the GPS track.
 
         \item \textbf{Routing:} The route search functionality must return results, complete with \textit{Path Score}, within 3 seconds for 
         requests in a standard urban environment (10 km radius), ensuring smooth planning.
 
         \item \textbf{Backend Scalability:} The system must be able to handle simultaneous load peaks (e.g., weekends or cycling events), scaling 
         horizontally to support thousands of simultaneous trip uploads without data loss.
-
-        \item \textbf{Reliability:} The backend service must guarantee 99.9\% uptime on a monthly basis, ensuring that users can 
-        always sync their trips and access maps.
     \end{itemize}
     \pagebreak
 
@@ -48,9 +42,6 @@
             \hline
             \textbf{WGS 84} & Geodetic reference standard for the GPS system. All stored and exchanged coordinates must comply with this standard 
             to ensure compatibility with global maps. \\
-            \hline
-            \textbf{GPX (GPS Exchange)} & The system should support the export of trip data in the standard XML format for GPS data, facilitating 
-            interoperability with other sports platforms. \\
             \hline
             \textbf{ISO/IEC 27001} & Standard for information security management, applied to protect the backend infrastructure and user data 
             from unauthorized access. \\
