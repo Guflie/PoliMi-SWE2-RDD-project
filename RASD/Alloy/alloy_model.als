@@ -1,7 +1,7 @@
 module BBP_System
 
 --------------------------------------------------------
-PART 1: DOMAIN MODEL
+// PART 1: DOMAIN MODEL
 --------------------------------------------------------
 
 sig GeoPoint {}
@@ -28,7 +28,7 @@ fact starting_datetime_not_ending_datetime {
 }
 
 --------------------------------------------------------
-PART 2: USER HIERARCHY 
+// PART 2: USER HIERARCHY 
 --------------------------------------------------------
 
 sig User {
@@ -53,7 +53,7 @@ fact single_mail_single_account {
 }
 
 --------------------------------------------------------
-PART 3: DATA GOVERNANCE LIFECYCLE 
+// PART 3: DATA GOVERNANCE LIFECYCLE 
 --------------------------------------------------------
 
 enum ReportStatus { Pending, Confirmed, Discarded }
@@ -77,7 +77,7 @@ fact Stability {
 }
 
 --------------------------------------------------------
-PART 4: PREDICATES 
+// PART 4: PREDICATES 
 --------------------------------------------------------
 
 pred confirmReport [r: Report] {
@@ -105,7 +105,7 @@ fact Traces {
 }
 
 --------------------------------------------------------
-PART 5: EXECUTION COMMANDS 
+// PART 5: EXECUTION COMMANDS 
 --------------------------------------------------------
 
 // SCENARIO 1: Differenza tra User generico e RegisteredUser
