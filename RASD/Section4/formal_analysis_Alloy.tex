@@ -10,7 +10,7 @@ We focused our modeling efforts on four critical aspects of the system:
 The model leverages Alloy 6's temporal logic capabilities to verify the dynamic behavior of the system over time.
 
     \subsection{Domain and Users}
-    First, we define the physical domain (Paths, Trips) and the user hierarchy. We explicitly model \texttt{RegisteredUser} as a specialization of the 
+    First, we define the physical domain and the user hierarchy. We explicitly model \texttt{RegisteredUser} as a specialization of the 
     generic \texttt{User}. This structural constraint ensures that only registered users possess an email and the capability to be authors.
 
     \begin{lstlisting}[language=alloy, caption={BBP Static Structure and User Hierarchy}]
@@ -58,7 +58,7 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
         email_address: one Email
     }
 
-    // Constraint: One email per account
+    // Constraint: One email per account.
     fact single_mail_single_account { 
         all e: Email | one email_address.e 
     }
@@ -73,19 +73,19 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
     enum ReportStatus { Pending, Confirmed, Discarded }
 
     sig Report {
-        // SECURITY: Only Registered Users can be authors
+        // SECURITY: Only Registered Users can be authors.
         author: one RegisteredUser, 
         refersTo: one Path,
-        // DYNAMIC: The status changes over time
+        // DYNAMIC: The status changes over time.
         var status: one ReportStatus 
     }
 
-    // Initial State: All reports start as Pending
+    // Initial State: All reports start as Pending.
     fact Init {
         all r: Report | r.status = Pending
     }
 
-    // Stability: Terminal states are final
+    // Stability: Terminal states are final.
     fact Stability {
         always (all r: Report | r.status = Confirmed implies 
                 always r.status = Confirmed)
@@ -128,20 +128,30 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.85\textwidth]{alloy_user_distinction.png} 
+        \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{alloy_user_distinction.png}}
         \caption{Alloy World generation showing the distinction between a Generic User and a Registered User.}
         \label{fig:alloy_users}
     \end{figure}
 
     \subsubsection{Scenario 2: Data Lifecycle Evolution}
-    The second run verifies the temporal evolution of a Report. Figure \ref{fig:alloy_lifecycle} illustrates the transition from the creation state (\texttt{Pending}) to the 
-    validation state (\texttt{Confirmed}), satisfying the Data Governance requirements defined in Section 3.
+    The second run verifies the temporal evolution of a Report. 
+    The following figures illustrate the transition satisfying the Data Governance requirements defined in Section 3:
+    \begin{itemize}
+        \item Figure \ref{fig:lifecycle_t0} shows the initial creation state where the data is \texttt{Pending}.
+        \item Figure \ref{fig:lifecycle_t1} shows the subsequent validation state where the status becomes \texttt{Confirmed}.
+    \end{itemize}
 
     \begin{figure}[H]
         \centering
-        \makebox[\textwidth][c]{\includegraphics[width=1.6\textwidth]{alloy_lifecycle.png}}
-        \caption{Temporal evolution of the Report status. At T0 the status was Pending; at T1 the Registered User validates it, changing the status to Confirmed.}
-        \label{fig:alloy_lifecycle}
+        \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{alloy_lifecycle_T0.png}}
+        \caption{Step T0 - The Report is created in 'Pending' status. It is associated with a Path and an Author, but it is not yet public.}
+        \label{fig:lifecycle_t0}
     \end{figure}
 
-    \end{document}
+    \begin{figure}[H]
+        \centering
+        \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{alloy_lifecycle_T1.png}}
+        \caption{Step T1 - The Registered User validates the report. The status transitions to 'Confirmed' preserving the data 
+        integrity defined in the Stability fact.}
+        \label{fig:lifecycle_t1}
+    \end{figure}
