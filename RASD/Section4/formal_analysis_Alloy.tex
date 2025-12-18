@@ -1,1 +1,147 @@
 \section{Formal anlaysis using Alloy}
+In this section, we verify the consistency of the BBP system specifications using \textbf{Alloy 6}. 
+We focused our modeling efforts on four critical aspects of the system:
+\begin{enumerate}
+    %aggiungere quello che fa LEO
+    \item \textbf{User Hierarchy and Permissions:} Ensuring a strict separation between Users and Registered Users who can contribute data.
+    \item \textbf{Data Governance Lifecycle:} Verifying that sensor data (Reports) follows a strict temporal evolution.
+\end{enumerate}
+
+The model leverages Alloy 6's temporal logic capabilities to verify the dynamic behavior of the system over time.
+
+    \subsection{Domain and Users}
+    First, we define the physical domain (Paths, Trips) and the user hierarchy. We explicitly model \texttt{RegisteredUser} as a specialization of the 
+    generic \texttt{User}. This structural constraint ensures that only registered users possess an email and the capability to be authors.
+
+    \begin{lstlisting}[language=alloy, caption={BBP Static Structure and User Hierarchy}]
+    module BBP_System
+
+    // --- DOMAIN ENTITIES ---
+    sig GeoPoint {}
+
+    sig Path {
+        starting_point: one GeoPoint,
+        ending_point: one GeoPoint
+    }
+
+    fact starting_point_diff_ending_point { 
+        all p: Path | p.starting_point != p.ending_point 
+    }
+
+    sig DateTime {}
+
+    sig Trip {
+        trip_path: one Path,
+        starting_datetime: one DateTime,
+        ending_datetime: one DateTime
+    }
+
+    fact starting_datetime_not_ending_datetime {
+        all t: Trip | t.starting_datetime != t.ending_datetime
+    }
+
+    // --- USER HIERARCHY ---
+    // "User" represents any user of the system.
+    sig User {
+        user_trips: set Trip
+    }
+
+    // A trip belongs to exactly one user.
+    fact no_shared_trips {
+        all t: Trip | one user_trips.t
+    }
+
+    sig Email {}
+
+    // "RegisteredUser" is the only actor allowed to have an account and contribute.
+    sig RegisteredUser extends User {
+        email_address: one Email
+    }
+
+    // Constraint: One email per account
+    fact single_mail_single_account { 
+        all e: Email | one email_address.e 
+    }
+    \end{lstlisting}
+
+    \subsection{Data Lifecycle}
+    Here we model the \textbf{Data Governance} process. We introduce the \texttt{Report} signature with a mutable field \texttt{status}.
+    The \texttt{Stability} fact ensures that once a report is validated, it cannot revert to a pending state, preserving the integrity of the public inventory.
+
+    \begin{lstlisting}[language=alloy, caption={Dynamic Logic and State Transitions}]
+    // --- DATA GOVERNANCE ---
+    enum ReportStatus { Pending, Confirmed, Discarded }
+
+    sig Report {
+        // SECURITY: Only Registered Users can be authors
+        author: one RegisteredUser, 
+        refersTo: one Path,
+        // DYNAMIC: The status changes over time
+        var status: one ReportStatus 
+    }
+
+    // Initial State: All reports start as Pending
+    fact Init {
+        all r: Report | r.status = Pending
+    }
+
+    // Stability: Terminal states are final
+    fact Stability {
+        always (all r: Report | r.status = Confirmed implies 
+                always r.status = Confirmed)
+        always (all r: Report | r.status = Discarded implies 
+                always r.status = Discarded)
+    }
+
+    // --- PREDICATES ---
+    pred confirmReport [r: Report] {
+        r.status = Pending
+        r.status' = Confirmed
+        all r2: Report - r | r2.status' = r2.status
+    }
+
+    pred discardReport [r: Report] {
+        r.status = Pending
+        r.status' = Discarded
+        all r2: Report - r | r2.status' = r2.status
+    }
+
+    pred doNothing { status' = status }
+
+    fact Traces {
+        always (
+            doNothing or
+            (some r: Report | confirmReport[r]) or
+            (some r: Report | discardReport[r])
+        )
+    }
+    \end{lstlisting}
+
+    \subsection{Verification Results}
+    We executed the model to verify two key scenarios. The solver successfully generated consistent instances for both, proving the validity of the 
+    specifications.
+
+    \subsubsection{Scenario 1: User Distinction}
+    The first run highlights the structural difference between a generic \texttt{User} and a \texttt{RegisteredUser}.
+    As shown in Figure \ref{fig:alloy_users}, the system correctly isolates the capabilities: only the registered user is associated with an email and 
+    content authorship.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{alloy_user_distinction.png} 
+        \caption{Alloy World generation showing the distinction between a Generic User and a Registered User.}
+        \label{fig:alloy_users}
+    \end{figure}
+
+    \subsubsection{Scenario 2: Data Lifecycle Evolution}
+    The second run verifies the temporal evolution of a Report. Figure \ref{fig:alloy_lifecycle} illustrates the transition from the creation state (\texttt{Pending}) to the 
+    validation state (\texttt{Confirmed}), satisfying the Data Governance requirements defined in Section 3.
+
+    \begin{figure}[H]
+        \centering
+        \makebox[\textwidth][c]{\includegraphics[width=1.6\textwidth]{alloy_lifecycle.png}}
+        \caption{Temporal evolution of the Report status. At T0 the status was Pending; at T1 the Registered User validates it, changing the status to Confirmed.}
+        \label{fig:alloy_lifecycle}
+    \end{figure}
+
+    \end{document}

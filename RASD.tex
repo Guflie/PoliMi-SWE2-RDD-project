@@ -14,6 +14,33 @@
 \usepackage{placeins}
 \graphicspath{ {img/} }
 
+\usepackage{listings}
+\definecolor{alloy-keyword}{rgb}{0,0,0.8}      % BLUE for keywords
+\definecolor{alloy-comment}{rgb}{0.5,0.5,0.5}  % GRAY for comments
+\definecolor{alloy-string}{rgb}{0.5,0,0}       % RED for strings
+
+\lstdefinelanguage{alloy}{
+    keywords={module, sig, fact, pred, assert, check, run, for, but, let, open, extends, in, sum, disj, one, some, all, no, lone, ordered, abstract, var, always, eventually, after, once, historically, implies, else, enum},
+    keywordstyle=\color{alloy-keyword}\bfseries,
+    ndkeywords={int, Int},
+    ndkeywordstyle=\color{black}\bfseries,
+    identifierstyle=\color{black},
+    sensitive=true,
+    comment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    commentstyle=\color{alloy-comment}\itshape,
+    stringstyle=\color{alloy-string}\ttfamily,
+    basicstyle=\ttfamily\small, % Font monospaziato
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=5pt,
+    tabsize=4,
+    breaklines=true,
+    showstringspaces=false,
+    frame=lines 
+}
+
 % sectsty settings
 \definecolor{sec-blue}{RGB}{51, 102, 255}
 \definecolor{subsec-blue}{RGB}{102, 140, 255}
