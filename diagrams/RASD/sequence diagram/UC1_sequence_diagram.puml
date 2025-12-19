@@ -1,4 +1,4 @@
-@startuml uc1_state_diagra,
+@startuml uc1_sequence_diagram
 actor User
 participant "BBP App" as App
 

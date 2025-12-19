@@ -1,0 +1,32 @@
+@startuml uc2_sequence_diagram
+actor "Registered User" as User
+participant "BBP App" as App
+
+autonumber
+
+activate User
+
+User -> App : open_app()
+activate App
+App -->> User : login_form()
+deactivate App
+
+User -> App : submit_login_form(email, password)
+activate App
+
+App -> App : check_login_info()
+
+alt #ffe6e6 Email not found
+    App -->> User : account_not_found_error()
+
+else #ffe6e6 Incorrect password
+    App -->> User : invalid_credentials_error()
+
+else #e6ffe6 Valid credentials
+    App -> App : retrieve_homepage_data()
+    App -->> User : homepage_data()
+end
+
+deactivate App
+deactivate User
+@enduml
