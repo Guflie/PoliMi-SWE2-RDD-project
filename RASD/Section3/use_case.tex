@@ -216,7 +216,7 @@
             \begin{itemize}
                 \item The user submits an invalid email address, therefore an error message would be sent to it
                 \item The user submits the email address of another account, therefore he won't receive the email to reset the password
-                \item The user doesn't open the link within one hour, therefore the password wouldn't be changed 
+                \item The user submits an email not associated to any account, therefore an error messagge is sent to it. 
                 \item The user doesn't submits the new password after opening the link within one hour, therefore the password wouldn't be changed
             \end{itemize}
             \end{minipage}
@@ -267,14 +267,7 @@
         \\
         \hline
         Exception & 
-        \begin{minipage}{0.7\textwidth}
-        \smallskip
-            \begin{itemize}
-            \item The user didn't open the link after one hour, therefore the link expries
-            \item The user didn't confirm the second time, therefore after one hour the request expires
-        \end{itemize} 
-        \smallskip
-        \end{minipage}
+            The user didn't confirm the second time within one hour, therefore the request expires
         \\
         \hline       
     \end{tabular}
@@ -304,7 +297,7 @@
                 \item The user opens the Search page and inserts the starting point and the destination
                 \item The system retrieves from its archive all paths near the starting point specified by the user and that lead toward the destination, ordered by "Path Score" and sends them to the user
                 \item The user explores the choices given by the system and selects one of them
-                \item The user starts the trip activity for the selected path, see UC\ref{UC:UC8}, UC:\ref{UC:UC9}.
+
             \end{enumerate}
             \smallskip
             \end{minipage}

@@ -1,0 +1,44 @@
+@startuml uc10_trip_monitoring
+actor "Registered User" as User
+participant "BBP App" as App
+participant "Weather Service" as Weather
+
+autonumber
+
+activate User
+
+User -> App : start_activity(path)
+activate App
+App -> App : retrieve_path_map()
+App -->> User : path_map_data()
+deactivate App
+
+loop Every second during activity
+    User -> User : sample_sensors()
+    
+    opt #ffe6e6 GPS signal lost
+        User -> User : notify_gps_loss()
+    end
+end
+
+User -> App : stop_activity()
+activate App
+
+App -> App : process_collected_data()
+
+App -> Weather : get_weather_conditions(timestamp, coordinates)
+activate Weather
+
+alt #e6ffe6 Weather service available
+    Weather -->> App : weather_data()
+    App -->> User : activity_summary(metrics, path_map, weather_info)
+
+else #ffe6e6 Weather service unavailable
+    Weather -->> App : unavailable_weather_data_error()
+    deactivate Weather
+    App -->> User : activity_summary(metrics, path_map)
+end
+
+deactivate App
+deactivate User
+@enduml
