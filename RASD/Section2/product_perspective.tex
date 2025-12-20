@@ -29,15 +29,16 @@
 
 \subsubsection{State Diagrams}
 
-    \textbf{Trip Lifecycle} 
+    \textbf{Activity Lifecycle} 
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Trip_lifecycle.pdf}
+        \includegraphics[width=0.9\textwidth]{RASD/state diagrams/activity_state_diagram.pdf}
         \caption{State Diagram of the Lifecycle of a Trip in the BBP System}
         \label{fig:trip_lifecycle}
     \end{figure}
 
+    % TODO: update this
     The diagram in Figure \ref{fig:trip_lifecycle} models the complete lifecycle of a \texttt{Trip}, from its inception to its final storage or 
     discard. The process begins in the initial \texttt{Route\_Definition} state, which represents the hub where a new route can be defined or an 
     existing one can be used. The fundamental transition to data acquisition occurs only if the \texttt{[if RegisteredUser]} guard condition is 
@@ -59,16 +60,16 @@
     by returning to the \texttt{Route\_Definition} state or definitively exiting the system, demonstrating how data only goes from ephemeral to 
     persistent information through a rigorous validation process.
 
-    % I catch che concept, but I don't know if the State Diagram is the right choice
-    \textbf{Data Lifecycle} 
+    \textbf{Issue Lifecycle} 
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Data_lifecycle.pdf}
+        \includegraphics[width=0.9\textwidth]{RASD/state diagrams/issue_state_diagramsvg.pdf}
         \caption{Data lifecycle state diagram in BBP system}
         \label{fig:data_lifecycle}
     \end{figure}
 
+    % TODO: updates
     The diagram in Figure \ref{fig:data_lifecycle} models the complete data lifecycle, from its origin to its final state. The process rigorously 
     distinguishes data based on its source to direct it to the correct validation path. The flow forks immediately from the initial state:
 
