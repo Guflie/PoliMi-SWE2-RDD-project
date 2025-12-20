@@ -2,21 +2,12 @@
 
     \textbf{Sign up \& Login} 
 
-    % GENERAL NOTE: fucntions seems ok, maybe we could refine them by giving higher focus on the system.
-
-    \begin{comment}
-    This feature is the entry point for any user wishing to actively contribute to the inventory. A visitor can register by providing their 
-    information and credentials, and the system creates a \texttt{RegisteredUser} profile, enabling write permissions. Once the account is created
-    the user can log in to access their reserved area, view their travel history, and use the tracking features. Without authentication, the user 
-    remains in "read-only" mode, without access or all the features expected of a registered user.
-    \end{comment}
-
     This feature is the entry point for any user wishing to actively contribute to the inventory. A visitor can register by providing their 
     information and credentials,and once the account is created the user can log in to access their reserved area, view their travel history, and 
     use the tracking features. Without authentication, the user remains in "read-only" mode, without access or all the features expected of a 
     registered user.
 
-    \textbf{User Profile Management} %sono sempre più convinto di dover inserire dati personali all'interno di utente come peso, altezza, ecc..
+    \textbf{User Profile Management}
 
     Registered users have access to a dedicated section for managing their personal data. Here they can update their contact information and 
     personal details, change their password, or delete their account. These actions ensure that the user maintains full control over their digital
@@ -24,9 +15,9 @@
 
     \textbf{Trip Recording} 
 
-    This is a core feature available exclusively to authenticated users. Users can start a recording session at the beginning of their activity. 
+    This is a core feature available exclusively to registered users. Users can start a recording session at the beginning of their activity. 
     During the trip, the system tracks their geographic location via GPS in real time. Users have the flexibility to pause and resume recording 
-    (for example, during a rest stop). Upon completion, the trip is stored in the user's personal database.
+    (for example, during a rest stop). Upon completion, the trip is stored in the system database.
 
     \textbf{Statistics Calculation and Data Enrichment} 
 
@@ -45,24 +36,31 @@
 
     If the registered user enables "Automatic Mode" while driving, the system uses the mobile device's accelerometer and gyroscope to monitor 
     vibrations and sudden movements. Internal algorithms analyze this data to identify potential road surface anomalies, such as potholes. This 
-    process occurs in the background so as not to distract the user while driving.
+    process occurs in the background so as not to distract the user while riding.
 
     \textbf{Review and Confirmation of Detections} 
-
+    
     To ensure data reliability and filter out false positives, automatic detections are not published immediately. At the end of the journey, 
     the system presents the user with a list of detected anomalies. The registered user must explicitly confirm the presence of the obstacle 
-    (validation) or discard the detection (if incorrect). Only confirmed data is promoted to publishable information.
+    (validation) or discard the detection (if incorrect). Only data with a feedback is promoted to publishable information.
     The published route data is then used to calculate the Path Score.
+    
+    \textbf{Activity History Consultation}
+
+    Registered users may consult their historical trip data via a dedicated summary view, which provides the necessary functionality to view or 
+    delete specific trip records.
 
     \textbf{Route Search} 
 
     This feature is accessible to all users, regardless of registration. The user enters a starting point and a destination in the search interface.
-    The system processes the request and calculates one or more possible cycling routes connecting the two points, if data for such routes exists 
-    in the inventory.
+    The system processes the request and calculates one or more possible cycling routes connecting the two points, if data for such routes exists
+    in the inventory. Otherwise, the an External Mapping System will be interrogated by the system in order to create a path from the starting point
+    to the destination submitted by the user.
 
     \textbf{Display and Path Score} 
 
     The routes found are displayed on an interactive map. For each route, the system calculates and displays a \texttt{Path Score}. This summary 
     score aggregates information about the route's status and the presence of confirmed obstacles, allowing the user to quickly assess not only 
     the distance, but also the safety and quality of the proposed route.
+
 \pagebreak

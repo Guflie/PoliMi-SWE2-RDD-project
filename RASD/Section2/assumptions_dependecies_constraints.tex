@@ -33,15 +33,14 @@
         unavailable, the system will continue to record trips, but the "Weather Enrichment" feature will not be performed, and the trips will be 
         saved without this metadata.
 
-        \item \textbf{Mapping Services:} Route visualization and address geocoding depend on external map providers. If these are unavailable, the 
-        "Route Search" and "Map View" features will be compromised.
+        \item \textbf{External Mapping Services:} Route visualization and address geocoding depend on external map providers. If these are unavailable, the 
+        "Route Search" and "Trip Recording" features will be compromised.
     \end{itemize}
 
     \subsubsection{System Constraints}      
     \begin{itemize}
         \item \textbf{GDPR and Privacy:} Since the system tracks users' physical movements (sensitive data), the management, storage, and sharing 
-        of GPS data must strictly comply with the GDPR regulation. Personal travel data must not be accessible to other users without explicit 
-        consent.
+        of GPS data must strictly comply with the GDPR regulation. Personal travel data must not be accessible to other users.
 
         \item \textbf{Energy Consumption:} The automatic detection algorithm must be optimized to avoid draining the mobile device's battery 
         quickly, ensuring coverage of medium-duration trips (e.g., 2-3 hours).
