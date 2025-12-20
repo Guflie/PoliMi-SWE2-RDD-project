@@ -93,7 +93,6 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
                 always r.status = Discarded)
     }
 
-    // --- PREDICATES ---
     pred confirmReport [r: Report] {
         r.status = Pending
         r.status' = Confirmed
@@ -115,6 +114,44 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
             (some r: Report | discardReport[r])
         )
     }
+    \end{lstlisting}
+
+    \subsection{Verification Predicates}
+    To validate the model, we defined specific predicates that force the solver to search for instances satisfying our structural and temporal requirements.
+
+    The first predicate validates the structural separation of roles. It compels the solver to find a world containing both a simple Guest (with activity but no privileges) and a Registered User (with full privileges).
+
+    \begin{lstlisting}[language=alloy, caption={Predicate: User Role Distinction}]
+    pred showUserDistinction {
+        // We look for a user who is NOT registered but has trip activity
+        some u: User {
+            u not in RegisteredUser
+            some u.user_trips
+        }
+
+        // We look for a registered user with associated trips and reports
+        some ru: RegisteredUser {
+            some ru.user_trips 
+            some r: Report | r.author = ru
+        }
+    }
+    
+    run showUserDistinction for 5
+    \end{lstlisting}
+
+    The second predicate validates the temporal logic. It ensures that the model allows a Report to evolve from its initial state to a finalized state, confirming the reachability of the "Confirmed" status. 
+
+    \begin{lstlisting}[language=alloy, caption={Predicate: Data Lifecycle Reachability}]
+    pred showDataLifecycle {
+        // Scope Reduction: We focus on a single actor and report for clarity
+        one RegisteredUser
+        one Report
+    
+        // Temporal Goal: The system must eventually reach a Confirmed state
+        eventually (some r: Report | r.status = Confirmed)
+    }
+    
+    run showDataLifecycle for 4
     \end{lstlisting}
 
     \subsection{Verification Results}
