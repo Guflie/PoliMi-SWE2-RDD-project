@@ -1,0 +1,31 @@
+@startuml uc9_sequence_diagram
+actor "Registered User" as User
+participant "BBP App" as App
+
+autonumber
+
+activate User
+
+User -> App : start_activity(path)
+activate App
+App -> App : retrieve_path_map()
+App -->> User : path_map_data()
+deactivate App
+
+loop Optional: during the activity
+    User -> User : pause_activity()    
+    User -> User : resume_activity()
+end
+
+User -> App : activity_completion()
+activate App
+App -->> User : rating_form()
+deactivate App
+
+User -> App : submit_rating_form(rating)
+activate App
+App -->> User : rating_acknowledgement()
+deactivate App
+
+deactivate User
+@enduml

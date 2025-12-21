@@ -1,0 +1,17 @@
+@startuml uc12_sequence_diagram
+actor "Registered User" as User
+participant "BBP App" as App
+
+autonumber
+
+activate User
+
+User -> App : submit_issue_fixup(path, issue)
+activate App
+
+App -> App : path_status_update(path, issue)
+App -->> User : fixup_ack()
+
+deactivate App
+
+@enduml

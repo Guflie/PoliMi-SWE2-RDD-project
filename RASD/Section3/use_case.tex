@@ -53,7 +53,8 @@
             \begin{itemize}
             \item Email address is not valid, therefore a warnigs is displayed in point \textit{2.} and the form can't be submitted.
             \item Email inserted during registration has been already used, therefore the account is not created and in the point \textit{4.} instead of a link an informative message is sent. 
-            \item The user doesn't open the confirmation link within an hour, therefore the account creation procedure is aborted and the submited data cancelled.
+            \item The user doesn't open the confirmation link within an hour, therefore the account creation procedure is aborted and the submited data cancelled. If the confirmation link is
+            open after 1 hour, an error message is sent.
         \end{itemize} 
         \smallskip
         \end{minipage}
@@ -138,7 +139,7 @@
             \smallskip
             \begin{enumerate}
                 \item The user opens his profile page and selects the option to modify the account
-                \item The user selects the attribute to modify, types the new value and sends it
+                \item The user selects the attribute to modify, types the new value and sends it (except email or password)
                 \item The system checks the new values and sends an acknowledgement
             \end{enumerate}
             \smallskip
@@ -154,14 +155,7 @@
         \\
         \hline
         Exception &
-        \begin{minipage}{0.7\textwidth}
-        \smallskip
-        \begin{enumerate}
-            \item The user tries to modify email address and password, therefore it's immediately blocked
-        \end{enumerate}
-        \smallskip
-        \end{minipage}
-         \\
+        \\
         \hline       
     \end{tabular}
     \caption{Refers to \hyperref[sc:SC3]{SC3}}
@@ -215,7 +209,7 @@
             \begin{itemize}
                 \item The user submits an invalid email address, therefore an error message would be sent to it
                 \item The user submits the email address of another account, therefore he won't receive the email to reset the password
-                \item The user doesn't open the link within one hour, therefore the password wouldn't be changed 
+                \item The user submits an email not associated to any account, therefore an error messagge is sent to it. 
                 \item The user doesn't submits the new password after opening the link within one hour, therefore the password wouldn't be changed
             \end{itemize}
             \end{minipage}
@@ -266,14 +260,7 @@
         \\
         \hline
         Exception & 
-        \begin{minipage}{0.7\textwidth}
-        \smallskip
-            \begin{itemize}
-            \item The user didn't open the link after one hour, therefore the link expries
-            \item The user didn't confirm the second time, therefore after one hour the request expires
-        \end{itemize} 
-        \smallskip
-        \end{minipage}
+            The user didn't confirm the second time within one hour, therefore the request expires
         \\
         \hline       
     \end{tabular}
@@ -303,7 +290,7 @@
                 \item The user opens the Search page and inserts the starting point and the destination
                 \item The system retrieves from its archive all paths near the starting point specified by the user and that lead toward the destination, ordered by "Path Score" and sends them to the user
                 \item The user explores the choices given by the system and selects one of them
-                \item The user starts the trip activity for the selected path, see UC\ref{UC:UC8}, UC:\ref{UC:UC9}.
+
             \end{enumerate}
             \smallskip
             \end{minipage}

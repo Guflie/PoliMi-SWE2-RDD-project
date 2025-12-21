@@ -1,0 +1,33 @@
+@startuml uc5_sequence_diagram
+actor "Registered User" as User
+participant "BBP App" as App
+
+autonumber
+
+activate User
+
+User -> App : delete_account_request()
+activate App
+App -->> User : deletion_confirmation()
+deactivate App
+
+User -> App : submit_deletion_confirmation()
+activate App
+App -->> User : account_deletion_link()
+deactivate App
+
+User -> App :submit_second_confirmation_link()
+activate App
+App -> App : check_link_expiration()
+
+alt #ffe6e6 Link expired
+    App -->> User : link_expired_error()
+
+else #e6ffe6 Valid link
+    App -> App : account_deletion() 
+    App -->> User : account_deletion_ack()
+end
+
+deactivate App
+deactivate User
+@enduml

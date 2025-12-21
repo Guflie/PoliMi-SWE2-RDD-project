@@ -1,0 +1,24 @@
+@startuml uc14_history_consultation
+actor "Registered User" as User
+participant "BBP App" as App
+
+autonumber
+
+activate User
+
+alt Optional: Filter selection
+    User -> App : get_activity_history(filters)
+    activate App
+    App -> App : retrive_activity_history(filters)
+
+else no filters
+    User -> App : get_activity_history()
+    App -> App : retrive_activity_history()
+
+end
+App -->> User : display_history_view()
+deactivate App
+
+deactivate App
+deactivate User
+@enduml

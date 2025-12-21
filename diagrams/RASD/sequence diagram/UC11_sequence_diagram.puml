@@ -1,0 +1,22 @@
+@startuml uc11_sequence_diagram
+actor "Registered User" as User
+participant "BBP App" as App
+
+autonumber
+
+activate User
+
+User -> App : search_route(route_query)
+activate App
+App -->> User : path_list()
+deactivate App
+
+User -> App : submit_issue_report(path, position, type, description)
+activate App
+
+App -> App : update_path_status()
+App -->> User : issue_report_ack()
+
+deactivate App
+deactivate User
+@enduml
