@@ -29,57 +29,43 @@
 
 \subsubsection{State Diagrams}
 
-    \textbf{Trip Lifecycle} 
+    \textbf{Activity Lifecycle} 
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Trip_lifecycle.pdf}
+        \includegraphics[width=0.9\textwidth]{RASD/state diagrams/activity_state_diagram.pdf}
         \caption{State Diagram of the Lifecycle of a Trip in the BBP System}
         \label{fig:trip_lifecycle}
     \end{figure}
 
-    The diagram in Figure \ref{fig:trip_lifecycle} models the complete lifecycle of a \texttt{Trip}, from its inception to its final storage or 
-    discard. The process begins in the initial \texttt{Route\_Definition} state, which represents the hub where a new route can be defined or an 
-    existing one can be used. The fundamental transition to data acquisition occurs only if the \texttt{[if RegisteredUser]} guard condition is 
-    satisfied, ensuring that only authenticated users can initiate tracking, based on the system's contribution requirements. Once in the 
-    \texttt{Data\_Logging} state, the system actively logs raw sensor data (GPS, accelerometer) if in automatic mode. This state offers flexibility,
-    allowing data acquisition to be paused and resumed via transitions. The system manages three distinct transitions when recording is stopped, 
-    resulting in separate processing paths:
+The diagram in Figure \ref{fig:trip_lifecycle} models the complete lifecycle of an Activity. The process begins with the \texttt{Route Definition} state, in which the route to be traveled is established. 
+Subsequently, depending on whether the user decides to automatically monitor the trip, the Activity transitions into either the \texttt{Monitored ongoing} state or the \texttt{Ongoing} state. From either 
+ongoing states, the \textbf{Activity} can enter the \texttt{Paused} state if the user performs the \textit{stop action}, and it returns to the previous ongoing state if the user \textit{resumes} it. Within 
+the \texttt{Monitored ongoing} state, the system also performs the \textit{sampling} of sensor data in order to detect anomalies along the path. When the user chooses to \textit{terminate} the activity, the 
+transition depends on the current state: 
+\begin{itemize} 
+    \item If the Activity is in the \texttt{Ongoing} state, it transitions directly to the \texttt{Waiting rating} state. 
+    \item If the \textbf{Activity} is in the \texttt{Monitored ongoing} state, it first passes through the \texttt{Waiting detections} confirmation state, where the system waits for the user to \textit{confirm/discard} 
+    automatically detected issues. After receiving user confirmations, it then transitions to the \texttt{Waiting rating} state. 
+\end{itemize}
+In the \texttt{Waiting rating} state, the Activity awaits a score for the path from the user. Following this input, the Activity may optionally enter the \texttt{Weather enrichmenten} state, depending 
+on whether the External Weather Service is available; otherwise, it will transition directly to the \texttt{Completed} state.
 
-    \begin{itemize}
-        \item \textbf{Stop in manual mode}: This transition allows the user to actively add non-sensor data to the route.
-        \item \textbf{Stop in automated mode}: Indicates that the route has ended, starting the automatic processing cycle.
-        \item \textbf{Stop without data}: If the user does not wish to add any data, they go directly to the confirmation to save or delete the 
-        collected data (if collected).
-    \end{itemize}
-
-    The automated processing cycle begins with \texttt{Enrichment\_WeatherInfo}, where the system enriches the trip with weather data retrieved 
-    from external services. Once enrichment is complete, the flow moves to \texttt{Awaiting\_Confirmation}. This state is crucial for data quality:
-    here, the user must decide whether to validate the anomalies detected by the sensors (e.g., potholes) or discard them. The cycle closes 
-    by returning to the \texttt{Route\_Definition} state or definitively exiting the system, demonstrating how data only goes from ephemeral to 
-    persistent information through a rigorous validation process.
-
-    % I catch che concept, but I don't know if the State Diagram is the right choice
-    \textbf{Data Lifecycle} 
+    \textbf{Issue Lifecycle} 
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{Data_lifecycle.pdf}
+        \includegraphics[width=0.9\textwidth]{RASD/state diagrams/issue_state_diagram.pdf}
         \caption{Data lifecycle state diagram in BBP system}
         \label{fig:data_lifecycle}
     \end{figure}
 
-    The diagram in Figure \ref{fig:data_lifecycle} models the complete data lifecycle, from its origin to its final state. The process rigorously 
-    distinguishes data based on its source to direct it to the correct validation path. The flow forks immediately from the initial state:
-
-    \begin{itemize}
-        \item \textbf{Manual Path:} The user generates a \texttt{Manual report} that transitions to the \texttt{Manual\_Submission} state. 
-        The data, being the result of an explicit action, is initially saved and can be published if the user wishes.
-        \item \textbf{Automatic Path:} The data passively detected by the sensors transitions to the \texttt{Dected\_Raw} state. This raw data must
-        pass through the \texttt{Awaiting\_Confirmation} state at the end of its journey.
-    \end{itemize}
-
-    The pending confirmation state is the critical checkpoint: the user is responsible for validating the discovery to allow it to move to 
-    \texttt{Publishable}, or discarding it, moving it to \texttt{Discarded}. Only data in the \texttt{Publishable} state is integrated and can 
-    influence the \texttt{Path Score}. The cycle ends with final publication or discard.
+The diagram in Figure \ref{fig:data_lifecycle} models the complete Issue lifecycle, from its origin to its final state. The process rigorously distinguishes th issue based on its source to direct it to the correct 
+validation path. The flow forks immediately from the initial state: 
+\begin{itemize} 
+    \item \textbf{Manual report}: Once submitted, the report directly becomes an entity on its own by entering in the \texttt{Submitted} state. 
+    \item \textbf{Automatic report}: Upon automatic detection, the report enters the \texttt{waiting confirmation} state, in which it waits for the user to \textit{confirm} or \textit{discard} it. Consequently, it 
+    transitions into the corresponding \texttt{Confirmed} or \texttt{Discarded} state. If the issue is \texttt{Discarded} then there would be no further evolution. If the issue is \texttt{Confirmed} then it transitions
+    in the \texttt{Submitted} state, ending up in the same final state as the manual reported issues.
+\end{itemize}
 \pagebreak
