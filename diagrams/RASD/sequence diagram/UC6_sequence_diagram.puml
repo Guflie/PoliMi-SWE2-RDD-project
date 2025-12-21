@@ -10,12 +10,8 @@ User -> App : submit_route_points(start_point, destination)
 activate App
 
 App -> App : retrieve_nearby_paths(start_point, destination)
+note right: if no path is available refer to UC7 
 App -> App : rank_paths_by_score()
-
-alt #ffe6e6 No paths found
-    App -> App : create_path()
-    note right: Refers to UC7 (Route discovery) TOOD review this
-end
 
 App -->> User : paths()
 deactivate App

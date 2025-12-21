@@ -1,7 +1,6 @@
 @startuml uc13_automatic_detection
 actor "Registered User" as User
 participant "BBP App" as App
-participant "BBP System" as Sys
 
 autonumber
 
@@ -9,34 +8,27 @@ activate User
 
 User -> App : start_automatically_monitored_activity(path)
 activate App
-App -> Sys : start_activity(path)
-activate Sys
-Sys -> Sys : retrieve_path_map(path)
-Sys -->> App : path_map()
-deactivate Sys
+App -> App : retrieve_path_map(path)
+deactivate App
 App -->> User : path_map()
 
 ' --------------------------
 
 loop During activity
-    App -> App : collect_sensor_data()
-    App -> App : analyze_data_for_issues()
+    User -> User : collect_sensor_data()
+    User -> User : analyze_data_for_issues()
 end
 
-User -> App : stop_activity()
-
+User -> App : stop_activity(raw_detected_data)
+activate App
 App -> App : generate_detected_issues_list()
 App -->> User : display_issue_confirmation_form(issue_list)
 deactivate App
 
-User -> App : submit_confirmed_issues(issue_list)
+User -> App : submit_confirmed_issues(confirmed_list)
 activate App
-App -> Sys : issue_report(path, issue_list)
-activate Sys
-Sys -->> App : issue_report_ack()
-Sys -> Sys : update_path_status(issue_list)
+App -> App : update_path_status(confirmed_list)
 App -->> User : issue_report_ack()
-
 deactivate App
 
 @enduml

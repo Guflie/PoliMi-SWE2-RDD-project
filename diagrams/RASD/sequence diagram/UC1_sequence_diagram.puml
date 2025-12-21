@@ -9,10 +9,10 @@ activate User
 User -> App : start_account_registration()
 
 activate App
-App -->> User : registration_form(name, surname, gender, birth_date, email_address, password)
+App -->> User : registration_form()
 deactivate App
 
-User -> App : submit_registration_form()
+User -> App : submit_registration_form(name, surname, gender, birth_date, email_address, password)
 activate App
 App -> App : check_registration_info()
 

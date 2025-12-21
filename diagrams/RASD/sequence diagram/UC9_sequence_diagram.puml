@@ -22,7 +22,7 @@ activate App
 App -->> User : rating_form()
 deactivate App
 
-User -> App : submit_rating_form(score)
+User -> App : submit_rating_form(rating)
 activate App
 App -->> User : rating_acknowledgement()
 deactivate App

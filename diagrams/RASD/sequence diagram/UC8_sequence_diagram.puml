@@ -19,7 +19,6 @@ loop Optional: during the trip
 end
 
 User -> User : complete_trip()
-note right: Control this
 
 deactivate User
 @enduml

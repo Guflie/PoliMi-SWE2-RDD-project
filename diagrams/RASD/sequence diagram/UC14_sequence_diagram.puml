@@ -6,13 +6,16 @@ autonumber
 
 activate User
 
-opt Optional: Filter selection
-    User -> User : apply_history_filters()
-end
+alt Optional: Filter selection
+    User -> App : get_activity_history(filters)
+    activate App
+    App -> App : retrive_activity_history(filters)
 
-User -> App : open_history_page()
-activate App
-App -> App : get_activity_history()
+else no filters
+    User -> App : get_activity_history()
+    App -> App : retrive_activity_history()
+
+end
 App -->> User : display_history_view()
 deactivate App
 

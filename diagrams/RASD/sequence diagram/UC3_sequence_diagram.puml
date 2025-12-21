@@ -6,23 +6,21 @@ autonumber
 
 activate User
 
-User -> App : open_profile_page()
-activate App
-App -->> User : display_profile_options()
-deactivate App
-
 User -> App : select_modify_account()
 activate App
 App -->> User : display_attribute_selection()
+note right: account email and password are excluded from this procedure
 deactivate App
 
 User -> App : submit_attribute_update(attribute, new_value)
+
 activate App
 App -> App : validate_update_request()
 
+
 alt #ffe6e6 Restricted Attribute (Email or Password)
     ' Exception 1: User tries to modify restricted fields
-    App -->> User : error_modification_blocked()
+    App -->> User : modification_error()
 
 else #e6ffe6 Valid Attribute
     ' Success Flow

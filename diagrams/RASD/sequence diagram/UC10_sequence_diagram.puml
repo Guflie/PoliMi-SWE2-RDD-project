@@ -21,7 +21,7 @@ loop Every second during activity
     end
 end
 
-User -> App : stop_activity()
+User -> App : activity_ompletition()
 activate App
 
 App -> App : process_collected_data()
