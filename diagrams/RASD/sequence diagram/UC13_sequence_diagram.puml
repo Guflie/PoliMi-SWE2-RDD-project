@@ -1,4 +1,4 @@
-@startuml uc13_automatic_detection
+@startuml uc13_sequence_diagram
 actor "Registered User" as User
 participant "BBP App" as App
 

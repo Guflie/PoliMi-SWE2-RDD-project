@@ -1,4 +1,6 @@
 @startuml uc6_sequence_diagram
+hide footbox
+
 actor User
 participant "BBP App" as App
 

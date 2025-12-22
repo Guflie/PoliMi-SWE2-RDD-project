@@ -1,4 +1,6 @@
-@startuml uc10_trip_monitoring
+@startuml uc10_sequence_diagram
+hide footbox
+
 actor "Registered User" as User
 participant "BBP App" as App
 participant "Weather Service" as Weather

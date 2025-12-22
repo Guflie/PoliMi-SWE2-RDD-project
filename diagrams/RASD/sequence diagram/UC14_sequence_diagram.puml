@@ -1,4 +1,4 @@
-@startuml uc14_history_consultation
+@startuml uc14_sequence_diagram
 actor "Registered User" as User
 participant "BBP App" as App
 

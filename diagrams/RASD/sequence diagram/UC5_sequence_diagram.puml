@@ -1,4 +1,6 @@
 @startuml uc5_sequence_diagram
+hide footbox
+
 actor "Registered User" as User
 participant "BBP App" as App
 

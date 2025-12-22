@@ -1,4 +1,6 @@
 @startuml uc7_sequence_diagram
+hide footbox
+
 actor User
 participant "BBP App" as App
 participant "External Mapping Service" as MapService
