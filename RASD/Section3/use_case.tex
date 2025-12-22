@@ -225,9 +225,10 @@
 % --------------------------------------------------------------------------------------------------
 \subsubsection*{[UC5] Account deletion}
 \FloatBarrier
+
 \begin{table}[ht!]
     \renewcommand{\arraystretch}{1.5}
-    \begin{tabular}{|l|l|}
+    \begin{tabular}{|p{0.25\textwidth}|p{0.7\textwidth}|}
         \hline
         Name & \textbf{Account deletion} \\
         \hline
@@ -236,8 +237,6 @@
         Entry Condition & True \\
         \hline
         Event Flow & 
-            \begin{minipage}{0.7\textwidth}
-            \smallskip
             \begin{enumerate}
                 \item The user opens the Profile page, opens the options and selects to delete the account
                 \item The system receives the request and sends a confirmation message on the app
@@ -247,20 +246,19 @@
                 \item The system receives the second confirmation and processes the account deletion request
                 \item Once the system has deleted the account, sends to the ex-account mail address a deletion message confirmation
             \end{enumerate}
-            \smallskip
-            \end{minipage}
         \\
         \hline
         Exit Condition &
-            \begin{minipage}{0.7\textwidth}
-            \smallskip
             The account is deleted. If the confirmation isn't given within the expiration times, the account isn't deleted. 
-            \smallskip
-            \end{minipage}
         \\
         \hline
         Exception & 
-            The user didn't confirm the second time within one hour, therefore the request expires
+        \begin{minipage}{0.7\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item The user didn't confirm the second time within one hour, therefore the request expires
+            \end{itemize}
+            \end{minipage}
         \\
         \hline       
     \end{tabular}
