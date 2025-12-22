@@ -3,7 +3,7 @@ In this section, we verify the consistency of the BBP system specifications usin
 We focused our modeling efforts on four critical aspects of the system:
 \begin{enumerate}
     \item \textbf{User Hierarchy and Permissions:} Ensuring a strict separation between Users and Registered Users who can contribute data.
-    \item \textbf{Activity lifecycle:} Veryfing that activities follow the desired path during their evolution.
+    \item \textbf{Activity lifecycle:} Verifying that activities follow the desired path during their evolution.
     \item \textbf{Data Governance Lifecycle:} Verifying that sensor data (Reports) follows a strict temporal evolution.
 \end{enumerate}
 
@@ -71,7 +71,7 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
         PAUSE,          // Paused
         WAIT_CONF,      // Waiting detections confirmation
         WAIT_RAT,       // Waiting rating
-        WEAT_ENR,       // Waether enrichment
+        WEAT_ENR,       // Weather enrichment
         COMPLETED       // completed
     }
 
@@ -311,6 +311,7 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
 
     run showActivityLifecycleWithWeatherEnrichment
     \end{lstlisting}
+    \pagebreak
 
     % ---------------------------------------------------------------------------------------------------------------------------------------------------------
     \subsection{Verification Results}
@@ -335,7 +336,7 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
     The second round of run explores the evolution of an Activity.
     \begin{itemize}
         \item Figures \ref{fig:activity_lifecycle_t0},\ref{fig:activity_lifecycle_t1},\ref{fig:activity_lifecycle_t2} show the evolution of an activity
-        from the beginnning to its completition, without retriving weather data (the figures shown the transiton only throught the \texttt{Ogoing} 
+        from the beginning to its completion, without retrieving weather data (the figures shown the transition only through the \texttt{Ongoing} 
         state, however the evolution is the same also by passing for the \texttt{Monitored ongoing} state).
         \item Figures \ref{fig:activity_paused_t0}, \ref{fig:activity_paused_t1} show the case in which an activity is paused and then resumed by the user.
         \item Figures \ref{fig:activity_weather_t0}, \ref{fig:activity_weather_t1} show the case in which weather data are available for the terminated activity.
@@ -359,7 +360,7 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
     \begin{figure}[H]
         \centering
         \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{RASD/alloy/alloy_activity_lifecycle_t2.png}}
-        \caption{Step T2, T3 - The Activity is in the \texttt{Waiting rating(WAITING\_RAT)} state. After receving the rating, the Activity transtions in the
+        \caption{Step T2, T3 - The Activity is in the \texttt{Waiting rating(WAITING\_RAT)} state. After receiving the rating, the Activity transtions in the
         \texttt{COMPLETED} state and will remain in it.}
         \label{fig:activity_lifecycle_t2}
     \end{figure}
