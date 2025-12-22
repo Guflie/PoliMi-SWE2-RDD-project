@@ -16,9 +16,9 @@
     Figure \ref{fig:domain_model} shows the domain class diagram. The following points outline some choices made while modeling the domain:
    
     \begin{itemize}
-        \item \textbf{User \& Trip generalizations:} two superclasses were introduced to standardize and encapsulate the core functionalities shared by a
-        ll elements. By contrast, their specialization classes are responsible for capturing and highlighting the specific, differentiated relationships that 
-        these elements have with the rest of the domain components.
+        \item \textbf{User \& Trip generalizations:} two superclasses were introduced to standardize and encapsulate the core functionalities shared by all 
+        elements participating the generalization. By contrast, their specialization classes are responsible for capturing and highlighting the specific, 
+        differentiated relationships that these elements have with the rest of the domain components.
 
         \item \textbf{Publishable Info abstraction:} the introduction of this abstraction was motivated by the intent to make the defined set of publishable 
         information highly adaptable, in order to maximize flexibility for future extensions about publishable informations.
@@ -40,7 +40,7 @@
 
 The diagram in Figure \ref{fig:trip_lifecycle} models the complete lifecycle of an Activity. The process begins with the \texttt{Route Definition} state, in which the route to be traveled is established. 
 Subsequently, depending on whether the user decides to automatically monitor the trip, the Activity transitions into either the \texttt{Monitored ongoing} state or the \texttt{Ongoing} state. From either 
-ongoing states, the \textbf{Activity} can enter the \texttt{Paused} state if the user performs the \textit{stop action}, and it returns to the previous ongoing state if the user \textit{resumes} it. Within 
+ongoing states, the \textbf{Activity} can enter the \texttt{Paused} state if the user performs the \textit{stop} action, and it returns to the previous ongoing state if the user \textit{resumes} it. Within 
 the \texttt{Monitored ongoing} state, the system also performs the \textit{sampling} of sensor data in order to detect anomalies along the path. When the user chooses to \textit{terminate} the activity, the 
 transition depends on the current state: 
 \begin{itemize} 
@@ -48,8 +48,8 @@ transition depends on the current state:
     \item If the \textbf{Activity} is in the \texttt{Monitored ongoing} state, it first passes through the \texttt{Waiting detections} confirmation state, where the system waits for the user to \textit{confirm/discard} 
     automatically detected issues. After receiving user confirmations, it then transitions to the \texttt{Waiting rating} state. 
 \end{itemize}
-In the \texttt{Waiting rating} state, the Activity awaits a score for the path from the user. Following this input, the Activity may optionally enter the \texttt{Weather enrichmenten} state, depending 
-on whether the External Weather Service is available; otherwise, it will transition directly to the \texttt{Completed} state.
+In the \texttt{Waiting rating} state, the Activity waits a score for the path from the user. Following this input, the Activity may optionally enter the \texttt{Weather enrichmenten} state, depending 
+on whether the External Weather Service is available or not; otherwise, it will transition directly to the \texttt{Completed} state.
 
     \textbf{Issue Lifecycle} 
 
@@ -60,12 +60,12 @@ on whether the External Weather Service is available; otherwise, it will transit
         \label{fig:data_lifecycle}
     \end{figure}
 
-The diagram in Figure \ref{fig:data_lifecycle} models the complete Issue lifecycle, from its origin to its final state. The process rigorously distinguishes th issue based on its source to direct it to the correct 
+The diagram in Figure \ref{fig:data_lifecycle} models the complete Issue lifecycle, from its origin to its final state. The process rigorously distinguishes the issue based on its source to direct it to the correct 
 validation path. The flow forks immediately from the initial state: 
 \begin{itemize} 
     \item \textbf{Manual report}: Once submitted, the report directly becomes an entity on its own by entering in the \texttt{Submitted} state. 
     \item \textbf{Automatic report}: Upon automatic detection, the report enters the \texttt{waiting confirmation} state, in which it waits for the user to \textit{confirm} or \textit{discard} it. Consequently, it 
     transitions into the corresponding \texttt{Confirmed} or \texttt{Discarded} state. If the issue is \texttt{Discarded} then there would be no further evolution. If the issue is \texttt{Confirmed} then it transitions
-    in the \texttt{Submitted} state, ending up in the same final state as the manual reported issues.
+    in the \texttt{Submitted} state, ending up in the same final state as manual reported issues.
 \end{itemize}
 \pagebreak
