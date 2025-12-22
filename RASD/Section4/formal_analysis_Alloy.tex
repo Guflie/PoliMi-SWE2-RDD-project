@@ -1,9 +1,9 @@
-\section{Formal anlaysis using Alloy}
+\section{Formal analysis using Alloy}
 In this section, we verify the consistency of the BBP system specifications using \textbf{Alloy 6}. 
 We focused our modeling efforts on four critical aspects of the system:
 \begin{enumerate}
-    %aggiungere quello che fa LEO
     \item \textbf{User Hierarchy and Permissions:} Ensuring a strict separation between Users and Registered Users who can contribute data.
+    \item \textbf{Activity lifecycle:} Veryfing that activities follow the desired path during their evolution.
     \item \textbf{Data Governance Lifecycle:} Verifying that sensor data (Reports) follows a strict temporal evolution.
 \end{enumerate}
 
@@ -13,10 +13,10 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
     First, we define the physical domain and the user hierarchy. We explicitly model \texttt{RegisteredUser} as a specialization of the 
     generic \texttt{User}. This structural constraint ensures that only registered users possess an email and the capability to be authors.
 
-    \begin{lstlisting}[language=alloy, caption={BBP Static Structure and User Hierarchy}]
+    \begin{lstlisting}[language=alloy, caption={BBP Static Structure and Hierarchies}]
     module BBP_System
 
-    // --- DOMAIN ENTITIES ---
+    // --- GENERAL DOMAIN ENTITIES ---
     sig GeoPoint {}
 
     sig Path {
@@ -30,7 +30,7 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
 
     sig DateTime {}
 
-    sig Trip {
+    sig Ride {
         trip_path: one Path,
         starting_datetime: one DateTime,
         ending_datetime: one DateTime
@@ -40,10 +40,9 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
         all t: Trip | t.starting_datetime != t.ending_datetime
     }
 
-    // --- USER HIERARCHY ---
     // "User" represents any user of the system.
     sig User {
-        user_trips: set Trip
+        user_trips: set Ride
     }
 
     // A trip belongs to exactly one user.
@@ -62,13 +61,136 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
     fact single_mail_single_account { 
         all e: Email | one email_address.e 
     }
+
+    // enum listing all Activity states (see 2.1.3, Activity Lifecycle)
+    enum ActivityStatus {
+        START,
+        ROUTE_DEF,      // Route definition
+        ON,             // Ogoning
+        MON_ON,         // Monitored ongoing
+        PAUSE,          // Paused
+        WAIT_CONF,      // Waiting detections confirmation
+        WAIT_RAT,       // Waiting rating
+        WEAT_ENR,       // Waether enrichment
+        COMPLETED       // completed
+    }
+
+    sig Activity extends Ride { 
+        var act_status : one ActivityStatus
+    }
+
+    // --- activity constraints
+    fact activity_only_to_registered_user {
+        all a : Activity | user_trips.a in RegisteredUser
+    }
+    
+    fact ride_to_normal_users { 
+        all r: Ride | r in Ride-Activity implies user_trips.r in User-RegisteredUser 
+    }
     \end{lstlisting}
 
+    % ---------------------------------------------------------------------------------------------------------------------------------------------------------    
+    \subsection{Activity Lifecycle}
+    In thie part we introduction the portion of the model to represent the evolution of an \textbf{Activity}.
+
+    \begin{lstlisting}[language=alloy, caption={Dynamic Logic and State Transitions of Activities}]
+
+    // --- ACTIVITY LIFECYCLE ---
+    fact init_activity_state {
+        all a : Activity | a.act_status = ROUTE_DEF
+    }
+
+    pred do_nothing_activity {
+        act_status' = act_status
+    }
+
+    pred start_activity [a : Activity] {
+            a.act_status =  ROUTE_DEF
+            all ac : Activity-a | ac.act_status' = ac.act_status
+            a.act_status' = ON
+    }
+
+    pred start_monitored_activity [a : Activity] {
+            a.act_status =  ROUTE_DEF
+            all ac : Activity-a | ac.act_status' = ac.act_status
+        a.act_status' = MON_ON
+    }
+
+    pred stop_activity [a : Activity] {
+            a.act_status in ON+MON_ON
+            all ac : Activity-a | ac.act_status' = ac.act_status
+            a.act_status' = PAUSE
+    }
+
+    pred  resume_activity [a : Activity] {
+                a.act_status = PAUSE
+                all ac : Activity-a | ac.act_status' = ac.act_status
+            a.act_status' in ON+MON_ON
+    }
+
+    // the two following facts are needed to keep the activity consistent with the choice of normal or monitored after PAUSE state
+    fact resume_activity_constraint_1 {
+        all a : Activity | always (
+            a.act_status = ON implies historically (a.act_status != MON_ON)
+        )
+    }
+    fact resume_activity_constraint_2 {
+        all a : Activity | always (
+            a.act_status = MON_ON implies historically (a.act_status != ON)
+        )
+    }
+
+    pred terminate_monitored_activity [a : Activity] {
+            a.act_status = MON_ON
+            all ac : Activity-a | ac.act_status' = ac.act_status
+            a.act_status' = WAIT_CONF
+    }
+
+    pred rate_activity [a : Activity] {
+            a.act_status in ON+WAIT_CONF
+            all ac : Activity-a | ac.act_status' = ac.act_status
+            a.act_status' = WAIT_RAT
+    }
+
+    pred get_weather_info [a : Activity] {
+            a.act_status = WAIT_RAT
+            all ac : Activity-a | ac.act_status' = ac.act_status
+            a.act_status' = WEAT_ENR
+    }
+
+    pred complete_activity [a : Activity] {
+            a.act_status in WEAT_ENR+WAIT_RAT
+            all ac : Activity-a | ac.act_status' = ac.act_status
+            a.act_status' = COMPLETED
+    }
+
+    // ensures that once an activity reaches the COMPLETED state, it will remain forever in it
+    fact final_activity_state_stability  {
+        all a : Activity | always (a.act_status = COMPLETED implies always a.act_status = COMPLETED)
+    }
+
+    fact valid_traces {
+        always (
+            do_nothing_activity or
+            ( some a : Activity | start_activity[a] ) or
+            ( some a : Activity | start_monitored_activity[a] ) or
+            ( some a : Activity | stop_activity[a] ) or
+            ( some a : Activity | resume_activity[a] ) or
+            ( some a : Activity | terminate_monitored_activity[a] ) or
+            ( some a : Activity | rate_activity[a] ) or
+            ( some a : Activity | get_weather_info[a] ) or
+            ( some a : Activity | complete_activity[a] )
+        )	
+    }
+
+    \end{lstlisting}
+
+    % ---------------------------------------------------------------------------------------------------------------------------------------------------------
     \subsection{Data Lifecycle}
     Here we model the \textbf{Data Governance} process. We introduce the \texttt{Report} signature with a mutable field \texttt{status}.
     The \texttt{Stability} fact ensures that once a report is validated, it cannot revert to a pending state, preserving the integrity of the public inventory.
 
-    \begin{lstlisting}[language=alloy, caption={Dynamic Logic and State Transitions}]
+    \begin{lstlisting}[language=alloy, caption={Dynamic Logic and State Transitions for Reports}]
     // --- DATA GOVERNANCE ---
     enum ReportStatus { Pending, Confirmed, Discarded }
 
@@ -77,35 +199,35 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
         author: one RegisteredUser, 
         refersTo: one Path,
         // DYNAMIC: The status changes over time.
-        var status: one ReportStatus 
+        var report_status: one ReportStatus 
     }
 
     // Initial State: All reports start as Pending.
     fact Init {
-        all r: Report | r.status = Pending
+        all r: Report | r.report_status = Pending
     }
 
     // Stability: Terminal states are final.
     fact Stability {
-        always (all r: Report | r.status = Confirmed implies 
-                always r.status = Confirmed)
-        always (all r: Report | r.status = Discarded implies 
-                always r.status = Discarded)
+        always (all r: Report | r.report_status = Confirmed implies 
+                always r.report_status = Confirmed)
+        always (all r: Report | r.report_status = Discarded implies 
+                always r.report_status = Discarded)
     }
 
     pred confirmReport [r: Report] {
-        r.status = Pending
-        r.status' = Confirmed
-        all r2: Report - r | r2.status' = r2.status
+        r.report_status = Pending
+        r.report_status' = Confirmed
+        all r2: Report - r | r2.report_status' = r2.report_status
     }
 
     pred discardReport [r: Report] {
-        r.status = Pending
-        r.status' = Discarded
-        all r2: Report - r | r2.status' = r2.status
+        r.report_status = Pending
+        r.report_status' = Discarded
+        all r2: Report - r | r2.report_status' = r2.report_status
     }
 
-    pred doNothing { status' = status }
+    pred doNothing { report_status' = report_status }
 
     fact Traces {
         always (
@@ -116,6 +238,7 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
     }
     \end{lstlisting}
 
+    % ---------------------------------------------------------------------------------------------------------------------------------------------------------
     \subsection{Verification Predicates}
     To validate the model, we defined specific predicates that force the solver to search for instances satisfying our structural and temporal requirements.
 
@@ -141,23 +264,60 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
 
     The second predicate validates the temporal logic. It ensures that the model allows a Report to evolve from its initial state to a finalized state, confirming the reachability of the "Confirmed" status. 
 
-    \begin{lstlisting}[language=alloy, caption={Predicate: Data Lifecycle Reachability}]
-    pred showDataLifecycle {
-        // Scope Reduction: We focus on a single actor and report for clarity
+    \begin{lstlisting}[language=alloy, caption={Predicate: Activity lifecycle}]
+    pred showActivityLifecycle {
+        // just to make the model instance more readable
+        no User-RegisteredUser
+        no Activity-Ride
+        ------------------------------
+        one Path
+        one Activity
         one RegisteredUser
-        one Report
-    
-        // Temporal Goal: The system must eventually reach a Confirmed state
-        eventually (some r: Report | r.status = Confirmed)
+        eventually ( some a : Activity | a.act_status = COMPLETED )	
     }
-    
-    run showDataLifecycle for 4
+
+    run showActivityLifecycle
+
     \end{lstlisting}
 
+    \begin{lstlisting}[language=alloy, caption={Predicate: Activity lifecycle with pause}]
+    pred showActivityLifecycleWithPause {
+        // just to make the model instance more readable
+        no User-RegisteredUser
+        no Activity-Ride
+        ------------------------------
+        one Path
+        one Activity
+        one RegisteredUser
+        eventually ( some a : Activity | a.act_status = COMPLETED )	
+        not (some a : Activity | a.act_status = COMPLETED) until (some a : Activity | a.act_status = PAUSE)
+    }
+
+    run showActivityLifecycleWithPause
+    \end{lstlisting}
+
+    \begin{lstlisting}[language=alloy, caption={Predicate: Activity lifecycle with weather enrichment}]
+    pred showActivityLifecycleWithWeatherEnrichment {
+        // just to make the model instance more readable
+        no User-RegisteredUser
+        no Activity-Ride
+        ------------------------------
+        one Path
+        one Activity
+        one RegisteredUser
+        eventually ( some a : Activity | a.act_status = COMPLETED )	
+        not (some a : Activity | a.act_status = COMPLETED) until (some a : Activity | a.act_status = WEAT_ENR)
+    }
+
+    run showActivityLifecycleWithWeatherEnrichment
+    \end{lstlisting}
+
+    % ---------------------------------------------------------------------------------------------------------------------------------------------------------
     \subsection{Verification Results}
     We executed the model to verify two key scenarios. The solver successfully generated consistent instances for both, proving the validity of the 
     specifications.
-
+    
+    % ----------------------------------------------------------
     \subsubsection{Scenario 1: User Distinction}
     The first run highlights the structural difference between a generic \texttt{User} and a \texttt{RegisteredUser}.
     As shown in Figure \ref{fig:alloy_users}, the system correctly isolates the capabilities: only the registered user is associated with an email and 
@@ -165,30 +325,95 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
 
     \begin{figure}[H]
         \centering
-        \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{alloy_user_distinction.png}}
+        \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{RASD/alloy/alloy_user_distinction.png}}
         \caption{Alloy World generation showing the distinction between a Generic User and a Registered User.}
         \label{fig:alloy_users}
     \end{figure}
 
-    \subsubsection{Scenario 2: Data Lifecycle Evolution}
-    The second run verifies the temporal evolution of a Report. 
-    The following figures illustrate the transition satisfying the Data Governance requirements defined in Section 3:
+    % ----------------------------------------------------------
+    \subsubsection{Scenario 2: Activity Lifecycle}
+    The second round of run explores the evolution of an Activity.
     \begin{itemize}
-        \item Figure \ref{fig:lifecycle_t0} shows the initial creation state where the data is \texttt{Pending}.
-        \item Figure \ref{fig:lifecycle_t1} shows the subsequent validation state where the status becomes \texttt{Confirmed}.
+        \item Figures \ref{fig:activity_lifecycle_t0},\ref{fig:activity_lifecycle_t1},\ref{fig:activity_lifecycle_t2} show the evolution of an activity
+        from the beginnning to its completition, without retriving weather data (the figures shown the transiton only throught the \texttt{Ogoing} 
+        state, however the evolution is the same also by passing for the \texttt{Monitored ongoing} state).
+        \item Figures \ref{fig:activity_paused_t0}, \ref{fig:activity_paused_t1} show the case in which an activity is paused and then resumed by the user.
+        \item Figures \ref{fig:activity_weather_t0}, \ref{fig:activity_weather_t1} show the case in which weather data are available for the terminated activity.
     \end{itemize}
+    To avoid repeating the same steps, for the last two point only relevant changes in the evolution are shown.
 
     \begin{figure}[H]
         \centering
-        \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{alloy_lifecycle_T0.png}}
-        \caption{Step T0 - The Report is created in 'Pending' status. It is associated with a Path and an Author, but it is not yet public.}
-        \label{fig:lifecycle_t0}
+        \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{RASD/alloy/alloy_activity_lifecycle_t0.png}}
+        \caption{Step T0, T1 - The Activity starts in the \texttt{Route definition(ROUTE\_DEF)} state. Once the user starts it, the activity 
+        transitions in the \texttt{Ongoing(ON)}.}
+        \label{fig:activity_lifecycle_t0}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{RASD/alloy/alloy_activity_lifecycle_t1.png}}
+        \caption{Step T1, T2 - The Activity is in the \texttt{Ongoing(ON)} state. Once stopped, it transitions to \texttt{Waiting rating(WAITING\_RAT)} in which
+        is waiting for the user to rate the path.}
+        \label{fig:activity_lifecycle_t1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{RASD/alloy/alloy_activity_lifecycle_t2.png}}
+        \caption{Step T2, T3 - The Activity is in the \texttt{Waiting rating(WAITING\_RAT)} state. After receving the rating, the Activity transtions in the
+        \texttt{COMPLETED} state and will remain in it.}
+        \label{fig:activity_lifecycle_t2}
     \end{figure}
 
     \begin{figure}[H]
         \centering
-        \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{alloy_lifecycle_T1.png}}
+        \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{RASD/alloy/activity_paused_t0.png}}
+        \caption{Step T1, T2 - The Activity is in the \texttt{Ongoing(ON)} state. The user might stop it, therefore it transitions in the \texttt{PAUSE} state.}
+        \label{fig:activity_paused_t0}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{RASD/alloy/activity_paused_t1.png}}
+        \caption{Step T2, T3 - The Activity is in the \texttt{Waiting rating(PAUSE)} state. Once the user resumes the activity, it transitions back in the \texttt{Ongoing(ON)} 
+        state (the model avoid to transition in the wrong previou state e.g. \texttt{MON\_ON}).}
+        \label{fig:activity_paused_t1}
+    \end{figure}
+
+        \begin{figure}[H]
+        \centering
+        \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{RASD/alloy/activity_weather_t0.png}}
+        \caption{Step T2, T3 - The Activity is in the \texttt{Waiting rating(WAITING\_RAT)} state. Now the weather data during the activity is available, so 
+        it transition in the \texttt{Weather enrichment(WEAT\_ENR)} state.}
+        \label{fig:activity_weather_t0}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{RASD/alloy/activity_weather_t1.png}}
+        \caption{Step T3, T4 - The Activity is in the \texttt{Weather enrichment(WEAT\_ENR)} state. Once weather data about the activity are correctly loaded, The
+        activity transtions in the \texttt{COMPLETED} state.}
+        \label{fig:activity_weather_t1}
+    \end{figure}
+
+
+    % ----------------------------------------------------------
+    \subsubsection{Scenario 3: Data Lifecycle Evolution}
+    The third run verifies the temporal evolution of a Report. 
+    The following figures illustrate the transition satisfying the Data Governance requirements defined in Section 3:
+    \begin{itemize}
+        \item Figure \ref{fig:data_lifecycle_t0} shows the initial creation state where the data is \texttt{Pending}.
+        \item Figure \ref{fig:data_lifecycle_t1} shows the subsequent validation state where the status becomes \texttt{Confirmed}.
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{RASD/alloy/alloy_data_lifecycle_T0.png}}
+        \caption{Step T0 - The Report is created in 'Pending' status. It is associated with a Path and an Author, but it is not yet public.}
+        \label{fig:data_lifecycle_t0}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{RASD/alloy/alloy_data_lifecycle_T1.png}}
         \caption{Step T1 - The Registered User validates the report. The status transitions to 'Confirmed' preserving the data 
         integrity defined in the Stability fact.}
-        \label{fig:lifecycle_t1}
+        \label{fig:data_lifecycle_t1}
     \end{figure}
