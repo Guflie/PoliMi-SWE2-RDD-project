@@ -46,7 +46,7 @@ transition depends on the current state:
     \item If the \textbf{Activity} is in the \texttt{Monitored ongoing} state, it first passes through the \texttt{Waiting detections} confirmation state, where the system waits for the user to \textit{confirm/discard} 
     automatically detected issues. After receiving user confirmations, it then transitions to the \texttt{Waiting rating} state. 
 \end{itemize}
-In the \texttt{Waiting rating} state, the Activity waits a score for the path from the user. Following this input, the Activity may optionally enter the \texttt{Weather enrichmenten} state, depending 
+In the \texttt{Waiting rating} state, the Activity waits a score for the path from the user. Following this input, the Activity may optionally enter the \texttt{Weather enrichment} state, depending 
 on whether the External Weather Service is available or not; otherwise, it will transition directly to the \texttt{Completed} state.
 
     \textbf{Issue Lifecycle} 

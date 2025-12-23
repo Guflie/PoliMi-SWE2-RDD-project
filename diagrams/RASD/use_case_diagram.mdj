@@ -2528,7 +2528,7 @@
 										"$ref": "AAAAAAGbS0qfriFFW+I="
 									},
 									"edgePosition": 1,
-									"text": "«partecipate»"
+									"text": "«participate»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -4767,7 +4767,7 @@
 										"$ref": "AAAAAAGbS1JQoEi80e4="
 									},
 									"edgePosition": 1,
-									"text": "«partecipate»"
+									"text": "«participate»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -5054,7 +5054,7 @@
 										"$ref": "AAAAAAGbS1Lq7WO2EJA="
 									},
 									"edgePosition": 1,
-									"text": "«partecipate»"
+									"text": "«initiate»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -5341,7 +5341,7 @@
 										"$ref": "AAAAAAGbS1MND2bfwzI="
 									},
 									"edgePosition": 1,
-									"text": "«partecipate»"
+									"text": "«initiate»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -5628,7 +5628,7 @@
 										"$ref": "AAAAAAGbS1MrnWoyaqA="
 									},
 									"edgePosition": 1,
-									"text": "«partecipate»"
+									"text": "«initiate»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -5915,7 +5915,7 @@
 										"$ref": "AAAAAAGbS1NKx25va9w="
 									},
 									"edgePosition": 1,
-									"text": "«partecipate»"
+									"text": "«initiate»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -6940,7 +6940,7 @@
 										"$ref": "AAAAAAGbS1WWkNXzUdI="
 									},
 									"edgePosition": 1,
-									"text": "«partecipate»"
+									"text": "«initiate»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -7223,7 +7223,7 @@
 										"$ref": "AAAAAAGbS1XFG98Sv/A="
 									},
 									"edgePosition": 1,
-									"text": "«partecipate»"
+									"text": "«initiate»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -7719,7 +7719,7 @@
 										"$ref": "AAAAAAGbS1Z0i/8x9NQ="
 									},
 									"edgePosition": 1,
-									"text": "«partecipate»"
+									"text": "«initiate»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -8212,7 +8212,7 @@
 										"$ref": "AAAAAAGbS1b9Th7Pi9w="
 									},
 									"edgePosition": 1,
-									"text": "«partecipate»"
+									"text": "«initiate»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -8614,7 +8614,7 @@
 											"$ref": "AAAAAAGbS0c42hNNwGc="
 										}
 									},
-									"stereotype": "partecipate"
+									"stereotype": "participate"
 								}
 							]
 						},
@@ -8720,7 +8720,7 @@
 											"$ref": "AAAAAAGbS0wYCSec0m0="
 										}
 									},
-									"stereotype": "partecipate"
+									"stereotype": "participate"
 								}
 							]
 						},
@@ -8848,7 +8848,7 @@
 									"$ref": "AAAAAAGbS0uPoiQAdRM="
 								}
 							},
-							"stereotype": "partecipate"
+							"stereotype": "initiate"
 						},
 						{
 							"_type": "UMLAssociation",
@@ -8876,7 +8876,7 @@
 									"$ref": "AAAAAAGbS0uyYyUiGrQ="
 								}
 							},
-							"stereotype": "partecipate"
+							"stereotype": "initiate"
 						},
 						{
 							"_type": "UMLAssociation",
@@ -8904,7 +8904,7 @@
 									"$ref": "AAAAAAGbS0vu2SZ6IW4="
 								}
 							},
-							"stereotype": "partecipate"
+							"stereotype": "initiate"
 						},
 						{
 							"_type": "UMLAssociation",
@@ -8932,7 +8932,7 @@
 									"$ref": "AAAAAAGbS0vF8yXOh7c="
 								}
 							},
-							"stereotype": "partecipate"
+							"stereotype": "initiate"
 						},
 						{
 							"_type": "UMLAssociation",
@@ -8960,7 +8960,7 @@
 									"$ref": "AAAAAAGbS1PPOnxa6oo="
 								}
 							},
-							"stereotype": "partecipate"
+							"stereotype": "initiate"
 						},
 						{
 							"_type": "UMLAssociation",
@@ -8988,7 +8988,7 @@
 									"$ref": "AAAAAAGbS1PtfX4CVwk="
 								}
 							},
-							"stereotype": "partecipate"
+							"stereotype": "initiate"
 						},
 						{
 							"_type": "UMLAssociation",
@@ -9016,7 +9016,7 @@
 									"$ref": "AAAAAAGbS1Y96/Y6aNs="
 								}
 							},
-							"stereotype": "partecipate"
+							"stereotype": "initiate"
 						},
 						{
 							"_type": "UMLAssociation",
@@ -9044,7 +9044,7 @@
 									"$ref": "AAAAAAGbS1aeYQZHtuE="
 								}
 							},
-							"stereotype": "partecipate"
+							"stereotype": "initiate"
 						}
 					]
 				},
