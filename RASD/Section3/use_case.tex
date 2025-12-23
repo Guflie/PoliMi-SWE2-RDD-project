@@ -55,7 +55,7 @@
             \item Email inserted during registration has been already used, therefore the account is not created and in the point \textit{4.} instead of a link an informative message is sent. 
             \item The user doesn't open the confirmation link within an hour, therefore the account creation procedure is aborted and the submitted data cancelled. If the confirmation link is
             open after 1 hour, an error message is sent.
-        \end{itemize} 
+            \end{itemize} 
         \smallskip
         \end{minipage}
         \\
@@ -391,7 +391,6 @@
 
 \pagebreak
 % --------------------------------------------------------------------------------------------------
-% TODO: give a deep tought about this Use Case, maybe it isn't such relevant to be listed explicitly?
 \subsubsection*{[UC9] Activity trip}
 \FloatBarrier
 \begin{table}[ht!]
@@ -429,8 +428,10 @@
         Exception & 
             \begin{minipage}{0.7\textwidth}
             \smallskip
-            Weather conditions can't be retrived from the third party 
+            \begin{itemize}
+            \item Weather conditions can't be retrived from the third party 
             service, therefore those information won't be linked to the activity
+            \end{itemize}
             \smallskip
             \end{minipage}
         \\
