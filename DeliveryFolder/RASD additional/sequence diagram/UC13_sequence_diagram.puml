@@ -1,0 +1,34 @@
+@startuml uc13_sequence_diagram
+actor "Registered User" as User
+participant "BBP App" as App
+
+autonumber
+
+activate User
+
+User -> App : start_automatically_monitored_activity(path)
+activate App
+App -> App : retrieve_path_map(path)
+deactivate App
+App -->> User : path_map()
+
+' --------------------------
+
+loop During activity
+    User -> User : collect_sensor_data()
+    User -> User : analyze_data_for_issues()
+end
+
+User -> App : stop_activity(raw_detected_data)
+activate App
+App -> App : generate_detected_issues_list()
+App -->> User : display_issue_confirmation_form(issue_list)
+deactivate App
+
+User -> App : submit_confirmed_issues(confirmed_list)
+activate App
+App -> App : update_path_status(confirmed_list)
+App -->> User : issue_report_ack()
+deactivate App
+
+@enduml

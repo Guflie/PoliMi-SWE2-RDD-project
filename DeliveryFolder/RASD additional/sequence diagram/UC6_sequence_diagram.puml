@@ -1,0 +1,23 @@
+@startuml uc6_sequence_diagram
+hide footbox
+
+actor User
+participant "BBP App" as App
+
+autonumber
+
+activate User
+
+User -> App : submit_route_points(start_point, destination)
+activate App
+
+App -> App : retrieve_nearby_paths(start_point, destination)
+note right: if no path is available refer to UC7 
+App -> App : rank_paths_by_score()
+
+App -->> User : paths()
+deactivate App
+
+deactivate App
+deactivate User
+@enduml

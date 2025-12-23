@@ -1,0 +1,35 @@
+@startuml uc3_sequence_diagram
+hide footbox
+
+actor "Registered User" as User
+participant "BBP App" as App
+
+autonumber
+
+activate User
+
+User -> App : select_modify_account()
+activate App
+App -->> User : display_attribute_selection()
+note right: account email and password are excluded from this procedure
+deactivate App
+
+User -> App : submit_attribute_update(attribute, new_value)
+
+activate App
+App -> App : validate_update_request()
+
+
+alt #ffe6e6 Restricted Attribute (Email or Password)
+    ' Exception 1: User tries to modify restricted fields
+    App -->> User : modification_error()
+
+else #e6ffe6 Valid Attribute
+    ' Success Flow
+    App -> App : update_account_profile()
+    App -->> User : update_acknowledgement()
+end
+
+deactivate App
+deactivate User
+@enduml

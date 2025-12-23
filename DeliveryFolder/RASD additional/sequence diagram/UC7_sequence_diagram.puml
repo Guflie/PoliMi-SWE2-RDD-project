@@ -1,0 +1,28 @@
+@startuml uc7_sequence_diagram
+hide footbox
+
+actor User
+participant "BBP App" as App
+participant "External Mapping Service" as MapService
+
+autonumber
+
+activate User
+User -> App : submit_route_points(start_point, ending_point)
+activate App
+
+App -> App : retrieve_nearby_paths(start_point, ending_point)
+note right: No internal matches found
+
+App -> MapService : get_path(start_point, ending_point) 
+activate MapService
+MapService -> MapService : compute_path(start_point, ending_point)
+MapService -->> App : path()
+deactivate MapService
+
+App -->> User : path()
+deactivate App
+
+deactivate App
+deactivate User
+@enduml

@@ -1,0 +1,24 @@
+@startuml uc15_sequence_diagram
+actor "Registered User" as User
+participant "BBP App" as App
+
+autonumber
+
+activate User
+
+User -> App : open_activity_history()
+activate App
+App -->> User : activity_list()
+deactivate App
+
+User -> App : delete_activity(activity_id)
+activate App
+App -->> User : activity_deletion_confirm()
+User -> App : confirm_deletion()
+
+App -> App : remove_activity_from_history()
+App -->> User : deletion_acknowledgement()
+
+deactivate App
+deactivate User
+@enduml
