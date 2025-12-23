@@ -11,57 +11,58 @@ left to right direction
 u <|--- ru
 
 ' --- Use Cases for User ---
-(Account registration [UC1]) as uc1
-u --- uc1
+(Account creation) as uc1
+u --- uc1 : <<initiate>>
 
-(Trip planning [UC6]) as uc6
-u --- uc6
+(Trip planning) as uc6
+u --- uc6 : <<initiate>>
 
-(Trip unregistered user [UC8]) as uc8
-u --- uc8
+(Ride trip) as uc8
+u --- uc8 : <<initiate>>
 uc8 ...> uc6 :  <<include>>
 
-(Route creation [UC7]) as uc7
+(Route creation) as uc7
 uc7 ...> uc6 : <<extends>>
-uc7 --- ms
+uc7 --- ms : <<partecipate>>
+
 
 
 ' --- Use Cases for Registered User ---
-(Login [UC2]) as uc2
-ru --- uc2
+(Login) as uc2
+ru --- uc2 : <<inititate>>
 
-(Account modification [UC3]) as uc3
-ru --- uc3
+(Account update) as uc3
+ru --- uc3 : <<initiate>>
 
-(Password reset [UC4]) as uc4
-ru --- uc4
+(Password reset) as uc4
+ru --- uc4 : <<initiate>>
 
-(Account deletion [UC5]) as uc5
-ru --- uc5
+(Account deletion) as uc5
+ru --- uc5 : <<initiate>>
 
-(Trip registered user [UC9]) as uc9
-ru --- uc9
+(Activity trip) as uc9
+ru ---- uc9 : <<initiate>>
 uc8 <|- uc9
 
-(Automatic trip monitoring [UC10]) as uc10
-ru --- uc10
+(Automatic activity monitoring) as uc10
+ru --- uc10 : <<initiate>>
 uc9 <. uc10 : <<extends>>
-uc10 - ws
+uc10 - ws: <<partecipates>>
 
-(Manual route problem report [UC11]) as uc11
-ru --- uc11
+(Manual route problem report) as uc11
+ru --- uc11 : <<initiate>>
 
-(Route fixup report [UC12]) as uc12
-ru --- uc12
+(Route fixup report) as uc12
+ru --- uc12 : <<initiate>>
 
-(Automatic route problem report [UC13]) as uc13
-ru --- uc13
-uc13 ...> uc10 : <<include>>  
+(Automatic route problem report) as uc13
 
-(Activity history consulatation [UC14]) as uc14
-ru --- uc14
+uc13 ...> uc10 : <<extend>>  
 
-(Activity deletion from history [UC15]) as uc15
-ru --- uc15
+(Activity history consultation) as uc14
+ru --- uc14 : <<initiate>>
+
+(Activity deletion from history) as uc15
+ru --- uc15 : <<initiate>>
 
 @enduml

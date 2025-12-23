@@ -1146,7 +1146,7 @@
 											"top": 551,
 											"width": 151,
 											"height": 13,
-											"text": "Weather enrichement"
+											"text": "Weather enrichment"
 										},
 										{
 											"_type": "LabelView",
@@ -2467,7 +2467,7 @@
 										"$ref": "AAAAAAGbPGuC1cOrxs8="
 									},
 									"edgePosition": 1,
-									"text": "reated [weather unavailable]"
+									"text": "rated [weather unavailable]"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -2655,7 +2655,7 @@
 									},
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 1251,
+									"left": 1272,
 									"top": 669,
 									"width": 110.58251953125,
 									"height": 13,
@@ -2679,7 +2679,7 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 1306,
+									"left": 1327,
 									"top": 684,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -2701,7 +2701,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 1307,
+									"left": 1328,
 									"top": 639,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -2721,7 +2721,7 @@
 							"tail": {
 								"$ref": "AAAAAAGbPF/oRcIrSUY="
 							},
-							"points": "1307:584;1307:660;1213:660",
+							"points": "1328:584;1328:660;1213:660",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGbPGwXZsPb6P4="
@@ -2923,7 +2923,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGbPF7JZMEREgU="
 							},
-							"name": "Weather enrichement"
+							"name": "Weather enrichment"
 						},
 						{
 							"_type": "UMLState",
@@ -3188,7 +3188,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGbPGuC1cOqKGI="
 									},
-									"name": "reated"
+									"name": "rated"
 								}
 							]
 						},

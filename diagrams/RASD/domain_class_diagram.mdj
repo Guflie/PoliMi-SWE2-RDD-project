@@ -3361,7 +3361,7 @@
 											"top": 455,
 											"width": 152.68359375,
 											"height": 13,
-											"text": "PusblishableInformation"
+											"text": "PublishableInformation"
 										},
 										{
 											"_type": "LabelView",
@@ -7321,7 +7321,7 @@
 											"top": 877,
 											"width": 134.3134765625,
 											"height": 13,
-											"text": "+accellerometerX: float",
+											"text": "+accelerometerX: float",
 											"horizontalAlignment": 0
 										},
 										{
@@ -7341,7 +7341,7 @@
 											"top": 892,
 											"width": 134.3134765625,
 											"height": 13,
-											"text": "+accellerometerY: float",
+											"text": "+accelerometerY: float",
 											"horizontalAlignment": 0
 										},
 										{
@@ -7361,7 +7361,7 @@
 											"top": 907,
 											"width": 134.3134765625,
 											"height": 13,
-											"text": "+accellerometerZ: float",
+											"text": "+accelerometerZ: float",
 											"horizontalAlignment": 0
 										}
 									],
@@ -9457,7 +9457,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGbMYu8mbIU71s="
 									},
-									"name": "accellerometerX",
+									"name": "accelerometerX",
 									"type": "float"
 								},
 								{
@@ -9466,7 +9466,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGbMYu8mbIU71s="
 									},
-									"name": "accellerometerY",
+									"name": "accelerometerY",
 									"type": "float"
 								},
 								{
@@ -9475,7 +9475,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGbMYu8mbIU71s="
 									},
-									"name": "accellerometerZ",
+									"name": "accelerometerZ",
 									"type": "float"
 								}
 							]
@@ -9550,7 +9550,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGbMZmT5NEBx2E="
 							},
-							"name": "PusblishableInformation",
+							"name": "PublishableInformation",
 							"attributes": [
 								{
 									"_type": "UMLAttribute",

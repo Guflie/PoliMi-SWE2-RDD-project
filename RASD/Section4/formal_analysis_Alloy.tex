@@ -3,7 +3,7 @@ In this section, we verify the consistency of the BBP system specifications usin
 We focused our modeling efforts on four critical aspects of the system:
 \begin{enumerate}
     \item \textbf{User Hierarchy and Permissions:} Ensuring a strict separation between Users and Registered Users who can contribute data.
-    \item \textbf{Activity lifecycle:} Verifying that activities follow the desired path during their evolution.
+    \item \textbf{Activity lifecycle:} Verifying that activities follow their temporal evolution correctly.
     \item \textbf{Data Governance Lifecycle:} Verifying that sensor data (Reports) follows a strict temporal evolution.
 \end{enumerate}
 
@@ -333,7 +333,7 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
 
     % ----------------------------------------------------------
     \subsubsection{Scenario 2: Activity Lifecycle}
-    The second round of run explores the evolution of an Activity.
+    The second round of runs explores the evolution of an Activity.
     \begin{itemize}
         \item Figures \ref{fig:activity_lifecycle_t0},\ref{fig:activity_lifecycle_t1},\ref{fig:activity_lifecycle_t2} show the evolution of an activity
         from the beginning to its completion, without retrieving weather data (the figures shown the transition only through the \texttt{Ongoing} 
@@ -376,7 +376,7 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
         \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{RASD/alloy/activity_paused_t1.png}}
         \caption{Step T2, T3 - The Activity is in the \texttt{Waiting rating(PAUSE)} state. Once the user resumes the 
         activity, it transitions back in the \texttt{Ongoing(ON)} 
-        state (the model avoid to transition in the wrong previou state e.g. \texttt{MON\_ON}).}
+        state (the model avoid to transition in the wrong previous state e.g. \texttt{MON\_ON}).}
         \label{fig:activity_paused_t1}
     \end{figure}
 
@@ -391,7 +391,7 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
         \centering
         \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{RASD/alloy/activity_weather_t1.png}}
         \caption{Step T3, T4 - The Activity is in the \texttt{Weather enrichment(WEAT\_ENR)} state. Once weather data about the activity are correctly loaded, The
-        activity transtions in the \texttt{COMPLETED} state.}
+        activity transitions in the \texttt{COMPLETED} state.}
         \label{fig:activity_weather_t1}
     \end{figure}
 

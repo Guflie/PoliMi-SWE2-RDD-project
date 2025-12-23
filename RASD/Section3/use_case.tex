@@ -2,7 +2,7 @@
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{RASD/Use case/Use_case_diagram_v1.pdf}
+    \includegraphics[width=1\textwidth]{RASD/Use case/use_case_diagram_v2.pdf}
     \caption{Use Case Diagram}
     \label{fig:use_case_diagram}
 \end{figure}
@@ -122,7 +122,7 @@
 
 \pagebreak
 % --------------------------------------------------------------------------------------------------
-\subsubsection*{[UC3] Account information update}
+\subsubsection*{[UC3] Account update}
 \FloatBarrier
 \begin{table}[ht!]
     \renewcommand{\arraystretch}{1.5}
@@ -165,7 +165,7 @@
 
 \pagebreak
 % --------------------------------------------------------------------------------------------------
-\subsubsection*{[UC4] Password account reset}
+\subsubsection*{[UC4] Account password reset}
 \FloatBarrier
 \begin{table}[ht!]
     \renewcommand{\arraystretch}{1.5}
@@ -269,7 +269,7 @@
 
 \pagebreak
 % --------------------------------------------------------------------------------------------------
-\subsubsection*{[UC6] Route planning with route match}
+\subsubsection*{[UC6] Trip planning with route match}
 \FloatBarrier
 \begin{table}[ht!]
     \renewcommand{\arraystretch}{1.5}
@@ -314,7 +314,7 @@
 
 \pagebreak
 % --------------------------------------------------------------------------------------------------.
-\subsubsection*{[UC7] Route planning without route match}
+\subsubsection*{[UC7] Trip planning without route match (route creation)}
 \FloatBarrier
 \begin{table}[ht!]
     \renewcommand{\arraystretch}{1.5}
@@ -353,13 +353,13 @@
 
 \pagebreak
 % --------------------------------------------------------------------------------------------------
-\subsubsection*{[UC8] Trip activity for unregistered user}
+\subsubsection*{[UC8] Ride trip}
 \FloatBarrier
 \begin{table}[ht!]
     \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{|l|l|}
         \hline
-        Name & \textbf{Trip activity} \\
+        Name & \textbf{Ride trip} \\
         \hline
         Actors & Unregistered user \\
         \hline
@@ -369,11 +369,11 @@
             \begin{minipage}{0.7\textwidth}
             \smallskip
             \begin{enumerate}
-                \item The user selects the path and starts the trip, sending an information retrieval request to the system
+                \item The user selects the path and starts the ride, sending an information retrieval request to the system
                 \item The system receives the request, retrieves the path map and sends it to the user
                 \item The user receives the path map
-                    \subitem The user might stop and resume the trip whenever he likes
-                \item The user completes the trip and closes it
+                    \subitem The user might stop and resume the ride whenever he likes
+                \item The user completes the ride and closes it
             \end{enumerate}
             \smallskip
             \end{minipage}
@@ -392,13 +392,13 @@
 \pagebreak
 % --------------------------------------------------------------------------------------------------
 % TODO: give a deep tought about this Use Case, maybe it isn't such relevant to be listed explicitly?
-\subsubsection*{[UC9] Trip activity for registered user}
+\subsubsection*{[UC9] Activity trip}
 \FloatBarrier
 \begin{table}[ht!]
     \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{|l|l|}
         \hline
-        Name & \textbf{Trip activity} \\
+        Name & \textbf{Activity trip} \\
         \hline
         Actors & Registered user \\
         \hline
@@ -415,7 +415,10 @@
                 \item The user completes the activity, and sends an "Activity Completion message" to the system
                 \item The system receives the notification about the activity completion and sends a form to rate the path
                 \item The user receives the rating form, fills it out and sends it
-                \item The system receives the rating form and sends an acknowledgement 
+                \item The system receives the rating form
+                \item The system sends a request to retrieve weather conditions during the activity to a third-part Weather Service
+                \item The Weather Service responds to the system with the requested data
+                \item The system sends to the user an acknowledgement fo completed activity 
             \end{enumerate}
             \smallskip
             \end{minipage}
@@ -423,7 +426,14 @@
         \hline
         Exit Condition & The user completed its trip activity and scored to the path\\
         \hline
-        Exception & \\
+        Exception & 
+            \begin{minipage}{0.7\textwidth}
+            \smallskip
+            Weather conditions can't be retrived from the third party 
+            service, therefore those information won't be linked to the activity
+            \smallskip
+            \end{minipage}
+        \\
         \hline       
     \end{tabular}
     \caption{Refers to \hyperref[sc:SC10]{SC10}, \hyperref[sc:SC11]{SC11}, \hyperref[sc:SC13]{SC13}}
@@ -433,13 +443,13 @@
 
 \pagebreak
 % --------------------------------------------------------------------------------------------------
-\subsubsection*{[UC10] Automatic trip monitoring}
+\subsubsection*{[UC10] Automatic activity monitoring}
 \FloatBarrier
 \begin{table}[ht!]
     \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{|l|l|}
         \hline
-        Name & \textbf{Automatic trip monitoring} \\
+        Name & \textbf{Automatic activity monitoring} \\
         \hline
         Actors & Registered user, Weather Service \\
         \hline

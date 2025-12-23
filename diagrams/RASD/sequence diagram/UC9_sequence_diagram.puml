@@ -3,6 +3,7 @@ hide footbox
 
 actor "Registered User" as User
 participant "BBP App" as App
+participant "Weather Service" as Weather
 
 autonumber
 
@@ -26,7 +27,17 @@ deactivate App
 
 User -> App : submit_rating_form(rating)
 activate App
-App -->> User : rating_acknowledgement()
+App -> Weather : get_weather_conditions(timestamp, coordinates)
+activate Weather
+
+alt #e6ffe6 Weather service available
+    Weather -->> App : weather_data()
+
+else #ffe6e6 Weather service unavailable
+    Weather -->> App : unavailable_weather_data_error()
+    deactivate Weather
+end
+App -->> User : completed_activity_acknowledgement()
 deactivate App
 
 deactivate User
