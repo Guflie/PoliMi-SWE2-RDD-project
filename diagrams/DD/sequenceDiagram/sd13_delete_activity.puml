@@ -1,0 +1,41 @@
+@startuml sd13_delete_activity
+' Refer to UC15
+hide footbox
+
+participant "Mobile App" as app 
+participant "Trip API Gateway" as tapi
+participant "Activity History Service" as ahs
+participant "Activity DBMS" as dba 
+
+activate app
+
+app -> tapi : delete_act(actId)
+activate tapi
+tapi ->> ahs : delete_act(actId)
+deactivate tapi
+activate ahs
+ahs -->> tapi : conf_form
+deactivate ahs
+activate tapi
+tapi -->> app : conf_form
+deactivate tapi
+' --------------------------------
+app -> tapi : send_del_conf(actId)
+activate tapi
+tapi ->> ahs : send_del_conf(actId)
+deactivate tapi
+activate ahs
+ahs ->> dba : query_del_act(actId)
+deactivate ahs
+activate dba
+dba -> dba : delete_act(actId)
+dba -->> ahs : done
+deactivate dba
+activate ahs
+ahs -->> tapi : done
+deactivate ahs
+activate tapi
+tapi -->> app
+deactivate tapi
+
+@enduml

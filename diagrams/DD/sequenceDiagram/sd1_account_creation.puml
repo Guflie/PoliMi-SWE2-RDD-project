@@ -1,0 +1,100 @@
+@startuml sd1_account_creation
+' Refers to UC1
+hide footbox
+' To improve readability try to shorten the message signatures length
+participant "Mobile App" as app
+participant "Account API Gateway" as aapi
+participant "Account Creation Service" as acs
+participant "Authentication Service" as auth
+participant "Credentials DBMS" as dbc
+participant "Email Proxy Service" as emailp
+actor "Email Provider" as email
+participant "Account Manager Service" as accmngr
+participant "Account DBMS" as dba
+
+activate app
+
+app ->> aapi : create_acc(name, surname gender, birthdate, emailAddr, psw)
+activate aapi
+aapi ->> acs : create_acc(name, surname, gender, birthdate, emailAddr, psw)
+deactivate aapi
+activate acs
+acs ->> auth : check_acc(emailAddr)
+deactivate acs
+activate auth
+auth -> dbc : query_acc_exists(emailAddr)
+deactivate auth
+activate dbc
+break #ffe6e6 email already used
+    dbc -->> auth : match
+    activate auth
+    auth -->> acs : already_used_email_error
+    deactivate auth
+    activate acs
+    acs -->> aapi : already_used_email_error
+    deactivate acs
+    activate aapi
+    aapi -->> app : already_used_email_error
+    deactivate aapi
+end
+dbc -->> auth : noMatch
+deactivate dbc
+activate auth
+auth -->> acs : noMatch
+deactivate auth
+activate acs
+acs ->> emailp : send_reg_link(emailAddr, link)
+deactivate acs
+activate emailp
+emailp ->> email : send_email(emailAddr, regLinkMsg)
+deactivate emailp
+
+app ->> aapi : send_reg_conf()
+activate aapi
+note right 
+    The user opens the link received by email, which 
+    will be opened by the mobile app
+end note
+aapi ->> acs : send_reg_conf()
+deactivate aapi
+activate acs
+break #ffe6e6 link expired
+    acs -->> aapi : link_expired_error
+    activate aapi
+    aapi -->> app : link_expired_error
+    deactivate aapi
+end
+acs ->> auth : create_acc_cred(emailAddr, psw)
+deactivate acs
+activate auth
+auth ->> dbc : query_insert_cred(emailAddr, psw)
+deactivate auth
+activate dbc
+dbc -> dbc : insert_cred(emailAddr, psw)
+dbc -->> auth : userId
+deactivate dbc
+activate auth
+auth -->> acs : userId
+deactivate auth
+activate acs
+deactivate acs
+acs ->> accmngr : create_acc_info(userId, name, surname, gender, birthdate)
+deactivate acs
+activate accmngr
+accmngr ->> dba : query_insert_acc(userId, name, surname, gender, birthdate)
+deactivate accmngr
+activate dba
+dba -> dba : insert_acc(userId, name, surname, gender, birthdate)
+dba -->> accmngr : done
+deactivate dba
+activate accmngr
+accmngr -->> acs : done
+deactivate  accmngr
+activate acs
+acs -->> aapi : account_registration_succesful
+deactivate acs
+activate aapi
+aapi -->> app : account_registration_succesful
+deactivate aapi
+
+@enduml

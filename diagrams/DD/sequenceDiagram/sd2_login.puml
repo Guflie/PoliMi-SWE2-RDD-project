@@ -1,0 +1,65 @@
+@startuml sd2_login
+' Refers to UC2
+hide footbox
+
+participant "Mobile App" as app
+participant "Account API Gateway" as aapi
+participant "Authentication Service" as auth
+participant "Credentials DBMS" as dbc
+participant "Account Management Service" as acmngr
+participant "Account DBMS" as dba 
+
+activate app
+app -> aapi : send_login_acc(emailAddr, psw)
+activate aapi
+aapi ->> auth : login_acc(emailAddr, psw)
+deactivate aapi
+activate auth
+auth ->> dbc : query_get_cred(emailAddr)
+activate dbc
+deactivate auth
+dbc -> dbc : fetch_cred(emailAddr)
+break #ffe6e6 account not found
+    dbc -->> auth : no_match
+    activate auth
+    auth -->> aapi : account_not_found_error
+    deactivate auth
+    activate aapi
+    aapi -->> app : account_not_found_error
+    deactivate aapi
+end
+
+dbc -->> auth : hashPsw, userId
+deactivate dbc
+activate auth
+auth -> auth : check_psw(psw, psw_hash)
+
+
+break #ffe6e6 wrong password
+    auth -->> aapi : wrong_psw_error
+    activate aapi
+    aapi -->> app : wrong_psw_error
+    deactivate aapi
+end
+
+auth -->> aapi : correct_psw
+deactivate auth
+activate aapi
+aapi -> acmngr : get_acc_info(userId)
+deactivate aapi
+activate acmngr
+acmngr ->> dba : query_get_info(userId)
+deactivate acmngr
+activate dba
+dba -> dba : fetch_info(userId)
+dba ->> acmngr : account_info
+deactivate dba
+activate acmngr
+acmngr -->> aapi : account_info
+deactivate acmngr
+activate aapi
+aapi -->> app : account_info
+deactivate aapi
+
+
+@enduml

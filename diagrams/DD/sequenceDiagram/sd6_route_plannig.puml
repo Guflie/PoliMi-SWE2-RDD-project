@@ -1,0 +1,106 @@
+@startuml sd6_route_planning
+' Referes to UC6 and UC7
+hide footbox
+
+participant "Mobile App" as app
+participant "Trip API Gateway" as tapi
+participant "Trip Planner Service" as tb
+participant "Path Inventory Service" as pi
+participant "Path DMBS" as dbp
+participant "Public Info Service" as pis
+participant "Public Info DBMS" as dbpi
+participant "Mapping Proxy Service" as mp
+actor "External Mapping System" as ems
+
+activate app
+app -> tapi : get_paths(sPoint,ePoint)
+activate tapi
+tapi ->> tb: get_paths(sPoint,ePoint)
+deactivate tapi 
+activate tb
+
+' 1st step - path retrival
+tb->> pi : get_paths(sPoint,ePoint)
+deactivate tb
+activate pi
+pi ->> dbp : query_paths(sPoint,ePoint)
+deactivate pi
+activate dbp
+dbp -> dbp : fetch_paths(sPoint,ePoint)
+
+opt #ffeecc path creation
+    dbp -->> pi : no_match
+    deactivate dbp
+    activate pi
+    pi ->> mp : create_path(sPoint,ePoint)
+    deactivate pi
+    activate mp
+    mp ->> ems : find_path(sPoint,ePoint)
+    deactivate mp
+    activate ems
+    ems -> ems : find_path(sPoint,ePoint)
+    ems -->> mp : path
+    deactivate ems
+    activate mp
+    mp -->> pi : path
+    deactivate mp
+    activate pi
+    pi ->> dbp : query_insert_path(path)
+    deactivate pi
+    activate dbp
+    dbp -> dbp : insert_path(path)
+    dbp -->> pi : done
+    deactivate dbp
+    activate pi
+end
+
+pi -->> tb : List<pathInfo>
+note left
+If the action passes through the "Path Creation"
+optional section, this list will contain only one path
+end note
+deactivate pi
+activate tb
+opt #e6f9ff if the path wasn't created now
+    ' 2nd step - score retrival
+    tb ->> pis : get_scores(list<pathId>)
+    deactivate tb
+    activate pis
+    pis ->> dbpi : query_top_scores(list<pathId>)
+    deactivate pis
+    activate dbpi
+    dbpi -> dbpi : fetch_top_scores(list<pathId>)
+    ' add optional block for path creation
+    dbpi -->> pis : List<scores>
+    deactivate dbpi
+    activate pis
+    pis -->> tb : List<scores>
+    deactivate pis
+    activate tb
+
+    ' 3d step - issue retrival
+    tb -> tb : select_top_paths_by_score()
+    tb ->> pis : get_issues(List<topPathId>)
+    deactivate tb
+    activate pis
+    pis ->> dbpi : query_issues(List<topPathId>)
+    deactivate pis
+    activate dbpi
+    dbpi -> dbpi : fetch_issues(List<topPathId>)
+    ' add optional block for path creation
+    dbpi -->> pis : List<issues>
+    deactivate dbpi
+    activate pis
+    pis -->> tb : List<issues>
+    deactivate pis
+    activate tb
+
+    ' probably you wnat tho expand this in the near future 
+    tb -> tb : merge_paths_info()
+end
+tb -->> tapi : suggested_paths
+deactivate tb
+activate tapi
+tapi -->> app : suggested_paths
+deactivate tapi
+@enduml

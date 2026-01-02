@@ -1,0 +1,46 @@
+@startuml sd11_fixup_report
+' Refer to UC12
+hide footbox
+
+participant "Mobile App" as app
+participant "Trip API Gateway" as tapi
+participant "Public Info Manager Service" as pims
+participant "Public Info DBMS" as dbpi
+
+activate app
+
+app -> tapi : publish_fixup(issueId)
+activate tapi
+tapi ->> pims : publish_fixup(issueId)
+deactivate tapi
+activate pims
+pims ->> dbpi : check_issue_exists(issueId)
+deactivate pims
+activate dbpi
+dbpi -> dbpi : select_issue(issueId)
+break #ffe6e6 issue not found
+    dbpi -->> pims : noMatch
+    activate pims
+    pims -->> tapi : issue_not_found_error
+    deactivate pims
+    activate tapi
+    tapi -->> app : issue_not_found_error
+    deactivate tapi
+end
+dbpi -->> pims : match
+deactivate dbpi
+activate pims
+pims ->> dbpi : query_update_issue(issueId)
+deactivate pims
+activate dbpi
+dbpi -> dbpi : update_issue(issueId)
+dbpi -->> pims: done
+deactivate dbpi
+activate pims
+pims -->> tapi: done
+deactivate pims
+activate tapi
+tapi -->> app : done
+deactivate tapi
+
+@enduml

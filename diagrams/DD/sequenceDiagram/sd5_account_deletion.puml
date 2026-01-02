@@ -1,0 +1,81 @@
+@startuml sd5_account_deletion
+' Refers to UC5
+hide footbox
+
+participant "Mobile App" as app
+participant "Account API Gateway" as aapi
+participant "Account Deletion Service" as ads
+participant "Authentication Service" as auth
+participant "Credentials DBMS" as dbc
+participant "Email Proxy Service" as emailp
+actor "Email Service Provider" as email
+
+activate app
+app -> aapi : delete_acc(userId, emailAddr)
+activate aapi
+aapi ->> ads : delete_acc(userId, emailAddr)
+deactivate aapi
+activate ads
+ads ->> emailp : send_acc_del_link(emailAddr)
+deactivate ads
+activate emailp
+emailp ->> email : send_email(emailAddr, delLinkMsg)
+deactivate emailp
+
+app -> aapi : acc_del_conf() 
+note right
+    The user opens the link received by email, which 
+    will be opened by the mobile app
+end note
+activate aapi
+aapi ->> ads : acc_del_conf()
+deactivate aapi
+activate ads
+break #ffe6e6 link expired
+    ads -->> aapi : link_expired_error
+    activate aapi
+    aapi -->> app : link_expired_error
+    deactivate aapi
+end
+
+ads ->> auth : delete_acc(userId)
+deactivate ads
+activate auth
+auth ->> dbc : query_delete_acc(userId)
+deactivate auth
+activate dbc
+dbc -> dbc : delete_acc(userId)
+note right
+We've intentionally left out the inforatio deletion
+from Account DBMS to avoid data incoherencies.
+end note
+dbc -->> auth : done
+deactivate dbc
+activate auth
+auth -->> ads : done
+deactivate auth
+activate ads
+ads -->> aapi : done
+deactivate ads
+activate aapi
+aapi -->> app : done
+deactivate aapi
+
+
+/'
+aapi ->> auth : delete_account(userId)
+deactivate aapi
+activate auth
+auth ->> dbc : query_delete_acc(userId)
+deactivate auth
+activate dbc
+dbc -> dbc : delete_acc(userId)
+dbc -->> auth : delete_conf
+deactivate dbc
+activate auth
+auth -->> aapi : delete_conf
+deactivate auth
+'/
+
+
+@enduml

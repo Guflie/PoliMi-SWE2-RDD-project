@@ -1,0 +1,30 @@
+@startuml sd10_manual_report
+' Refer to UC11
+hide footbox
+
+participant "Mobile App" as app
+participant "Trip API Gateway" as tapi
+participant "Public Info Manager Service" as pims
+participant "Public Info DBMS" as dbpi
+
+activate app
+
+app -> tapi : publish_issue(userId, pathId, timestamp, pos, type, descr)
+activate tapi
+tapi ->> pims : publish_issue(userId, pathId, timestamp, pos, type, descr)
+activate pims
+deactivate tapi
+pims ->> dbpi : query_insert_issue(userId, pathId, timestamp, pos, type, descr)
+activate dbpi
+deactivate pims
+dbpi -> dbpi : insert_issue(userId, pathId, timestamp, pos, type, descr)
+dbpi -->> pims : done
+deactivate dbpi
+activate pims
+pims -->> tapi : done
+deactivate pims
+activate tapi
+tapi -->> app : done
+deactivate tapi
+
+@enduml

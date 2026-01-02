@@ -1,0 +1,28 @@
+@startuml sd3_account_update
+' Refers to UC1
+hide footbox
+
+participant "Mobile App" as app
+participant "Account API Gateway" as aapi
+participant "Account Manager Service" as acmngr
+participant "Account DBMS" as dba
+
+activate app
+app -> aapi : modify_attr(userId, attributeId, newValue)
+activate aapi
+aapi ->> acmngr : modify_attr(userId, attributeId, newValue)
+deactivate aapi
+activate acmngr
+acmngr ->> dba : query_update_attr(userId, attributeId, newValue)
+deactivate acmngr
+activate dba
+dba -> dba : update_attr(userId, attributeId, newValue)
+dba -->> acmngr : done
+deactivate dba
+activate acmngr
+acmngr -->> aapi : done
+deactivate acmngr
+activate aapi
+aapi -->> app : done
+deactivate aapi
+@enduml
