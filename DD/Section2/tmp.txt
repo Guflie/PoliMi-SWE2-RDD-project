@@ -1,0 +1,15 @@
+Allora, una breve descrizione di ciascuno dei componenti (sopravvolo sui DBMS perchè mi sembramo abbastanza espliciti, pooi se hai de dubbi chiedi pure):
+-  Account API Gateway: fa da punto di contatto tra la Mobile App e le funzionalità per gestire l'account
+- Account Deletion Service: sovraintende l'eliminazione del'account
+- Account Creation Service: sovraintende la creazione dell'account
+- Account Management Service: serve per gestire le informazioni dell'account, fatta eccezione per le credenziali
+- Authentication Service: serve per gestire le credenziali
+- Email Proxy Service: fa da intermediario tra i servizio che richiedono l'invio di mail, e il servizio mail dell'utente
+- Trip API Gateway: come l'Account API Gateway, solo per la gestione dei Trip (e elativi elementi)
+- Trip Planner Service: si occupa di recuperare e sovraintendere tutti gli scambi di dati per esaudire la richiesta di un path.
+- Path nventory Service: servizio per gestire l'archivio di path del sistema
+- Public Info Manager Servcie: sii occupa di gestire tutti le Publishable Information
+- Mapping Proxy Service: proxy per il sistema di Mapping
+- Activity Storing Service (nome da migliorare): si occua di sovraintendere il salvataggio di un'attività completata dall'utente
+- Weather Proxy Service: proxy per il servizio meteo
+- Activity History Service: contiene tutte le Activity svolte da utenti

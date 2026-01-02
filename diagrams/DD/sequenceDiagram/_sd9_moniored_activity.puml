@@ -1,0 +1,103 @@
+@startuml sd8_registered_user_activity
+' Refers to UC10, 13
+hide footbox
+
+participant "Mobile App" as app
+participant "Trip API Gateway" as tapi
+participant "Activity Handler Service" as ah
+participant "Weather Proy Service" as wps
+actor "External Weather Service" as ews
+participant "Activity History Service" as ahs
+participant "Activity DBMS" as dba
+participant "Public Info Manager Service" as pim
+participant "Public Info DBMS" as dbpi
+participant "Path Inventory Service" as pi
+participant "Path DMBS" as dbp
+
+opt stop/resume trip
+    loop
+        app -> app : pause_activity()
+        app -> app : resume_activity()
+    end
+end
+
+app -> app : complete_ride()
+app -> app : score_path()
+app -> tapi : save_activity(userId, pathId, date, startTime, endTime, score)
+activate tapi
+tapi ->> ah : save_activity(userId, pathId, date, startTime, endTime, score)
+deactivate tapi
+activate ah
+' retrive wetaher info
+ah ->> pi : get_paht_location(pathId)
+deactivate ah
+activate pi
+pi ->>  dbp : query_get_location(pathId)
+deactivate pi
+activate dbp
+dbp -> dbp : fecth_location(pathId)
+dbp -->> pi : pathLocation
+deactivate dbp
+activate pi
+pi -->> ah : pathLocation
+deactivate pi
+activate ah
+ah ->> wps : get_wetaher_info(pathLocation)
+deactivate ah
+activate wps
+wps ->> ews : get_wetaher_info(pathLocation)
+deactivate wps
+activate ews
+ews -> ews : fetch_weather_info(pathLocation)
+alt #dff7e5 weather info available
+    ews -->> wps : weatherInfo
+    activate wps
+    wps -->> ah : weatherInfo
+    deactivate wps
+    activate ah
+else #ffe6e6 waether info unavailable
+    ews -->> wps : unavailable
+    deactivate ews
+    activate wps
+    wps -->> ah : unavailable
+    deactivate wps    
+end
+ah ->> ahs : save_activity(userId, pathId, activityInfo)
+note left
+activityInfo contains date, startTime, 
+endTime and possibly wetaherInfo
+end note
+deactivate ah 
+activate ahs
+ahs ->> dba : query_save_act(userId, pathId, activityInfo)
+deactivate ahs 
+activate dba
+dba -> dba : insert_act(userId, pathId, activityInfo)
+dba -->> ahs : actitivityId
+deactivate dba
+activate ahs
+ahs -->> ah : actitivityId
+deactivate ahs
+activate ah
+
+ah ->> pim : store_score(userId, pathId, actitivityId)
+deactivate ah 
+activate pim
+pim ->> dbpi : query_store_score(userId, pathId, actitivityId)
+deactivate pim 
+activate dbpi
+dbpi -> dbpi : insert_score(userId, pathId, activityId)
+dbpi -->> pim : done
+deactivate dbpi
+activate pim
+pim -->> ah : done
+deactivate pim
+activate ah
+
+ah -->> tapi : done
+deactivate ah
+activate tapi
+tapi -->> app : done
+deactivate tapi
+
+@enduml
