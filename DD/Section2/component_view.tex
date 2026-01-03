@@ -3,7 +3,100 @@
 \begin{figure}[H]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{DD/component_diagram.pdf}}
-    \caption{Component Diagram. In red are drown those components external our system; in blue those regarding 
-    the Data tier, and in Green the mobile app residing on the user's device.}
     \label{fig:component_diagram}
+    \caption{Component Diagram. In red are drown those actors external to our system; in blue the DBMS and those
+    components in Data tier; in green the mobile app residing on the user's device.}
 \end{figure}
+
+\subsubsection*{Mobile App}
+The Mobile Application serves as the primary user interface, enabling users to manage their accounts, browse available 
+paths, and initiate trips with real-time monitoring.
+
+% --------------------------------------------------------------------------------------------------------------------
+\subsubsection*{Account API Gateway}
+Implements the Gateway Pattern to provide a unified entry point for all account management services.
+
+\subsubsection*{Account Creation Service}
+The Account Creation Service manages the process of creating a new account. It coordinates overhall request by the 
+user, orchestrating the communications with the user and the data storage by interfacing with the 
+\textit{Authentication Service} and the \textit{Account Manager Service}.
+
+\subsubsection*{Account Deletion Service}
+This service handles the account deletion lifecycle. It interfaces with the Authentication Service to execute 
+identity removal and manages outbound communication through the \textit{Email Proxy Service} to verify and confirm the 
+deletion request.
+
+\subsubsection*{Credentials DBMS}
+This DBMS stores and manages account credentials.
+
+\subsubsection*{Authentication Service}
+This service facilitates the authentication lifecycle. It processes login requests, performs identity verification by 
+querying the \textit{Credentials DBMS}, and acts as the primary interface for any credential-related data retrieval.
+
+\subsubsection*{Acconnt DBMS}
+This DBMS stores and manages general account information, like name, surname or birthdate.
+
+\subsubsection*{Account Management Service}
+Manages user account information and profile updates. It hanlde the access to the data stored in the \textit{Account DBMS}, providing 
+acting as an interface for all data retrival operation involving account information.
+
+\subsubsection*{Email Proxy Server}
+This component works as a middleware between the user \textit{Email Provider} and those services which
+need to send an email, avoid direct contact with something outside the system and allowing a more
+decoupled approach.
+
+\subsubsection*{Email Provider}
+This actor represents the user email provider.
+% --------------------------------------------------------------------------------------------------------------------
+\subsubsection*{Trip API Gateway} 
+Implements the Gateway Pattern to provide a unified entry point for all trip services (both rides and 
+activities) and related information, like issues and scores.
+
+\subsubsection*{Trip Planner Service}
+This service is responsible for retrieving and merging all the information necessary for the user during trip planning. To 
+achieve this, it interfaces with the Path Inventory Service to retrieve the path and the Public Info Manager Service to 
+retrieve scores and issues.
+
+\subsubsection*{Activity Handler Service}
+This service scope is to handle the storage of completed activities by acting as a central coordinator. It executes this 
+task by interfacing with the \textit{Activity History Service} to record finished sessions. It also merges weather information 
+into the record by interfacing with the \textit{Weather Proxy Service}. Furthermore, it handles the storage of activity-related information
+such as path scores by interfacing with the \textit{Public Info Manager Service} to enrich the final data set.
+
+\subsubsection*{Path DBMS}
+This DBMS stores and manages all the informations about the paths.
+
+\subsubsection*{Path Inventory Service}
+This service handles the path-related information stored in the \textit{Path DBMS}, acting as management layer for all geographic route data. 
+Upon request, it retrieves the specific information, and in case there isn't a match between the request and the stored data, the service 
+handles the creation of a new path by asking it to the \textit{Mapping Proxy Service}, ensuring that the internal database is updated with new 
+coordinates and route details.
+
+\subsubsection*{Mapping Proxy Service}
+This component acts as a security layer for communicating with the External Mapping System, serving as a protected gateway for all geographic 
+requests that cannot be satisfied by the \textit{Path Inventory Service}. Its also ensures that the internal architecture remains independent 
+from interfaces external to our system.
+
+\subsubsection*{External Mapping System}
+This actor represent a mapping systsem external to BBP boundaries.
+
+\subsubsection*{Public Info DBMS}
+This DBMS stores and manages all the informations about \textit{Publishable Infromation} submitted by registered users.
+
+\subsubsection*{Public Info Manager Service}
+This service handles the Publishable Information published by the user, managing Issues and Path Scores. It fulfills this role by handling all 
+requests about data stored in the \textit{Public Info DBMS}, and by handling the issue-status updates within the system..
+
+\subsubsection*{Weather Proxy Service}
+This component acts as an intermediary between the system and the \textit{External Weather System} to facilitate secure and reliable activity data 
+enrichment with the meteorological conditions present during the time of the trip.
+
+\subsubsection*{External Weather System}
+This actor represents a weather system indipendet from the BBP system.
+
+\subsubsection*{Activity DBMS}
+This DBMS stores and manages all the informations about activities.
+
+\subsubsection*{Activity History Service}
+This service handles the activity-related requests within the system by interfacing with the \textit{Activity DBMS}, serving as the primary management layer 
+for recorded user data. It is directly involved in those operations concerning the activity history of a user.
