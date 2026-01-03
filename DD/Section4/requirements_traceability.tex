@@ -1,1 +1,63 @@
-\section{Requirement Traceability}
+\section{Requirements Traceability}
+
+The following matrix maps each functional requirement to the system components responsible for its realization. An 'X' indicates that the component participates in satisfying the requirement.
+
+{
+\begin{longtable}{|c|p{3.0cm}|c|c|c|c|c|c|c|c|c|c|c|c|c|c|} 
+    \hline
+    \textbf{ID} & \textbf{Requirement} & 
+    \rotatebox{90}{\textbf{Mobile App}} & 
+    \rotatebox{90}{\textbf{Acc. API GW}} & 
+    \rotatebox{90}{\textbf{Trip API GW}} & 
+    \rotatebox{90}{\textbf{Acc. Creation Svc}} & 
+    \rotatebox{90}{\textbf{Acc. Deletion Svc}} & 
+    \rotatebox{90}{\textbf{Cred. Subsys.}} & 
+    \rotatebox{90}{\textbf{Acc. Subsys.}} & 
+    \rotatebox{90}{\textbf{Act. Handler Svc}} & 
+    \rotatebox{90}{\textbf{Act. Storage Subsys.}} & 
+    \rotatebox{90}{\textbf{Trip Planner Svc}} & 
+    \rotatebox{90}{\textbf{Path Subsys.}} & 
+    \rotatebox{90}{\textbf{Pub. Info Subsys.}} & 
+    \rotatebox{90}{\textbf{Weather Proxx}} & 
+    \rotatebox{90}{\textbf{Email Proxy}} \\
+    \hline
+    \endhead
+    
+    % --- AUTHENTICATION ---
+    \textbf{R1} & Create an account & X & X & & X & & X & X & & & & & & & X \\ \hline
+    \textbf{R2} & Log in & X & X & & & & X & X & & & & & & & \\ \hline
+    \textbf{R3} & Reset password & X & X & & & & X & & & & & & & & X \\ \hline
+    \textbf{R4} & Update profile info & X & X & & & & & X & & & & & & & \\ \hline
+    \textbf{R5} & Delete account & X & X & & & X & X & & & & & & & & X \\ \hline
+    
+    % --- TRIP RECORDING ---
+    \textbf{R6} & Start recording & X & & X & & & & & & & & X & & & \\ \hline
+    \textbf{R7} & Pause/Resume & X & & & & & & & & & & & & &  \\ \hline
+    \textbf{R8} & Track pos. \& stats & X & & & & & & & X & & & & & & \\ \hline
+    \textbf{R9} & Retrieve weather & & & X & & & & & X & & & & & X & \\ \hline
+
+    % --- DATA CONTRIBUTION ---
+    \textbf{R10} & Report path status & X & & X & & & & & & & & & X & & \\ \hline
+    \textbf{R11} & Submit feedback & X & & X & & & & & X & & & & X & & \\ \hline
+    \textbf{R12} & Report problems & X & & X & & & & & & & & & X & & \\ \hline
+    \textbf{R13} & Enable auto-detect & X & & & & & & & & & & & & & \\ \hline
+    \textbf{R14} & Analyze anomalies & X & & & & & & & & & & & & & \\ \hline
+    \textbf{R15} & Review anomalies & X & & & & & & & & & & & & & \\ \hline
+    \textbf{R16} & Confirm anomaly & X & & X & & & & & X & & & & X & & \\ \hline
+
+    % --- PATH PLANNING ---
+    \textbf{R17} & Compute routes & X & & X & & & & & & & X & X & X & & \\ \hline
+    \textbf{R18} & Visualize routes & X & & & & & & & & & X & X & & & \\ \hline
+    \textbf{R19} & Path Score & & & & & & & & & & X & & X & & \\ \hline
+    \textbf{R20} & Display obstacles & X & & X & & & & & & & & & X & & \\ \hline
+    \textbf{R21} & Filter search & X & & X & & & & & & & X & X & & & \\ \hline
+
+    % --- TRIP HISTORY ---
+    \textbf{R22} & View list & X & & X & & & & & & X & & & & & \\ \hline
+    \textbf{R23} & View trip details & X & & X & & & & & & X & & X & & & \\ \hline
+    \textbf{R24} & Delete activity & X & & X & & & & & & X & & & & & \\ \hline
+    \textbf{R25} & Search activity & X & & X & & & & & & X & & & & & \\ \hline
+    \textbf{R26} & Filter history & X & & X & & & & & & X & & & & & \\ \hline
+    
+\end{longtable}
+}
