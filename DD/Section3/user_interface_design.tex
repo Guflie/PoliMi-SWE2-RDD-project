@@ -8,6 +8,7 @@
     While the RASD defined the visual appearance through mockups, this section details the navigation logic and the structure of the transitions 
     between views, organized by functional areas.
     \pagebreak
+    
     \subsection{Navigation Logic}
 
     \subsubsection{Entry Point and Authentication Flow}
@@ -24,7 +25,7 @@
     \textbf{Transitions and Logic:}
     \begin{itemize}
         \item \textbf{Guest Path:} The \uiElement{Continue As A Guest} button instantiates an anonymous session and redirects the user directly to the 
-        \textit{Map View} (Fig. \ref{fig:ui_map}) with limited functionality.
+        \textit{Map View} (see Fig. \ref{fig:ui_map}) with limited functionality.
         
         \item \textbf{Registered Path:} Entering credentials and tapping \uiElement{Login} validates the token; if successful, the user is redirected to the 
         \textit{Map View} with the Bottom Bar enabled.
@@ -62,6 +63,7 @@
         \item \textbf{Text View:} The \uiElement{List} icon (top left of the panel) switches the view from the graphical map to a text list of navigation directions.
     \end{itemize}
     \pagebreak
+    
     \subsubsection{Data Governance Flow}
     At the end of a tracking session, the system prevents an immediate return to the Home page, forcing a critical data validation step.
 
@@ -89,7 +91,7 @@
         just completed (e.g., Optimal, Average, Poor).
         
         \item \textbf{Exit and Persistence:} The \uiElement{End Trip} button is the only way out: it finalizes the session, saves the confirmed data to the remote 
-        database, and redirects the user to the \textit{History/Profile} view.
+        database, and redirects the user to the \textit{History/Profile} view (Fig. \ref{fig:ui_history}).
     \end{itemize}
     \pagebreak
 
