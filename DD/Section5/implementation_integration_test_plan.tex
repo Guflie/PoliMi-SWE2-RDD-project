@@ -1,1 +1,93 @@
 \section{Implementation, Integration and Test plan}
+\subsection{Implementation Plan}
+The system architecture allows for parallel development. However, adhering to the \textbf{Critical Component Strategy}, prioritizing high-risk and 
+foundational modules ensures that the core value proposition is secured early in the lifecycle.
+
+\subsection{Component Integration Analysis}
+The following table classifies system components based on the \textbf{Impact of Failure}. The scale ranges from 1 to 5.
+
+\definecolor{critical}{RGB}{255, 102, 102}   
+\definecolor{high}{RGB}{255, 178, 102}      
+\definecolor{medium}{RGB}{255, 255, 153}   
+\definecolor{low}{RGB}{153, 255, 153}    
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.4}
+    \footnotesize 
+    \begin{tabular}{|l|p{4.5cm}|c|c|}
+        \hline
+        \textbf{Component} & \textbf{Rationale for Classification} & \textbf{Impact} & \textbf{Dev. Order} \\
+        \hline
+        
+        % LIVELLO 5 - CRITICO
+        \textbf{Trip API Gateway} & 
+        Single point of entry for all core features. If down, the App cannot communicate with the backend. & 
+        \cellcolor{critical}\textbf{5} & 1 \\
+        \hline
+        
+        \textbf{Path Subsystem} & 
+        Provides map data and road network topology. Without it, no visualization or routing is possible. & 
+        \cellcolor{critical}\textbf{5} & 1 \\
+        \hline
+        
+        \textbf{Trip Planner Service} & 
+        Core business logic. The primary goal of "Best Bike Paths" is finding routes. Without it, the app loses its purpose. & 
+        \cellcolor{critical}\textbf{5} & 2 \\
+        \hline
+        
+        % LIVELLO 4 - ALTO
+        \textbf{Credentials Subsystem} & 
+        Manages Authentication (Login) and Security. Critical for user access, though Guest Mode bypasses it. & 
+        \cellcolor{high}\textbf{4} & 2 \\
+        \hline
+        
+        \textbf{Account Subsystem} & 
+        Aggregates \textit{Creation}, \textit{Deletion}, and \textit{Management} services. Essential for user persistence, but Guest Mode mitigates total failure. & 
+        \cellcolor{high}\textbf{4} & 2 \\
+        \hline
+        
+        \textbf{Activity Handler Service} & 
+        Responsible for tracking rides. High value, but users could theoretically still use the map for visual navigation without active recording. & 
+        \cellcolor{high}\textbf{4} & 3 \\
+        \hline
+        
+        \textbf{Account API Gateway} & 
+        Entry point for Auth/Profile operations. If down, login and registration fail, limiting the app to Guest features. & 
+        \cellcolor{high}\textbf{4} & 3 \\
+        \hline
+        
+        % LIVELLO 3 - MEDIO
+        \textbf{Activity Storage Subsystem} & 
+        Manages history. Failure prevents viewing past trips, but does not block new rides (which can be buffered locally). & 
+        \cellcolor{medium}\textbf{3} & 4 \\
+        \hline
+        
+        \textbf{Public Info Subsystem} & 
+        Crowdsourcing logic (Issue Reporting, Scoring). Important for data enrichment, but the system functions without community reports. & 
+        \cellcolor{medium}\textbf{3} & 4 \\
+        \hline
+        
+        % LIVELLO 2 - BASSO
+        \textbf{Weather Proxy Service} & 
+        Auxiliary feature. Lack of weather data reduces UX quality but does not stop any core function. & 
+        \cellcolor{low}\textbf{2} & 5 \\
+        \hline
+        
+        % LIVELLO 1 - MOLTO BASSO
+        \textbf{Email Proxy Service} & 
+        Used only for password reset or confirmation emails. Failure impacts a tiny fraction of daily user interactions. & 
+        \cellcolor{low}\textbf{1} & 5 \\
+        \hline
+    \end{tabular}
+    \caption{Component Criticality and Implementation Priority}
+    \label{tab:implementation_order}
+\end{table}
+\pagebreak
+\textbf{Impact Severity Legend:}
+\begin{itemize}
+    \item \textbf{\colorbox{critical}{5} - Critical:} Complete system outage or total loss of the application's core purpose.
+    \item \textbf{\colorbox{high}{4} - High:} Major functionality unavailable, but the system may offer degraded service.
+    \item \textbf{\colorbox{medium}{3} - Moderate:} Secondary features unavailable; core flow remains intact.
+    \item \textbf{\colorbox{low}{1-2} - Low:} Auxiliary information missing or minor workflows blocked.
+\end{itemize}

@@ -14,6 +14,7 @@
 \usepackage{array}
 \usepackage{pdflscape}
 \usepackage{hyperref}
+\usepackage[table]{xcolor}
 \graphicspath{ {../img/} }
 
 % sectsty settings
@@ -79,13 +80,13 @@
     \begin{table}[H]
         \centering
         \renewcommand{\arraystretch}{1.5}
-        \begin{tabular}{|l|c|c|c|c|}
+        \begin{tabular}{|l|c|c|c|c|c|}
             \hline
-            \textbf{Student} & \textbf{Section 1} & \textbf{Section 2} & \textbf{Section 3} & \textbf{Section 4} \\
+            \textbf{Student} & \textbf{Section 1} & \textbf{Section 2} & \textbf{Section 3} & \textbf{Section 4} & \textbf{Section 5}\\
             \hline
-            Guglielmi Leonardo &  & 15h &  & \\
+            Guglielmi Leonardo &  & 15h &  &  &\\
             \hline
-            Lo Conte Francesco & 5h & & (todo) & \\
+            Lo Conte Francesco & 5h & & 3h & 4h & 3h\\
             \hline
         \end{tabular}
         \caption{Effort spent by each team member per section}
