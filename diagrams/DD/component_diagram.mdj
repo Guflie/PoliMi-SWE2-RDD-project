@@ -29,8 +29,8 @@
 							"parentStyle": false,
 							"left": 448,
 							"top": 608,
-							"width": 2192,
-							"height": 800
+							"width": 2176,
+							"height": 792
 						},
 						{
 							"_type": "UMLComponentView",
@@ -9488,7 +9488,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 681,
+									"left": 705,
 									"top": 950,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -9507,18 +9507,20 @@
 									"model": {
 										"$ref": "AAAAAAGbemJbqMpAnIM="
 									},
-									"visible": null,
+									"visible": "",
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 666,
-									"top": 950,
+									"left": 679,
+									"top": 949,
+									"width": 96.09716796875,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
+									"alpha": -1.4464412820124672,
+									"distance": 8.06225774829855,
 									"hostEdge": {
 										"$ref": "AAAAAAGbemJbqMpCz+8="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«circuit breaker»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -9532,7 +9534,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 710,
+									"left": 734,
 									"top": 951,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -9551,7 +9553,7 @@
 							"tail": {
 								"$ref": "AAAAAAGbdXv8FZa88G4="
 							},
-							"points": "752:1006;696:1006;696:908;612.273193359375:908",
+							"points": "752:1006;720:1006;720:908;612.273193359375:908",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGbemJbqMpDnmI="
@@ -9604,18 +9606,19 @@
 									"model": {
 										"$ref": "AAAAAAGbemVT/8qUnAg="
 									},
-									"visible": null,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 898,
-									"top": 1090,
+									"left": 919,
+									"top": 1063,
+									"width": 96.09716796875,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
+									"alpha": -0.9770465057434189,
+									"distance": 48.25971404805462,
 									"hostEdge": {
 										"$ref": "AAAAAAGbemVT/8qWnj0="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«circuit breaker»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -9701,18 +9704,19 @@
 									"model": {
 										"$ref": "AAAAAAGbemVmY8qlenY="
 									},
-									"visible": null,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 1095,
-									"top": 908,
+									"left": 1032,
+									"top": 1040,
+									"width": 96.09716796875,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
+									"alpha": 1.4723502287143393,
+									"distance": 162.78820596099706,
 									"hostEdge": {
 										"$ref": "AAAAAAGbemVmY8qnp9k="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«circuit breaker»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -9779,7 +9783,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 673,
+									"left": 649,
 									"top": 1014,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -9798,18 +9802,19 @@
 									"model": {
 										"$ref": "AAAAAAGbemfdAMq7Nc4="
 									},
-									"visible": null,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 658,
-									"top": 1014,
+									"left": 632,
+									"top": 1103,
+									"width": 96.09716796875,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
+									"alpha": -2.96371719324627,
+									"distance": 90.4267659490264,
 									"hostEdge": {
 										"$ref": "AAAAAAGbemfdAMq98Xk="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«circuit breaker»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -9823,7 +9828,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 703,
+									"left": 679,
 									"top": 1015,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -9842,7 +9847,7 @@
 							"tail": {
 								"$ref": "AAAAAAGbbIpwQ5luv2w="
 							},
-							"points": "944:1134;688:1134;688:908;612.273193359375:908",
+							"points": "944:1134;664:1134;664:908;612.273193359375:908",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGbemfdAMq+/Hs="
@@ -9895,18 +9900,19 @@
 									"model": {
 										"$ref": "AAAAAAGbemjSfMrMG3A="
 									},
-									"visible": null,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 1155,
-									"top": 1080,
+									"left": 1128,
+									"top": 1088,
+									"width": 96.09716796875,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
+									"alpha": 0.8086495483701274,
+									"distance": 30.4138126514911,
 									"hostEdge": {
 										"$ref": "AAAAAAGbemjSfMrOvnQ="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«circuit breaker»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -10767,18 +10773,19 @@
 									"model": {
 										"$ref": "AAAAAAGbemtiDsulfSw="
 									},
-									"visible": null,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 1672,
-									"top": 1040,
+									"left": 1664,
+									"top": 1087,
+									"width": 96.09716796875,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
+									"alpha": -0.4228538325778666,
+									"distance": 43.86342439892262,
 									"hostEdge": {
 										"$ref": "AAAAAAGbemtiDsun8l4="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«circuit breaker»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -11734,18 +11741,20 @@
 									"model": {
 										"$ref": "AAAAAAGbemygZ8yPAlM="
 									},
-									"visible": null,
+									"visible": "",
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 1855,
-									"top": 940,
+									"left": 1792,
+									"top": 928,
+									"width": 96.09716796875,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
+									"alpha": 0.8441542964580844,
+									"distance": 24.08318915758459,
 									"hostEdge": {
 										"$ref": "AAAAAAGbemygaMyRDUs="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«circuit breaker»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -11928,18 +11937,19 @@
 									"model": {
 										"$ref": "AAAAAAGbemyyNcyxdK0="
 									},
-									"visible": null,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 1656,
-									"top": 832,
+									"left": 1608,
+									"top": 871,
+									"width": 96.09716796875,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
+									"alpha": -1.5707953267948966,
+									"distance": 10,
 									"hostEdge": {
 										"$ref": "AAAAAAGbemyyNcyz3VI="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«circuit breaker»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -12683,7 +12693,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 1864,
+									"left": 1920,
 									"top": 863,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -12702,18 +12712,19 @@
 									"model": {
 										"$ref": "AAAAAAGbem71Gs1PWFY="
 									},
-									"visible": null,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 1864,
-									"top": 848,
+									"left": 1872,
+									"top": 967,
+									"width": 96.09716796875,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
+									"alpha": -1.5707962156837856,
+									"distance": 90,
 									"hostEdge": {
 										"$ref": "AAAAAAGbem71Gs1RBik="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«circuit breaker»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -12727,7 +12738,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 1864,
+									"left": 1920,
 									"top": 893,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -12746,7 +12757,7 @@
 							"tail": {
 								"$ref": "AAAAAAGbcYyxyg75v8k="
 							},
-							"points": "1864:1000;1864:884;2015.7099609375:884",
+							"points": "1920:1000;1920:884;2015.7099609375:884",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGbem71Gs1SSGE="
@@ -12799,18 +12810,19 @@
 									"model": {
 										"$ref": "AAAAAAGbem9I0c1g7Rk="
 									},
-									"visible": null,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 1647,
-									"top": 940,
+									"left": 1584,
+									"top": 1038,
+									"width": 96.09716796875,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
+									"alpha": 1.4464414091712128,
+									"distance": 128.9961239727768,
 									"hostEdge": {
 										"$ref": "AAAAAAGbem9I0c1iNoU="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«circuit breaker»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -13573,18 +13585,19 @@
 									"model": {
 										"$ref": "AAAAAAGbenbJz84CVWc="
 									},
-									"visible": null,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 1876,
-									"top": 1104,
+									"left": 1888,
+									"top": 1134,
+									"width": 96.09716796875,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
+									"alpha": -0.01666512093693482,
+									"distance": 60.00833275470999,
 									"hostEdge": {
 										"$ref": "AAAAAAGbenbJ0M4Ekng="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«circuit breaker»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -13658,7 +13671,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"parentStyle": true,
-											"left": 848,
+											"left": 928,
 											"top": 672,
 											"width": 64.32080078125,
 											"height": 13,
@@ -13672,7 +13685,7 @@
 											},
 											"font": "Arial;13;1",
 											"parentStyle": true,
-											"left": 2229,
+											"left": 2269,
 											"top": 1063,
 											"width": 62.419921875,
 											"height": 13,
@@ -13687,7 +13700,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"parentStyle": true,
-											"left": 848,
+											"left": 928,
 											"top": 672,
 											"width": 80.9072265625,
 											"height": 13,
@@ -13702,7 +13715,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"parentStyle": true,
-											"left": 848,
+											"left": 928,
 											"top": 672,
 											"height": 13,
 											"horizontalAlignment": 1
@@ -13710,7 +13723,7 @@
 									],
 									"font": "Arial;13;0",
 									"parentStyle": true,
-									"left": 2224,
+									"left": 2264,
 									"top": 1056,
 									"width": 72.419921875,
 									"height": 25,
@@ -13739,7 +13752,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": true,
-									"left": 424,
+									"left": 464,
 									"top": 336,
 									"width": 10,
 									"height": 10
@@ -13756,7 +13769,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": true,
-									"left": 424,
+									"left": 464,
 									"top": 336,
 									"width": 10,
 									"height": 10
@@ -13773,7 +13786,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": true,
-									"left": 424,
+									"left": 464,
 									"top": 336,
 									"width": 10,
 									"height": 10
@@ -13790,7 +13803,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": true,
-									"left": 424,
+									"left": 464,
 									"top": 336,
 									"width": 10,
 									"height": 10
@@ -13799,7 +13812,7 @@
 							"font": "Arial;13;0",
 							"parentStyle": false,
 							"containerChangeable": true,
-							"left": 2224,
+							"left": 2264,
 							"top": 1032,
 							"width": 71.419921875,
 							"height": 49,
@@ -13844,7 +13857,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 2311,
+									"left": 2351,
 									"top": 1053,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -13866,7 +13879,7 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 2311,
+									"left": 2351,
 									"top": 1068,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -13888,7 +13901,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 2312,
+									"left": 2352,
 									"top": 1023,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -13907,7 +13920,7 @@
 							"tail": {
 								"$ref": "AAAAAAGbZL7sOGYInTk="
 							},
-							"points": "2312:965;2312:1044;2271.7099609375:1044",
+							"points": "2352:965;2352:1044;2311.7099609375:1044",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGbenckcs5FxGw="
@@ -13941,7 +13954,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 2225,
+									"left": 2245,
 									"top": 1023,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -13960,18 +13973,19 @@
 									"model": {
 										"$ref": "AAAAAAGbencvqM5Uvjk="
 									},
-									"visible": null,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 2225,
-									"top": 1008,
+									"left": 2208,
+									"top": 1016,
+									"width": 96.09716796875,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
+									"alpha": 1.107148354157793,
+									"distance": 24.596747752497688,
 									"hostEdge": {
 										"$ref": "AAAAAAGbencvqM5WJGY="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«circuit breaker»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -13985,7 +13999,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 2225,
+									"left": 2245,
 									"top": 1053,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -14004,7 +14018,7 @@
 							"tail": {
 								"$ref": "AAAAAAGbZT0m2JVKcsw="
 							},
-							"points": "2203:1044;2247.7099609375:1044",
+							"points": "2203:1044;2287.7099609375:1044",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGbencvqM5X338="
@@ -14233,7 +14247,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": false,
 									"left": 1969,
-									"top": 959,
+									"top": 977,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -14251,18 +14265,20 @@
 									"model": {
 										"$ref": "AAAAAAGbenepYs6Jzv8="
 									},
-									"visible": null,
+									"visible": "",
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 1954,
-									"top": 959,
+									"left": 2008,
+									"top": 991,
+									"width": 96.09716796875,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
+									"alpha": -1.7628442180133255,
+									"distance": 73.348483283569,
 									"hostEdge": {
 										"$ref": "AAAAAAGbenepYs6LVZI="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«circuit breaker»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -14276,8 +14292,8 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 1998,
-									"top": 960,
+									"left": 1999,
+									"top": 978,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -14295,7 +14311,7 @@
 							"tail": {
 								"$ref": "AAAAAAGbZT0m2JVKcsw="
 							},
-							"points": "2024:1048;1984:1048;1984:884;2015.7099609375:884",
+							"points": "2048:1024;2048:984;1984:984;1984:884;2015.7099609375:884",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGbenepYs6MG6k="
@@ -14330,7 +14346,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": false,
 									"left": 1961,
-									"top": 1002,
+									"top": 995,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -14348,18 +14364,19 @@
 									"model": {
 										"$ref": "AAAAAAGbenrffM6a/1k="
 									},
-									"visible": null,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 1946,
-									"top": 1002,
+									"left": 1920,
+									"top": 1080,
+									"width": 96.09716796875,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
+									"alpha": -3.2365441572092575,
+									"distance": 84.38009243891595,
 									"hostEdge": {
 										"$ref": "AAAAAAGbenrffM6cEeY="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«circuit breaker»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -14374,7 +14391,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": false,
 									"left": 1991,
-									"top": 1003,
+									"top": 996,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -14392,7 +14409,7 @@
 							"tail": {
 								"$ref": "AAAAAAGbYZv3XWRIN10="
 							},
-							"points": "1736:1134;1976:1134;1976:884;2015.7099609375:884",
+							"points": "1736:1120;1976:1120;1976:884;2015.7099609375:884",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGbenrffM6dGHw="
@@ -14445,18 +14462,19 @@
 									"model": {
 										"$ref": "AAAAAAGbeosry86ucws="
 									},
-									"visible": null,
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 1672,
-									"top": 1144,
+									"left": 1768,
+									"top": 1174,
+									"width": 96.09716796875,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
+									"alpha": -0.006944332332785754,
+									"distance": 144.00347218036097,
 									"hostEdge": {
 										"$ref": "AAAAAAGbeosrzM6wu8c="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«circuit breaker»"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -15160,7 +15178,8 @@
 							},
 							"target": {
 								"$ref": "AAAAAAGbemsXUMtq1Hs="
-							}
+							},
+							"stereotype": "circuit breaker"
 						},
 						{
 							"_type": "UMLDependency",
@@ -15173,7 +15192,8 @@
 							},
 							"target": {
 								"$ref": "AAAAAAGbemxOUMw75tc="
-							}
+							},
+							"stereotype": "circuit breaker"
 						},
 						{
 							"_type": "UMLDependency",
@@ -15186,7 +15206,8 @@
 							},
 							"target": {
 								"$ref": "AAAAAAGbenaCAc3GlSs="
-							}
+							},
+							"stereotype": "circuit breaker"
 						},
 						{
 							"_type": "UMLDependency",
@@ -15199,7 +15220,8 @@
 							},
 							"target": {
 								"$ref": "AAAAAAGbem53PczG36E="
-							}
+							},
+							"stereotype": "circuit breaker"
 						},
 						{
 							"_type": "UMLDependency",
@@ -15212,7 +15234,8 @@
 							},
 							"target": {
 								"$ref": "AAAAAAGbdX7hP5frKaA="
-							}
+							},
+							"stereotype": "circuit breaker"
 						}
 					],
 					"stereotype": "component"
@@ -15323,7 +15346,8 @@
 							},
 							"target": {
 								"$ref": "AAAAAAGbencQrs4ZtHM="
-							}
+							},
+							"stereotype": "circuit breaker"
 						},
 						{
 							"_type": "UMLDependency",
@@ -15349,7 +15373,8 @@
 							},
 							"target": {
 								"$ref": "AAAAAAGbem53PczG36E="
-							}
+							},
+							"stereotype": ""
 						}
 					],
 					"stereotype": "component"
@@ -15487,7 +15512,8 @@
 							},
 							"target": {
 								"$ref": "AAAAAAGbdX/FjphJ09w="
-							}
+							},
+							"stereotype": "circuit breaker"
 						},
 						{
 							"_type": "UMLDependency",
@@ -15500,7 +15526,8 @@
 							},
 							"target": {
 								"$ref": "AAAAAAGbdX6chJeWrcU="
-							}
+							},
+							"stereotype": "circuit breaker"
 						},
 						{
 							"_type": "UMLDependency",
@@ -15513,7 +15540,8 @@
 							},
 							"target": {
 								"$ref": "AAAAAAGbdX6w6pfAP/E="
-							}
+							},
+							"stereotype": "circuit breaker"
 						},
 						{
 							"_type": "UMLDependency",
@@ -15526,7 +15554,8 @@
 							},
 							"target": {
 								"$ref": "AAAAAAGbdX+KiZgdAEY="
-							}
+							},
+							"stereotype": "circuit breaker"
 						}
 					],
 					"stereotype": "component"
@@ -15589,7 +15618,8 @@
 							},
 							"target": {
 								"$ref": "AAAAAAGbemxOUMw75tc="
-							}
+							},
+							"stereotype": ""
 						},
 						{
 							"_type": "UMLDependency",
@@ -15602,7 +15632,8 @@
 							},
 							"target": {
 								"$ref": "AAAAAAGbem53PczG36E="
-							}
+							},
+							"stereotype": "circuit breaker"
 						}
 					],
 					"stereotype": "component"
@@ -15665,7 +15696,8 @@
 							},
 							"target": {
 								"$ref": "AAAAAAGbdX6w6pfAP/E="
-							}
+							},
+							"stereotype": ""
 						},
 						{
 							"_type": "UMLDependency",
@@ -16177,7 +16209,8 @@
 									},
 									"target": {
 										"$ref": "AAAAAAGbemwASMvtIsY="
-									}
+									},
+									"stereotype": "circuit breaker"
 								}
 							],
 							"stereotype": "component"

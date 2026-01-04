@@ -100,3 +100,7 @@ This DBMS stores and manages all the informations about activities.
 \subsubsection*{Activity History Service}
 This service handles the activity-related requests within the system by interfacing with the \textit{Activity DBMS}, serving as the primary management layer 
 for recorded user data. It is directly involved in those operations concerning the activity history of a user.
+
+\subsubsection*{Circuit Breaker}
+In order to avoid ripple effect slowing down the entire system, \textit{Circuit Breakers} are positioned one those components which should have high responsivness
+or that interface with external services. All the Circuit Breakers depicted in Figure \ref{fig:component_diagram} are positioned on the calling service side.
