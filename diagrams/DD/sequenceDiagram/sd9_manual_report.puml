@@ -1,4 +1,4 @@
-@startuml sd10_manual_report
+@startuml sd9_manual_report
 ' Refer to UC11
 hide footbox
 
@@ -12,11 +12,11 @@ activate app
 app -> tapi : publish_issue(userId, pathId, timestamp, pos, type, descr)
 activate tapi
 tapi ->> pims : publish_issue(userId, pathId, timestamp, pos, type, descr)
-activate pims
 deactivate tapi
+activate pims
 pims ->> dbpi : query_insert_issue(userId, pathId, timestamp, pos, type, descr)
-activate dbpi
 deactivate pims
+activate dbpi
 dbpi -> dbpi : insert_issue(userId, pathId, timestamp, pos, type, descr)
 dbpi -->> pims : done
 deactivate dbpi

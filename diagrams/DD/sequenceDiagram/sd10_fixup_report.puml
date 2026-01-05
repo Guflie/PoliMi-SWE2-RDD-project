@@ -1,4 +1,4 @@
-@startuml sd11_fixup_report
+@startuml sd10_fixup_report
 ' Refer to UC12
 hide footbox
 

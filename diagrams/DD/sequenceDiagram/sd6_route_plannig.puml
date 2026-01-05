@@ -59,48 +59,46 @@ note left
 If the action passes through the "Path Creation"
 optional section, this list will contain only one path
 end note
+
 deactivate pi
 activate tb
 opt #e6f9ff if the path wasn't created now
     ' 2nd step - score retrival
-    tb ->> pis : get_scores(list<pathId>)
-    deactivate tb
-    activate pis
-    pis ->> dbpi : query_top_scores(list<pathId>)
-    deactivate pis
-    activate dbpi
-    dbpi -> dbpi : fetch_top_scores(list<pathId>)
-    ' add optional block for path creation
-    dbpi -->> pis : List<scores>
-    deactivate dbpi
-    activate pis
-    pis -->> tb : List<scores>
-    deactivate pis
-    activate tb
-
-    ' 3d step - issue retrival
-    tb -> tb : select_top_paths_by_score()
-    tb ->> pis : get_issues(List<topPathId>)
-    deactivate tb
-    activate pis
-    pis ->> dbpi : query_issues(List<topPathId>)
-    deactivate pis
-    activate dbpi
-    dbpi -> dbpi : fetch_issues(List<topPathId>)
-    ' add optional block for path creation
-    dbpi -->> pis : List<issues>
-    deactivate dbpi
-    activate pis
-    pis -->> tb : List<issues>
-    deactivate pis
-    activate tb
-
-    ' probably you wnat tho expand this in the near future 
-    tb -> tb : merge_paths_info()
+    par 
+        tb ->> pis : get_scores(list<pathId>)
+        deactivate tb
+        activate pis
+        pis ->> dbpi : query_top_scores(list<pathId>)
+        deactivate pis
+        activate dbpi
+        dbpi -> dbpi : fetch_top_scores(list<pathId>)
+        dbpi -->> pis : List<scores>
+        deactivate dbpi
+        activate pis
+        pis -->> tb : List<scores>
+        deactivate pis
+        activate tb
+    else
+        tb ->> pis : get_issues(List<topPathId>)
+        deactivate tb
+        activate pis
+        pis ->> dbpi : query_issues(List<topPathId>)
+        deactivate pis
+        activate dbpi
+        dbpi -> dbpi : fetch_issues(List<topPathId>)
+        dbpi -->> pis : List<issues>
+        deactivate dbpi
+        activate pis
+        pis -->> tb : List<issues>
+        deactivate pis
+        activate tb
+    end
+tb -> tb : merge_paths_info()
 end
 tb -->> tapi : suggested_paths
 deactivate tb
 activate tapi
 tapi -->> app : suggested_paths
 deactivate tapi
+
 @enduml

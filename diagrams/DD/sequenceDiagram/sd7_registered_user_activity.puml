@@ -1,0 +1,116 @@
+@startuml sd7_registered_user_activity
+' Refers to UC9
+hide footbox
+
+participant "Mobile App" as app
+participant "Trip API Gateway" as tapi
+participant "Activity Handler Service" as ahs
+participant "Path Inventory Service" as pi
+participant "Path DMBS" as dbp
+participant "Weather Proy Service" as wps
+actor "External Weather Service" as ews
+participant "Activity History Service" as ah
+participant "Activity DBMS" as dba
+participant "Public Info Manager Service" as pim
+participant "Public Info DBMS" as dbpi
+
+activate app
+app -> app :start_activity()
+opt stop/resume trip
+    loop
+        app -> app : pause_activity()
+        app -> app : resume_activity()
+    end
+end
+app -> app : complete_ride()
+app -> app : score_path()
+app -> tapi: save_act(save_activity(userId, pathId, date, startTime, endTime, score)
+activate tapi
+tapi ->> ahs : save_act(userId, pathId, date, startTime, endTime, score)
+deactivate tapi
+
+' first check if the weather servcie is available
+activate ahs
+ahs ->> wps : check_av()
+deactivate ahs
+activate wps
+wps ->> ews : check_av()
+deactivate wps
+activate ews
+ews -->> wps : status
+deactivate ews
+activate wps
+wps -->> ahs : status
+deactivate wps
+activate ahs
+
+' if available, retrive it
+opt status = available
+    ahs ->> pi : get_paht_loc(pathId)
+    deactivate ahs
+    activate pi
+    pi ->>  dbp : query_loc(pathId)
+    deactivate pi
+    activate dbp
+    dbp -> dbp : fecth_loc(pathId)
+    dbp -->> pi : pathLocation
+    deactivate dbp
+    activate pi
+    pi -->> ahs : pathLocation
+    deactivate pi
+    activate ahs
+    ahs ->> wps : get_weat_info(pathLocation)
+    deactivate ahs
+    activate wps
+    wps ->> ews : get_weat_info(pathLocation)
+    deactivate wps
+    activate ews
+    ews -> ews : fetch_weat_info(pathLocation)
+    ews -->> wps : weatherInfo
+    deactivate ews
+    activate wps
+    wps -->> ahs : weatherInfo
+    deactivate wps
+    activate ahs
+end
+
+par 
+    ahs ->> ah : save_act(userId, pathId, activityInfo)
+    note left
+    activityInfo contains date, startTime, 
+    endTime and possibly wetaherInfo
+    end note
+    deactivate ahs
+    activate ah 
+    ah ->> dba : query_save_act(userId, pathId, activityInfo)
+    deactivate ah 
+    activate dba
+    dba -> dba : insert_act(userId, pathId, activityInfo)
+    dba -->> ah : actId
+    deactivate dba
+    activate ah
+    ah -->> ahs : actId
+    deactivate ah
+    activate ahs
+else
+    ahs ->> pim : save_score(userId, pathId, actId)
+    deactivate ahs 
+    activate pim
+    pim ->> dbpi : query_save_score(userId, pathId, actId)
+    deactivate pim 
+    activate dbpi
+    dbpi -> dbpi : insert_score(userId, pathId, actId)
+    dbpi -->> pim : done
+    deactivate dbpi
+    activate pim
+    pim -->> ahs : done
+    deactivate pim
+    activate ahs
+end
+ahs -->> tapi : done
+deactivate ahs
+activate tapi
+tapi -->> app : done
+deactivate tapi
+
+@enduml

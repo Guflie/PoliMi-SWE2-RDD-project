@@ -1,4 +1,4 @@
-@startuml sd12_history_consultation
+@startuml sd11_history_consultation
 ' Refer to UC14
 hide footbox
 

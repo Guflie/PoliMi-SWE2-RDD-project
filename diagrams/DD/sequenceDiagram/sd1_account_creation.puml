@@ -64,32 +64,49 @@ break #ffe6e6 link expired
     aapi -->> app : link_expired_error
     deactivate aapi
 end
-acs ->> auth : create_acc_cred(emailAddr, psw)
-deactivate acs
-activate auth
-auth ->> dbc : query_insert_cred(emailAddr, psw)
-deactivate auth
-activate dbc
-dbc -> dbc : insert_cred(emailAddr, psw)
-dbc -->> auth : userId
-deactivate dbc
-activate auth
-auth -->> acs : userId
-deactivate auth
-activate acs
-deactivate acs
-acs ->> accmngr : create_acc_info(userId, name, surname, gender, birthdate)
+
+acs ->> accmngr : get_new_userId()
 deactivate acs
 activate accmngr
-accmngr ->> dba : query_insert_acc(userId, name, surname, gender, birthdate)
+accmngr ->> dba : query_new_id()
 deactivate accmngr
 activate dba
-dba -> dba : insert_acc(userId, name, surname, gender, birthdate)
-dba -->> accmngr : done
+dba -> dba : fetch_new_id()
+dba -->> accmngr : newUserId
 deactivate dba
 activate accmngr
-accmngr -->> acs : done
-deactivate  accmngr
+accmngr -->> acs
+deactivate accmngr
+activate acs
+
+par
+    acs ->> auth : create_acc_cred(newUserId, emailAddr, psw)
+    deactivate acs
+    activate auth
+    auth ->> dbc : query_insert_cred(newUserId, emailAddr, psw)
+    deactivate auth
+    activate dbc
+    dbc -> dbc : insert_cred(newUserI, emailAddr, psw)
+    dbc -->> auth : done
+    deactivate dbc
+    activate auth
+    auth -->> acs : done
+    deactivate auth
+    activate acs
+else
+    acs ->> accmngr : create_acc_info(newUserId, name, surname, gender, birthdate)
+    deactivate acs
+    activate accmngr
+    accmngr ->> dba : query_insert_acc(newUserId, name, surname, gender, birthdate)
+    deactivate accmngr
+    activate dba
+    dba -> dba : insert_acc(newUserId, name, surname, gender, birthdate)
+    dba -->> accmngr : done
+    deactivate dba
+    activate accmngr
+    accmngr -->> acs : done
+     deactivate  accmngr
+end
 activate acs
 acs -->> aapi : account_registration_succesful
 deactivate acs

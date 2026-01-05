@@ -1,4 +1,4 @@
-@startuml sd13_delete_activity
+@startuml sd12_delete_activity
 ' Refer to UC15
 hide footbox
 
