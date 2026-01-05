@@ -7,6 +7,22 @@ components independently, enabling the infrastructure to adapt dynamically to fl
 and the intelligent duplication of critical resources significantly enhance the system's overall resilience.
 
 \subsubsection*{4-layer architecture}
+To ensure a modular and scalable environment, we opted for a 4-tier architectural approach. This design allows us to separate system functionalities based on their logical domain while 
+simultaneously defining how these components are distributed across physical hardware and network boundaries.
+We have identified the following layers:
+\begin{itemize} 
+    \item \textbf{Presentation Layer}: This layer serves as the primary interface between the user and the system. It is responsible for rendering the UI components and facilitating user 
+    interaction, allowing the user to interct easily with the system.
+
+    \item \textbf{Front-end Application Layer}: This layer encapsulates the client-side business logic executed within the mobile application. It handles tasks like trip management, high-frequency 
+    real-time data sampling and on-device pattern recognition for identifying issues during recorded trips. To handle the recognition task, we've chose to use pre-trained lightweight machine learning models.
+
+    \item \textbf{Back-end Application Layer}: This layer comprises the core server-side logic and the various microservices offered by the platform. It is architected as a set of distributed server nodes, 
+    where each service is decoupled to address specific functional domains, ensuring high availability and fault isolation.
+
+    \item \textbf{Data Layer}: Dedicated to the persistence and orchestration of system information, this layer consists of a distributed database cluster. It manages data integrity and retrieval across the 
+    different storage strategies based on the specific type of data is handling.
+\end{itemize}
 
 \subsubsection*{API Gateway}
 To fortify system security and streamline the interaction between the client-side and server-side logic, we implemented the API Gateway pattern. By positioning the gateway as 
