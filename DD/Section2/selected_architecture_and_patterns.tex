@@ -1,1 +1,36 @@
 \subsection{Selected architectural styles and patterns}
+
+\subsubsection*{Microservice architectural style}
+The decision to adopt a Microservices architectural style was primarily driven by the inherent requirement for horizontal scalability. Unlike monolithic structures, this 
+distributed approach focusses on splitting the whole system into small pieces, each one specialized on dealing with a specific task, allowing the system to scale specific 
+components independently, enabling the infrastructure to adapt dynamically to fluctuating workloads in real-time. Furthermore, the fine-grained decomposition of services 
+and the intelligent duplication of critical resources significantly enhance the system's overall resilience.
+
+\subsubsection*{4-layer architecture}
+
+\subsubsection*{API Gateway}
+To fortify system security and streamline the interaction between the client-side and server-side logic, we implemented the API Gateway pattern. By positioning the gateway as 
+the sole entry point for all client requests, we effectively decouple the front-end from the internal microservices architecture. This abstraction layer enhances the system's 
+security by encapsulating the internal service topology, thereby shielding the underlying services from direct external exposure. To mitigate the risk of a Single Point of Failure, 
+the gateway is deployed across multiple instances, ensuring high availability and continuous service. Beyond acting as a reverse proxy, these gateways also perform the tasks of server-side 
+load balancing and service discovery (see Section \ref{sec:other_design_decisions}).
+Furthermore, we adopted for a differentiated gateway strategy by dividing the entry points into two specialized categories: the Account API Gateway and the Trip API Gateway. This granular 
+approach allows each gateway to scale independently according to the specific needs of the underlying services (e.g. an exceptional number of trip requests won't affect the login service)
+
+\subsubsection*{Proxy}
+To prevent internal microservices from directly interfacing with external systems, we implemented a Proxy Service pattern. This pattern establishes a secure communication intermediary, 
+creating a strictly controlled boundary between our internal infrastructure and third-party services. By routing all external traffic through these proxies, we implement a robust security 
+perimeter where initial validation and security audits can be performed without exposing the internal services. Beyond security, this approach facilitates a more decoupled architecture. 
+By abstracting the external service's specific API, our internal business logic remains indipendent from the third-party implementation.
+
+\subsubsection*{Circuit breaker}
+To prevent a single service slowing down other services, we placed some circuit breakers on those services which have to interact other services but that are not stricly related to their 
+funcionning, like API Gatweays, or those connected with third-part system, for which we don't have garanteed reliability.
+This kind of pattern allows the client service to monitor the called service in order to don't be slowd down by another service, avoiding a ripple effect that may cause to slow down a even
+bigger portion of the system.
+
+To safeguard the system against performance degradation caused by a restricted group of services, we implemented the Circuit Breaker pattern. This is particularly useful for services that interact 
+with non-critical dependencies, such as the API Gateways, or services interfaced with third-party systems, where their reliability cannot be guaranteed.
+By utilizing this pattern, the calling service actively monitors the health and response times of the invoked service. If a particular service begins to fail or exceeds predefined latency thresholds, 
+the circuit "closes," immediately redirecting subsequent calls to a fallback mechanism or returning a controlled error. This fail-fast approach prevents the calling service from hanging indefinitely, 
+thereby avoiding a ripple effect that could otherwise compromise the entire application's stability.
