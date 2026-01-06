@@ -48,5 +48,5 @@ bigger portion of the system.
 To safeguard the system against performance degradation caused by a restricted group of services, we implemented the Circuit Breaker pattern. This is particularly useful for services that interact 
 with non-critical dependencies, such as the API Gateways, or services interfaced with third-party systems, where their reliability cannot be guaranteed.
 By utilizing this pattern, the calling service actively monitors the health and response times of the invoked service. If a particular service begins to fail or exceeds predefined latency thresholds, 
-the circuit "closes," immediately redirecting subsequent calls to a fallback mechanism or returning a controlled error. This fail-fast approach prevents the calling service from hanging indefinitely, 
-thereby avoiding a ripple effect that could otherwise compromise the entire application's stability.
+the circuit "closes," immediately redirecting subsequent calls to a fallback mechanism. This fail-fast approach prevents the calling service from hanging indefinitely, thereby avoiding a ripple effect 
+that could otherwise compromise the entire application's stability.
