@@ -1,0 +1,31 @@
+\subsubsection*{Activity DBMS}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Query Insert Activity}} \\ 
+        \hline
+        Signature & query\_insert\_act(userId, pathId, activityInfo): string \\
+        \hline
+        Description & Store the given activity. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item userId: string, the unique identifier of the user
+                \item pathId: string, the identifier of the path
+                \item activityInfo: object, structure containing date, start time, end time, and weather info (if available)
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns the generated activity ID (actId) \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}

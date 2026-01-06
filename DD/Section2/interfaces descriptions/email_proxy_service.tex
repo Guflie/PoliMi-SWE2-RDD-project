@@ -1,0 +1,88 @@
+\subsubsection*{Email Proxy Service}
+\begin{table}[H]
+\centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Send Registration Link}} \\ 
+        \hline
+        Signature & send\_reg\_link(emailAddr, link): void \\
+        \hline
+        Description & Send the email containing the account creation confirmation link. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item emailAddr: string, the recipient's email
+                \item link: string, the confirmation URL containing the token
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}  
+% -----------------------------------------------------------------------------------------------------------
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Send Reset Password Link}} \\ 
+        \hline
+        Signature & send\_reset\_psw\_link(emailAddr): void \\
+        \hline
+        Description & Send the email containing the password reset confirmation link. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item emailAddr: string, the recipient's email
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+% -----------------------------------------------------------------------------------------------------------
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Send Deletion Link}} \\ 
+        \hline
+        Signature & send\_acc\_del\_link(emailAddr, delLink): void \\
+        \hline
+        Description & Send the email containing the account deletion confirmation link \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item emailAddr: string, the recipient's email
+                \item delLink: string, the account deletion URL containing the token
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}

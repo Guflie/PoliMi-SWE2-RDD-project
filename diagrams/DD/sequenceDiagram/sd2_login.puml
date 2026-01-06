@@ -10,7 +10,7 @@ participant "Account Management Service" as acmngr
 participant "Account DBMS" as dba 
 
 activate app
-app -> aapi : send_login_acc(emailAddr, psw)
+app -> aapi : frw_login(emailAddr, psw)
 activate aapi
 aapi ->> auth : login_acc(emailAddr, psw)
 deactivate aapi
@@ -29,7 +29,7 @@ break #ffe6e6 account not found
     deactivate aapi
 end
 
-dbc -->> auth : hashPsw, userId
+dbc -->> auth : psw, userId
 deactivate dbc
 activate auth
 auth -> auth : check_psw(psw, psw_hash)

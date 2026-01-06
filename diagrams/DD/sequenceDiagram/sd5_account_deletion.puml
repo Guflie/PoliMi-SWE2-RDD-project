@@ -11,24 +11,24 @@ participant "Email Proxy Service" as emailp
 actor "Email Service Provider" as email
 
 activate app
-app -> aapi : delete_acc(userId, emailAddr)
+app -> aapi : frw_delete_acc_req(userId, emailAddr)
 activate aapi
-aapi ->> ads : delete_acc(userId, emailAddr)
+aapi ->> ads : delete_acc_req(userId, emailAddr)
 deactivate aapi
 activate ads
-ads ->> emailp : send_acc_del_link(emailAddr)
+ads ->> emailp : send_acc_del_link(emailAddr, delLink)
 deactivate ads
 activate emailp
 emailp ->> email : send_email(emailAddr, delLinkMsg)
 deactivate emailp
 
-app -> aapi : acc_del_conf() 
+app -> aapi : frw_acc_del_conf(delToken) 
 note right
     The user opens the link received by email, which 
     will be opened by the mobile app
 end note
 activate aapi
-aapi ->> ads : acc_del_conf()
+aapi ->> ads : acc_del_conf(delToken)
 deactivate aapi
 activate ads
 break #ffe6e6 link expired
@@ -38,7 +38,7 @@ break #ffe6e6 link expired
     deactivate aapi
 end
 
-ads ->> auth : delete_acc(userId)
+ads ->> auth : delete_acc_cred(userId)
 deactivate ads
 activate auth
 auth ->> dbc : query_delete_acc(userId)

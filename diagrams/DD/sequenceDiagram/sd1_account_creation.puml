@@ -16,13 +16,13 @@ participant "Account Subsystems" as ass
 
 activate app
 
-app ->> aapi : create_acc(name, surname gender, birthdate, emailAddr, psw)
+app ->> aapi : create_acc_req(name, surname gender, birthdate, emailAddr, psw)
 activate aapi
-aapi ->> acs : create_acc(name, surname, gender, birthdate, emailAddr, psw)
+aapi ->> acs : send_acc_creat(name, surname, gender, birthdate, emailAddr, psw)
 deactivate aapi
 activate acs
 ' ---------------------------------------------------------------------------
-acs ->> css : check_acc(emailAddr)
+acs ->> css : check_acc_exist(emailAddr)
 deactivate acs
 ref over css : Refer to SD 1.1- Check Account Exists
 css -->> acs 
@@ -35,22 +35,23 @@ break #ffe6e6 if ref returns match=true
 end
 
 ' ---------------------------------------------------------------------------
-
+acs -> acs : generate_reg_token()
 acs ->> emailp : send_reg_link(emailAddr, link)
 deactivate acs
 activate emailp
 emailp ->> email : send_email(emailAddr, regLinkMsg)
 deactivate emailp
 
-app ->> aapi : send_reg_conf()
+app ->> aapi : send_create_conf(regToken)
 activate aapi
 note right 
     The user opens the link received by email, which 
     will be opened by the mobile app
 end note
-aapi ->> acs : send_reg_conf()
+aapi ->> acs : creae_acc(regToken)
 deactivate aapi
 activate acs
+acs -> acs : check_reg_token(regToken)
 break #ffe6e6 link expired
     acs -->> aapi : link_expired_error
     activate aapi
@@ -76,10 +77,10 @@ else
     ass -->> acs
     activate acs
 end
-acs -->> aapi : account_registration_succesful
+acs -->> aapi : acc_creation_succ
 deactivate acs
 activate aapi
-aapi -->> app : account_registration_succesful
+aapi -->> app : acc_creation_succ
 deactivate aapi
 
 @enduml

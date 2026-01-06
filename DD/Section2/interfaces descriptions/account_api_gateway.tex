@@ -1,25 +1,26 @@
 \subsubsection*{Account API Gateway}
+
 \begin{table}[H]
     \centering
     \renewcommand{\arraystretch}{1.5}     
     \begin{tabular}{|l|p{0.8\textwidth}|}
         \hline
-        Name & \multicolumn{1}{c|}{\textbf{Create account request}} \\ 
+        Name & \multicolumn{1}{c|}{\textbf{Create Account Request}} \\ 
         \hline
-        Signature & create\_acc\_req(name, surname, gender, birthdate, emailAddr, psw): void\\
+        Signature & create\_acc\_req(name, surname, gender, birthdate, emailAddr, psw): void \\
         \hline
-        Description & Forwards to the system the request of creating an account \\
+        Description & Forwards to the system the account creation request. \\
         \hline
         Parameters &
             \begin{minipage}{0.8\textwidth}
             \smallskip
             \begin{itemize}
-                \item  name: string, name of the user
-                \item surname: string, surname of the user 
-                \item gender: string, user gender
-                \item birthdate: date, user birthdate
-                \item email address (emailAddr): string, user email address 
-                \item password(psw): string, account password 
+                \item name: string, user's first name
+                \item surname: string, user's last name
+                \item gender: string, user's gender
+                \item birthdate: date, user's date of birth
+                \item emailAddr: string, user's email address
+                \item psw: string, user's chosen password
             \end{itemize}
             \smallskip
             \end{minipage}  
@@ -27,7 +28,7 @@
         \hline
         Returned & \\
         \hline
-         Exceptions & The submitted email it's already used, thereofore the account can't be created (already\_used\_error) \\
+        Exceptions & The email is already in use (already\_used\_email\_error) \\
         \hline
     \end{tabular}
 \end{table}
@@ -37,112 +38,123 @@
     \renewcommand{\arraystretch}{1.5}     
     \begin{tabular}{|l|p{0.8\textwidth}|}
         \hline
-        Name & \multicolumn{1}{c|}{\textbf{Send accont creation confimation}} \\ 
+        Name & \multicolumn{1}{c|}{\textbf{Forward Account Creation Confirmation}} \\ 
         \hline
-        Signature & send\_create\_conf(regToken): bool \\
+        Signature & send\_create\_conf(regToken): void \\
         \hline
-        Description & Forwards to the system the confirmation to create an account\\
+        Description & Forards to the system the confirmation token after the user clicks the email link. \\
         \hline
-        Parameters &  
+        Parameters &
             \begin{minipage}{0.8\textwidth}
             \smallskip
             \begin{itemize}
-                \item registration token (regToken): string, token embedded into the confirmation link to validate the confirmation 
+                \item regToken: string, the unique registration token generated during the account request phase
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns a success status (acc\_creation\_succ) \\
+        \hline
+        Exceptions & The token has expired(link\_expired\_error) \\
+        \hline
+    \end{tabular}
+\end{table}
+
+% -----------------------------------------------------------------------------------------------------------
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Forward Login Request}} \\ 
+        \hline
+        Signature & frw\_login(emailAddr, psw): account\_info \\
+        \hline
+        Description & Forward the account login request to the system. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item emailAddr: string, the user's email address
+                \item psw: string, the user's password
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns the user's account information (account\_info) \\
+        \hline
+        Exceptions & 
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item Account not found (account\_not\_found\_error)
+                \item Invalid password (wrong\_psw\_error)
             \end{itemize}
             \smallskip
             \end{minipage} 
         \\
         \hline
-        Returned & Returns an acknowledgemnt of account creation \\
-        \hline
-        Exceptions & The creation confirmation wasn't sent within 1 hour, therefore the request is expired (link\_expired\_error)\\
-        \hline        
     \end{tabular}
 \end{table}
+% -----------------------------------------------------------------------------------------------------------
 
 \begin{table}[H]
     \centering
     \renewcommand{\arraystretch}{1.5}     
     \begin{tabular}{|l|p{0.8\textwidth}|}
         \hline
-        Name & \multicolumn{1}{c|}{\textbf{Send login}} \\ 
+        Name & \multicolumn{1}{c|}{\textbf{Forward Modify Attribute Request}} \\ 
         \hline
-        Signature & sen\_login(emailAddr, psw): account\_info\\
+        Signature & frw\_modify\_attr(userId, attrId, newVal): void \\
         \hline
-        Description & Forwards to the system the login request\\
-        \hline
-        Parameters &
-            \begin{minipage}{0.8\textwidth}
-            \smallskip
-            \begin{itemize}        
-                \item email address (emailAddr): string, user email address
-                \item password (psw): string, account password
-            \end{itemize}
-            \smallskip
-            \end{minipage} 
-        \\
-        \hline
-        Returned & A map listing user attributes \\
-        \hline
-        Exceptions & \\
-        \hline
-    \end{tabular}
-\end{table}
-
-\begin{table}[H]
-    \centering
-    \renewcommand{\arraystretch}{1.5}     
-    \begin{tabular}{|l|p{0.8\textwidth}|}
-        \hline
-        Name & \multicolumn{1}{c|}{\textbf{Modify attribute}} \\ 
-        \hline
-        Signature & modify\_attr(userId, attrId, newVal): bool \\
-        \hline
-        Description & Forwards to the system the request to modify the attribute specified with the new value\\
+        Description & Forward the modification of an account ttribute modification to the system. \\
         \hline
         Parameters &
             \begin{minipage}{0.8\textwidth}
             \smallskip
             \begin{itemize}
-                \item  userId: sting, unique identifier of the userId
-                \item attrId: string, unique identifier of the attribute to be modified
-                \item newVal: var, new value to assign to the attribute
+                \item userId: string, the unique identifier of the user
+                \item attrId: string, the identifier/name of the attribute to be modified
+                \item newVal: string, the new value to be assigned to the attribute
             \end{itemize}
             \smallskip
-            \end{minipage}    
+            \end{minipage}  
         \\
         \hline
-        Returned & Indicates that the update has been executed \\
+        Returned & Returns a completion status (done) \\
         \hline
         Exceptions & \\
         \hline
     \end{tabular}
 \end{table}
-
+% -----------------------------------------------------------------------------------------------------------
 \begin{table}[H]
     \centering
     \renewcommand{\arraystretch}{1.5}     
     \begin{tabular}{|l|p{0.8\textwidth}|}
         \hline
-        Name & \multicolumn{1}{c|}{\textbf{Password reset request}} \\ 
+        Name & \multicolumn{1}{c|}{\textbf{Forward Password Reset Request}} \\ 
         \hline
-        Signature & psw\_reset\_req(emailAddr): void \\
+        Signature & frw\_psw\_reset\_req(emailAddr): void \\
         \hline
-        Description & Forwards to the system the request to chang password\\
+        Description & Forwards the initial request to reset the account password to the system. \\
         \hline
         Parameters &
             \begin{minipage}{0.8\textwidth}
             \smallskip
             \begin{itemize}
-                \item  email address (emailAddr): string, user email address
+                \item emailAddr: string, the email address associated with the account
             \end{itemize}
             \smallskip
-            \end{minipage}    
+            \end{minipage}  
         \\
         \hline
         Returned & \\
         \hline
-        Exceptions & \\
+        Exceptions & Account not found (no\_account\_error)\\
         \hline
     \end{tabular}
 \end{table}
@@ -152,25 +164,25 @@
     \renewcommand{\arraystretch}{1.5}     
     \begin{tabular}{|l|p{0.8\textwidth}|}
         \hline
-        Name & \multicolumn{1}{c|}{\textbf{Reset password cofirmation}} \\ 
+        Name & \multicolumn{1}{c|}{\textbf{Forward Reset Password Confirmation}} \\ 
         \hline
-        Signature & reset\_psw\_conf(resetToken): reset\_psw\_form \\
+        Signature & frw\_reset\_psw\_conf(resetToken): form \\
         \hline
-        Description & Forwards to the system the confirmation for the password reset\\
+        Description & Forwads to the system the token from the email link to validate the reset request. \\
         \hline
         Parameters &
             \begin{minipage}{0.8\textwidth}
             \smallskip
             \begin{itemize}
-                \item  reset token (resetToken): string, token embedded into the confirmation link to validate the password reset request
+                \item resetToken: string, the validation token received via email
             \end{itemize}
             \smallskip
-            \end{minipage}    
+            \end{minipage}  
         \\
         \hline
-        Returned & The reset password form with the token embedded \\
+        Returned & Returns the password reset form (reset\_psw\_form)\\
         \hline
-        Exceptions & \\
+        Exceptions & The request is expired (link\_expired\_error)\\
         \hline
     \end{tabular}
 \end{table}
@@ -180,29 +192,31 @@
     \renewcommand{\arraystretch}{1.5}     
     \begin{tabular}{|l|p{0.8\textwidth}|}
         \hline
-        Name & \multicolumn{1}{c|}{\textbf{Submit new password}} \\ 
+        Name & \multicolumn{1}{c|}{\textbf{Forward New Password}} \\ 
         \hline
-        Signature & submit\_new\_psw(newPsw, resetToken): bool\\
+        Signature & frw\_new\_psw(newPsw, resetToken): void \\
         \hline
-        Description & Forwards to the system the new password given by the user \\
+        Description & Forwards to the system the new password. \\
         \hline
         Parameters &
             \begin{minipage}{0.8\textwidth}
             \smallskip
             \begin{itemize}
-                \item  new password (newPsw): string, new password chosen by the user
-                \item reset token (resetToken): string, token embedded into the confirmation link to validate the password reset request
+                \item newPsw: string, the new password to set
+                \item resetToken: string, the validation token
             \end{itemize}
             \smallskip
-            \end{minipage}    
+            \end{minipage}  
         \\
         \hline
-        Returned & Indicates that the update has been executed  \\
+        Returned & Returns a completion status (done)  \\
         \hline
         Exceptions & \\
         \hline
     \end{tabular}
 \end{table}
+
+% -----------------------------------------------------------------------------------------------------------
 
 \begin{table}[H]
     \centering
@@ -257,6 +271,64 @@
         Returned & Indicates that the deletion has been executed\\
         \hline
         Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+% -----------------------------------------------------------------------------------------------------------
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Forward Account Deletion Request}} \\ 
+        \hline
+        Signature & frw\_delete\_acc\_req(userId, emailAddr): void \\
+        \hline
+        Description & Forwards to the system the initial request to delete the account. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item userId: string, the unique identifier of the user
+                \item emailAddr: string, the user's email address
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Forward Account Deletion Confirmation}} \\ 
+        \hline
+        Signature & frw\_acc\_del\_conf(delToken): void \\
+        \hline
+        Description & Receives the confirmation token from the user (via email link) to finalize account deletion. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item delToken: string, the token used to validate the deletion request
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns a completion status (done) \\
+        \hline
+        Exceptions & The request has expired (link\_expired\_error) \\
         \hline
     \end{tabular}
 \end{table}

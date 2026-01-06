@@ -8,15 +8,15 @@ participant "Account Manager Service" as acmngr
 participant "Account DBMS" as dba
 
 activate app
-app -> aapi : modify_attr(userId, attributeId, newValue)
+app -> aapi : frw_modify_attr(userId, attrId, newVal)
 activate aapi
-aapi ->> acmngr : modify_attr(userId, attributeId, newValue)
+aapi ->> acmngr : modify_attr(userId, attrId, newVal)
 deactivate aapi
 activate acmngr
-acmngr ->> dba : query_update_attr(userId, attributeId, newValue)
+acmngr ->> dba : query_update_attr(userId, attrId, newVal)
 deactivate acmngr
 activate dba
-dba -> dba : update_attr(userId, attributeId, newValue)
+dba -> dba : update_attr(userId, attrId, newVal)
 dba -->> acmngr : done
 deactivate dba
 activate acmngr
