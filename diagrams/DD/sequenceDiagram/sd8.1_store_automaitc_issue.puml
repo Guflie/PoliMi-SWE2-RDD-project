@@ -5,17 +5,17 @@ participant "Activity Handler Service" as ahs
 participant "Public Info Manager Service" as pim
 participant "Public Info DBMS" as dbpi
 
-ahs ->> pim : save_issue(userId, pathId, List<detIssue>)
+ahs ->> pim : create_issue_set(userId, pathId, List<detIssue>)
 activate pim
 loop foreach issueInfo in List<detIssue>
-    pim ->> dbpi : query_save_score(userId, pathId, issueInfo)
+    pim ->> dbpi : query_insert_issue(userId, pathId, issueInfo)
     deactivate pim 
     activate dbpi
     note left
     issueInfo contains timestamp, 
     pos, type, desc
     end note
-    dbpi -> dbpi : insert_score(userId, pathId, issueInfo)
+    dbpi -> dbpi : insert_issue(userId, pathId, issueInfo)
     dbpi -->> pim : done
     deactivate dbpi
     activate pim

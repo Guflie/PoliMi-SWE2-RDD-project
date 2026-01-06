@@ -9,7 +9,7 @@ participant "Public Info DBMS" as dbpi
 
 activate app
 
-app -> tapi : publish_issue(userId, pathId, timestamp, pos, type, descr)
+app -> tapi : frw_publish_issue(userId, pathId, timestamp, pos, type, descr)
 activate tapi
 tapi ->> pims : publish_issue(userId, pathId, timestamp, pos, type, descr)
 deactivate tapi

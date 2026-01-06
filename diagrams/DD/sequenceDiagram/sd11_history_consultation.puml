@@ -9,7 +9,7 @@ participant "Activity DBMS" as dba
 
 activate app
 
-app -> tapi : show_act_hist(userId, filters)
+app -> tapi : frw_get_act_hist(userId, filters)
 note right
 If the user doesn't apply filters, the
 "filters" attributes is empty
@@ -18,17 +18,17 @@ activate tapi
 tapi ->> ahs : get_act_hist(userId, filters)
 deactivate tapi
 activate ahs
-ahs ->> dba : query_act_hist(userId, filters)
+ahs ->> dba : query_get_act_hist(userId, filters)
 deactivate ahs
 activate dba
 dba -> dba : select_act_his(userId, filters)
-dba -->> ahs : done
+dba -->> ahs : List<Activity>
 deactivate dba
 activate ahs
-ahs -->> tapi : done
+ahs -->> tapi : List<Activity>
 deactivate ahs
 activate tapi
-tapi -->> app
+tapi -->> app : List<Activity>
 deactivate tapi
 
 @enduml

@@ -9,20 +9,20 @@ participant "Activity DBMS" as dba
 
 activate app
 
-app -> tapi : delete_act(actId)
+app -> tapi : frw_delete_act_req(actId)
 activate tapi
-tapi ->> ahs : delete_act(actId)
+tapi ->> ahs : delete_act_req(actId)
 deactivate tapi
 activate ahs
-ahs -->> tapi : conf_form
+ahs -->> tapi : conf_form, actDelToken
 deactivate ahs
 activate tapi
-tapi -->> app : conf_form
+tapi -->> app : conf_form, actDelToken
 deactivate tapi
 ' --------------------------------
-app -> tapi : send_del_conf(actId)
+app -> tapi : frw_send_del_conf(actId, ascDelToken)
 activate tapi
-tapi ->> ahs : send_del_conf(actId)
+tapi ->> ahs : delete_act(actId, ascDelToken)
 deactivate tapi
 activate ahs
 ahs ->> dba : query_del_act(actId)

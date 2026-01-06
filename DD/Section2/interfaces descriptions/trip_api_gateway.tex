@@ -1,0 +1,216 @@
+\subsubsction*{Trip API Gateweay}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Forward Path Request}} \\ 
+        \hline
+        Signature & frw\_get\_paths(sPoint, ePoint): suggested\_paths \\
+        \hline
+        Description & Forwards to the system the request for path givens the starting and ending point. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item sPoint: location/string, the starting point of the trip
+                \item ePoint: location/string, the destination point of the trip
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns the calculated suggested paths (suggested\_paths) \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+% -----------------------------------------------------------------------------------------------------------
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Forward Save Activity}} \\ 
+        \hline
+        Signature & frw\_save\_act(userId, pathId, date, startTime, endTime, score, List<detIssue>:): void \\
+        \hline
+        Description & Forwards to the system the completed activity to be saved. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item userId: string, the unique identifier of the user
+                \item pathId: string, the identifier of the path taken
+                \item date: date, the date the activity occurred
+                \item startTime: time, the start time of the activity
+                \item endTime: time, the end time of the activity
+                \item score: integer, the rating given by the user
+                \item List<detIssue>: List<Issue>(optional), a list of issues automatically detected during the monitored activity
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns a completion status (done) \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+% -----------------------------------------------------------------------------------------------------------
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Forward Issue Report}} \\ 
+        \hline
+        Signature & frw\_publish\_issue(userId, pathId, timestamp, pos, type, descr): void \\
+        \hline
+        Description & Forward to the system the request to publish issue. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item userId: string, the unique identifier of the user reporting the issue
+                \item pathId: string, the identifier of the path where the issue was found
+                \item timestamp: datetime, the time the issue was observed
+                \item pos: string/coords, the specific location of the issue
+                \item type: string, the category of the issue (e.g., obstacle, damage)
+                \item descr: string, a text description provided by the user
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns a completion status (done) \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+% -----------------------------------------------------------------------------------------------------------
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Forward Fixup Report}} \\ 
+        \hline
+        Signature & frw\_publish\_fixup(issueId): void \\
+        \hline
+        Description & Forward to the system the request to publish fixup. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item issueId: string, the unique identifier of the issue to be updated
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns a completion status (done) \\
+        \hline
+        Exceptions & The specified issue was not found (issue\_not\_found\_error) \\
+        \hline
+    \end{tabular}
+\end{table}
+% -----------------------------------------------------------------------------------------------------------
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Forward History Request}} \\ 
+        \hline
+        Signature & frw\_get\_act\_hist(userId, filters): List<Activity> \\
+        \hline
+        Description & Forward to the system the request to get the activity history. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item userId: string, the unique identifier of the user
+                \item filters: object/list, optional search criteria (empty if no filter applied)
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns the list of historical activities (done) \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+% -----------------------------------------------------------------------------------------------------------
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Forward Activity Deletion Request}} \\ 
+        \hline
+        Signature & frw\_delete\_act\_req(actId): (conf\_form, actDelToken) \\
+        \hline
+        Description & Forwards to the system the request to delete the specified activity. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item actId: string, the unique identifier of the activity
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns the confirmation form (conf\_form) and deletion token (actDelToken) \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Forward Activity Deletion Confirmation}} \\ 
+        \hline
+        Signature & frw\_send\_del\_conf(actId, actDelToken): void \\
+        \hline
+        Description & Forward to the system the request to delete the selected activity. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item actId: string, the unique identifier of the activity
+                \item actDelToken: string, the security token received in the previous step
+            \end{itemize}
+            \smallskip
+            \end{minipage}
+        \\
+        \hline
+        Returned & Returns a completion status (done) \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}

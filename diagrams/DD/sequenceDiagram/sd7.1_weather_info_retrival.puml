@@ -7,7 +7,7 @@ participant "Path DMBS" as dbp
 participant "Weather Proy Service" as wps
 actor "External Weather Service" as ews
 
-ahs ->> wps : check_av()
+ahs ->> wps : check_weather_av()
 deactivate ahs
 activate wps
 wps ->> ews : check_av()
@@ -25,7 +25,7 @@ opt #ffeecc status = available
     ahs ->> pi : get_paht_loc(pathId)
     deactivate ahs
     activate pi
-    pi ->>  dbp : query_loc(pathId)
+    pi ->>  dbp : query_get_loc(pathId)
     deactivate pi
     activate dbp
     dbp -> dbp : fecth_loc(pathId)

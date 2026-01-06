@@ -5,13 +5,13 @@ participant "Activity Handler Service" as ahs
 participant "Public Info Manager Service" as pim
 participant "Public Info DBMS" as dbpi
 
-ahs ->> pim : save_score(userId, pathId, actId)
+ahs ->> pim : create_score(userId, pathId, actId, score)
 deactivate ahs 
 activate pim
-pim ->> dbpi : query_save_score(userId, pathId, actId)
+pim ->> dbpi : query_insert_score(userId, pathId, actId, score)
 deactivate pim 
 activate dbpi
-dbpi -> dbpi : insert_score(userId, pathId, actId)
+dbpi -> dbpi : insert_score(userId, pathId, actId, score)
 dbpi -->> pim : done
 deactivate dbpi
 activate pim

@@ -26,7 +26,7 @@ end
 app -> app : complete_ride()
 app -> app : score_path()
 app -> app : confirm_det_issue()
-app -> tapi: save_act(save_activity(userId, pathId, date, startTime, endTime, score, List<detIssue>)
+app -> tapi: frw_save_act(save_activity(userId, pathId, date, startTime, endTime, score, List<detIssue>)
 activate tapi
 tapi ->> ahs : save_act(userId, pathId, date, startTime, endTime, score, List<detIssue>)
 deactivate tapi
@@ -36,13 +36,13 @@ ahs ->> wps : check_av()
 ref over wps, ews, pss : Refer to SD 7.1-Weather Info Retrivalactivate 
 
 par #e1f4fc 
-    ahs ->> ass : save_act(userId, pathId, activityInfo)
+    ahs ->> ass : create_act(userId, pathId, activityInfo)
     ref over  ass : Refer to SD 7.2-Store Activity
 else
-    ahs ->> piss : save_score(userId, pathId, actId)
+    ahs ->> piss : create_score(userId, pathId, actId)
     ref over piss : Refer to SD 7.3-Store Score
 else
-    ahs ->> piss : save_issue(userId, pathId, List<detIssue>)
+    ahs ->> piss : create_issue_set(userId, pathId, List<detIssue>)
     ref over piss : Refer to SD 8.1-Store Automatic Issue
 end
 ahs -->> tapi : done

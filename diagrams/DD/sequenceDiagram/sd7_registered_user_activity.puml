@@ -25,21 +25,21 @@ opt stop/resume trip
 end
 app -> app : complete_ride()
 app -> app : score_path()
-app -> tapi: save_act(save_activity(userId, pathId, date, startTime, endTime, score)
+app -> tapi: frw_save_act(save_activity(userId, pathId, date, startTime, endTime, score)
 activate tapi
 tapi ->> ahs : save_act(userId, pathId, date, startTime, endTime, score)
 deactivate tapi
 
 ' first check if the weather servcie is available
 activate ahs
-ahs ->> wps : check_av()
+ahs ->> wps : check_weather_av()
 ref over wps, ews, pss : Refer to SD 7.1-Weather Information Retrival
 
 par #e1f4fc 
-    ahs ->> ass : save_act(userId, pathId, activityInfo)
+    ahs ->> ass : create_act(userId, pathId, activityInfo)
     ref over  ass : Refer to SD 7.2-Store Activity
 else
-    ahs ->> piss : save_score(userId, pathId, actId)
+    ahs ->> piss : create_score(userId, pathId, actId)
     ref over piss : Refer to SD 7.3-Store Score
 end
 ahs -->> tapi : done

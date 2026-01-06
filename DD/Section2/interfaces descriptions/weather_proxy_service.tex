@@ -1,0 +1,49 @@
+\subsubsection*{Weather Proxy Service}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Check Weather Availability}} \\ 
+        \hline
+        Signature & check\_weather\_av(): status \\
+        \hline
+        Description & Checks the availability status of the external weather service provider in order to avoid useless operation. \\
+        \hline
+        Parameters & None \\
+        \hline
+        Returned & Returns the availability status (status) \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Get Weather Information}} \\ 
+        \hline
+        Signature & get\_weat\_info(pathLocation): weatherInfo \\
+        \hline
+        Description & Retrieves specific weather data for the activity location from the \textit{External Weather System}. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item pathLocation: string, the coordinates or location data of the path
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns the weather information set (weatherInfo) \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}

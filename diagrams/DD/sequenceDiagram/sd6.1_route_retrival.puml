@@ -7,7 +7,7 @@ participant "Path DMBS" as dbp
 participant "Mapping Proxy Service" as mp
 actor "External Mapping System" as ems
 
-tb ->> pi : get_paths(sPoint,ePoint)
+tb ->> pi : retrive_paths(sPoint,ePoint)
 activate pi
 pi ->> dbp : query_paths(sPoint,ePoint)
 deactivate pi
