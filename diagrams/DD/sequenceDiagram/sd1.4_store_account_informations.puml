@@ -1,0 +1,21 @@
+@startuml sd1-4_store_account_informations
+hide footbox
+
+participant "Account Creation Service" as acs
+participant "Account Management Service" as accmngr
+participant "Account DBMS" as dba
+
+acs ->> accmngr : create_acc_info(newUserId, name, surname, gender, birthdate)
+deactivate acs
+activate accmngr
+accmngr ->> dba : query_insert_acc(newUserId, name, surname, gender, birthdate)
+deactivate accmngr
+activate dba
+dba -> dba : insert_acc(newUserId, name, surname, gender, birthdate)
+dba -->> accmngr : done
+deactivate dba
+activate accmngr
+accmngr -->> acs : done
+deactivate  accmngr
+
+@enduml

@@ -1,16 +1,18 @@
 @startuml sd1_account_creation
 ' Refers to UC1
 hide footbox
-' To improve readability try to shorten the message signatures length
+
+skinparam sequence {
+    ReferenceBackgroundColor #fcf8e1
+}
+
 participant "Mobile App" as app
 participant "Account API Gateway" as aapi
 participant "Account Creation Service" as acs
-participant "Authentication Service" as auth
-participant "Credentials DBMS" as dbc
+participant "Credentials Subsystem" as css
 participant "Email Proxy Service" as emailp
 actor "Email Provider" as email
-participant "Account Manager Service" as accmngr
-participant "Account DBMS" as dba
+participant "Account Subsystems" as ass
 
 activate app
 
@@ -19,30 +21,21 @@ activate aapi
 aapi ->> acs : create_acc(name, surname, gender, birthdate, emailAddr, psw)
 deactivate aapi
 activate acs
-acs ->> auth : check_acc(emailAddr)
+' ---------------------------------------------------------------------------
+acs ->> css : check_acc(emailAddr)
 deactivate acs
-activate auth
-auth -> dbc : query_acc_exists(emailAddr)
-deactivate auth
-activate dbc
-break #ffe6e6 email already used
-    dbc -->> auth : match
-    activate auth
-    auth -->> acs : already_used_email_error
-    deactivate auth
-    activate acs
+ref over css : Refer to SD 1.1- Check Account Exists
+css -->> acs 
+activate acs
+break #ffe6e6 if ref returns match=true
     acs -->> aapi : already_used_email_error
-    deactivate acs
     activate aapi
     aapi -->> app : already_used_email_error
     deactivate aapi
 end
-dbc -->> auth : noMatch
-deactivate dbc
-activate auth
-auth -->> acs : noMatch
-deactivate auth
-activate acs
+
+' ---------------------------------------------------------------------------
+
 acs ->> emailp : send_reg_link(emailAddr, link)
 deactivate acs
 activate emailp
@@ -65,49 +58,24 @@ break #ffe6e6 link expired
     deactivate aapi
 end
 
-acs ->> accmngr : get_new_userId()
+acs ->> ass : get_new_userId()
 deactivate acs
-activate accmngr
-accmngr ->> dba : query_new_id()
-deactivate accmngr
-activate dba
-dba -> dba : fetch_new_id()
-dba -->> accmngr : newUserId
-deactivate dba
-activate accmngr
-accmngr -->> acs
-deactivate accmngr
+ref over ass : Refer to SD 1.2-Get New UserId
+ass -->> acs : newUserId
 activate acs
-
-par
-    acs ->> auth : create_acc_cred(newUserId, emailAddr, psw)
+par #e1f4fc
+    acs ->> css : create_acc_cred(newUserId, emailAddr, psw)
     deactivate acs
-    activate auth
-    auth ->> dbc : query_insert_cred(newUserId, emailAddr, psw)
-    deactivate auth
-    activate dbc
-    dbc -> dbc : insert_cred(newUserI, emailAddr, psw)
-    dbc -->> auth : done
-    deactivate dbc
-    activate auth
-    auth -->> acs : done
-    deactivate auth
+    ref over css : Refer to SD 1.3-Store Account Credentials
+    css -->> acs
     activate acs
 else
-    acs ->> accmngr : create_acc_info(newUserId, name, surname, gender, birthdate)
+    acs ->> ass : create_acc_info(newUserId, name, surname, gender, birthdate)
     deactivate acs
-    activate accmngr
-    accmngr ->> dba : query_insert_acc(newUserId, name, surname, gender, birthdate)
-    deactivate accmngr
-    activate dba
-    dba -> dba : insert_acc(newUserId, name, surname, gender, birthdate)
-    dba -->> accmngr : done
-    deactivate dba
-    activate accmngr
-    accmngr -->> acs : done
-     deactivate  accmngr
+    ref over ass : Refer to SD 1.4-Store Account Information
+    ass -->> acs
+    activate acs
 end
-activate acs
 acs -->> aapi : account_registration_succesful
 deactivate acs
 activate aapi

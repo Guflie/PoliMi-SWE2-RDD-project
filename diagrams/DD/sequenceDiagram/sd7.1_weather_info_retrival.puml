@@ -1,0 +1,53 @@
+@startuml sd7-1_weather_info_retrival
+hide footbox
+
+participant "Activity Handler Service" as ahs
+participant "Path Inventory Service" as pi
+participant "Path DMBS" as dbp
+participant "Weather Proy Service" as wps
+actor "External Weather Service" as ews
+
+ahs ->> wps : check_av()
+deactivate ahs
+activate wps
+wps ->> ews : check_av()
+deactivate wps
+activate ews
+ews -->> wps : status
+deactivate ews
+activate wps
+wps -->> ahs : status
+deactivate wps
+activate ahs
+
+' if available, retrive it
+opt #ffeecc status = available
+    ahs ->> pi : get_paht_loc(pathId)
+    deactivate ahs
+    activate pi
+    pi ->>  dbp : query_loc(pathId)
+    deactivate pi
+    activate dbp
+    dbp -> dbp : fecth_loc(pathId)
+    dbp -->> pi : pathLocation
+    deactivate dbp
+    activate pi
+    pi -->> ahs : pathLocation
+    deactivate pi
+    activate ahs
+    ahs ->> wps : get_weat_info(pathLocation)
+    deactivate ahs
+    activate wps
+    wps ->> ews : get_weat_info(pathLocation)
+    deactivate wps
+    activate ews
+    ews -> ews : fetch_weat_info(pathLocation)
+    ews -->> wps : weatherInfo
+    deactivate ews
+    activate wps
+    wps -->> ahs : weatherInfo
+    deactivate wps
+    activate ahs
+end
+
+@enduml

@@ -1,0 +1,21 @@
+@startuml sd1-2_get_new_userid
+hide footbox
+
+participant "Account Creation Service" as acs
+participant "Account Management Service" as accmngr
+participant "Account DBMS" as dba
+
+acs ->> accmngr : get_new_userId()
+deactivate acs
+activate accmngr
+accmngr ->> dba : query_new_id()
+deactivate accmngr
+activate dba
+dba -> dba : fetch_new_id()
+dba -->> accmngr : newUserId
+deactivate dba
+activate accmngr
+accmngr -->> acs : newUserId
+deactivate accmngr
+
+@enduml
