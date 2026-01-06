@@ -18,9 +18,6 @@ Deploying microservices with containers allow to encapsulate each service with i
 the fact that containerization ensures that a failure is contained within it, without causing problems to other instances of the same service.
 
 \subsubsection*{Caches}
-To boost teh system availability, we decided to use caches. This allow those services with high dependency from reading operations to store temporarly output proecessing, or even compute some
-popular requests on advance without have to fullfil the request when needed.the 
-
 To enhance system availability, we implemented a robust caching layer for those services that could benefit from it. This strategy is particularly effective for services characterized by read-intensive workloads, like
 those interfacing directly with the DBMSs. By serving requests from the cache, we significantly decrease response times.
 Caching approch also allows the system to pre-compute results for some high-demand requests, avoiding to iterate th same complex operation over and over.
