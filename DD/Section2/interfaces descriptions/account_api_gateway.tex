@@ -1,0 +1,262 @@
+\subsubsection*{Account API Gateway}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Create account request}} \\ 
+        \hline
+        Signature & create\_acc\_req(name, surname, gender, birthdate, emailAddr, psw): void\\
+        \hline
+        Description & Forwards to the system the request of creating an account \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item  name: string, name of the user
+                \item surname: string, surname of the user 
+                \item gender: string, user gender
+                \item birthdate: date, user birthdate
+                \item email address (emailAddr): string, user email address 
+                \item password(psw): string, account password 
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & \\
+        \hline
+         Exceptions & The submitted email it's already used, thereofore the account can't be created (already\_used\_error) \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Send accont creation confimation}} \\ 
+        \hline
+        Signature & send\_create\_conf(regToken): bool \\
+        \hline
+        Description & Forwards to the system the confirmation to create an account\\
+        \hline
+        Parameters &  
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item registration token (regToken): string, token embedded into the confirmation link to validate the confirmation 
+            \end{itemize}
+            \smallskip
+            \end{minipage} 
+        \\
+        \hline
+        Returned & Returns an acknowledgemnt of account creation \\
+        \hline
+        Exceptions & The creation confirmation wasn't sent within 1 hour, therefore the request is expired (link\_expired\_error)\\
+        \hline        
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Send login}} \\ 
+        \hline
+        Signature & sen\_login(emailAddr, psw): account\_info\\
+        \hline
+        Description & Forwards to the system the login request\\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}        
+                \item email address (emailAddr): string, user email address
+                \item password (psw): string, account password
+            \end{itemize}
+            \smallskip
+            \end{minipage} 
+        \\
+        \hline
+        Returned & A map listing user attributes \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Modify attribute}} \\ 
+        \hline
+        Signature & modify\_attr(userId, attrId, newVal): bool \\
+        \hline
+        Description & Forwards to the system the request to modify the attribute specified with the new value\\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item  userId: sting, unique identifier of the userId
+                \item attrId: string, unique identifier of the attribute to be modified
+                \item newVal: var, new value to assign to the attribute
+            \end{itemize}
+            \smallskip
+            \end{minipage}    
+        \\
+        \hline
+        Returned & Indicates that the update has been executed \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Password reset request}} \\ 
+        \hline
+        Signature & psw\_reset\_req(emailAddr): void \\
+        \hline
+        Description & Forwards to the system the request to chang password\\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item  email address (emailAddr): string, user email address
+            \end{itemize}
+            \smallskip
+            \end{minipage}    
+        \\
+        \hline
+        Returned & \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Reset password cofirmation}} \\ 
+        \hline
+        Signature & reset\_psw\_conf(resetToken): reset\_psw\_form \\
+        \hline
+        Description & Forwards to the system the confirmation for the password reset\\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item  reset token (resetToken): string, token embedded into the confirmation link to validate the password reset request
+            \end{itemize}
+            \smallskip
+            \end{minipage}    
+        \\
+        \hline
+        Returned & The reset password form with the token embedded \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Submit new password}} \\ 
+        \hline
+        Signature & submit\_new\_psw(newPsw, resetToken): bool\\
+        \hline
+        Description & Forwards to the system the new password given by the user \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item  new password (newPsw): string, new password chosen by the user
+                \item reset token (resetToken): string, token embedded into the confirmation link to validate the password reset request
+            \end{itemize}
+            \smallskip
+            \end{minipage}    
+        \\
+        \hline
+        Returned & Indicates that the update has been executed  \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Send account deletion request}} \\ 
+        \hline
+        Signature & send\_delete\_acc(userId, emailAddr): void \\
+        \hline
+        Description & Forwards to the system the request to delete the account\\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item  userId: sting, unique identifier of the userId
+                \item email address (emailAddr): string, user email address
+            \end{itemize}
+            \smallskip
+            \end{minipage}    
+        \\
+        \hline
+        Returned & \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}     
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Confirm account deletion}} \\ 
+        \hline
+        Signature & acc\_del\_conf(delToken): bool\\
+        \hline
+        Description & Forwards to the system the account deletion confirmation\\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item  deletion token (delToken): string, token embedded into the confirmation link to validate the account deletion request
+            \end{itemize}
+            \smallskip
+            \end{minipage}    
+        \\
+        \hline
+        Returned & Indicates that the deletion has been executed\\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
