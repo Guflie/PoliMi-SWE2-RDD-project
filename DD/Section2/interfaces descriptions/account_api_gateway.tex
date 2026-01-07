@@ -9,7 +9,7 @@
         \hline
         Signature & create\_acc\_req(name, surname, gender, birthdate, emailAddr, psw): void \\
         \hline
-        Description & Forwards to the system the account creation request. \\
+        Description & Forward to the system the account creation request. \\
         \hline
         Parameters &
             \begin{minipage}{0.8\textwidth}
@@ -40,9 +40,9 @@
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Forward Account Creation Confirmation}} \\ 
         \hline
-        Signature & send\_create\_conf(regToken): void \\
+        Signature & send\_create\_conf(regToken): status \\
         \hline
-        Description & Forards to the system the confirmation token after the user clicks the email link. \\
+        Description & Forward to the system the confirmation token after the user clicks the email link. \\
         \hline
         Parameters &
             \begin{minipage}{0.8\textwidth}
@@ -106,11 +106,11 @@
     \renewcommand{\arraystretch}{1.15}      
     \begin{tabular}{|l|p{0.8\textwidth}|}
         \hline
-        Name & \multicolumn{1}{c|}{\textbf{Forward Modify Attribute Request}} \\ 
+        Name & \multicolumn{1}{c|}{\textbf{Forward Modify Attribute}} \\ 
         \hline
-        Signature & frw\_modify\_attr(userId, attrId, newVal): void \\
+        Signature & frw\_modify\_attr(userId, attrId, newVal): status \\
         \hline
-        Description & Forward the modification of an account ttribute modification to the system. \\
+        Description & Forward the modification of an account attribute modification to the system. \\
         \hline
         Parameters &
             \begin{minipage}{0.8\textwidth}
@@ -140,7 +140,7 @@
         \hline
         Signature & frw\_psw\_reset\_req(emailAddr): void \\
         \hline
-        Description & Forwards the initial request to reset the account password to the system. \\
+        Description & Forwards to the system the initial request to reset the account password. \\
         \hline
         Parameters &
             \begin{minipage}{0.8\textwidth}
@@ -194,7 +194,7 @@
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Forward New Password}} \\ 
         \hline
-        Signature & frw\_new\_psw(newPsw, resetToken): void \\
+        Signature & frw\_new\_psw(newPsw, resetToken): status \\
         \hline
         Description & Forwards to the system the new password. \\
         \hline
@@ -216,64 +216,6 @@
     \end{tabular}
 \end{table}
 
-% -----------------------------------------------------------------------------------------------------------
-
-\begin{table}[H]
-    \centering
-    \renewcommand{\arraystretch}{1.15}      
-    \begin{tabular}{|l|p{0.8\textwidth}|}
-        \hline
-        Name & \multicolumn{1}{c|}{\textbf{Send account deletion request}} \\ 
-        \hline
-        Signature & send\_delete\_acc(userId, emailAddr): void \\
-        \hline
-        Description & Forwards to the system the request to delete the account\\
-        \hline
-        Parameters &
-            \begin{minipage}{0.8\textwidth}
-            \smallskip
-            \begin{itemize}
-                \item  userId: sting, unique identifier of the userId
-                \item email address (emailAddr): string, user email address
-            \end{itemize}
-            \smallskip
-            \end{minipage}    
-        \\
-        \hline
-        Returned & \\
-        \hline
-        Exceptions & \\
-        \hline
-    \end{tabular}
-\end{table}
-
-\begin{table}[H]
-    \centering
-    \renewcommand{\arraystretch}{1.15}      
-    \begin{tabular}{|l|p{0.8\textwidth}|}
-        \hline
-        Name & \multicolumn{1}{c|}{\textbf{Confirm account deletion}} \\ 
-        \hline
-        Signature & acc\_del\_conf(delToken): bool\\
-        \hline
-        Description & Forwards to the system the account deletion confirmation\\
-        \hline
-        Parameters &
-            \begin{minipage}{0.8\textwidth}
-            \smallskip
-            \begin{itemize}
-                \item  deletion token (delToken): string, token embedded into the confirmation link to validate the account deletion request
-            \end{itemize}
-            \smallskip
-            \end{minipage}    
-        \\
-        \hline
-        Returned & Indicates that the deletion has been executed\\
-        \hline
-        Exceptions & \\
-        \hline
-    \end{tabular}
-\end{table}
 % -----------------------------------------------------------------------------------------------------------
 
 \begin{table}[H]
@@ -312,9 +254,9 @@
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Forward Account Deletion Confirmation}} \\ 
         \hline
-        Signature & frw\_acc\_del\_conf(delToken): void \\
+        Signature & frw\_acc\_del\_conf(delToken): status \\
         \hline
-        Description & Receives the confirmation token from the user (via email link) to finalize account deletion. \\
+        Description & Forward to the system the confirmation token sent to the user via email link to finalize account deletion. \\
         \hline
         Parameters &
             \begin{minipage}{0.8\textwidth}

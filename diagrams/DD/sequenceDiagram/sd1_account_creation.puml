@@ -16,7 +16,7 @@ participant "Account Subsystems" as ass
 
 activate app
 
-app ->> aapi : create_acc_req(name, surname gender, birthdate, emailAddr, psw)
+app ->> aapi : frw_create_acc_req(name, surname gender, birthdate, emailAddr, psw)
 activate aapi
 aapi ->> acs : send_acc_creat(name, surname, gender, birthdate, emailAddr, psw)
 deactivate aapi

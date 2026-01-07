@@ -64,7 +64,7 @@
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Create Score}} \\ 
         \hline
-        Signature & create\_score(userId, pathId, actId, score): void \\
+        Signature & create\_score(userId, pathId, actId, score): status \\
         \hline
         Description & Creates and stores the given score witth its information. \\
         \hline
@@ -96,7 +96,7 @@
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Query Insert Issue}} \\ 
         \hline
-        Signature & query\_insert\_issue(userId, pathId, issueInfo): void \\
+        Signature & query\_insert\_issue(userId, pathId, issueInfo): status \\
         \hline
         Description & Store the given issue \\
         \hline
@@ -127,7 +127,7 @@
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Publish Issue}} \\ 
         \hline
-        Signature & publish\_issue(userId, pathId, timestamp, pos, type, descr): void \\
+        Signature & publish\_issue(userId, pathId, timestamp, pos, type, descr): status \\
         \hline
         Description & Add to the system issue archive the given issue data. \\
         \hline
@@ -161,7 +161,7 @@
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Publish Fixup}} \\ 
         \hline
-        Signature & publish\_fixup(issueId): void \\
+        Signature & publish\_fixup(issueId): status \\
         \hline
         Description & Add to the system issue archive the given fixup after running the appropriate checks. \\
         \hline

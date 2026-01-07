@@ -1,4 +1,4 @@
-subsubsection*{Public Info DBMS}
+\subsubsection*{Public Info DBMS}
 
 \begin{table}[H]
     \centering
@@ -64,7 +64,7 @@ subsubsection*{Public Info DBMS}
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Query Insert Score}} \\ 
         \hline
-        Signature & query\_insert\_score(userId, pathId, actId, score): void \\
+        Signature & query\_insert\_score(userId, pathId, actId, score): issue \\
         \hline
         Description &  Store the new score. \\
         \hline
@@ -96,7 +96,7 @@ subsubsection*{Public Info DBMS}
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Create Issue Set}} \\ 
         \hline
-        Signature & create\_issue\_set(userId, pathId, List<detIssue>): void \\
+        Signature & create\_issue\_set(userId, pathId, List<detIssue>): status \\
         \hline
         Description & Create ad store the list of issues given. \\
         \hline
@@ -127,7 +127,7 @@ subsubsection*{Public Info DBMS}
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Query Insert Issue}} \\ 
         \hline
-        Signature & query\_insert\_issue(userId, pathId, timestamp, pos, type, descr): void \\
+        Signature & query\_insert\_issue(userId, pathId, timestamp, pos, type, descr): status \\
         \hline
         Description & Stores the given issue. \\
         \hline
@@ -161,7 +161,7 @@ subsubsection*{Public Info DBMS}
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Query Check Issue Exists}} \\ 
         \hline
-        Signature & query\_check\_issue\_exists(issueId): status \\
+        Signature & query\_check\_issue\_exists(issueId): bool \\
         \hline
         Description & Check whether the selected issue exists or not. \\
         \hline
@@ -189,7 +189,7 @@ subsubsection*{Public Info DBMS}
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Query Update Issue}} \\ 
         \hline
-        Signature & query\_update\_issue(issueId): void \\
+        Signature & query\_update\_issue(issueId): status \\
         \hline
         Description & Update the issue status. \\
         \hline

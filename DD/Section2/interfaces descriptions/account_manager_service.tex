@@ -27,7 +27,7 @@
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Create Account Information}} \\ 
         \hline
-        Signature & create\_acc\_info(newUserId, name, surname, gender, birthdate): void \\
+        Signature & create\_acc\_info(newUserId, name, surname, gender, birthdate): status \\
         \hline
         Description &  Creates and stores the new account informations. \\
         \hline
@@ -45,7 +45,7 @@
             \end{minipage}  
         \\
         \hline
-        Returned & \\
+        Returned & Returns a completion status (done) \\
         \hline
         Exceptions & \\
         \hline
@@ -89,7 +89,7 @@
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Modify Attribute}} \\ 
         \hline
-        Signature & modify\_attr(userId, attrId, newVal): void \\
+        Signature & modify\_attr(userId, attrId, newVal): status \\
         \hline
         Description & Updated the attribute value with the new one for the specified user. \\
         \hline
@@ -120,7 +120,7 @@
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Delete Account}} \\ 
         \hline
-        Signature & delete\_acc(userId): void \\
+        Signature & delete\_acc(userId): status \\
         \hline
         Description & Delete the account information associated to the given userId. \\
         \hline

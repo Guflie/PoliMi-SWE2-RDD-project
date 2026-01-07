@@ -36,7 +36,7 @@
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Send Reset Password Link}} \\ 
         \hline
-        Signature & send\_reset\_psw\_link(emailAddr): void \\
+        Signature & send\_reset\_psw\_link(emailAddr, link): void \\
         \hline
         Description & Send the email containing the password reset confirmation link. \\
         \hline
@@ -45,6 +45,7 @@
             \smallskip
             \begin{itemize}
                 \item emailAddr: string, the recipient's email
+                \item link: string, the password reset URL containing the token
             \end{itemize}
             \smallskip
             \end{minipage}  

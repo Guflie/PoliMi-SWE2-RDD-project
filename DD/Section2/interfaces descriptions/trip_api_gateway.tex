@@ -38,7 +38,7 @@
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Forward Save Activity}} \\ 
         \hline
-        Signature & frw\_save\_act(userId, pathId, date, startTime, endTime, score, List<detIssue>:): void \\
+        Signature & frw\_save\_act(userId, pathId, date, startTime, endTime, score, detIssues): status \\
         \hline
         Description & Forwards to the system the completed activity to be saved. \\
         \hline
@@ -52,7 +52,7 @@
                 \item startTime: time, the start time of the activity
                 \item endTime: time, the end time of the activity
                 \item score: integer, the rating given by the user
-                \item List<detIssue>: List<Issue>(optional), a list of issues automatically detected during the monitored activity
+                \item detIssues: List<Issue>(optional), a list of issues automatically detected during the monitored activity
             \end{itemize}
             \smallskip
             \end{minipage}  
@@ -73,7 +73,7 @@
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Forward Issue Report}} \\ 
         \hline
-        Signature & frw\_publish\_issue(userId, pathId, timestamp, pos, type, descr): void \\
+        Signature & frw\_publish\_issue(userId, pathId, timestamp, pos, type, descr): status \\
         \hline
         Description & Forward to the system the request to publish issue. \\
         \hline
@@ -85,7 +85,7 @@
                 \item pathId: string, the identifier of the path where the issue was found
                 \item timestamp: datetime, the time the issue was observed
                 \item pos: string/coords, the specific location of the issue
-                \item type: string, the category of the issue (e.g., obstacle, damage)
+                \item type: string, the category of the issue
                 \item descr: string, a text description provided by the user
             \end{itemize}
             \smallskip
@@ -107,7 +107,7 @@
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Forward Fixup Report}} \\ 
         \hline
-        Signature & frw\_publish\_fixup(issueId): void \\
+        Signature & frw\_publish\_fixup(issueId): status \\
         \hline
         Description & Forward to the system the request to publish fixup. \\
         \hline
@@ -194,7 +194,7 @@
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Forward Activity Deletion Confirmation}} \\ 
         \hline
-        Signature & frw\_send\_del\_conf(actId, actDelToken): void \\
+        Signature & frw\_send\_del\_conf(actId, actDelToken): status \\
         \hline
         Description & Forward to the system the request to delete the selected activity. \\
         \hline
