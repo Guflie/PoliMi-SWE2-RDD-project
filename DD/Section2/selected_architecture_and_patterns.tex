@@ -12,16 +12,16 @@ simultaneously defining how these components are distributed across physical har
 We have identified the following layers:
 \begin{itemize} 
     \item \textbf{Presentation Layer}: This layer serves as the primary interface between the user and the system. It is responsible for rendering the UI components and facilitating user 
-    interaction, allowing the user to interct easily with the system.
+    interaction, allowing the user to interact easily with the system.
 
     \item \textbf{Front-end Application Layer}: This layer encapsulates the client-side business logic executed within the mobile application. It handles tasks like trip management, high-frequency 
-    real-time data sampling and on-device pattern recognition for identifying issues during recorded trips. To handle the recognition task, we've chose to use pre-trained lightweight machine learning models.
+    real-time data sampling and on-device pattern recognition for identifying issues during recorded trips. To handle the issue-recognition task, we've chose to use pre-trained lightweight machine learning models.
 
     \item \textbf{Back-end Application Layer}: This layer comprises the core server-side logic and the various microservices offered by the platform. It is architected as a set of distributed server nodes, 
     where each service is decoupled to address specific functional domains, ensuring high availability and fault isolation.
 
-    \item \textbf{Data Layer}: Dedicated to the persistence and orchestration of system information, this layer consists of a distributed database cluster. It manages data integrity and retrieval across the 
-    different storage strategies based on the specific type of data is handling.
+    \item \textbf{Data Layer}: Dedicated to the persistence and orchestration of system information, this layer consists of a distributed database cluster. It manages data integrity and retrieval across all
+    nodes, implementing different storage strategies based on the specific type of data is handling.
 \end{itemize}
 
 \subsubsection*{API Gateway}
@@ -40,11 +40,6 @@ perimeter where initial validation and security audits can be performed without 
 By abstracting the external service's specific API, our internal business logic remains indipendent from the third-party implementation.
 
 \subsubsection*{Circuit breaker}
-To prevent a single service slowing down other services, we placed some circuit breakers on those services which have to interact other services but that are not stricly related to their 
-funcionning, like API Gatweays, or those connected with third-part system, for which we don't have garanteed reliability.
-This kind of pattern allows the client service to monitor the called service in order to don't be slowd down by another service, avoiding a ripple effect that may cause to slow down a even
-bigger portion of the system.
-
 To safeguard the system against performance degradation caused by a restricted group of services, we implemented the Circuit Breaker pattern. This is particularly useful for services that interact 
 with non-critical dependencies, such as the API Gateways, or services interfaced with third-party systems, where their reliability cannot be guaranteed.
 By utilizing this pattern, the calling service actively monitors the health and response times of the invoked service. If a particular service begins to fail or exceeds predefined latency thresholds, 

@@ -1,26 +1,25 @@
 \subsection{Component View}
-In this section we focus on describing the \textit{Back-end Application Layer} internal strcuture and it's interaction with the \textit{Data layer}.
+In this section and the following ones we focus on describing the \textit{Back-end Application Layer} internal strcuture and its interaction with the \textit{Data layer}.
 
 \begin{figure}[H]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{DD/component_diagram.pdf}}
     \label{fig:component_diagram}
     \caption{Component Diagram. In red are drown those actors external to our system; in blue the DBMS and those
-    components in Data tier; in green the mobile app residing on the user's device.}
+    components in the Data tier; in green the mobile app residing on the user's device.}
 \end{figure}
 
 \subsubsection*{Mobile App}
 The Mobile Application serves as the primary user interface, enabling users to manage their accounts, browse available 
-paths, and initiate trips with real-time monitoring.
-% after identifing the responsibilities of the front-end layer expand this.
+paths, and initiate trips with real-time monitoring. It also performs an early analysis of raw data collected during activities.
 
 % --------------------------------------------------------------------------------------------------------------------
 \subsubsection*{Account API Gateway}
-Implements the Gateway Pattern to provide a unified entry point for all account management services.
+Implements the Gateway Pattern to provide a unified entry point for all account-related services.
 
 \subsubsection*{Account Creation Service}
-The Account Creation Service manages the process of creating a new account. It coordinates overhall request by the 
-user, orchestrating the communications with the user and the data storage by interfacing with the 
+The Account Creation Service manages the process of creating a new account. It orchestrates 
+the communications with the user and the data storage by interfacing with the 
 \textit{Authentication Service} and the \textit{Account Management Service}.
 
 \subsubsection*{Account Deletion Service}
@@ -52,10 +51,10 @@ This actor represents the email provider.
 % --------------------------------------------------------------------------------------------------------------------
 \subsubsection*{Trip API Gateway} 
 Implements the Gateway Pattern to provide a unified entry point for all trip services (both rides and 
-activities) and related information, like issues and scores.
+activities) and related aspects, like issues and scores.
 
 \subsubsection*{Trip Planner Service}
-This service is responsible for retrieving and merging all the information necessary for the user during trip planning. To 
+This service is responsible for retriving and merging all the information necessary to the user during trip planning. To 
 achieve this, it interfaces with the \textit{Path Inventory} Service to retrieve the path and with the \textit{Public Info Manager} Service to 
 retrieve scores and issues.
 
@@ -87,7 +86,7 @@ This DBMS stores and manages all the informations about \textit{Publishable Infr
 
 \subsubsection*{Public Info Manager Service}
 This service handles the Publishable Information published by the user, managing Issues and Path Scores. It fulfills this role by handling all 
-requests about data stored in the \textit{Public Info DBMS}, and by handling the issue-status updates within the system..
+requests about data stored in the \textit{Public Info DBMS}, and by handling the issue-status updates within the system.
 
 \subsubsection*{Weather Proxy Service}
 This component acts as an intermediary between the system and the \textit{External Weather System} to facilitate secure and reliable activity data 
@@ -104,5 +103,5 @@ This service handles the activity-related requests within the system by interfac
 for recorded user data. It is directly involved in those operations concerning the activity history of a user.
 
 \subsubsection*{Circuit Breaker}
-In order to avoid ripple effect slowing down the entire system, \textit{Circuit Breakers} are positioned one those components which should have high responsivness
+In order to avoid ripple effect slowing down the entire system, \textit{Circuit Breakers} are positioned on those components which should have high responsivness
 or that interface with external services. All \textit{Circuit Breakers} depicted in Figure \ref{fig:component_diagram} are positioned on the calling service side.

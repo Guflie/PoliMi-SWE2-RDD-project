@@ -20,7 +20,7 @@ the fact that containerization ensures that a failure is contained within it, wi
 \subsubsection*{Caches}
 To enhance system availability, we implemented a robust caching layer for those services that could benefit from it. This strategy is particularly effective for services characterized by read-intensive workloads, like
 those interfacing directly with the DBMSs. By serving requests from the cache, we significantly decrease response times.
-Caching approch also allows the system to pre-compute results for some high-demand requests, avoiding to iterate th same complex operation over and over.
+Caching approch also allows the system to pre-compute results for some high-demand requests, avoiding to iterate complex and time-consuming operations on demand.
 
 \subsubsection*{Differentiated Database}
 To optimize the management of different data types, we adopted a diffretentiated data storage strategy, differentiating our database and data layer architecture into five distinct functional areas based on the type of
@@ -28,6 +28,6 @@ data is going to handle. This modular organization allows each domain to utilize
 This division further enables a tailored approach to Data Consistency based on the criticality of the information:
 \begin{itemize}
     \item \textbf{Strong Consistency}: For data where coherency among all nodes is non-negotiable (such as user credentials), the system can use Relational Database Management Systems.
-    \item \textbf{Eventual Consistency}: For data types with less stringent consistency requirements, such as issue updates or path informatio, the system can rely NoSQL technologies. By adopting an eventual consistency model, 
+    \item \textbf{Eventual Consistency}: For data types with less stringent consistency requirements, such as issue updates or path information, the system can rely on NoSQL technologies. By adopting an eventual consistency model, 
     the system can have higher availability. This trade-off allows the system to remain highly responsive and performant.
 \end{itemize}
