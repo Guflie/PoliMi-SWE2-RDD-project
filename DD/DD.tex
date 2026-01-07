@@ -10,15 +10,20 @@
 \usepackage{verbatim}
 \usepackage{sectsty}
 \usepackage{xcolor}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{pdflscape}
+\usepackage{hyperref}
+\usepackage[table]{xcolor}
+\usepackage[T1]{fontenc}
+
 \graphicspath{ {../img/} }
 
-% sectsty settings
 \definecolor{sec-blue}{RGB}{77, 121, 255}
 \definecolor{subsec-blue}{RGB}{153, 179, 255}
 \sectionfont{\color{sec-blue}}
 \subsectionfont{\color{subsec-blue}}
 
-% header infos
 \title{DD}
 \author{Leonardo Guglielmi, Francesco Lo Conte}
 \date{\today\\Version 1}
@@ -71,19 +76,74 @@
     \input{Section5/implementation_integration_test_plan.tex}
     \pagebreak
 
-    \section{Effort spent}
-
-        \textbf{Guglielmi Leonardo}
-        \begin{itemize}
-            \item
-        \end{itemize}
+    \section{Effort Spent}
+    \begin{table}[H]
+        \centering
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}{|l|c|c|c|c|c|}
+            \hline
+            \textbf{Student} & \textbf{Section 1} & \textbf{Section 2} & \textbf{Section 3} & \textbf{Section 4} & \textbf{Section 5}\\
+            \hline
+            Guglielmi Leonardo & 1h & 39h & 1h & 2h &\\
+            \hline
+            Lo Conte Francesco & 5h & 1h & 6h & 6h & 11h\\
+            \hline
+        \end{tabular}
+        \caption{Effort spent by each team member per section}
+        \label{tab:effort_spent}
+    \end{table}
+    \pagebreak
     
-        \textbf{Lo Conte Francesco}
+    \section{References}
+    \begin{itemize}
+        \item \textbf{Standards referenced in the document:}
         \begin{itemize}
-            \item 02/12/2025 5h (Section 1,2)
+            \item \textit{IEEE Std 1016-2009} - IEEE Standard for Information Technology—Systems Design—Software Design Descriptions.
+            \item \textit{Regulation (EU) 2016/679} (GDPR) - General Data Protection Regulation.
+            \item \textit{ISO/IEC 27001} - Information Security Management.
         \end{itemize}
 
+        \item \textbf{Tools and Languages:}
+        \begin{itemize}
+            \item \textit{PlantUML} - Open-source tool used to generate Sequence Diagram via code.
+            \item \textit{StarUML} - Software modeling tool used to create UML Diagram, with the exception of SDs.
+            \item \textit{Draw.io} - Tool used to create Overview Diagram.
+            \item \textit{Figma} - Tool used for User Interface (UI) mockups.
+            \item \textit{Visual Studio Code} - Integrated Development Environment used for \LaTeX\ editing.
+            \item \textit{Git \& GitHub} - Version control and collaborative platform.
+            \item \textit{JUnit 5 \& Mockito} - Referenced frameworks for Unit Testing.
+        \end{itemize}
+    \end{itemize}
+    \pagebreak
 
-    \section{References}
+    % -------------------------------------------------------------
+    \section{Declaration of GenAI Usage}
+    The project was supported by the use of generative artificial intelligence tools during the development of this document. The use of these tools 
+    was strictly limited to technical support, linguistic refinement, and syntax checking.
+
+    \subsection*{Tools Used}
+    \begin{itemize}
+        \item \textbf{Model:} Google Gemini
+        \item \textbf{Usage Scope:} Linguistic revision and technical typesetting support.
+    \end{itemize}
+
+    \subsection*{Description of Usage}
+    The authors certify that they are the sole creators of the intellectual content, including all architectural decisions, design patterns selection, and 
+    testing strategies. The usage of AI was limited to:
+
+    \begin{itemize}
+        \item \textbf{Linguistic Checking:} The tool was used to review the English grammar and vocabulary of the technical descriptions to ensure 
+        clarity, professional tone, and correctness.
+        \item \textbf{Technical Support for \LaTeX:} The tool provided assistance in troubleshooting compilation errors and formatting complex elements.
+        \item \textbf{Design Choices Discussion:} The tool was used to discuss and challenge architectural decisions, helping the authors to evaluate 
+        trade-offs and strengthen the rationale behind the final design.
+        \item \textbf{Interface Description Automation:} The tool streamlined the development of Interface Description from Sequence Diagram by analyzing the PlantUML diagram code
+        and generating the \LaTeX table, which was then refined through careful review by ourselves.
+        \end{itemize}
+
+    \subsection*{Verification}
+    All content processed for linguistic or technical review was manually verified by the authors to ensure it accurately reflects the original intent, 
+    the architectural logic, and the project requirements defined in the RASD.
+
 
 \end{document}

@@ -1,1 +1,33 @@
-\subsection{Other design decisions}
+\subsection{Other design decisions} \label{sec:other_design_decisions}
+
+\subsubsection*{Server-side service discovery}
+To enable the API Gateways to route traffic effectively, we integrated a Service Discovery mechanism on them. When a new service instance is initialized, it automatically registers itself. To ensure 
+consistency across all nodes in the discovery service, this registration data is propagated throughout the entire discovery system using a Gossiping Protocol, ensuring all gateway nodes are updated eventually.
+To maintain updated the services' status, each service instance transmits a periodic heartbeat to the discovery service. The API Gateways maintain a local cache of the service mapping. In the event that a 
+gateway attempts to communicate with a service instance that has become unresponsive, the corresponding service-map cache record is invalidated.
+
+\subsubsection*{Server-side load balancing}
+To facilitate fluid system scalability and prevent performance bottlenecks, the API Gateway services integrate a server-side load balancing mechanism. This component acts as a traffic 
+orchestrator, distributing incoming requests across multiple instances of a target microservice. By doing so, the gateway ensures that traffic is routed only to available nodes, preventing 
+any single instance from becoming overwhelmed. This approach is helps to maintain high availability and consistent response times. 
+By dynamically balancing the workload, the system can effectively absorb sudden spikes in traffic and maintain a seamless user experience.
+
+\subsubsection*{Containers}
+In order to take full advantage of the microservice architecture, we opted to deploy services with containers.
+Deploying microservices with containers allow to encapsulate each service with it's own environment. This allows to easily scale the system based on the specific needs. This also grants a more reliable system due 
+the fact that containerization ensures that a failure is contained within it, without causing problems to other instances of the same service.
+
+\subsubsection*{Caches}
+To enhance system availability, we implemented a robust caching layer for those services that could benefit from it. This strategy is particularly effective for services characterized by read-intensive workloads, like
+those interfacing directly with the DBMSs. By serving requests from the cache, we significantly decrease response times.
+Caching approach also allows the system to pre-compute results for some high-demand requests, avoiding to iterate complex and time-consuming operations on demand.
+
+\subsubsection*{Differentiated Database}
+To optimize the management of different data types, we adopted a differentiated data storage strategy, differentiating our database and data layer architecture into five distinct functional areas based on the type of
+data is going to handle. This modular organization allows each domain to utilize the most efficient storage technology for the services that are going to use that data.
+This division further enables a tailored approach to Data Consistency based on the criticality of the information:
+\begin{itemize}
+    \item \textbf{Strong Consistency}: For data where coherency among all nodes is non-negotiable (such as user credentials), the system can use Relational Database Management Systems.
+    \item \textbf{Eventual Consistency}: For data types with less stringent consistency requirements, such as issue updates or path information, the system can rely on NoSQL technologies. By adopting an eventual consistency model, 
+    the system can have higher availability. This trade-off allows the system to remain highly responsive and performant.
+\end{itemize}

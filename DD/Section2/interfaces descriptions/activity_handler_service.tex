@@ -1,0 +1,35 @@
+\subsubsection*{Activity Handler Service}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.15}      
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Forward Save Activity}} \\ 
+        \hline
+        Signature & frw\_save\_act(userId, pathId, date, startTime, endTime, score, List<detIssue>): status \\
+        \hline
+        Description & Orchestrates the process of saving the activity, verifying weather conditions, and updating scores. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item userId: string, the unique identifier of the user
+                \item pathId: string, the identifier of the path taken during the activity
+                \item date: date, the date the activity occurred
+                \item startTime: time, the start time of the activity
+                \item endTime: time, the end time of the activity
+                \item score: Score, the rating given by the user
+                \item \item List<detIssue>: List<Issue>(optional), a list of issues automatically detected during the monitored activity
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns a completion status (done) \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}

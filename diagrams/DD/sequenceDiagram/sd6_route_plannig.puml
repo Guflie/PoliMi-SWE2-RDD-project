@@ -1,0 +1,73 @@
+@startuml sd6_route_planning
+' Referes to UC6 and UC7
+hide footbox
+
+skinparam sequence {
+    ReferenceBackgroundColor #fcf8e1
+}
+
+participant "Mobile App" as app
+participant "Trip API Gateway" as tapi
+participant "Trip Planner Service" as tb
+participant "Path Subsystem" as ps
+participant "Public Info Service" as pis
+participant "Public Info DBMS" as dbpi
+
+activate app
+app -> tapi : frw_get_paths(sPoint, ePoint, filters)
+note right
+If the user doesn't apply filters, the
+"filters" attributes is empty
+end note
+activate tapi
+tapi ->> tb: get_paths(sPoint, ePoint, filters)
+deactivate tapi 
+activate tb
+
+' 1st step - path retrival
+tb ->> ps : retrive_paths(sPoint, ePoint, filters)
+deactivate tb
+ref over ps : Refer to SD6.1-Route retrival
+ps -->> tb : List<pathInfo>
+activate tb
+
+opt #ffeecc if the path wasn't created during this use case
+    ' 2nd step - score retrival
+    par #e1f4fc
+        tb ->> pis : get_scores(list<pathId>)
+        deactivate tb
+        activate pis
+        pis ->> dbpi : query_top_scores(list<pathId>)
+        deactivate pis
+        activate dbpi
+        dbpi -> dbpi : fetch_top_scores(list<pathId>)
+        dbpi -->> pis : List<scores>
+        deactivate dbpi
+        activate pis
+        pis -->> tb : List<scores>
+        deactivate pis
+        activate tb
+    else 
+        tb ->> pis : get_issues(List<topPathId>)
+        deactivate tb
+        activate pis
+        pis ->> dbpi : query_issues(List<topPathId>)
+        deactivate pis
+        activate dbpi
+        dbpi -> dbpi : fetch_issues(List<topPathId>)
+        dbpi -->> pis : List<issues>
+        deactivate dbpi
+        activate pis
+        pis -->> tb : List<issues>
+        deactivate pis
+        activate tb
+    end
+tb -> tb : merge_paths_info()
+end
+tb -->> tapi : suggested_paths
+deactivate tb
+activate tapi
+tapi -->> app : suggested_paths
+deactivate tapi
+
+@enduml

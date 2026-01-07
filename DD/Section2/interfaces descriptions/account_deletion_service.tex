@@ -1,0 +1,57 @@
+\subsubsection*{Account Deletion Service}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.15}      
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Delete Account Request}} \\ 
+        \hline
+        Signature & delete\_acc\_req(userId, emailAddr): void \\
+        \hline
+        Description & Sends to the user via email the link to confirm account deletion. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item userId: string, the unique identifier of the user
+                \item emailAddr: string, the user's email address
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.15}      
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Account Deletion Confirmation}} \\ 
+        \hline
+        Signature & acc\_del\_conf(delToken): status \\
+        \hline
+        Description & Validates the token and actually removes the account data. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item delToken: string, the validation token
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns a completion status (done) \\
+        \hline
+        Exceptions & The deletion request is expired (link\_expired\_error) \\
+        \hline
+    \end{tabular}
+\end{table}

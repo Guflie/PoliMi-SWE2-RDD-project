@@ -1,0 +1,86 @@
+@startuml sd1_account_creation
+' Refers to UC1
+hide footbox
+
+skinparam sequence {
+    ReferenceBackgroundColor #fcf8e1
+}
+
+participant "Mobile App" as app
+participant "Account API Gateway" as aapi
+participant "Account Creation Service" as acs
+participant "Credentials Subsystem" as css
+participant "Email Proxy Service" as emailp
+actor "Email Provider" as email
+participant "Account Subsystems" as ass
+
+activate app
+
+app ->> aapi : frw_create_acc_req(name, surname gender, birthdate, emailAddr, psw)
+activate aapi
+aapi ->> acs : send_acc_creat(name, surname, gender, birthdate, emailAddr, psw)
+deactivate aapi
+activate acs
+' ---------------------------------------------------------------------------
+acs ->> css : check_acc_exist(emailAddr)
+deactivate acs
+ref over css : Refer to SD 1.1- Check Account Exists
+css -->> acs 
+activate acs
+break #ffe6e6 if ref returns match=true
+    acs -->> aapi : already_used_email_error
+    activate aapi
+    aapi -->> app : already_used_email_error
+    deactivate aapi
+end
+
+' ---------------------------------------------------------------------------
+acs -> acs : generate_reg_token()
+acs ->> emailp : send_reg_link(emailAddr, link)
+deactivate acs
+activate emailp
+emailp ->> email : send_email(emailAddr, regLinkMsg)
+deactivate emailp
+
+app ->> aapi : send_create_conf(regToken)
+activate aapi
+note right 
+    The user opens the link received by email, which 
+    will be opened by the mobile app
+end note
+aapi ->> acs : creae_acc(regToken)
+deactivate aapi
+activate acs
+acs -> acs : check_reg_token(regToken)
+break #ffe6e6 link expired
+    acs -->> aapi : link_expired_error
+    activate aapi
+    aapi -->> app : link_expired_error
+    deactivate aapi
+end
+
+acs ->> ass : get_new_userId()
+deactivate acs
+ref over ass : Refer to SD 1.2-Get New UserId
+ass -->> acs : newUserId
+activate acs
+par #e1f4fc
+    acs ->> css : create_acc_cred(newUserId, emailAddr, psw)
+    deactivate acs
+    ref over css : Refer to SD 1.3-Store Account Credentials
+    css -->> acs
+    activate acs
+else
+    acs ->> ass : create_acc_info(newUserId, name, surname, gender, birthdate)
+    deactivate acs
+    ref over ass : Refer to SD 1.4-Store Account Information
+    ass -->> acs
+    activate acs
+end
+acs -->> aapi : acc_creation_succ
+deactivate acs
+activate aapi
+aapi -->> app : acc_creation_succ
+deactivate aapi
+
+@enduml

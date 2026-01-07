@@ -1,0 +1,26 @@
+@startuml sd8-1_store_automatic_issue
+hide footbox
+
+participant "Activity Handler Service" as ahs
+participant "Public Info Manager Service" as pim
+participant "Public Info DBMS" as dbpi
+
+ahs ->> pim : create_issue_set(userId, pathId, List<detIssue>)
+activate pim
+loop foreach issueInfo in List<detIssue>
+    pim ->> dbpi : query_insert_issue(userId, pathId, issueInfo)
+    deactivate pim 
+    activate dbpi
+    note left
+    issueInfo contains timestamp, 
+    pos, type, desc
+    end note
+    dbpi -> dbpi : insert_issue(userId, pathId, issueInfo)
+    dbpi -->> pim : done
+    deactivate dbpi
+    activate pim
+end
+    pim -->> ahs : done
+    deactivate pim
+
+@enduml

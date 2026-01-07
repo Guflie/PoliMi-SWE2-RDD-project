@@ -1,0 +1,183 @@
+\subsubsection*{Public Info Manager Service}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.15}      
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Get Path Scores}} \\ 
+        \hline
+        Signature & get\_scores(list<pathId>): List<scores> \\
+        \hline
+        Description & Retrieves rating scores for a given list of paths. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item list<pathId>: List<string>, identifiers for the paths to be scored
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns a list of scores to the paths \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.15}      
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Get Path Issues}} \\ 
+        \hline
+        Signature & get\_issues(List<topPathId>): List<issues> \\
+        \hline
+        Description & Retrieves reported issues for a given list of paths. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item List<topPathId>: List<string>, identifiers for the top paths
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns a list of issues found for the paths \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+% -----------------------------------------------------------------------------------------------------------
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.15}      
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Create Score}} \\ 
+        \hline
+        Signature & create\_score(userId, pathId, actId, score): status \\
+        \hline
+        Description & Creates and stores the given score witth its information. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item userId: string, the unique identifier of the user
+                \item pathId: string, the identifier of the path being scored
+                \item actId: string, the identifier activtiy from which the score is derived
+                \item score: float, the score to be saved
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns a completion status (done) \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+% -----------------------------------------------------------------------------------------------------------
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.15}      
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Query Insert Issue}} \\ 
+        \hline
+        Signature & query\_insert\_issue(userId, pathId, issueInfo): status \\
+        \hline
+        Description & Store the given issue \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item userId: string, the unique identifier of the user
+                \item pathId: string, the identifier of the path
+                \item issueInfo: object, structure containing timestamp, position (pos), type, and description (desc)
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns a completion status (done) \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+% -----------------------------------------------------------------------------------------------------------
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.15}      
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Publish Issue}} \\ 
+        \hline
+        Signature & publish\_issue(userId, pathId, timestamp, pos, type, descr): status \\
+        \hline
+        Description & Add to the system issue archive the given issue data. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item userId: string, the user identifier
+                \item pathId: string, the path identifier
+                \item timestamp: datetime, observation time
+                \item pos: string/coords, location of the issue
+                \item type: string, issue category
+                \item descr: string, user description
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns a completion status (done) \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+% -----------------------------------------------------------------------------------------------------------
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.15}      
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Publish Fixup}} \\ 
+        \hline
+        Signature & publish\_fixup(issueId): status \\
+        \hline
+        Description & Add to the system issue archive the given fixup after running the appropriate checks. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item issueId: string, the unique identifier of the issue
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns a completion status (done) \\
+        \hline
+        Exceptions & The specified issue was not found (issue\_not\_found\_error) \\
+        \hline
+    \end{tabular}
+\end{table}

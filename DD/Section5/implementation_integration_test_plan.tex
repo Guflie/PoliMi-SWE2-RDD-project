@@ -1,1 +1,214 @@
 \section{Implementation, Integration and Test plan}
+
+\subsection{Implementation Plan}
+The system architecture allows for parallel development. However, adhering to the \textbf{Critical Component Strategy}, prioritizing high-risk and 
+foundational modules ensures that the core value proposition is secured early in the lifecycle.
+
+\subsection{Component Integration Analysis}
+The following table classifies system components based on the \textbf{Impact of Failure}. The scale ranges from 1 to 5.
+
+\definecolor{critical}{RGB}{255, 102, 102}   
+\definecolor{high}{RGB}{255, 178, 102}      
+\definecolor{medium}{RGB}{255, 255, 153}   
+\definecolor{low}{RGB}{153, 255, 153}  
+
+\begin{itemize}
+    \item \textbf{\colorbox{critical}{4} - Critical:} Complete system outage or total loss of the application's core purpose.
+    \item \textbf{\colorbox{high}{3} - High:} Major functionality unavailable, but the system may offer degraded service.
+    \item \textbf{\colorbox{medium}{2} - Moderate:} Secondary features unavailable; core flow remains intact.
+    \item \textbf{\colorbox{low}{1} - Low:} Auxiliary information missing or minor workflows blocked.
+\end{itemize}  
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.4}
+    \footnotesize 
+    \begin{tabular}{|l|p{4.5cm}|c|c|}
+        \hline
+        \textbf{Component} & \textbf{Rationale for Classification} & \textbf{Impact} \\
+        \hline
+        
+        % LIVELLO 4 - CRITICO
+        \textbf{Trip API Gateway} & 
+        Single point of entry for all core features. If down, the App cannot communicate with the backend. & 
+        \cellcolor{critical}\textbf{4} \\
+        \hline
+        
+        \textbf{Path Subsystem} & 
+        Provides map data and road network topology. Without it, no visualization or routing is possible. & 
+        \cellcolor{critical}\textbf{4} \\
+        \hline
+        
+        \textbf{Trip Planner Service} & 
+        Core business logic. The primary goal of "Best Bike Paths" is finding routes. Without it, the app loses its purpose. & 
+        \cellcolor{critical}\textbf{4} \\
+        \hline
+        
+        % LIVELLO 3 - ALTO
+        \textbf{Credentials Subsystem} & 
+        Manages Authentication (Login) and Security. Critical for user access, though Guest Mode bypasses it. & 
+        \cellcolor{high}\textbf{3} \\
+        \hline
+        
+        \textbf{Account Subsystem} & 
+        Essential for user persistence, but Guest Mode mitigates total failure. & 
+        \cellcolor{high}\textbf{3} \\
+        \hline
+        
+        \textbf{Activity Handler Service} & 
+        Responsible for tracking rides. High value, but users could theoretically still use the map for visual navigation without active recording. & 
+        \cellcolor{high}\textbf{3} \\
+        \hline
+        
+        \textbf{Account API Gateway} & 
+        Entry point for Auth/Profile operations. If down, login and registration fail, limiting the app to Guest features. & 
+        \cellcolor{high}\textbf{3} \\
+        \hline
+        
+        % LIVELLO 2 - MEDIO
+        \textbf{Activity Storage Subsystem} & 
+        Manages history. Failure prevents viewing past trips, but does not block new rides (which can be buffered locally). & 
+        \cellcolor{medium}\textbf{2} \\
+        \hline
+        
+        \textbf{Public Info Subsystem} & 
+        Crowdsourcing logic (Issue Reporting, Scoring). Important for data enrichment, but the system functions without community reports. & 
+        \cellcolor{medium}\textbf{2} \\
+        \hline
+
+        \textbf{Account Creation Service} & 
+        Responsible to create new account. Important for overall experience, but Guest Mode mitigates the inconvenience.&
+        \cellcolor{medium}\textbf{2} \\
+        \hline
+
+        \textbf{Email Proxy Service} & 
+        Used only for password reset or confirmation emails. Failure impacts a tiny fraction of daily user interactions, except for Account Creation. & 
+        \cellcolor{medium}\textbf{2} \\
+        \hline
+    
+        % LIVELLO 1 - BASSO
+        \textbf{Weather Proxy Service} & 
+        Auxiliary feature. Lack of weather data reduces UX quality but does not stop any core function. & 
+        \cellcolor{low}\textbf{1} \\
+        \hline
+
+        \textbf{Account Deletion Service} & 
+        Used for handle account elimination. The malfunctioning does not compromise the overall experience. & 
+        \cellcolor{low}\textbf{1} \\
+        \hline
+        
+    \end{tabular}
+    \caption{Component Criticality}
+    \label{tab:implementation_order}
+\end{table}
+\pagebreak
+
+\subsection{Integration Strategy}
+To balance the complexity of distributed microservices with the need for early risk mitigation, the project adopts a \textbf{Hybrid Integration Strategy}. 
+This approach combines two distinct methodologies applied at different architectural levels:
+
+\begin{enumerate}
+    \item \textbf{Macro-Level: Risk-Driven Integration.} \\
+    At the system level, components are integrated based on their criticality. 
+    The "High Risk" subsystems are integrated first to verify the architectural viability of the solution.
+    
+    \item \textbf{Micro-Level: Bottom-Up Integration.} \\
+    Within each specific subsystem, development follows a linear Bottom-Up path: 
+    \textit{DBMS $\rightarrow$ Data Access Layer $\rightarrow$ Service Logic $\rightarrow$ API Interface}. 
+    This ensures that each unit is stable before being exposed to the rest of the system.
+\end{enumerate}
+
+The integration sequence is dictated by the dependency graph below, structured to support this hybrid flow:
+
+\begin{figure}[H]
+    \centering
+    \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{DD/dependency_diagram.pdf}}
+    \label{fig:dep_graph}
+    \caption{Dependency Graph highlighting the criticality of each module.}
+\end{figure}
+
+\mbox{} \\
+The integration roadmap is divided into four phases:
+
+\paragraph{Phase 1: The Critical Core} \mbox{} \\
+
+The primary goal is to secure the application's core value: routing on a map.
+\begin{itemize}
+    \item \textbf{Action:} Parallel Bottom-Up construction of the \textit{Path Subsystem}, \textit{Trip Planner} and \textit{Trip API Gateway}.
+    \item \textbf{Integration Point:} The \textit{Trip Planner} is connected to the \textit{Path Subsystem} and with the \textit{Trip API Gateway} . 
+    \item \textbf{Validation:} Verification that the routing algorithm correctly returns a valid output, also by verifying the operations that pass by \textit{Trip Api Gateawy}.
+\end{itemize}
+
+\paragraph{Phase 2: Activity Section} \mbox{} \\
+
+Once the core logic is validated, the modules related to activities and publishable info are developed. 
+\begin{itemize}
+    \item \textbf{Action:} Parallel development of \textit{Activity Storage Subsystem} and \textit{Public Info Subsystem}, follows the development of \textit{Activity Handler} .
+    \item \textbf{Integration Point:} Connection of \textit{Activity Handler} to \textit{Activity Storage Subsystem} and \textit{Public Info Subsystem}. Then integrate \textit{Trip Planner} with \textit{Public Info Subsystem}.
+    \item \textbf{Validation:} Confirmation that a registered user can simulate a ride and that the data is persisted. Verify that manual reports are correcty processed and stored. Verify the remaining funcionalities of \textit{Trip Planner} after the integration.
+\end{itemize}
+
+\paragraph{Phase 3: Account Section} \mbox{} \\
+
+After main application functionalities are tested, core modules related to account management are developed.
+\begin{itemize}
+    \item \textbf{Action:} Develop simultaneously the \textit{Credential Subsystem} and \textit{Account Subsystem}. After this, develop the secondary modules 
+    \textit{Account Creation} and \textit{Email Proxy}.
+    \item \textbf{Integration Point:} Connect \textit{Email Proxy} and \textit{Account Creation} modules with their dependecies.
+    \item \textbf{Validation:} Verify that all functionalities of the modules developed in this phase are working.
+\end{itemize}
+
+
+\paragraph{Phase 4: Gateway Aggregation} \mbox{} \\
+
+The system is exposed to the outside world.
+\begin{itemize}
+    \item \textbf{Action:} Deployment of \textit{Trip API Gateway} and \textit{Account API Gateway}.
+    \item \textbf{Integration Point:} Gateways are configured to route traffic to the services deployed in Phases 1 and 2.
+    \item \textbf{Validation:} End-to-end API testing to verify authentication tokens and correct routing.
+\end{itemize}
+
+\paragraph{Phase 4: Auxiliary \& Client Integration} \mbox{} \\
+
+Final polish and connection of external non-critical dependencies.
+\begin{itemize}
+    \item \textbf{Action:} Integration of \textit{Weather Proxy}, \textit{Account Deletion}, and the \textit{Mobile App}.
+    \item \textbf{Integration Point:} The Mobile App connects to the live Gateways.
+    \item \textbf{Validation:} User Acceptance Testing (UAT) and usability verification.
+\end{itemize}
+\mbox{} \\
+\mbox{} \\
+\subsection{Test Plan}
+The testing strategy aligns with the hybrid integration approach, ensuring coverage from granular logic to system-wide workflows.
+
+\subsubsection{Unit Testing}
+Focuses on the correctness of the internal logic of each service, isolated from dependencies using mocks.
+\begin{itemize}
+    \item \textbf{Tools:} JUnit 5, Mockito.
+    \item \textbf{Key Targets:} 
+    \begin{itemize}
+        \item \textit{Trip Planner:} Routing algorithm correctness on use-case graphs.
+        \item \textit{Credentials:} Password hashing strength and JWT generation.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Integration Testing}
+Verifies the interactions defined in the sequence diagrams.
+\begin{itemize}
+    \item \textbf{Tools:} REST Assured, TestContainers.
+    \item \textbf{Key Targets:}
+    \begin{itemize}
+        \item \textit{Service-to-Service:} Ensure \textit{Activity Handler} correctly calls \textit{Weather Proxy} upon trip completion.
+        \item \textit{Gateway-to-Service:} Verify that the API Gateway correctly handles service timeouts and load balancing.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{System Testing}
+Validates the fully integrated system against the functional requirements.
+\begin{itemize}
+    \item \textbf{Key Scenarios:}
+    \begin{itemize}
+        \item \textit{Full Ride Cycle:} Registration $\rightarrow$ Login $\rightarrow$ Search Route $\rightarrow$ Start Ride $\rightarrow$ Stop \& Save.
+        \item \textit{Resilience:} Verify that the \textit{Guest Mode} remains functional even if the \textit{Account Subsystem} is forcefully taken offline (Simulated Failure).
+    \end{itemize}
+\end{itemize}

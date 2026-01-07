@@ -1,0 +1,51 @@
+@startuml sd7_registered_user_activity
+' Refers to UC9
+hide footbox
+
+skinparam sequence {
+    ReferenceBackgroundColor #fcf8e1
+}
+
+participant "Mobile App" as app
+participant "Trip API Gateway" as tapi
+participant "Activity Handler Service" as ahs
+participant "Weather Proy Service" as wps
+actor "External Weather Service" as ews
+participant "Path Subsystem" as pss
+participant "Activity Subsystem" as ass 
+participant "Public Info Subsystem" as piss
+
+activate app
+app -> app :start_activity()
+opt stop/resume trip
+    loop
+        app -> app : pause_activity()
+        app -> app : resume_activity()
+    end
+end
+app -> app : complete_ride()
+app -> app : score_path()
+app -> tapi: frw_save_act(save_activity(userId, pathId, date, startTime, endTime, score)
+activate tapi
+tapi ->> ahs : save_act(userId, pathId, date, startTime, endTime, score)
+deactivate tapi
+
+' first check if the weather servcie is available
+activate ahs
+ahs ->> wps : check_weather_av()
+ref over wps, ews, pss : Refer to SD 7.1-Weather Information Retrival
+
+par #e1f4fc 
+    ahs ->> ass : create_act(userId, pathId, activityInfo)
+    ref over  ass : Refer to SD 7.2-Store Activity
+else
+    ahs ->> piss : create_score(userId, pathId, actId)
+    ref over piss : Refer to SD 7.3-Store Score
+end
+ahs -->> tapi : done
+deactivate ahs
+activate tapi
+tapi -->> app : done
+deactivate tapi
+
+@enduml

@@ -1,0 +1,25 @@
+@startuml sd7-2_store_activity
+hide footbox
+
+participant "Activity Handler Service" as ahs
+participant "Activity History Service" as ah
+participant "Activity DBMS" as dba
+
+ahs ->> ah : create_act(userId, pathId, activityInfo)
+deactivate ahs
+note left
+activityInfo contains date, startTime, 
+endTime and possibly weatherInfo
+end note
+deactivate ahs
+activate ah 
+ah ->> dba : query_insert_act(userId, pathId, activityInfo)
+deactivate ah 
+activate dba
+dba -> dba : insert_act(userId, pathId, activityInfo)
+dba -->> ah : actId
+deactivate dba
+activate ah
+ah -->> ahs : actId
+deactivate ah
+@enduml

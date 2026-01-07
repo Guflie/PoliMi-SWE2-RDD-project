@@ -1,0 +1,22 @@
+@startuml sd7-3_store_score
+hide footbox
+
+participant "Activity Handler Service" as ahs
+participant "Public Info Manager Service" as pim
+participant "Public Info DBMS" as dbpi
+
+ahs ->> pim : create_score(userId, pathId, actId, score)
+deactivate ahs 
+activate pim
+pim ->> dbpi : query_insert_score(userId, pathId, actId, score)
+deactivate pim 
+activate dbpi
+dbpi -> dbpi : insert_score(userId, pathId, actId, score)
+dbpi -->> pim : done
+deactivate dbpi
+activate pim
+pim -->> ahs : done
+deactivate pim
+activate ahs
+
+@enduml

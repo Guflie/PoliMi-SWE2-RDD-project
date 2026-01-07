@@ -1,0 +1,63 @@
+
+\subsubsection*{Account Creation Service}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.15}      
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Send Account Creation Confirmation}} \\ 
+        \hline
+        Signature & send\_acc\_creat(name, surname, gender, birthdate, emailAddr, psw): void \\
+        \hline
+        Description & Sends to the user the email containing the link to confirm the account creation. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item name: string, user's first name
+                \item surname: string, user's last name
+                \item gender: string, user's gender
+                \item birthdate: date, user's date of birth
+                \item emailAddr: string, user's email address
+                \item psw: string, user's chosen password
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & \\
+        \hline
+        Exceptions & The email is already registered for an account (already\_used\_email\_error) \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.15}      
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Account Creation}} \\ 
+        \hline
+        Signature & create\_acc(regToken): void \\
+        \hline
+        Description & Creates the new account, orchestrating the intermediate phases. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item regToken: string, the registration token to validate
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns a success status (acc\_creation\_succ) \\
+        \hline
+        Exceptions & The token validation failed or timed out (link\_expired\_error) \\
+        \hline
+    \end{tabular}
+\end{table}
+% -----------------------------------------------------------------------------------------------------------

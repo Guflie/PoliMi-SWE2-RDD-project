@@ -1,0 +1,23 @@
+@startuml sd1-1_check_account_exists
+hide footbox
+
+participant "Account Creation Service" as acs
+participant "Authentication Service" as auth
+participant "Credentials  DBMS" as dbc
+
+acs ->> auth : check_acc_ex(emailAddr)
+deactivate acs
+activate auth
+auth -> dbc : query_acc_exists(emailAddr)
+deactivate auth
+activate dbc
+dbc -> dbc : fetch_account(emailAddr)
+dbc -->> auth : match
+note left
+The returned match is a boolean value true/false
+end note
+activate auth
+auth -->> acs : match
+deactivate auth
+
+@enduml

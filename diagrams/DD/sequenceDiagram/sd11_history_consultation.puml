@@ -1,0 +1,34 @@
+@startuml sd11_history_consultation
+' Refer to UC14
+hide footbox
+
+participant "Mobile App" as app 
+participant "Trip API Gateway" as tapi
+participant "Activity History Service" as ahs
+participant "Activity DBMS" as dba 
+
+activate app
+
+app -> tapi : frw_get_act_hist(userId, filters)
+note right
+If the user doesn't apply filters, the
+"filters" attributes is empty
+end note
+activate tapi
+tapi ->> ahs : get_act_hist(userId, filters)
+deactivate tapi
+activate ahs
+ahs ->> dba : query_get_act_hist(userId, filters)
+deactivate ahs
+activate dba
+dba -> dba : select_act_his(userId, filters)
+dba -->> ahs : List<Activity>
+deactivate dba
+activate ahs
+ahs -->> tapi : List<Activity>
+deactivate ahs
+activate tapi
+tapi -->> app : List<Activity>
+deactivate tapi
+
+@enduml

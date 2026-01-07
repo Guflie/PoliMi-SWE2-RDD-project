@@ -1,1 +1,47 @@
 \subsection{Selected architectural styles and patterns}
+
+\subsubsection*{Microservice architectural style}
+The decision to adopt a Microservices architectural style was primarily driven by the inherent requirement for horizontal scalability. Unlike monolithic structures, this 
+distributed approach focusses on splitting the whole system into small pieces, each one specialized on dealing with a specific task, allowing the system to scale specific 
+components independently, enabling the infrastructure to adapt dynamically to fluctuating workloads in real-time. Furthermore, the fine-grained decomposition of services 
+and the intelligent duplication of critical resources significantly enhance the system's overall resilience.
+
+\subsubsection*{4-layer architecture}
+To ensure a modular and scalable environment, we opted for a 4-tier architectural approach. This design allows us to separate system functionalities based on their logical domain while 
+simultaneously defining how these components are distributed across physical hardware and network boundaries.
+We have identified the following layers:
+\begin{itemize} 
+    \item \textbf{Presentation Layer}: This layer serves as the primary interface between the user and the system. It is responsible for rendering the UI components and facilitating user 
+    interaction, allowing the user to interact easily with the system.
+
+    \item \textbf{Front-end Application Layer}: This layer encapsulates the client-side business logic executed within the mobile application. It handles tasks like trip management, high-frequency 
+    real-time data sampling and on-device pattern recognition for identifying issues during recorded trips. To handle the issue-recognition task, we've chose to use pre-trained lightweight machine learning models.
+
+    \item \textbf{Back-end Application Layer}: This layer comprises the core server-side logic and the various microservices offered by the platform. It is architected as a set of distributed server nodes, 
+    where each service is decoupled to address specific functional domains, ensuring high availability and fault isolation.
+
+    \item \textbf{Data Layer}: Dedicated to the persistence and orchestration of system information, this layer consists of a distributed database cluster. It manages data integrity and retrieval across all
+    nodes, implementing different storage strategies based on the specific type of data is handling.
+\end{itemize}
+
+\subsubsection*{API Gateway}
+To fortify system security and streamline the interaction between the client-side and server-side logic, we implemented the API Gateway pattern. By positioning the gateway as 
+the sole entry point for all client requests, we effectively decouple the front-end from the internal microservices architecture. This abstraction layer enhances the system's 
+security by encapsulating the internal service topology, thereby shielding the underlying services from direct external exposure. To mitigate the risk of a Single Point of Failure, 
+the gateway is deployed across multiple instances, ensuring high availability and continuous service. Beyond acting as a reverse proxy, these gateways also perform the tasks of server-side 
+load balancing and service discovery (see Section \ref{sec:other_design_decisions}).
+Furthermore, we adopted for a differentiated gateway strategy by dividing the entry points into two specialized categories: the Account API Gateway and the Trip API Gateway. This granular 
+approach allows each gateway to scale independently according to the specific needs of the underlying services (e.g. an exceptional number of trip requests won't affect the login service)
+
+\subsubsection*{Proxy}
+To prevent internal microservices from directly interfacing with external systems, we implemented a Proxy Service pattern. This pattern establishes a secure communication intermediary, 
+creating a strictly controlled boundary between our internal infrastructure and third-party services. By routing all external traffic through these proxies, we implement a robust security 
+perimeter where initial validation and security audits can be performed without exposing the internal services. Beyond security, this approach facilitates a more decoupled architecture. 
+By abstracting the external service's specific API, our internal business logic remains indipendent from the third-party implementation.
+
+\subsubsection*{Circuit breaker}
+To safeguard the system against performance degradation caused by a restricted group of services, we implemented the Circuit Breaker pattern. This is particularly useful for services that interact 
+with non-critical dependencies, such as the API Gateways, or services interfaced with third-party systems, where their reliability cannot be guaranteed.
+By utilizing this pattern, the calling service actively monitors the health and response times of the invoked service. If a particular service begins to fail or exceeds predefined latency thresholds, 
+the circuit "closes," immediately redirecting subsequent calls to a fallback mechanism. This fail-fast approach prevents the calling service from hanging indefinitely, thereby avoiding a ripple effect 
+that could otherwise compromise the entire application's stability.

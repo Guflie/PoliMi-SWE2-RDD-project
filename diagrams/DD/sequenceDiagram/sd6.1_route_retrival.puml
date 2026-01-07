@@ -1,0 +1,52 @@
+@startuml sd6-1_route_retrival
+hide footbox
+
+participant "Trip Planner Service" as tb
+participant "Path Inventory Service" as pi
+participant "Path DMBS" as dbp
+participant "Mapping Proxy Service" as mp
+actor "External Mapping System" as ems
+
+tb ->> pi : retrive_paths(sPoint,ePoint,filters)
+activate pi
+pi ->> dbp : query_paths(sPoint,ePoint,filters)
+deactivate pi
+activate dbp
+dbp -> dbp : fetch_paths(sPoint,ePoint,filters)
+
+alt #dff7e5 path match
+    dbp -->> pi : List<pathInfo>
+    activate pi
+else #ffe6e6 no match, path creation
+    dbp -->> pi : no_match
+    deactivate dbp
+    pi ->> mp : create_path(sPoint,ePoint)
+    deactivate pi
+    activate mp
+    mp ->> ems : find_path(sPoint,ePoint)
+    deactivate mp
+    activate ems
+    ems -> ems : find_path(sPoint,ePoint)
+    ems -->> mp : path
+    deactivate ems
+    activate mp
+    mp -->> pi : path
+    deactivate mp
+    activate pi
+    pi ->> dbp : query_insert_path(path)
+    deactivate pi
+    activate dbp
+    dbp -> dbp : insert_path(path)
+    dbp -->> pi : done
+    deactivate dbp
+    activate pi
+end
+
+pi -->> tb : List<pathInfo>
+deactivate pi
+note right
+If the action passes through the "Path Creation"
+optional section, this list will contain only one path
+end note
+
+@enduml

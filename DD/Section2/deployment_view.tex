@@ -1,1 +1,27 @@
 \subsection{Deployment View}
+
+\begin{figure}[H]
+    \centering
+    \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{DD/deployment_diagram.pdf}}
+    \label{fig:deployment_diagram}
+    \caption{Deployment Diagram.}
+\end{figure}
+
+\subsubsection*{User Device}
+This refers to the mobile device used by the user, which serves as the host environment for the execution of the 
+BBP mobile application.
+
+\subsubsection*{Firewall}
+Acting as the system's primary gatekeeper, this component monitors network data flow to detect anomalies and security threats. 
+They are placed before the load balancers to secure inter-layer communications. The placement between the proxy services and
+the external systems is made in order to protect the system from possible threatening message due to external interactions. 
+
+\subsubsection*{Load Balancer}
+Responsible for traffic distribution, these components serve as the entry point for requests intended for the API gateway layer. 
+In order to facilitating the granular management of traffic on the specific requirements of each service macro-category, a dedicated 
+load balancing instance is utilized for each gateway type.
+
+\subsubsection*{Container \& API container}
+Every system's service  is encapsulated in a container environment to enhance operational elasticity, allowing for the rapid instantiation of 
+additional replicas as traffic volume increases.
+\pagebreak
