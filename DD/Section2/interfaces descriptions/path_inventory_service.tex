@@ -7,7 +7,7 @@
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Retrieve Paths}} \\ 
         \hline
-        Signature & retrive\_paths(sPoint, ePoint): List<pathInfo> \\
+        Signature & retrive\_paths(sPoint, ePoint, filters): List<pathInfo> \\
         \hline
         Description & Returns a list of paths and related information matching the starting and destination point given by the user. \\
         \hline
@@ -17,6 +17,7 @@
             \begin{itemize}
                 \item sPoint: location/string, the starting point of the route
                 \item ePoint: location/string, the destination point
+                \item filters: List<string>, optional filters to customize the path search (empty if no filter applied)
             \end{itemize}
             \smallskip
             \end{minipage}  

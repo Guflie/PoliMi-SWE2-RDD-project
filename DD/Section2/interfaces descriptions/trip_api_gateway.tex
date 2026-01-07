@@ -7,9 +7,9 @@
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Forward Path Request}} \\ 
         \hline
-        Signature & frw\_get\_paths(sPoint, ePoint): suggested\_paths \\
+        Signature & frw\_get\_paths(sPoint, ePoint, filters): suggested\_paths \\
         \hline
-        Description & Forwards to the system the request for path givens the starting and ending point. \\
+        Description & Forwards to the system the request for path givens the starting and ending point with the specifed filters. \\
         \hline
         Parameters &
             \begin{minipage}{0.8\textwidth}
@@ -17,6 +17,7 @@
             \begin{itemize}
                 \item sPoint: location/string, the starting point of the trip
                 \item ePoint: location/string, the destination point of the trip
+                \item filters: List<string>, optional filters to customize the path search (empty if no filter applied)
             \end{itemize}
             \smallskip
             \end{minipage}  

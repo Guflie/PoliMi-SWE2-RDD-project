@@ -14,14 +14,18 @@ participant "Public Info Service" as pis
 participant "Public Info DBMS" as dbpi
 
 activate app
-app -> tapi : frw_get_paths(sPoint,ePoint)
+app -> tapi : frw_get_paths(sPoint, ePoint, filters)
+note right
+If the user doesn't apply filters, the
+"filters" attributes is empty
+end note
 activate tapi
-tapi ->> tb: get_paths(sPoint,ePoint)
+tapi ->> tb: get_paths(sPoint, ePoint, filters)
 deactivate tapi 
 activate tb
 
 ' 1st step - path retrival
-tb ->> ps : retrive_paths(sPoint,ePoint)
+tb ->> ps : retrive_paths(sPoint, ePoint, filters)
 deactivate tb
 ref over ps : Refer to SD6.1-Route retrival
 ps -->> tb : List<pathInfo>
