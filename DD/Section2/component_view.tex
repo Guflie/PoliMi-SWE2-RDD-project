@@ -1,5 +1,5 @@
 \subsection{Component View}
-In this section and the following ones we focus on describing the \textit{Back-end Application Layer} internal strcuture and its interaction with the \textit{Data layer}.
+In this section and the following ones we focus on describing the \textit{Back-end Application Layer} internal structure and its interaction with the \textit{Data layer}.
 
 \begin{figure}[H]
     \centering
@@ -38,8 +38,8 @@ querying the \textit{Credentials DBMS}, and acts as the primary interface for an
 This DBMS stores and manages general account information, like name, surname or birthdate.
 
 \subsubsection*{Account Management Service}
-Manages user account information and profile updates. It hanlde the access to the data stored in the \textit{Account DBMS}, 
-acting as an interface for all data retrival operation involving account information.
+Manages user account information and profile updates. It handles the access to the data stored in the \textit{Account DBMS}, 
+acting as an interface for all data retrieval operation involving account information.
 
 \subsubsection*{Email Proxy Server}
 This component works as a middleware between the user \textit{Email Provider} and those services which
@@ -54,7 +54,7 @@ Implements the Gateway Pattern to provide a unified entry point for all trip ser
 activities) and related aspects, like issues and scores.
 
 \subsubsection*{Trip Planner Service}
-This service is responsible for retriving and merging all the information necessary to the user during trip planning. To 
+This service is responsible for retrieving and merging all the information necessary to the user during trip planning. To 
 achieve this, it interfaces with the \textit{Path Inventory} Service to retrieve the path and with the \textit{Public Info Manager} Service to 
 retrieve scores and issues.
 
@@ -79,10 +79,10 @@ requests that cannot be satisfied by the \textit{Path Inventory Service}. Its al
 from interfaces external to our system.
 
 \subsubsection*{External Mapping System}
-This actor represent a mapping systsem external to BBP boundaries.
+This actor represent a mapping system external to BBP boundaries.
 
 \subsubsection*{Public Info DBMS}
-This DBMS stores and manages all the informations about \textit{Publishable Infromation} submitted by registered users.
+This DBMS stores and manages all the informations about \textit{Publishable Information} submitted by registered users.
 
 \subsubsection*{Public Info Manager Service}
 This service handles the Publishable Information published by the user, managing Issues and Path Scores. It fulfills this role by handling all 
@@ -93,7 +93,7 @@ This component acts as an intermediary between the system and the \textit{Extern
 enrichment with the meteorological conditions present during the time of the trip.
 
 \subsubsection*{External Weather System}
-This actor represents a weather system indipendet from the BBP system.
+This actor represents a weather system indipendent from the BBP system.
 
 \subsubsection*{Activity DBMS}
 This DBMS stores and manages all the informations about activities.
