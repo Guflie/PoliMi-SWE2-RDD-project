@@ -1,1 +1,36 @@
 \subsection{Overview}
+The architecture is defined by two primary structural decisions: the adoption of a Microservices Architectural Style for 
+the backend and a 4-Layer Architectural Approach to organize the logical and physical distribution of components.
+
+\begin{figure}[H]
+    \centering
+    \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{DD/overview_diagram.pdf}}
+    \label{fig:overview_diagram}
+\end{figure}
+
+For the BBP system we opted to base the architecture on a \textbf{4-Layer Architecture}. This structural design was chosen to ensure 
+a strict separation of concerns, thereby maximizing both maintainability and operational efficiency. The architecture is 
+composed of the following distinct layers:
+\begin{enumerate}
+    \item \textit{Presentation Layer}, which serves as the pooint of contact for the user. It is strictly responsible for 
+    managing the User Interface (UI) and orchestrating the direct interaction flow with the user.
+
+    \item \textit{Front-End Application Layer}, which encapsulates the logic of the mobile application. The features contained 
+    in this layer  are those regarding the management of ongoing activities. Another key point of this layer is the execution 
+    of an immediate, local analysis of raw data sampled during monitored activities, in order to reduce the volume of data transmission.
+
+    \item \textit{Back-End Application Layer}, which acts as the central engine of the system. It houses the majority of the 
+    system funcitonalities, implementing complex functionalities such as trip planning algorithms and comprehensive account management.
+
+    \item \textit{Data Layer}, which functions are responsible for the secure storage and retrieval of system's data.
+
+\end{enumerate}
+Regarding the \textit{Back-End Application Layer}, the system adopts the \textbf{Microservices Architectural Style}. Rather than 
+relying on a monolithic structure, this approach decomposes the system into a suite of small, autonomous services, with each service 
+laser-focused on a specific bounded context within the domain.
+Adopting this style provides a wide spectrum of strategic advantages. Primarily, it ensures high scalability and fault tolerance, while 
+also allowing the architecture to leverage the benefits of geographical data distribution. Furthermore, it offers the flexibility to 
+employ different programming technologies and languages best suited for specific services.
+To align with this decentralized principle, the \textit{Data Tier} adopts a \textbf{distributed storage strategy}. Data is partitioned across 
+different Database Management Systems (DBMS), where each instance is dedicated to a specific domain area—such as account management 
+or trip handling, ensuring that the storage layer is as modular as the application logic it supports.
