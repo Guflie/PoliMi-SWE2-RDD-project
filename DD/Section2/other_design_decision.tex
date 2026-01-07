@@ -20,10 +20,10 @@ the fact that containerization ensures that a failure is contained within it, wi
 \subsubsection*{Caches}
 To enhance system availability, we implemented a robust caching layer for those services that could benefit from it. This strategy is particularly effective for services characterized by read-intensive workloads, like
 those interfacing directly with the DBMSs. By serving requests from the cache, we significantly decrease response times.
-Caching approch also allows the system to pre-compute results for some high-demand requests, avoiding to iterate complex and time-consuming operations on demand.
+Caching approach also allows the system to pre-compute results for some high-demand requests, avoiding to iterate complex and time-consuming operations on demand.
 
 \subsubsection*{Differentiated Database}
-To optimize the management of different data types, we adopted a diffretentiated data storage strategy, differentiating our database and data layer architecture into five distinct functional areas based on the type of
+To optimize the management of different data types, we adopted a differentiated data storage strategy, differentiating our database and data layer architecture into five distinct functional areas based on the type of
 data is going to handle. This modular organization allows each domain to utilize the most efficient storage technology for the services that are going to use that data.
 This division further enables a tailored approach to Data Consistency based on the criticality of the information:
 \begin{itemize}
