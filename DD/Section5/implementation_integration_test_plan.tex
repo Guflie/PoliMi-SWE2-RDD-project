@@ -1,4 +1,5 @@
 \section{Implementation, Integration and Test plan}
+
 \subsection{Implementation Plan}
 The system architecture allows for parallel development. However, adhering to the \textbf{Critical Component Strategy}, prioritizing high-risk and 
 foundational modules ensures that the core value proposition is secured early in the lifecycle.
@@ -9,7 +10,14 @@ The following table classifies system components based on the \textbf{Impact of 
 \definecolor{critical}{RGB}{255, 102, 102}   
 \definecolor{high}{RGB}{255, 178, 102}      
 \definecolor{medium}{RGB}{255, 255, 153}   
-\definecolor{low}{RGB}{153, 255, 153}    
+\definecolor{low}{RGB}{153, 255, 153}  
+
+\begin{itemize}
+    \item \textbf{\colorbox{critical}{5} - Critical:} Complete system outage or total loss of the application's core purpose.
+    \item \textbf{\colorbox{high}{4} - High:} Major functionality unavailable, but the system may offer degraded service.
+    \item \textbf{\colorbox{medium}{3} - Moderate:} Secondary features unavailable; core flow remains intact.
+    \item \textbf{\colorbox{low}{1-2} - Low:} Auxiliary information missing or minor workflows blocked.
+\end{itemize}  
 
 \begin{table}[H]
     \centering
@@ -84,10 +92,107 @@ The following table classifies system components based on the \textbf{Impact of 
     \label{tab:implementation_order}
 \end{table}
 \pagebreak
-\textbf{Impact Severity Legend:}
+
+\subsection{Integration Strategy}
+To balance the complexity of distributed microservices with the need for early risk mitigation, the project adopts a \textbf{Hybrid Integration Strategy}. 
+This approach combines two distinct methodologies applied at different architectural levels:
+
+\begin{enumerate}
+    \item \textbf{Macro-Level: Risk-Driven Integration.} \\
+    At the system level, components are integrated based on their criticality. 
+    The "High Risk" subsystems are integrated first to verify the architectural viability of the solution.
+    
+    \item \textbf{Micro-Level: Bottom-Up Integration.} \\
+    Within each specific subsystem, development follows a linear Bottom-Up path: 
+    \textit{DBMS $\rightarrow$ Data Access Layer $\rightarrow$ Service Logic $\rightarrow$ API Interface}. 
+    This ensures that each unit is stable before being exposed to the rest of the system.
+\end{enumerate}
+
+The integration sequence is dictated by the dependency graph below, structured to support this hybrid flow:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{DD/dependency_graph.png} 
+    \caption{Dependency Graph highlighting the Hybrid Integration flow}
+    \label{fig:dep_graph}
+\end{figure}
+
+\mbox{} \\
+The integration roadmap is divided into four phases:
+
+\paragraph{Phase 1: The Critical Core} \mbox{} \\
+
+The primary goal is to secure the application's core value: routing on a map.
 \begin{itemize}
-    \item \textbf{\colorbox{critical}{5} - Critical:} Complete system outage or total loss of the application's core purpose.
-    \item \textbf{\colorbox{high}{4} - High:} Major functionality unavailable, but the system may offer degraded service.
-    \item \textbf{\colorbox{medium}{3} - Moderate:} Secondary features unavailable; core flow remains intact.
-    \item \textbf{\colorbox{low}{1-2} - Low:} Auxiliary information missing or minor workflows blocked.
+    \item \textbf{Action:} Parallel Bottom-Up construction of the \textit{Path Subsystem} and \textit{Trip Planner Service}.
+    \item \textbf{Integration Point:} The \textit{Trip Planner} is connected to the \textit{Path Subsystem}. 
+    \item \textbf{Validation:} Verification that the routing algorithm correctly traverses the graph provided by the inventory.
+\end{itemize}
+
+\paragraph{Phase 2: The Infrastructure Layer} \mbox{} \\
+Once the core logic is validated, the supporting subsystems are built and integrated.
+\begin{itemize}
+    \item \textbf{Action:} Development of \textit{Account} and \textit{Activity} subsystems starting from their Data Layers (DBMS).
+    \item \textbf{Integration Point:} Connection of \textit{Activity Handler} to \textit{Account Subsystem} (for user context) and \textit{Trip Planner} (for route context).
+    \item \textbf{Validation:} Confirmation that a registered user can simulate a ride and that the data is persisted.
+\end{itemize}
+
+\paragraph{Phase 3: Gateway Aggregation} \mbox{} \\
+
+The system is exposed to the outside world.
+\begin{itemize}
+    \item \textbf{Action:} Deployment of \textit{Trip API Gateway} and \textit{Account API Gateway}.
+    \item \textbf{Integration Point:} Gateways are configured to route traffic to the services deployed in Phases 1 and 2.
+    \item \textbf{Validation:} End-to-end API testing using REST clients to verify authentication tokens and correct routing.
+\end{itemize}
+
+\paragraph{Phase 4: Auxiliary \& Client Integration} \mbox{} \\
+
+Final polish and connection of external non-critical dependencies.
+\begin{itemize}
+    \item \textbf{Action:} Integration of \textit{Weather Proxy}, \textit{Email Proxy}, and the \textit{Mobile App}.
+    \item \textbf{Integration Point:} The Mobile App connects to the live Gateways.
+    \item \textbf{Validation:} User Acceptance Testing (UAT) and usability verification.
+\end{itemize}
+\mbox{} \\
+\mbox{} \\
+\subsection{Test Plan}
+The testing strategy aligns with the hybrid integration approach, ensuring coverage from granular logic to system-wide workflows.
+
+\subsubsection{Unit Testing}
+Focuses on the correctness of the internal logic of each service, isolated from dependencies using mocks.
+\begin{itemize}
+    \item \textbf{Tools:} JUnit 5, Mockito.
+    \item \textbf{Key Targets:} 
+    \begin{itemize}
+        \item \textit{Trip Planner:} Routing algorithm correctness on use-case graphs.
+        \item \textit{Credentials:} Password hashing strength and JWT generation.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Integration Testing}
+Verifies the interactions defined in the sequence diagrams.
+\begin{itemize}
+    \item \textbf{Tools:} REST Assured, TestContainers.
+    \item \textbf{Key Targets:}
+    \begin{itemize}
+        \item \textit{Service-to-Service:} Ensure \textit{Activity Handler} correctly calls \textit{Weather Proxy} upon trip completion.
+        \item \textit{Gateway-to-Service:} Verify that the API Gateway correctly handles service timeouts and load balancing.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{System Testing}
+Validates the fully integrated system against the functional requirements.
+\begin{itemize}
+    \item \textbf{Key Scenarios:}
+    \begin{itemize}
+        \item \textit{Full Ride Cycle:} Registration $\rightarrow$ Login $\rightarrow$ Search Route $\rightarrow$ Start Ride $\rightarrow$ Stop \& Save.
+        \item \textit{Resilience:} Verify that the \textit{Guest Mode} remains functional even if the \textit{Account Subsystem} is forcefully taken offline (Simulated Failure).
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Acceptance Testing}
+Final validation performed by human users to assess UX and real-world performance.
+\begin{itemize}
+    \item \textbf{Focus:} Responsiveness of the map on mobile devices, GPS accuracy, and clarity of navigation instructions.
 \end{itemize}
