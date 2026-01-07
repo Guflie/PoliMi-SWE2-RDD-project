@@ -7,6 +7,8 @@ participant "Account API Gateway" as aapi
 participant "Account Deletion Service" as ads
 participant "Authentication Service" as auth
 participant "Credentials DBMS" as dbc
+participant "Account Management Service" as acmngr
+participant "Account DBMS" as dba
 participant "Email Proxy Service" as emailp
 actor "Email Service Provider" as email
 
@@ -37,24 +39,35 @@ break #ffe6e6 link expired
     aapi -->> app : link_expired_error
     deactivate aapi
 end
-
-ads ->> auth : delete_acc_cred(userId)
-deactivate ads
-activate auth
-auth ->> dbc : query_delete_acc(userId)
-deactivate auth
-activate dbc
-dbc -> dbc : delete_acc(userId)
-note right
-We've intentionally left out the inforatio deletion
-from Account DBMS to avoid data incoherencies.
-end note
-dbc -->> auth : done
-deactivate dbc
-activate auth
-auth -->> ads : done
-deactivate auth
-activate ads
+par #e1f4fc
+    ads ->> auth : delete_acc_cred(userId)
+    deactivate ads
+    activate auth
+    auth ->> dbc : query_delete_acc(userId)
+    deactivate auth
+    activate dbc
+    dbc -> dbc : delete_acc(userId)
+    dbc -->> auth : done
+    deactivate dbc
+    activate auth
+    auth -->> ads : done
+    deactivate auth
+    activate ads
+else
+    ads ->> acmngr : delete_acc(userId)
+    deactivate ads
+    activate acmngr
+    acmngr ->> dba : query_delete_acc(userId)
+    deactivate acmngr
+    activate dba
+    dba -> dba : delete_acc(userId)
+    dba -->> acmngr : done
+    deactivate dba
+    activate acmngr
+    acmngr -->> ads : done
+    deactivate acmngr
+    activate ads
+end
 ads -->> aapi : done
 deactivate ads
 activate aapi

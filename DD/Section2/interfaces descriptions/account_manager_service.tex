@@ -87,7 +87,7 @@
     \renewcommand{\arraystretch}{1.15}      
     \begin{tabular}{|l|p{0.8\textwidth}|}
         \hline
-        Name & \multicolumn{1}{c|}{\textbf{PModify Attribute}} \\ 
+        Name & \multicolumn{1}{c|}{\textbf{Modify Attribute}} \\ 
         \hline
         Signature & modify\_attr(userId, attrId, newVal): void \\
         \hline
@@ -100,6 +100,35 @@
                 \item userId: string, the unique identifier of the user
                 \item attrId: string, the identifier/name of the attribute to be modified
                 \item newVal: string, the new value to be assigned
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns a completion status (done) \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
+
+% -----------------------------------------------------------------------------------------------------------
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.15}      
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Delete Account}} \\ 
+        \hline
+        Signature & delete\_acc(userId): void \\
+        \hline
+        Description & Delete the account information associated to the given userId. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item userId: string, the unique identifier of the user
             \end{itemize}
             \smallskip
             \end{minipage}  

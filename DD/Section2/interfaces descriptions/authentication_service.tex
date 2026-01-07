@@ -66,7 +66,7 @@
         \hline
         Name & \multicolumn{1}{c|}{\textbf{Account Login}} \\ 
         \hline
-        Signature & login\_acc(emailAddr, psw): status \\
+        Signature & login\_acc(emailAddr, psw): status, userId \\
         \hline
         Description & Verifies the provided credentials. \\
         \hline
@@ -81,7 +81,7 @@
             \end{minipage}  
         \\
         \hline
-        Returned & Returns success status (correct\_psw) \\
+        Returned & Returns success status (correct\_psw) and userId \\
         \hline
         Exceptions & 
             \begin{minipage}{0.8\textwidth}

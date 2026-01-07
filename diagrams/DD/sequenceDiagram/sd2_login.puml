@@ -42,7 +42,7 @@ break #ffe6e6 wrong password
     deactivate aapi
 end
 
-auth -->> aapi : correct_psw
+auth -->> aapi : correct_psw, userId
 deactivate auth
 activate aapi
 aapi -> acmngr : get_acc_info(userId)

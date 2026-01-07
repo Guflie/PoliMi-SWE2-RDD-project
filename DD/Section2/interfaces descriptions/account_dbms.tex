@@ -110,3 +110,32 @@
         \hline
     \end{tabular}
 \end{table}
+% -----------------------------------------------------------------------------------------------------------
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.15}      
+    \begin{tabular}{|l|p{0.8\textwidth}|}
+        \hline
+        Name & \multicolumn{1}{c|}{\textbf{Query Delete Account}} \\ 
+        \hline
+        Signature & query\_delete\_account(userId): status \\
+        \hline
+        Description & Delete the account information record for the given user. \\
+        \hline
+        Parameters &
+            \begin{minipage}{0.8\textwidth}
+            \smallskip
+            \begin{itemize}
+                \item userId: string, the unique identifier to search for
+            \end{itemize}
+            \smallskip
+            \end{minipage}  
+        \\
+        \hline
+        Returned & Returns a completion status (done) \\
+        \hline
+        Exceptions & \\
+        \hline
+    \end{tabular}
+\end{table}
