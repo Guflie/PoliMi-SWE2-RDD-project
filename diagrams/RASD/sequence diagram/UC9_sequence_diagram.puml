@@ -9,19 +9,21 @@ autonumber
 
 activate User
 
-User -> App : start_activity(path)
+User -> App : start_ride(path)
 activate App
-App -> App : retrieve_path_map()
-App -->> User : path_map_data()
-deactivate App
 
-loop Optional: during the activity
-    User -> User : pause_activity()    
-    User -> User : resume_activity()
+loop Optional: during the trip
+    User -> App : pause_trip()
+    activate App
+    App -->> User
+    deactivate App
+    User -> App : resume_trip()
+    activate App
+    App -->> User
+    deactivate App
 end
 
 User -> App : activity_completion()
-activate App
 App -->> User : rating_form()
 deactivate App
 

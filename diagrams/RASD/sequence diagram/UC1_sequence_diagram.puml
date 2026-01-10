@@ -3,6 +3,7 @@ hide footbox
 
 actor User
 participant "BBP App" as App
+participant "Email Service" as em
 
 autonumber
 
@@ -18,26 +19,25 @@ User -> App : submit_registration_form(name, surname, gender, birth_date, email_
 activate App
 App -> App : check_registration_info()
 
-alt #ffe6e6 Invalid Email Format
+break #ffe6e6 Invalid Email Format
     App -->> User : invalid_email_error()
-
-else #ffe6e6 Email already used
+end
+break #ffe6e6 Email already used
     App -->> User : email_already_used_error()
-
-else #e6ffe6 Valid form
-    App -->> User : registration_link()
+end
+App ->> em : registration_link()
 deactivate App
-
+activate em
+em -->> User : registration_email()
+deactivate em
 User -> App : registration_confirmation()
 activate App
-    alt #e6ffe6 Confirmation sent within 1 hour
-        App -->> User : registration_ack()
-    
-    else #ffe6e6 Link expired
-        App -->> User : invalid_registration_link()
+break #ffe6e6 Link expired
+    App -->> User : invalid_registration_link()
 
-    end
 end
+ App -->> User : registration_ack()
+    
 deactivate App
 
 deactivate User

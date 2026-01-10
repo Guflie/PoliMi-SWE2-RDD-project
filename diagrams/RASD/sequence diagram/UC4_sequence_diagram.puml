@@ -3,6 +3,7 @@ hide footbox
 
 actor "Registered User" as User
 participant "BBP App" as App
+participant "Email Service" as em
 
 autonumber
 
@@ -17,37 +18,36 @@ User -> App : submit_email_address(email)
 activate App
 App -> App : validate_email_format()
 
-alt #ffe6e6 Invalid Email Format
+break #ffe6e6 Invalid Email Format
     App -->> User : invalid_email_error()
-
-else #e6ffe6 Valid Format
-    App -> App : check_account_association()
-    
-    alt #ffe6e6 Email without account
-        App -->> User : account_not_exists()
-    
-    else #e6ffe6 Account found
-        App -->> User : email_reset_password()
-        deactivate App
-        
-        User -> App : open_reset_link()
-        activate App
-        App -> App : check_link_expiration()
-
-        alt #ffe6e6 Link Expired (> 1 hour)
-            App -->> User : link_expired_error()
-            
-        else #e6ffe6 Link Valid
-            App -->> User : new_password_form()
-            deactivate App
-            
-            User -> App : submit_new_password(new_pass)
-            activate App
-            App -> App : update_account_password()
-            App -->> User : password_update_ack()
-        end
-    end
 end
+
+App -> App : check_account_association()
+    
+break #ffe6e6 Email without account
+    App -->> User : account_not_exists()
+end
+
+App ->> em : email_reset_password()
+deactivate App
+activate em
+em -->> User : password_reset_email()
+deactivate em
+
+User -> App : open_reset_link()
+activate App
+App -> App : check_link_expiration()
+
+break #ffe6e6 Link Expired (> 1 hour)
+    App -->> User : link_expired_error()
+end    
+App -->> User : new_password_form()
+deactivate App
+
+User -> App : submit_new_password(new_pass)
+activate App
+App -> App : update_account_password()
+App -->> User : password_update_ack()
 
 deactivate App
 deactivate User

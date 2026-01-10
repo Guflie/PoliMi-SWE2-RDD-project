@@ -20,15 +20,13 @@ activate App
 App -> App : validate_update_request()
 
 
-alt #ffe6e6 Restricted Attribute (Email or Password)
+break #ffe6e6 Restricted Attribute (Email or Password)
     ' Exception 1: User tries to modify restricted fields
     App -->> User : modification_error()
-
-else #e6ffe6 Valid Attribute
-    ' Success Flow
-    App -> App : update_account_profile()
-    App -->> User : update_acknowledgement()
 end
+' Success Flow
+App -> App : update_account_profile()
+App -->> User : update_acknowledgement()
 
 deactivate App
 deactivate User

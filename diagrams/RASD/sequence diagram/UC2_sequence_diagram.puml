@@ -18,16 +18,16 @@ activate App
 
 App -> App : check_login_info()
 
-alt #ffe6e6 Email not found
+break #ffe6e6 Email not found
     App -->> User : account_not_found_error()
-
-else #ffe6e6 Incorrect password
-    App -->> User : invalid_credentials_error()
-
-else #e6ffe6 Valid credentials
-    App -> App : retrieve_homepage_data()
-    App -->> User : homepage_data()
 end
+
+break #ffe6e6 Incorrect password
+    App -->> User : invalid_credentials_error()
+end
+
+App -> App : retrieve_homepage_data()
+App -->> User : homepage_data()
 
 deactivate App
 deactivate User

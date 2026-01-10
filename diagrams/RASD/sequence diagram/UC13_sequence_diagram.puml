@@ -8,19 +8,15 @@ activate User
 
 User -> App : start_automatically_monitored_activity(path)
 activate App
-App -> App : retrieve_path_map(path)
-deactivate App
-App -->> User : path_map()
-
+App -->> User
 ' --------------------------
 
 loop During activity
-    User -> User : collect_sensor_data()
-    User -> User : analyze_data_for_issues()
+    App -> App : collect_sensor_data()
+    App -> App : analyze_data_for_issues()
 end
 
-User -> App : stop_activity(raw_detected_data)
-activate App
+User -> App : stop_activity()
 App -> App : generate_detected_issues_list()
 App -->> User : display_issue_confirmation_form(issue_list)
 deactivate App

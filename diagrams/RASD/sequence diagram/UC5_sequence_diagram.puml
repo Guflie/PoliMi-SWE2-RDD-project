@@ -3,6 +3,7 @@ hide footbox
 
 actor "Registered User" as User
 participant "BBP App" as App
+participant "Email Service" as em
 
 autonumber
 
@@ -15,8 +16,11 @@ deactivate App
 
 User -> App : submit_deletion_confirmation()
 activate App
-App -->> User : account_deletion_link()
+App -->> em : account_deletion_link()
 deactivate App
+activate em
+em -->> User : send_deletion_link()
+deactivate em
 
 User -> App :submit_second_confirmation_link()
 activate App

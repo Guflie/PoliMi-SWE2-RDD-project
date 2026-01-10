@@ -11,16 +11,19 @@ activate User
 User -> App : start_ride(path)
 activate App
 
-App -> App : retrieve_path_map()
-App -->> User : path_map()
-deactivate App
-
 loop Optional: during the trip
-    User -> User : pause_trip()
-    User -> User : resume_trip()
+    User -> App : pause_trip()
+    activate App
+    App -->> User
+    deactivate App
+    User -> App : resume_trip()
+    activate App
+    App -->> User
+    deactivate App
 end
 
-User -> User : complete_trip()
+User -> App : complete_trip()
+deactivate App
 
 deactivate User
 @enduml
