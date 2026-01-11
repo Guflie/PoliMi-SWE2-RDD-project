@@ -9,21 +9,29 @@ autonumber
 
 activate User
 
-User -> App : start_activity(path)
+User -> App : start_ride(path)
 activate App
-App -> App : retrieve_path_map()
-App -->> User : path_map_data()
-deactivate App
 
 loop Every second during activity
-    User -> User : sample_sensors()
-    
-    opt #ffe6e6 GPS signal lost
-        User -> User : notify_gps_loss()
-    end
+    App -> App : sample_sensors()
 end
 
-User -> App : activity_ompletition()
+loop Optional: during the trip
+    User -> App : pause_trip()
+    activate App
+    App -->> User
+    deactivate App
+    User -> App : resume_trip()
+    activate App
+    App -->> User
+    deactivate App
+end
+
+User -> App : activity_completion()
+App -->> User : rating_form()
+deactivate App
+
+User -> App : submit_rating_form(rating)
 activate App
 
 App -> App : process_collected_data()
