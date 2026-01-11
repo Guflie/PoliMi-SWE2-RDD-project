@@ -326,7 +326,7 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
 
     \begin{figure}[H]
         \centering
-        \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{RASD/alloy/alloy_user_distinction.png}}
+        \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{../img/RASD/alloy/alloy_user_distinction.png}}
         \caption{Alloy World generation showing the distinction between a Generic User and a Registered User.}
         \label{fig:alloy_users}
     \end{figure}
@@ -345,21 +345,21 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
 
     \begin{figure}[H]
         \centering
-        \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{RASD/alloy/alloy_activity_lifecycle_t0.png}}
+        \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{../img/RASD/alloy/alloy_activity_lifecycle_t0.png}}
         \caption{Step T0, T1 - The Activity starts in the \texttt{Route definition(ROUTE\_DEF)} state. Once the user starts it, the activity 
         transitions in the \texttt{Ongoing(ON)}.}
         \label{fig:activity_lifecycle_t0}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{RASD/alloy/alloy_activity_lifecycle_t1.png}}
+        \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{../img/RASD/alloy/alloy_activity_lifecycle_t1.png}}
         \caption{Step T1, T2 - The Activity is in the \texttt{Ongoing(ON)} state. Once stopped, it transitions to \texttt{Waiting rating(WAITING\_RAT)} in which
         is waiting for the user to rate the path.}
         \label{fig:activity_lifecycle_t1}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{RASD/alloy/alloy_activity_lifecycle_t2.png}}
+        \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{../img/RASD/alloy/alloy_activity_lifecycle_t2.png}}
         \caption{Step T2, T3 - The Activity is in the \texttt{Waiting rating(WAITING\_RAT)} state. After receiving the rating, the Activity transtions in the
         \texttt{COMPLETED} state and will remain in it.}
         \label{fig:activity_lifecycle_t2}
@@ -367,13 +367,13 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
 
     \begin{figure}[H]
         \centering
-        \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{RASD/alloy/activity_paused_t0.png}}
+        \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{../img/RASD/alloy/activity_paused_t0.png}}
         \caption{Step T1, T2 - The Activity is in the \texttt{Ongoing(ON)} state. The user might stop it, therefore it transitions in the \texttt{PAUSE} state.}
         \label{fig:activity_paused_t0}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{RASD/alloy/activity_paused_t1.png}}
+        \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{../img/RASD/alloy/activity_paused_t1.png}}
         \caption{Step T2, T3 - The Activity is in the \texttt{Waiting rating(PAUSE)} state. Once the user resumes the 
         activity, it transitions back in the \texttt{Ongoing(ON)} 
         state (the model avoid to transition in the wrong previous state e.g. \texttt{MON\_ON}).}
@@ -382,14 +382,14 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
 
         \begin{figure}[H]
         \centering
-        \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{RASD/alloy/activity_weather_t0.png}}
+        \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{../img/RASD/alloy/activity_weather_t0.png}}
         \caption{Step T2, T3 - The Activity is in the \texttt{Waiting rating(WAITING\_RAT)} state. Now the weather data during the activity is available, so 
         it transition in the \texttt{Weather enrichment(WEAT\_ENR)} state.}
         \label{fig:activity_weather_t0}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{RASD/alloy/activity_weather_t1.png}}
+        \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{../img/RASD/alloy/activity_weather_t1.png}}
         \caption{Step T3, T4 - The Activity is in the \texttt{Weather enrichment(WEAT\_ENR)} state. Once weather data about the activity are correctly loaded, The
         activity transitions in the \texttt{COMPLETED} state.}
         \label{fig:activity_weather_t1}
@@ -411,7 +411,7 @@ The model leverages Alloy 6's temporal logic capabilities to verify the dynamic 
     
     \begin{figure}[H]
         \centering
-        \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{RASD/alloy/alloy_data_lifecycle.pdf}}
+        \makebox[\textwidth][c]{\includegraphics[width=1.7\textwidth]{../img/RASD/alloy/alloy_data_lifecycle.pdf}}
         \caption{Temporal evolution of a Report: transition from 'Pending' (T0) to 'Confirmed' (T1) status.}
         \label{fig:data_lifecycle}
     \end{figure}
